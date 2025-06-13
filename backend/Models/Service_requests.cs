@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("Service_requests")]
-public class ServiceRequest
+public class Service_request
 {
     [Key]
     [Column("request_id")]

@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Statements
 {
     [Key]
-    public int statement_id;
+    public int statement_id{ get; set; }
 
     [ForeignKey("Accounts")]
-    public int account_id;
-    public Accounts accounts;
+    public int account_id{ get; set; }
+    public Accounts accounts{ get; set; }
 
     [MaxLength(10)]
     public string PeriodType { get; set; } // monthly or annual
