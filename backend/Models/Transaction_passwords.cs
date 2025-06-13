@@ -3,19 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 
-
-public class Login_attempts
+public class Transaction_passwords
 {
     [Key]
     public int id { get; set; }
+
 
     [ForeignKey("Customer")]
     public int customer_id { get; set; }
     public Customer customer { get; set; }
 
-    public string device{ get; set; }
     
-    public int number_login  { get; set; }
-
-    public bool success { get; set; }
+    public int transaction_password { get; set; }
 }
