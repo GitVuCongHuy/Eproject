@@ -13,6 +13,5 @@ public class Transaction_passwords
     public int customer_id { get; set; }
     public Customer customer { get; set; }
 
-    
     public int transaction_password { get; set; }
 }

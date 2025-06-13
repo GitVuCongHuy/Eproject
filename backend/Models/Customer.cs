@@ -15,7 +15,7 @@ public class Customer
     [MaxLength(50)]
     public string username { get; set; }
 
-    [MaxLength(50)]
+    [MaxLength(50)] //vachar(50)
     [Required] //không nulll
     public string password { get; set; }
 
