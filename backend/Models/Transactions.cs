@@ -17,17 +17,19 @@ public class Transactions
     [Required]
     [MaxLength(20)]
     [Column("transaction_type")]
-    public string TransactionType { get; set; }  // e.g., transfer, deposit
+    public string TransactionType { get; set; } 
 
     [Required]
     [MaxLength(20)]
     [Column("status")]
-    public string Status { get; set; }  // e.g., success, failed
+    public string Status { get; set; }  
 
     [Required]
     [Column("transaction_date")]
     public DateTime TransactionDate { get; set; }
 
     [Column("description", TypeName = "text")]
+
+    public string Description { get; set; }
  
 }

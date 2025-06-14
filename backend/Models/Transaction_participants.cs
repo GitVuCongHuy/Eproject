@@ -19,6 +19,6 @@ public class Transaction_Participants
     [Required]
     [MaxLength(10)]
     [Column("role")]
-    public string Role { get; set; }  // from, to
+    public string Role { get; set; }  
 
 }
