@@ -1,24 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 [Table("transactions")]
-public class Transaction
+public class Transactions
 {
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     [Column("transaction_id")]
     public int TransactionId { get; set; }
-
-    [Required]
-    [ForeignKey("FromAccount")]
-    [Column("from_account")]
-    public int FromAccountId { get; set; }
-
-    [Required]
-    [ForeignKey("ToAccount")]
-    [Column("to_account")]
-    public int ToAccountId { get; set; }
 
     [Required]
     [Column("amount", TypeName = "decimal(18,2)")]
@@ -27,18 +17,17 @@ public class Transaction
     [Required]
     [MaxLength(20)]
     [Column("transaction_type")]
-    public string TransactionType { get; set; }
+    public string TransactionType { get; set; }  // e.g., transfer, deposit
 
     [Required]
     [MaxLength(20)]
     [Column("status")]
-    public string Status { get; set; }
+    public string Status { get; set; }  // e.g., success, failed
 
     [Required]
     [Column("transaction_date")]
     public DateTime TransactionDate { get; set; }
 
-    [Column("description")]
-    public string Description { get; set; }
-
+    [Column("description", TypeName = "text")]
+ 
 }
