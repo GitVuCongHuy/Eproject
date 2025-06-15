@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.main-content {
+    margin-left: 250px; /* Đẩy nội dung sang phải đúng bằng chiều rộng sidebar */
+    padding: 30px;
+    max-width: calc(100% - 250px); /* Hoặc để auto nếu muốn full width */
+    background-color: #f4f6f9;
+}
+
+
+.section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.section h2 {
+    font-size: 20px;
+    color: #003087;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.section p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.section a {
+    color: #003087;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.section a:hover {
+    color: #ffd700;
+    text-decoration: underline;
+}
+
+.account-info p.balance {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003087;
+}
+
+.recent-activity p {
+    color: #666;
+}
+
+.contact-info p {
+    font-size: 14px;
+}
+
+.guide a {
+    display: inline-block;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #666;
+    font-size: 14px;
+    border-top: 1px solid #e0e0e0;
+    margin-top: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-content {
+        margin-left: 200px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        margin-left: 0;
+        padding: 10px;
+    }
+}
+

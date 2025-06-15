@@ -2,7 +2,6 @@
 
 ## Cấu trúc thư mục Frontend
 
-Phần frontend của dự án được phát triển sử dụng Vite và React. Cấu trúc thư mục :
 
 Phần frontend của dự án được phát triển sử dụng Vite và React. Cấu trúc thư mục :
 
