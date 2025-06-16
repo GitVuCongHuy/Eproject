@@ -15,11 +15,17 @@ public class CustomerController : Controller
 
     private readonly IConfiguration _configuration;
 
-
-    public CustomerController(ApplicationDbContext context)
+    public CustomerController(ApplicationDbContext context, IConfiguration configuration)
     {
         _context = context;
+        _configuration = configuration;
     }
+
+
+    // public CustomerController(ApplicationDbContext context)
+    // {
+    //     _context = context;
+    // }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
@@ -174,18 +180,29 @@ public class CustomerController : Controller
                 new Claim(ClaimTypes.NameIdentifier, existUser.customer_id.ToString()),
             };
 
-            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
-            // var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        
+
+
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
             var token = new JwtSecurityToken(
                 issuer: _configuration["JwtSettings:Issuer"],
                 audience: _configuration["JwtSettings:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddMinutes(5),
+                expires: DateTime.UtcNow.AddMinutes(5), // ✅ UtcNow
                 signingCredentials: creds
             );
 
+   
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Log in successfully",
+                Data = new { Token = tokenString }  // ✅ trả token dạng string
+            });
 
 
         }
