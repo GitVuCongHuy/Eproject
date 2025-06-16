@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250616113043_ok")]
+    partial class ok
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,10 +264,6 @@ namespace backend.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountId");
-
-                    b.HasIndex("TransactionId");
-
                     b.ToTable("transaction_participants");
                 });
 
@@ -301,14 +300,14 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
 
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("amount");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
+
+                    b.Property<int>("FromAccountId")
+                        .HasColumnType("int")
+                        .HasColumnName("from_account");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -316,9 +315,9 @@ namespace backend.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasColumnName("status");
 
-                    b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("transaction_date");
+                    b.Property<int>("ToAccountId")
+                        .HasColumnType("int")
+                        .HasColumnName("to_account");
 
                     b.Property<string>("TransactionType")
                         .IsRequired()
@@ -384,25 +383,6 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("accounts");
-                });
-
-            modelBuilder.Entity("Transaction_Participants", b =>
-                {
-                    b.HasOne("Accounts", "accounts")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Transactions", "transactions")
-                        .WithMany()
-                        .HasForeignKey("TransactionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("accounts");
-
-                    b.Navigation("transactions");
                 });
 
             modelBuilder.Entity("Transaction_passwords", b =>

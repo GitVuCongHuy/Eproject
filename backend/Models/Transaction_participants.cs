@@ -8,13 +8,16 @@ public class Transaction_Participants
     [Column("id")]
     public int Id { get; set; }
 
-    [ForeignKey("Transaction")]
+   
     [Column("transaction_id")]
     public int TransactionId { get; set; }
+    [ForeignKey(nameof(TransactionId))] 
+    public Transactions transactions { get; set; }
 
-    [ForeignKey("Account")]
     [Column("account_id")]
     public int AccountId { get; set; }
+    [ForeignKey(nameof(AccountId))] 
+    public Accounts accounts { get; set; }
 
     [Required]
     [MaxLength(10)]

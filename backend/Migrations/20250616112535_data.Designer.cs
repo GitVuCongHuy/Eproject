@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250616112535_data")]
+    partial class data
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,38 +239,6 @@ namespace backend.Migrations
                     b.ToTable("statements");
                 });
 
-            modelBuilder.Entity("Transaction_Participants", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("AccountId")
-                        .HasColumnType("int")
-                        .HasColumnName("account_id");
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)")
-                        .HasColumnName("role");
-
-                    b.Property<int>("TransactionId")
-                        .HasColumnType("int")
-                        .HasColumnName("transaction_id");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.HasIndex("TransactionId");
-
-                    b.ToTable("transaction_participants");
-                });
-
             modelBuilder.Entity("Transaction_passwords", b =>
                 {
                     b.Property<int>("id")
@@ -290,45 +261,6 @@ namespace backend.Migrations
                     b.HasIndex("customer_id1");
 
                     b.ToTable("transaction_Passwords");
-                });
-
-            modelBuilder.Entity("Transactions", b =>
-                {
-                    b.Property<int>("TransactionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("transaction_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("amount");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("status");
-
-                    b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("transaction_date");
-
-                    b.Property<string>("TransactionType")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("transaction_type");
-
-                    b.HasKey("TransactionId");
-
-                    b.ToTable("transactions");
                 });
 
             modelBuilder.Entity("Accounts", b =>
@@ -384,25 +316,6 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("accounts");
-                });
-
-            modelBuilder.Entity("Transaction_Participants", b =>
-                {
-                    b.HasOne("Accounts", "accounts")
-                        .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Transactions", "transactions")
-                        .WithMany()
-                        .HasForeignKey("TransactionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("accounts");
-
-                    b.Navigation("transactions");
                 });
 
             modelBuilder.Entity("Transaction_passwords", b =>

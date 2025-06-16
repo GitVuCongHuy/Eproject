@@ -11,32 +11,22 @@ public class Transactions
     public int TransactionId { get; set; }
 
     [Required]
-    [ForeignKey("FromAccount")]
-    [Column("from_account")]
-    public int FromAccountId { get; set; }
-
-    [Required]
-    [ForeignKey("ToAccount")]
-    [Column("to_account")]
-    public int ToAccountId { get; set; }
-
-    // [Required]
-    // [Column("amount", TypeName = "decimal(18,2)")]
-    // public decimal Amount { get; set; }
+    [Column("amount", TypeName = "decimal(18,2)")]
+    public decimal Amount { get; set; }
 
     [Required]
     [MaxLength(20)]
     [Column("transaction_type")]
-    public string TransactionType { get; set; }
+    public string TransactionType { get; set; } 
 
     [Required]
     [MaxLength(20)]
     [Column("status")]
-    public string Status { get; set; }
+    public string Status { get; set; }  
 
-    // [Required]
-    // [Column("transaction_date")]
-    // public DateTime TransactionDate { get; set; }
+    [Required]
+    [Column("transaction_date")]
+    public DateTime TransactionDate { get; set; }
 
     [Column("description", TypeName = "text")]
 

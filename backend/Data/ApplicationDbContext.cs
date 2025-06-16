@@ -17,7 +17,8 @@ public class ApplicationDbContext : DbContext
     public DbSet<Statements> statements { get; set; }
     public DbSet<Transaction_passwords> transaction_Passwords { get; set; }
     // public DbSet<Transaction> transactions { get; set; }
-
+    public DbSet<Transaction_Participants> transaction_Participants { get; set; }
+    public DbSet<Transactions> transactions { get; set; }
 
    
 }
