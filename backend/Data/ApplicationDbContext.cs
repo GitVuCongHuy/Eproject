@@ -2,21 +2,23 @@ using Microsoft.EntityFrameworkCore;
 
 public class ApplicationDbContext : DbContext
 {
-  public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-      : base(options)
-  {
-  }
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options)
+    {
+    }
 
-      // DbSets ở đây
-  
-      DbSet<Accounts> Accounts { get; set; }
-      DbSet<Bank> Banks { get; set; }
-      DbSet<Customer> Customers { get; set; }
-      DbSet<Login_attempts> Login_Attempts { get; set; }
-      DbSet<Service_request> Service_Requests { get; set; }
-      DbSet<Statements> statements { get; set; }
-      DbSet<Transaction_passwords> transaction_Passwords { get; set; }
-      DbSet<Transaction> transactions { get; set; }
+    // DbSets ở đây
+
+    public DbSet<Accounts> Accounts { get; set; }
+    public DbSet<Bank> Banks { get; set; }
+    public DbSet<Customer> Customers { get; set; }
+    public DbSet<Login_attempts> Login_Attempts { get; set; }
+    public DbSet<Service_request> Service_Requests { get; set; }
+    public DbSet<Statements> statements { get; set; }
+    public DbSet<Transaction_passwords> transaction_Passwords { get; set; }
+    // public DbSet<Transaction> transactions { get; set; }
 
 
+   
 }
+

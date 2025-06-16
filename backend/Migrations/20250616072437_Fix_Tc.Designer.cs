@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250616072437_Fix_Tc")]
+    partial class Fix_Tc
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,6 +92,9 @@ namespace backend.Migrations
                     b.Property<int>("bank_id")
                         .HasColumnType("int");
 
+                    b.Property<int>("bank_id1")
+                        .HasColumnType("int");
+
                     b.Property<string>("email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -109,7 +115,8 @@ namespace backend.Migrations
 
                     b.Property<string>("password")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("username")
                         .IsRequired()
@@ -118,7 +125,7 @@ namespace backend.Migrations
 
                     b.HasKey("customer_id");
 
-                    b.HasIndex("bank_id");
+                    b.HasIndex("bank_id1");
 
                     b.ToTable("Customers");
                 });
@@ -275,7 +282,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("Bank", "bank")
                         .WithMany()
-                        .HasForeignKey("bank_id")
+                        .HasForeignKey("bank_id1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

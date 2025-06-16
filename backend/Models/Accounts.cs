@@ -13,6 +13,7 @@ public class Accounts
     public Customer customer { get; set; }
 
     // Số dư (balance) dưới dạng decimal, ví dụ 1000 VND
+    [Column("balance", TypeName = "decimal(18,2)")]
     public decimal Balance { get; set; }
 
     // Trạng thái giao dịch (status), ví dụ "Completed", "Pending", "Failed"

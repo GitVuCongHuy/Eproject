@@ -6,7 +6,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Bank
 {
     [Key]
-    public int bank_id{ get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int bank_id { get; set; }
 
     [MaxLength(100)]
     public string bank_name { get; set; }

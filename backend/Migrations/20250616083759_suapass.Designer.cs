@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250613135645_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20250616083759_suapass")]
+    partial class suapass
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,7 +33,8 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("account_id"));
 
                     b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(18,2)");
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("balance");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -114,8 +115,7 @@ namespace backend.Migrations
 
                     b.Property<string>("password")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("username")
                         .IsRequired()
@@ -197,6 +197,8 @@ namespace backend.Migrations
 
                     b.HasKey("RequestId");
 
+                    b.HasIndex("CustomerId");
+
                     b.ToTable("Service_requests");
                 });
 
@@ -238,53 +240,6 @@ namespace backend.Migrations
                     b.HasIndex("accountsaccount_id");
 
                     b.ToTable("statements");
-                });
-
-            modelBuilder.Entity("Transaction", b =>
-                {
-                    b.Property<int>("TransactionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("transaction_id");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("amount");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("description");
-
-                    b.Property<int>("FromAccountId")
-                        .HasColumnType("int")
-                        .HasColumnName("from_account");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("status");
-
-                    b.Property<int>("ToAccountId")
-                        .HasColumnType("int")
-                        .HasColumnName("to_account");
-
-                    b.Property<DateTime>("TransactionDate")
-                        .HasColumnType("datetime2")
-                        .HasColumnName("transaction_date");
-
-                    b.Property<string>("TransactionType")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)")
-                        .HasColumnName("transaction_type");
-
-                    b.HasKey("TransactionId");
-
-                    b.ToTable("transactions");
                 });
 
             modelBuilder.Entity("Transaction_passwords", b =>
@@ -338,6 +293,17 @@ namespace backend.Migrations
                     b.HasOne("Customer", "customer")
                         .WithMany()
                         .HasForeignKey("customer_id1")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("customer");
+                });
+
+            modelBuilder.Entity("Service_request", b =>
+                {
+                    b.HasOne("Customer", "customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

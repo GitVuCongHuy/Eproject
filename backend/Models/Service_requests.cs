@@ -12,6 +12,7 @@ public class Service_request
     [ForeignKey("Customer")]
     [Column("customer_id")]
     public int CustomerId { get; set; }
+    public Customer customer { get; set; }
 
     [Required]
     [MaxLength(50)]
