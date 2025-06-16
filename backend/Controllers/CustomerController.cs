@@ -1,5 +1,9 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 
 
 
@@ -8,6 +12,9 @@ using Microsoft.EntityFrameworkCore;
 public class CustomerController : Controller
 {
     private readonly ApplicationDbContext _context;  //khai báo  controller 
+
+    private readonly IConfiguration _configuration;
+
 
     public CustomerController(ApplicationDbContext context)
     {
@@ -160,8 +167,25 @@ public class CustomerController : Controller
                 });
             }
 
-            
-            
+
+            //tạo token trả về 
+            var claims = new[]
+            {
+                new Claim(ClaimTypes.NameIdentifier, existUser.customer_id.ToString()),
+            };
+
+            // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
+            // var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JwtSettings:Issuer"],
+                audience: _configuration["JwtSettings:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddMinutes(5),
+                signingCredentials: creds
+            );
+
 
 
         }
@@ -171,4 +195,6 @@ public class CustomerController : Controller
         }
 
     }
+    
+    
 }
