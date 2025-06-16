@@ -35,9 +35,11 @@ public class Customer
     [MaxLength(15)]
     public string mobile { get; set; }
 
+    public int number_login  { get; set; }
+
     public bool locked { get; set; }
 
-
+    
 
 
 }

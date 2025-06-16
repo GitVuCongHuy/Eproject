@@ -15,7 +15,5 @@ public class Login_attempts
 
     public string device{ get; set; }
     
-    public int number_login  { get; set; }
-
     public bool success { get; set; }
 }

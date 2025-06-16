@@ -62,6 +62,7 @@ public class CustomerController : Controller
                 full_name = model.FullName,
                 email = model.Email,
                 mobile = model.Mobile,
+                number_login = 0,
                 locked = false,
                 bank_id = 1
             };
@@ -85,8 +86,89 @@ public class CustomerController : Controller
 
 
 
-    // public async Task<IActionResult> Log_in()
-    // {
-        
-    // }
+    [HttpPost("login")]
+    public async Task<IActionResult> Log_in([FromBody] LoginViewModel viewModel)
+    {
+
+        try
+        {
+            if (string.IsNullOrWhiteSpace(viewModel.Username)
+            || string.IsNullOrWhiteSpace(viewModel.Password))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Missing_data",
+                    Message = "Thiếu dữ liệu truyền vào"
+                });
+            }
+
+
+            var existUser = await _context.Customers.FirstOrDefaultAsync(x => x.username == viewModel.Username);
+            if (existUser == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Account does not exist",
+                    Message = "Tài khoản này không tồn tại"
+                });
+            }
+
+
+
+            bool isPasswordValid = BCrypt.Net.BCrypt.Verify(viewModel.Password, existUser.password);
+            if (!isPasswordValid)
+            {
+
+
+
+                if (existUser.locked == true)
+                {
+                    return BadRequest(new ApiError
+                    {
+                        Status = 400,
+                        Error = "Account lock",
+                        Message = "Tài khoản này đã bị khóa , vui lòng ra ngân hàng gần nhất để mở"
+                    });
+                }
+
+
+                if (existUser.number_login >= 3)
+                {
+                    existUser.locked = true;
+                    await _context.SaveChangesAsync();
+                    return BadRequest(new ApiError
+                    {
+                        Status = 400,
+                        Error = "Account lock",
+                        Message = "Tài khoản này đã bị khóa , vui lòng ra ngân hàng gần nhất để mở"
+                    });
+                }
+                else
+                {
+                    existUser.number_login += 1;
+                    await _context.SaveChangesAsync();
+                }
+
+
+                return Unauthorized(new ApiError
+                {
+                    Status = 401,
+                    Error = "Unauthorized",
+                    Message = "Mật khẩu không chính xác nếu nhập quá 3 lần sẽ bị khóa"
+                });
+            }
+
+            
+            
+
+
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Lỗi server: {ex.Message}");
+        }
+
+    }
 }
