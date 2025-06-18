@@ -1,0 +1,40 @@
+{
+  "customers": [
+    {
+      "id": 1,
+      "full_name": "Nguyễn Văn A",
+      "email": "a@example.com",
+      "mobile": "0901234567"
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "customer_id": 1,
+      "account_number": "19071903030017",
+      "balance": 95245000,
+      "status": "active"
+    }
+  ],
+  "transactions": [
+    {
+      "id": 1,
+      "account_id": 1,
+      "transaction_type": "deposit",
+      "status": "success",
+      "transaction_date": "2024-06-10T10:00:00",
+      "description": "Gửi tiền",
+      "amount": 2000000
+    },
+    {
+      "id": 2,
+      "account_id": 1,
+      "transaction_type": "transfer",
+      "status": "success",
+      "transaction_date": "2024-06-11T14:30:00",
+      "description": "Chuyển tiền đến B",
+      "amount": -500000
+    }
+  ]
+
+}
