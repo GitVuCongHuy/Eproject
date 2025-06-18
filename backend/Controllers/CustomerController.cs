@@ -15,6 +15,8 @@ public class CustomerController : Controller
 
     private readonly IConfiguration _configuration;
 
+   
+
     public CustomerController(ApplicationDbContext context, IConfiguration configuration)
     {
         _context = context;
@@ -174,6 +176,9 @@ public class CustomerController : Controller
             }
 
 
+
+
+            
             //tạo token trả về 
             var claims = new[]
             {

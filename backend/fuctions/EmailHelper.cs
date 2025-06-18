@@ -25,7 +25,23 @@ public class EmailHelper
             Credentials = new NetworkCredential(_fromEmail, _password),
             EnableSsl = true
         };
-
         await smtp.SendMailAsync(message);
+    }
+    
+    
+    public Task SendEmail(string toEmail, string subject, string body, bool isHtml = false)
+    {
+        var message = new MailMessage(_fromEmail, toEmail, subject, body)
+        {
+            IsBodyHtml = isHtml
+        };
+
+        using var smtp = new SmtpClient("smtp.gmail.com", 587)
+        {
+            Credentials = new NetworkCredential(_fromEmail, _password),
+            EnableSsl = true
+        };
+
+        return smtp.SendMailAsync(message);
     }
 }
