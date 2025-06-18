@@ -1,1 +1,0 @@
-// Giống hệt layout default khác cái là bỏ phần footer đi 
