@@ -49,6 +49,7 @@ builder.Services.AddControllersWithViews();
 
 //add send-email
 builder.Services.AddSingleton<EmailHelper>();
+builder.Services.AddScoped<JwtTokenHelper>();
 
 
 // Kết nối database
@@ -58,6 +59,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 // Cấu hình JWT Authentication
 var configuration = builder.Configuration;
+
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>

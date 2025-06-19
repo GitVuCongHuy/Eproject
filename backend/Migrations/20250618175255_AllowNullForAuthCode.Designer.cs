@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250618175255_AllowNullForAuthCode")]
+    partial class AllowNullForAuthCode
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,6 +143,9 @@ namespace backend.Migrations
                     b.Property<int>("customer_id")
                         .HasColumnType("int");
 
+                    b.Property<int>("customer_id1")
+                        .HasColumnType("int");
+
                     b.Property<string>("device")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -149,7 +155,7 @@ namespace backend.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("customer_id");
+                    b.HasIndex("customer_id1");
 
                     b.ToTable("Login_Attempts");
                 });
@@ -357,7 +363,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("Customer", "customer")
                         .WithMany()
-                        .HasForeignKey("customer_id")
+                        .HasForeignKey("customer_id1")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

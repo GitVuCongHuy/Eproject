@@ -15,6 +15,8 @@ public class EmailHelper
 
     public async Task SendEmailAsync(string toEmail, string subject, string body, bool isHtml = false)
     {
+
+  
         var message = new MailMessage(_fromEmail, toEmail, subject, body)
         {
             IsBodyHtml = isHtml
@@ -27,10 +29,12 @@ public class EmailHelper
         };
         await smtp.SendMailAsync(message);
     }
-    
-    
+
+
     public Task SendEmail(string toEmail, string subject, string body, bool isHtml = false)
     {
+
+        
         var message = new MailMessage(_fromEmail, toEmail, subject, body)
         {
             IsBodyHtml = isHtml
@@ -44,4 +48,23 @@ public class EmailHelper
 
         return smtp.SendMailAsync(message);
     }
+
+
+
+    /// <summary>
+    /// Tạo Mã Code
+    /// </summary>
+    /// <param name="length"> Độ dài đoạn code</param>
+    /// <returns></returns>
+    public  string GenerateRandomCode(int length )
+    {
+        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var random = new Random();
+        return new string(Enumerable.Repeat(chars, length)
+            .Select(s => s[random.Next(s.Length)]).ToArray());
+    }
+
+
+
+
 }

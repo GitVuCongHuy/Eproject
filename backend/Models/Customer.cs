@@ -10,12 +10,12 @@ public class Customer
 
 
     public int bank_id { get; set; }
-    
+
     [ForeignKey(nameof(bank_id))] // hoặc "bank_id"
     public Bank bank { get; set; }
 
 
-    
+
 
     [MaxLength(50)]
     public string username { get; set; }
@@ -35,9 +35,11 @@ public class Customer
     [MaxLength(15)]
     public string mobile { get; set; }
 
-    public int number_login  { get; set; }
+    public int number_login { get; set; }
 
     public bool locked { get; set; }
+    
+    public string? authentication_code { get; set; }
 
     
 

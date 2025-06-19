@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.VisualBasic;
 
 
 
@@ -12,15 +13,20 @@ using Microsoft.IdentityModel.Tokens;
 public class CustomerController : Controller
 {
     private readonly ApplicationDbContext _context;  //khai báo  controller 
+    private readonly JwtTokenHelper _jwtTokenHelper;
+    private readonly EmailHelper _emailHelper;
+
 
     private readonly IConfiguration _configuration;
 
-   
 
-    public CustomerController(ApplicationDbContext context, IConfiguration configuration)
+
+    public CustomerController(ApplicationDbContext context, IConfiguration configuration, JwtTokenHelper jwtTokenHelper, EmailHelper emailHelper)
     {
         _context = context;
         _configuration = configuration;
+        _jwtTokenHelper = jwtTokenHelper;
+        _emailHelper = emailHelper;
     }
 
 
@@ -79,7 +85,8 @@ public class CustomerController : Controller
                 mobile = model.Mobile,
                 number_login = 0,
                 locked = false,
-                bank_id = 1
+                bank_id = 1,
+
             };
 
             _context.Customers.Add(customer);
@@ -108,6 +115,7 @@ public class CustomerController : Controller
         try
         {
             if (string.IsNullOrWhiteSpace(viewModel.Username)
+            || string.IsNullOrWhiteSpace(viewModel.Password)
             || string.IsNullOrWhiteSpace(viewModel.Password))
             {
                 return BadRequest(new ApiError
@@ -170,37 +178,57 @@ public class CustomerController : Controller
                 return Unauthorized(new ApiError
                 {
                     Status = 401,
-                    Error = "Unauthorized",
+                    Error = "Wrong password",
                     Message = "Mật khẩu không chính xác nếu nhập quá 3 lần sẽ bị khóa"
                 });
             }
 
 
-
-
-            
-            //tạo token trả về 
-            var claims = new[]
+            //Kra có phải thiết bị mới không 
+            var new_device = await _context.Login_Attempts.FirstOrDefaultAsync(x => x.customer_id == existUser.customer_id);
+            if (new_device == null)
             {
-                new Claim(ClaimTypes.NameIdentifier, existUser.customer_id.ToString()),
-            };
 
-        
+                string code = _emailHelper.GenerateRandomCode(6);
+                existUser.authentication_code = code;
+                await _context.SaveChangesAsync();
+                await Verify_Code(code,existUser.email);
+
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "New equipment",
+                    Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
+                });
 
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+            }
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JwtSettings:Issuer"],
-                audience: _configuration["JwtSettings:Audience"],
-                claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(5), // ✅ UtcNow
-                signingCredentials: creds
-            );
+            if (new_device.device != viewModel.deviceId)
+            {
+                string code = _emailHelper.GenerateRandomCode(6);
+                existUser.authentication_code = code;
+                await _context.SaveChangesAsync();
 
-   
-            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+                await  Verify_Code(code,existUser.email);
+
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "New equipment",
+                    Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
+                });
+
+            }
+            ;
+
+
+
+
+
+            //Tạo Token
+            var tokenString = _jwtTokenHelper.GenerateToken(existUser.customer_id);
 
             return Ok(new ApiResponse<object>
             {
@@ -217,6 +245,150 @@ public class CustomerController : Controller
         }
 
     }
+
+
+    [HttpPost("login_verify")]
+    public async Task<IActionResult> LogInVerifyCode([FromBody] LoginVerifyModel viewModel) 
+    {
+        try
+        {
+            if (string.IsNullOrWhiteSpace(viewModel.Username)
+            || string.IsNullOrWhiteSpace(viewModel.Code)
+            || string.IsNullOrWhiteSpace(viewModel.deviceId))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Missing_data",
+                    Message = "Thiếu dữ liệu truyền vào"
+                });
+            }
+
+
+            var existUser = await _context.Customers.FirstOrDefaultAsync(x => x.username == viewModel.Username);
+            if (existUser == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Account does not exist",
+                    Message = "Tài khoản này không tồn tại"
+                });
+            }
+
+
+            if (existUser.locked == true)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Account lock",
+                    Message = "Tài khoản này đã bị khóa , vui lòng ra ngân hàng gần nhất để mở"
+                });
+            }
+
+
+            if (existUser.authentication_code != viewModel.Code)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Authentication code is wrong",
+                    Message = "Mã xác thực này sai , vui lòng thử lại.."
+                });
+            }
+
+
+            
+            var Login_attempts_Search =   await _context.Login_Attempts.FirstOrDefaultAsync(x => x.customer_id == existUser.customer_id);
+            if (Login_attempts_Search != null)
+            {
+                Login_attempts_Search.device = viewModel.deviceId;
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+
+                var Login_Attempts = new Login_attempts
+                {
+                    device = viewModel.deviceId,
+                    success = false,
+                    customer_id = existUser.customer_id
+
+                };
+                _context.Login_Attempts.Add(Login_Attempts);
+                await _context.SaveChangesAsync();
+            }
+
+
+
+
+
+
+            string subject = "Phát hiện thiết bị mới đăng nhập";
+
+            string timeDetected = DateTime.Now.ToString("HH:mm:ss dd/MM/yyyy");
+
+            string body = $@"
+            Chào bạn,
+
+            Chúng tôi phát hiện một lần đăng nhập từ một thiết bị lạ vào tài khoản của bạn.
+
+            🕒 Thời gian phát hiện: {timeDetected}
+
+            Nếu bạn không thực hiện hành động này, hãy thay đổi mật khẩu ngay và liên hệ với chúng tôi để được hỗ trợ.
+
+            Trân trọng,  
+            Đội ngũ hỗ trợ khách hàng
+            ";
+
+
+            await _emailHelper.SendEmailAsync(existUser.email, subject, body, false);
+
+              //Tạo Token
+            var tokenString = _jwtTokenHelper.GenerateToken(existUser.customer_id);
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Log in successfully",
+                Data = new { Token = tokenString }  // ✅ trả token dạng string
+            });
+
+
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Lỗi server: {ex.Message}");
+        }
+    }   
     
+
+    public async Task Verify_Code(string Code, string toEmail)
+    {
+        // string Code = _emailHelper.GenerateRandomCode(6);
+        string subject = "Xác thực thiết bị đăng nhập mới";
+
+        string body = $@"
+        Chào bạn,
+
+        Chúng tôi phát hiện một lần đăng nhập từ một thiết bị lạ vào tài khoản của bạn.  
+        Để đảm bảo an toàn, vui lòng sử dụng mã xác thực dưới đây để xác nhận bạn là người thực hiện hành động này:
+
+        🔐 **Mã xác thực:** {Code}
+
+        Vui lòng không chia sẻ mã này với bất kỳ ai. Mã có hiệu lực trong một khoảng thời gian ngắn.
+
+        Nếu bạn không thực hiện yêu cầu này, hãy thay đổi mật khẩu ngay và liên hệ với chúng tôi để được hỗ trợ.
+
+        Trân trọng,  
+        Đội ngũ hỗ trợ khách hàng
+        ";
+
+
+        await _emailHelper.SendEmailAsync(toEmail, subject, body, false);
+
+    }
     
+   
 }
