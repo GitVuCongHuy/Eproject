@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250616083759_suapass")]
-    partial class suapass
+    [Migration("20250620191209_FixCustomerForeignKey")]
+    partial class FixCustomerForeignKey
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,8 +33,7 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("account_id"));
 
                     b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("balance");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -44,12 +43,9 @@ namespace backend.Migrations
                     b.Property<int>("customer_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("customer_id1")
-                        .HasColumnType("int");
-
                     b.HasKey("account_id");
 
-                    b.HasIndex("customer_id1");
+                    b.HasIndex("customer_id");
 
                     b.ToTable("Accounts");
                 });
@@ -89,10 +85,10 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("customer_id"));
 
-                    b.Property<int>("bank_id")
-                        .HasColumnType("int");
+                    b.Property<string>("authentication_code")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("bank_id1")
+                    b.Property<int>("bank_id")
                         .HasColumnType("int");
 
                     b.Property<string>("email")
@@ -113,6 +109,9 @@ namespace backend.Migrations
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
+                    b.Property<int>("number_login")
+                        .HasColumnType("int");
+
                     b.Property<string>("password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -124,7 +123,7 @@ namespace backend.Migrations
 
                     b.HasKey("customer_id");
 
-                    b.HasIndex("bank_id1");
+                    b.HasIndex("bank_id");
 
                     b.ToTable("Customers");
                 });
@@ -140,22 +139,16 @@ namespace backend.Migrations
                     b.Property<int>("customer_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("customer_id1")
-                        .HasColumnType("int");
-
                     b.Property<string>("device")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("number_login")
-                        .HasColumnType("int");
 
                     b.Property<bool>("success")
                         .HasColumnType("bit");
 
                     b.HasKey("id");
 
-                    b.HasIndex("customer_id1");
+                    b.HasIndex("customer_id");
 
                     b.ToTable("Login_Attempts");
                 });
@@ -242,35 +235,103 @@ namespace backend.Migrations
                     b.ToTable("statements");
                 });
 
+            modelBuilder.Entity("Transaction_Participants", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int")
+                        .HasColumnName("account_id");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)")
+                        .HasColumnName("role");
+
+                    b.Property<int>("TransactionId")
+                        .HasColumnType("int")
+                        .HasColumnName("transaction_id");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountId");
+
+                    b.HasIndex("TransactionId");
+
+                    b.ToTable("transaction_participants");
+                });
+
             modelBuilder.Entity("Transaction_passwords", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("customer_id")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("customer_id1")
+                    b.Property<int>("TransactionPassword")
                         .HasColumnType("int");
 
-                    b.Property<int>("transaction_password")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("customer_id1");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("transaction_Passwords");
+                });
+
+            modelBuilder.Entity("Transactions", b =>
+                {
+                    b.Property<int>("TransactionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("transaction_id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("amount");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("status");
+
+                    b.Property<DateTime>("TransactionDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("transaction_date");
+
+                    b.Property<string>("TransactionType")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)")
+                        .HasColumnName("transaction_type");
+
+                    b.HasKey("TransactionId");
+
+                    b.ToTable("transactions");
                 });
 
             modelBuilder.Entity("Accounts", b =>
                 {
                     b.HasOne("Customer", "customer")
                         .WithMany()
-                        .HasForeignKey("customer_id1")
+                        .HasForeignKey("customer_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -281,7 +342,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("Bank", "bank")
                         .WithMany()
-                        .HasForeignKey("bank_id1")
+                        .HasForeignKey("bank_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -292,7 +353,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("Customer", "customer")
                         .WithMany()
-                        .HasForeignKey("customer_id1")
+                        .HasForeignKey("customer_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -321,15 +382,34 @@ namespace backend.Migrations
                     b.Navigation("accounts");
                 });
 
-            modelBuilder.Entity("Transaction_passwords", b =>
+            modelBuilder.Entity("Transaction_Participants", b =>
                 {
-                    b.HasOne("Customer", "customer")
+                    b.HasOne("Accounts", "accounts")
                         .WithMany()
-                        .HasForeignKey("customer_id1")
+                        .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("customer");
+                    b.HasOne("Transactions", "transactions")
+                        .WithMany()
+                        .HasForeignKey("TransactionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("accounts");
+
+                    b.Navigation("transactions");
+                });
+
+            modelBuilder.Entity("Transaction_passwords", b =>
+                {
+                    b.HasOne("Customer", "Customer")
+                        .WithMany()
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }

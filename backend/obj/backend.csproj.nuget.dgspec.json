@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\hoctap\\DoAN\\backend\\backend.csproj": {}
+    "D:\\hoc\\project 3\\Eproject\\backend\\backend.csproj": {}
   },
   "projects": {
-    "D:\\hoctap\\DoAN\\backend\\backend.csproj": {
+    "D:\\hoc\\project 3\\Eproject\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\hoctap\\DoAN\\backend\\backend.csproj",
+        "projectUniqueName": "D:\\hoc\\project 3\\Eproject\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "D:\\hoctap\\DoAN\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\kien2\\.nuget\\packages\\",
-        "outputPath": "D:\\hoctap\\DoAN\\backend\\obj\\",
+        "projectPath": "D:\\hoc\\project 3\\Eproject\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\lhlsl\\.nuget\\packages\\",
+        "outputPath": "D:\\hoc\\project 3\\Eproject\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kien2\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\lhlsl\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -37,8 +37,7 @@
           "enableAudit": "true",
           "auditLevel": "low",
           "auditMode": "direct"
-        },
-        "SdkAnalysisLevel": "9.0.200"
+        }
       },
       "frameworks": {
         "net8.0": {
@@ -61,6 +60,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[9.0.5, )"
+            },
+            "QuestPDF": {
+              "target": "Package",
+              "version": "[2025.5.1, )"
             }
           },
           "imports": [
@@ -74,24 +77,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[8.0.13, 8.0.13]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[8.0.13, 8.0.13]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -100,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class Fix_Tc : Migration
+    public partial class FixCustomerForeignKey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,26 +27,44 @@ namespace backend.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "transactions",
+                columns: table => new
+                {
+                    transaction_id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    transaction_type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    transaction_date = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_transactions", x => x.transaction_id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Customers",
                 columns: table => new
                 {
                     customer_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     bank_id = table.Column<int>(type: "int", nullable: false),
-                    bank_id1 = table.Column<int>(type: "int", nullable: false),
                     username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    password = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     full_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     mobile = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
-                    locked = table.Column<bool>(type: "bit", nullable: false)
+                    number_login = table.Column<int>(type: "int", nullable: false),
+                    locked = table.Column<bool>(type: "bit", nullable: false),
+                    authentication_code = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Customers", x => x.customer_id);
                     table.ForeignKey(
-                        name: "FK_Customers_Banks_bank_id1",
-                        column: x => x.bank_id1,
+                        name: "FK_Customers_Banks_bank_id",
+                        column: x => x.bank_id,
                         principalTable: "Banks",
                         principalColumn: "bank_id",
                         onDelete: ReferentialAction.Cascade);
@@ -59,16 +77,15 @@ namespace backend.Migrations
                     account_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     customer_id = table.Column<int>(type: "int", nullable: false),
-                    customer_id1 = table.Column<int>(type: "int", nullable: false),
-                    balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Accounts", x => x.account_id);
                     table.ForeignKey(
-                        name: "FK_Accounts_Customers_customer_id1",
-                        column: x => x.customer_id1,
+                        name: "FK_Accounts_Customers_customer_id",
+                        column: x => x.customer_id,
                         principalTable: "Customers",
                         principalColumn: "customer_id",
                         onDelete: ReferentialAction.Cascade);
@@ -81,17 +98,15 @@ namespace backend.Migrations
                     id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     customer_id = table.Column<int>(type: "int", nullable: false),
-                    customer_id1 = table.Column<int>(type: "int", nullable: false),
                     device = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    number_login = table.Column<int>(type: "int", nullable: false),
                     success = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Login_Attempts", x => x.id);
                     table.ForeignKey(
-                        name: "FK_Login_Attempts_Customers_customer_id1",
-                        column: x => x.customer_id1,
+                        name: "FK_Login_Attempts_Customers_customer_id",
+                        column: x => x.customer_id,
                         principalTable: "Customers",
                         principalColumn: "customer_id",
                         onDelete: ReferentialAction.Cascade);
@@ -124,18 +139,17 @@ namespace backend.Migrations
                 name: "transaction_Passwords",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    customer_id = table.Column<int>(type: "int", nullable: false),
-                    customer_id1 = table.Column<int>(type: "int", nullable: false),
-                    transaction_password = table.Column<int>(type: "int", nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false),
+                    TransactionPassword = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_transaction_Passwords", x => x.id);
+                    table.PrimaryKey("PK_transaction_Passwords", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_transaction_Passwords_Customers_customer_id1",
-                        column: x => x.customer_id1,
+                        name: "FK_transaction_Passwords_Customers_CustomerId",
+                        column: x => x.CustomerId,
                         principalTable: "Customers",
                         principalColumn: "customer_id",
                         onDelete: ReferentialAction.Cascade);
@@ -166,20 +180,47 @@ namespace backend.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "transaction_participants",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    transaction_id = table.Column<int>(type: "int", nullable: false),
+                    account_id = table.Column<int>(type: "int", nullable: false),
+                    role = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_transaction_participants", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_transaction_participants_Accounts_account_id",
+                        column: x => x.account_id,
+                        principalTable: "Accounts",
+                        principalColumn: "account_id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_transaction_participants_transactions_transaction_id",
+                        column: x => x.transaction_id,
+                        principalTable: "transactions",
+                        principalColumn: "transaction_id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
-                name: "IX_Accounts_customer_id1",
+                name: "IX_Accounts_customer_id",
                 table: "Accounts",
-                column: "customer_id1");
+                column: "customer_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customers_bank_id1",
+                name: "IX_Customers_bank_id",
                 table: "Customers",
-                column: "bank_id1");
+                column: "bank_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Login_Attempts_customer_id1",
+                name: "IX_Login_Attempts_customer_id",
                 table: "Login_Attempts",
-                column: "customer_id1");
+                column: "customer_id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Service_requests_customer_id",
@@ -192,9 +233,19 @@ namespace backend.Migrations
                 column: "accountsaccount_id");
 
             migrationBuilder.CreateIndex(
-                name: "IX_transaction_Passwords_customer_id1",
+                name: "IX_transaction_participants_account_id",
+                table: "transaction_participants",
+                column: "account_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_transaction_participants_transaction_id",
+                table: "transaction_participants",
+                column: "transaction_id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_transaction_Passwords_CustomerId",
                 table: "transaction_Passwords",
-                column: "customer_id1");
+                column: "CustomerId");
         }
 
         /// <inheritdoc />
@@ -210,10 +261,16 @@ namespace backend.Migrations
                 name: "statements");
 
             migrationBuilder.DropTable(
+                name: "transaction_participants");
+
+            migrationBuilder.DropTable(
                 name: "transaction_Passwords");
 
             migrationBuilder.DropTable(
                 name: "Accounts");
+
+            migrationBuilder.DropTable(
+                name: "transactions");
 
             migrationBuilder.DropTable(
                 name: "Customers");

@@ -1,17 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-
 public class Transaction_passwords
 {
     [Key]
-    public int id { get; set; }
+    public int Id { get; set; }
 
+    public int CustomerId { get; set; }
 
-    [ForeignKey("Customer")]
-    public int customer_id { get; set; }
-    public Customer customer { get; set; }
+    [ForeignKey("CustomerId")]
+    public Customer Customer { get; set; }
 
-    public int transaction_password { get; set; }
+    public int TransactionPassword { get; set; }
 }
