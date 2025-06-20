@@ -8,7 +8,6 @@ public class Transaction_passwords
     [Key]
     public int id { get; set; }
 
-
     [ForeignKey("Customer")]
     public int customer_id { get; set; }
     public Customer customer { get; set; }
