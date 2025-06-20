@@ -160,6 +160,7 @@ public class CustomerController : Controller
                 if (existUser.number_login >= 3)
                 {
                     existUser.locked = true;
+                    existUser.number_login = 0;
                     await _context.SaveChangesAsync();
                     return BadRequest(new ApiError
                     {
@@ -192,7 +193,7 @@ public class CustomerController : Controller
                 string code = _emailHelper.GenerateRandomCode(6);
                 existUser.authentication_code = code;
                 await _context.SaveChangesAsync();
-                await Verify_Code(code,existUser.email);
+                await Verify_Code(code, existUser.email);
 
                 return BadRequest(new ApiError
                 {
@@ -211,7 +212,7 @@ public class CustomerController : Controller
                 await _context.SaveChangesAsync();
 
 
-                await  Verify_Code(code,existUser.email);
+                await Verify_Code(code, existUser.email);
 
                 return BadRequest(new ApiError
                 {
@@ -225,7 +226,11 @@ public class CustomerController : Controller
 
 
 
-
+            if (existUser.number_login != 0)
+            {
+                existUser.number_login = 0;
+                await _context.SaveChangesAsync();
+            }
 
             //Tạo Token
             var tokenString = _jwtTokenHelper.GenerateToken(existUser.customer_id);
@@ -307,7 +312,7 @@ public class CustomerController : Controller
                 await _context.SaveChangesAsync();
             }
             else
-            {
+            {   
 
                 var Login_Attempts = new Login_attempts
                 {
@@ -345,6 +350,12 @@ public class CustomerController : Controller
 
             await _emailHelper.SendEmailAsync(existUser.email, subject, body, false);
 
+
+            if (existUser.number_login != 0)
+            {
+                existUser.number_login = 0;
+                await _context.SaveChangesAsync();
+            }
               //Tạo Token
             var tokenString = _jwtTokenHelper.GenerateToken(existUser.customer_id);
 
