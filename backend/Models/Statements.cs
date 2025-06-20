@@ -16,9 +16,6 @@ public class Statements
     public string PeriodType { get; set; } // monthly or annual
 
 
-
-
-
     [Column(TypeName = "date")]
     public DateTime StartDate { get; set; }
 
