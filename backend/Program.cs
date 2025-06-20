@@ -1,41 +1,3 @@
-// using Microsoft.EntityFrameworkCore;
-
-// var builder = WebApplication.CreateBuilder(args);
-
-// // Add services to the container.
-// builder.Services.AddControllersWithViews();
-
-
-
-
-// builder.Services.AddDbContext<ApplicationDbContext>(options =>
-//     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-// var app = builder.Build();
-
-
-
-// // Configure the HTTP request pipeline.
-// if (!app.Environment.IsDevelopment())
-// {
-//     app.UseExceptionHandler("/Home/Error");
-//     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-//     app.UseHsts();
-// }
-
-// app.UseHttpsRedirection();
-// app.UseStaticFiles();
-
-// app.UseRouting();
-
-// app.UseAuthorization();
-
-// app.MapControllerRoute(
-//     name: "default",
-//     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-// app.Run();
-
-
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -43,19 +5,26 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container
 builder.Services.AddControllersWithViews();
 
-//add send-email
+// Add send-email
 builder.Services.AddSingleton<EmailHelper>();
 builder.Services.AddScoped<JwtTokenHelper>();
 
-
 // Kết nối database
-
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Cấu hình CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:5173" ) // Thay thế bằng URL chính xác của frontend của bạn
+                          .AllowAnyMethod() // Cho phép tất cả các phương thức HTTP (GET, POST, PUT, DELETE, v.v.)
+                          .AllowAnyHeader() // Cho phép tất cả các header
+                          .AllowCredentials()); // Cho phép gửi cookie và thông tin xác thực
+});
 
 // Cấu hình JWT Authentication
 var configuration = builder.Configuration;
@@ -94,6 +63,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Sử dụng chính sách CORS đã định nghĩa
+// Đặt UseCors sau UseRouting và trước UseAuthentication/UseAuthorization
+app.UseCors("AllowSpecificOrigin"); 
+
 // Bảo mật
 app.UseAuthentication();  // Phải trước UseAuthorization
 app.UseAuthorization();
@@ -104,4 +77,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
