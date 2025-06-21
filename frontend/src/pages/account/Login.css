@@ -17,7 +17,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* padding: 20px; */
 }
 
 .ekyc-img {
@@ -28,10 +27,10 @@
 .login-right {
   background-color: #fff;
   display: flex;
-  flex-direction: column; 
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px; 
+  padding: 20px;
 }
 
 .login-form-wrapper {
@@ -39,174 +38,197 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1; /* Cho phép wrapper này chiếm hết không gian còn lại */
+  flex-grow: 1;
 }
 
 .login-form {
   width: 100%;
   max-width: 420px;
   text-align: center;
-  padding: 2.5rem; 
+  padding: 2.5rem;
   background-color: #fff;
-  border-radius: 12px; 
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); 
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid #eee;
 }
 
 .logo {
-  width: 60px; /* Tăng kích thước logo */
-  margin-bottom: 1.5rem; /* Tăng khoảng cách dưới logo */
+  width: 60px;
+  margin-bottom: 1.5rem;
 }
 
 .login-form h3 {
   margin: 0;
-  font-weight: 400; /* Điều chỉnh độ đậm chữ */
-  color: #555; /* Màu chữ xám hơn */
+  font-weight: 400;
+  color: #555;
   font-size: 1rem;
 }
 
 .login-form h2 {
-  margin: 0.5rem 0 2rem; /* Tăng khoảng cách dưới tiêu đề chính */
+  margin: 0.5rem 0 2rem;
   color: #000;
-  font-size: 1.8rem; /* Tăng kích thước tiêu đề chính */
-  font-weight: 700; /* Đậm hơn */
+  font-size: 1.8rem;
+  font-weight: 700;
 }
 
 .login-form input {
-  width: 380px  ;
+  width: 380px;
   padding: 0.9rem 1rem;
-  margin: 0.75rem 0; 
-  border: 1px solid #002fff; 
+  margin: 0.75rem 0;
+  border: 1px solid #002fff;
   border-radius: 8px;
-  font-size: 1rem; 
-  background-color: #f9f9f9; 
+  font-size: 1rem;
+  background-color: #f9f9f9;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .login-form input:focus {
-  border-color: rgb(0, 102, 255); 
-  outline: none; 
+  border-color: rgb(0, 102, 255);
+  outline: none;
   box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
 }
 
 .captcha-row {
-  width: 100%; 
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 1.5rem; 
-  gap: 10px; 
+  margin-top: 1.5rem;
+  gap: 10px;
 }
 
 .captcha-row input {
-  width: calc(100% - 60px); /* Giảm bớt khoảng cách cho input captcha */
-  flex-grow: 1; 
-  margin: 0; 
+  width: calc(100% - 60px);
+  flex-grow: 1;
+  margin: 0;
 }
 
-/* Style mới cho CAPTCHA hiển thị dạng text */
 .captcha-display {
   height: 48px;
-  min-width: 120px; /* Đảm bảo đủ rộng để hiển thị 6 ký tự */
+  min-width: 120px;
   border: 1px solid #ddd;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive; /* Font chữ đặc biệt */
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
   font-size: 1.5rem;
   font-weight: bold;
   color: #333;
-  background-color: #f0f0f0;
-  letter-spacing: 2px; 
-  user-select: none; 
-  text-decoration:line-through; 
+  background: url(https://png.pngtree.com/png-vector/20220615/ourmid/pngtree-black-and-white-diagonal-stripes-background-light-book-vector-vector-png-image_31608732.jpg);
+  letter-spacing: 2px;
+  user-select: none;
+  text-decoration: line-through;
   padding: 0 5px;
 }
-
 
 .refresh-btn {
   background: none;
   border: none;
   color: #0033a0;
-  font-size: 1.8rem; 
+  font-size: 1.8rem;
   cursor: pointer;
-  transition: color 0.3s ease, transform 0.3s ease; 
-  padding: 5px; 
+  transition: color 0.3s ease, transform 0.3s ease;
+  padding: 5px;
 }
 
 .refresh-btn:hover {
   color: #002fff;
-  transform: rotate(30deg); /* Xoay nhẹ khi hover */
+  transform: rotate(30deg);
 }
 
 .submit-btn {
-  width: 100%; /* Đảm bảo responsive */
-  padding: 1rem; /* Tăng padding nút submit */
-  background-color:#0529c7;
+  width: 100%;
+  padding: 1rem;
+  background-color: #0529c7;
   color: white;
   border: none;
-  border-radius: 8px; /* Bo tròn góc nút submit */
+  border-radius: 8px;
   font-weight: bold;
-  margin-top: 2rem; /* Tăng khoảng cách trên nút submit */
-  font-size: 1.1rem; /* Tăng kích thước chữ nút submit */
+  margin-top: 2rem;
+  font-size: 1.1rem;
   cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease; /* Thêm hiệu ứng chuyển động */
-  letter-spacing: 0.5px; /* Thêm khoảng cách chữ */
+  transition: background 0.3s ease, transform 0.2s ease;
+  letter-spacing: 0.5px;
 }
 
 .submit-btn:hover {
   background-color: #0529c7;
-  transform: translateY(-2px); /* Nâng nhẹ nút khi hover */
-  box-shadow: 0 4px 10px rgba(0, 51, 160, 0.3); /* Thêm đổ bóng khi hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 51, 160, 0.3);
 }
 
 .submit-btn:disabled {
-  background-color: #cccccc; /* Màu xám khi bị vô hiệu hóa */
-  cursor: not-allowed; /* Con trỏ không cho phép */
-  transform: none; /* Bỏ hiệu ứng hover */
-  box-shadow: none; /* Bỏ đổ bóng */
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .footer-links-wrapper {
   width: 100%;
   text-align: center;
-  margin-top: auto; /* Đẩy footer xuống cuối */
-  padding-top: 20px; /* Khoảng cách trên footer */
+  margin-top: auto;
+  padding-top: 20px;
 }
 
 .footer-links {
-  font-size: 0.9rem; /* Tăng kích thước chữ footer */
-  color: #777; /* Màu chữ xám hơn */
+  font-size: 0.9rem;
+  color: #777;
 }
 
 .footer-links a {
-  color: #0033a0; /* Màu link đồng bộ với màu chủ đạo */
+  color: #0033a0;
   text-decoration: none;
-  margin: 0 0.5rem; /* Tăng khoảng cách giữa các link */
+  margin: 0 0.5rem;
   transition: color 0.3s ease;
 }
 
 .footer-links a:hover {
   text-decoration: underline;
-  color: #0056b3; /* Màu link khi hover */
+  color: #0056b3;
 }
 
 .error {
-  color: #e74c3c; /* Màu đỏ lỗi rõ ràng hơn */
+  color: #e74c3c;
   font-size: 0.9rem;
-  margin-bottom: 1rem; /* Tăng khoảng cách dưới lỗi */
+  margin-bottom: 1rem;
   font-weight: 500;
+}
+
+@media (max-width: 1559px) {
+  .login-wrapper {
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
+  }
+  .login-left {
+    display: none;
+  }
+
+  .login-right {
+    background: url(https://i.pinimg.com/originals/4e/de/5a/4ede5a33c5490195b2b17466ad26d124.gif);
+    padding: auto;
+  }
+
+  .login-form {
+    max-width: 400px;
+    padding: 2rem;
+  }
+
+  .footer-links-wrapper {
+    margin-top: 40px;
+  }
 }
 
 @media (max-width: 1059px) {
   .login-wrapper {
-    grid-template-columns: 1fr; 
-    height: auto; 
-    min-height: 100vh; 
+    grid-template-columns: 1fr;
+    height: auto;
+    min-height: 100vh;
   }
   .login-left {
-    display: none; 
+    display: none;
   }
 
   .login-right {
@@ -214,25 +236,22 @@
   }
 
   .login-form {
-    max-width: 400px; /* Giới hạn lại max-width cho form trên màn hình nhỏ */
+    max-width: 400px;
     padding: 2rem;
   }
 
   .footer-links-wrapper {
-    margin-top: 40px; /* Điều chỉnh khoảng cách trên footer */
+    margin-top: 40px;
   }
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 992px) {
-
   .login-wrapper {
-    /* grid-template-columns: 1fr;  */
-    height: auto; 
-    min-height: 100vh; 
+    height: auto;
+    min-height: 100vh;
   }
   .login-left {
-    display: none; 
+    display: none;
   }
 
   .login-right {
@@ -240,12 +259,12 @@
   }
 
   .login-form {
-    max-width: 400px; /* Giới hạn lại max-width cho form trên màn hình nhỏ */
+    max-width: 400px;
     padding: 2rem;
   }
 
   .footer-links-wrapper {
-    margin-top: 40px; /* Điều chỉnh khoảng cách trên footer */
+    margin-top: 40px;
   }
 }
 
@@ -253,8 +272,8 @@
   .login-form {
     padding: 1.5rem;
     border-radius: 8px;
-    box-shadow: none; /* Bỏ đổ bóng trên màn hình rất nhỏ */
-    border: none; /* Bỏ viền trên màn hình rất nhỏ */
+    box-shadow: none;
+    border: none;
   }
 
   .login-form h2 {
@@ -269,23 +288,20 @@
     margin-bottom: 1rem;
   }
 
-
   .captcha-row input {
     width: 150px;
   }
 
-  /* Điều chỉnh kích thước cho captcha-display trên màn hình nhỏ */
   .captcha-display {
     width: 150px;
     height: auto;
     max-height: 50px;
-    font-size: 1.2rem; /* Giảm kích thước font */
+    font-size: 1.2rem;
   }
 
   .refresh-btn {
     align-self: flex-end;
     margin-top: 5px;
-
   }
 
   .submit-btn {
@@ -294,7 +310,7 @@
   }
 
   .footer-links a {
-    display: block; 
+    display: block;
     margin: 0.5rem 0;
   }
 }

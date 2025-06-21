@@ -1,14 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    background-color: #ffffff;
-}
-
 .sidebar {
     background-color: #ffffff;
     color: #333;
@@ -23,17 +12,17 @@ body {
     flex-direction: column;
 }
 
-.user-info {
+.userInfo {
     margin-bottom: 20px;
 }
 
-.user-info p {
+.userInfo p {
     font-size: 16px;
     font-weight: bold;
     margin-bottom: 10px;
 }
 
-.user-info button {
+.userInfo button {
     background-color: #f0f0f0;
     color: #333;
     border: 1px solid #ccc;
@@ -44,7 +33,7 @@ body {
     transition: background-color 0.3s;
 }
 
-.user-info button:hover {
+.userInfo button:hover {
     background-color: #e0e0e0;
 }
 
@@ -57,7 +46,7 @@ nav ul li {
     margin: 10px 0;
 }
 
-nav ul li a {
+.link {
     color: #333;
     text-decoration: none;
     font-size: 16px;
@@ -67,11 +56,11 @@ nav ul li a {
     transition: background-color 0.3s;
 }
 
-nav ul li a:hover {
+.link:hover {
     background-color: #e6f0ff;
 }
 
-nav ul li a.active {
+.active {
     background-color: #d0e6ff;
     font-weight: bold;
 }
@@ -109,11 +98,11 @@ nav ul li a.active {
         font-size: 14px;
     }
 
-    .user-info p {
+    .userInfo p {
         font-size: 14px;
     }
 
-    .user-info button {
+    .userInfo button {
         font-size: 12px;
         padding: 6px 10px;
     }

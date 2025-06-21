@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './header.css';
+import styles from './header.module.css';
 
 const Header = () => {
     const [activeMenu, setActiveMenu] = useState('');
@@ -9,8 +9,8 @@ const Header = () => {
     };
 
     return (
-        <aside className="sidebar">
-            <div className="user-info">
+        <aside className={styles.sidebar}>
+            <div className={styles.userInfo}>
                 <p>Xin chào, VU THIEN HUU</p>
                 <button>Thong tin tai khoan</button>
             </div>
@@ -20,14 +20,13 @@ const Header = () => {
                         <a
                             href="#"
                             onClick={() => handleMenuClick('trangchu')}
-                            className={activeMenu === 'trangchu' ? 'active' : ''}
+                            className={`${styles.link} ${activeMenu === 'trangchu' ? styles.active : ''}`}
                         >
                             Trang chủ
                         </a>
                         {activeMenu === 'trangchu' && (
-                            <ul className="submenu">
+                            <ul className={styles.submenu}>
                                 <li><a href="#">Tổng quan</a></li>
-
                             </ul>
                         )}
                     </li>
@@ -35,12 +34,12 @@ const Header = () => {
                         <a
                             href="#"
                             onClick={() => handleMenuClick('taikhoan')}
-                            className={activeMenu === 'taikhoan' ? 'active' : ''}
+                            className={`${styles.link} ${activeMenu === 'taikhoan' ? styles.active : ''}`}
                         >
                             Tài khoản & Thẻ
                         </a>
                         {activeMenu === 'taikhoan' && (
-                            <ul className="submenu">
+                            <ul className={styles.submenu}>
                                 <li><a href="#">Xem số dư</a></li>
                                 <li><a href="#">Sao kê</a></li>
                             </ul>
@@ -50,12 +49,12 @@ const Header = () => {
                         <a
                             href="#"
                             onClick={() => handleMenuClick('chuyentien')}
-                            className={activeMenu === 'chuyentien' ? 'active' : ''}
+                            className={`${styles.link} ${activeMenu === 'chuyentien' ? styles.active : ''}`}
                         >
                             Chuyển tiền
                         </a>
                         {activeMenu === 'chuyentien' && (
-                            <ul className="submenu">
+                            <ul className={styles.submenu}>
                                 <li><a href="#">Chuyển nội bộ</a></li>
                                 <li><a href="#">Chuyển liên ngân hàng</a></li>
                             </ul>
@@ -65,12 +64,12 @@ const Header = () => {
                         <a
                             href="#"
                             onClick={() => handleMenuClick('tinhang')}
-                            className={activeMenu === 'tinhang' ? 'active' : ''}
+                            className={`${styles.link} ${activeMenu === 'tinhang' ? styles.active : ''}`}
                         >
                             Tính năng khác
                         </a>
                         {activeMenu === 'tinhang' && (
-                            <ul className="submenu">
+                            <ul className={styles.submenu}>
                                 <li><a href="#">Yêu cầu sổ séc</a></li>
                                 <li><a href="#">Ngừng thanh toán séc</a></li>
                                 <li><a href="#">Thay đổi địa chỉ</a></li>
@@ -78,7 +77,7 @@ const Header = () => {
                         )}
                     </li>
                     <li>
-                        <a href="#">Đăng xuất</a>
+                        <a className={styles.link} href="#">Đăng xuất</a>
                     </li>
                 </ul>
             </nav>

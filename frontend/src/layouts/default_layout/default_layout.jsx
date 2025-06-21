@@ -1,16 +1,17 @@
 import React from "react";
-import Header from "..//../components/header/header.jsx"; // Sidebar của bạn
 import { Outlet } from "react-router-dom";
+import Sidebar from "../../components/slider/Slidebar";
+import styles from "./default_layout.module.css";
 
-const default_layout = () => {
+const DefaultLayout = () => {
     return (
-        <div >
-            <Header />
-            <div >
-                <Outlet /> {/* Đây là nơi hiển thị nội dung từng page */}
-            </div>
+        <div className={styles.dashboardContainer}>
+            <Sidebar />
+            <main className={styles.mainContent}>
+                <Outlet /> 
+            </main>
         </div>
     );
 };
 
-export default default_layout;
+export default DefaultLayout;
