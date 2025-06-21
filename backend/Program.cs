@@ -1,16 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using QuestPDF.Infrastructure; 
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-builder.Services.AddControllersWithViews();
-
-// Add send-email
-builder.Services.AddSingleton<EmailHelper>();
-builder.Services.AddScoped<JwtTokenHelper>();
+// ✅ Cấu hình license cho QuestPDF
+QuestPDF.Settings.License = LicenseType.Community;
 
 // Kết nối database
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -20,17 +17,23 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:5173" ) // Thay thế bằng URL chính xác của frontend của bạn
-                          .AllowAnyMethod() // Cho phép tất cả các phương thức HTTP (GET, POST, PUT, DELETE, v.v.)
-                          .AllowAnyHeader() // Cho phép tất cả các header
-                          .AllowCredentials()); // Cho phép gửi cookie và thông tin xác thực
+        builder => builder.WithOrigins("http://localhost:5173") // URL frontend
+                          .AllowAnyMethod()
+                          .AllowAnyHeader()
+                          .AllowCredentials());
 });
 
-// Cấu hình JWT Authentication
+// Thêm dịch vụ controller và view
+builder.Services.AddControllersWithViews();
+
+// Đăng ký các service cần thiết
+builder.Services.AddSingleton<EmailHelper>();
+builder.Services.AddScoped<JwtTokenHelper>();
+
+// Lấy thông tin cấu hình từ appsettings.json
 var configuration = builder.Configuration;
 
-
-
+// Cấu hình xác thực bằng JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -47,31 +50,30 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             )
         };
     });
-    
+
 var app = builder.Build();
 
-// Middleware xử lý lỗi khi không ở môi trường Development
+// Xử lý lỗi khi không ở môi trường development
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
 
-// Middlewares cơ bản
+// Middleware cơ bản
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
 
-// Sử dụng chính sách CORS đã định nghĩa
-// Đặt UseCors sau UseRouting và trước UseAuthentication/UseAuthorization
-app.UseCors("AllowSpecificOrigin"); 
+//  CORS nên để giữa Routing và Authentication
+app.UseCors("AllowSpecificOrigin");
 
-// Bảo mật
-app.UseAuthentication();  // Phải trước UseAuthorization
+// Authentication + Authorization
+app.UseAuthentication();
 app.UseAuthorization();
 
-// Định tuyến controller
+// Định tuyến
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
