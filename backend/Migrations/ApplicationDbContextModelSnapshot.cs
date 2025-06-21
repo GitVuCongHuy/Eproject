@@ -30,8 +30,7 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("account_id"));
 
                     b.Property<decimal>("Balance")
-                        .HasColumnType("decimal(18,2)")
-                        .HasColumnName("balance");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -41,12 +40,9 @@ namespace backend.Migrations
                     b.Property<int>("customer_id")
                         .HasColumnType("int");
 
-                    b.Property<int>("customer_id1")
-                        .HasColumnType("int");
-
                     b.HasKey("account_id");
 
-                    b.HasIndex("customer_id1");
+                    b.HasIndex("customer_id");
 
                     b.ToTable("Accounts");
                 });
@@ -270,24 +266,21 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Transaction_passwords", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("customer_id")
+                    b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int>("customer_id1")
+                    b.Property<int>("TransactionPassword")
                         .HasColumnType("int");
 
-                    b.Property<int>("transaction_password")
-                        .HasColumnType("int");
+                    b.HasKey("Id");
 
-                    b.HasKey("id");
-
-                    b.HasIndex("customer_id1");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("transaction_Passwords");
                 });
@@ -335,7 +328,7 @@ namespace backend.Migrations
                 {
                     b.HasOne("Customer", "customer")
                         .WithMany()
-                        .HasForeignKey("customer_id1")
+                        .HasForeignKey("customer_id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -407,13 +400,13 @@ namespace backend.Migrations
 
             modelBuilder.Entity("Transaction_passwords", b =>
                 {
-                    b.HasOne("Customer", "customer")
+                    b.HasOne("Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("customer_id1")
+                        .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("customer");
+                    b.Navigation("Customer");
                 });
 #pragma warning restore 612, 618
         }
