@@ -114,6 +114,43 @@ public class Accounts_manager : ControllerBase
         return Ok(new ApiResponse<string> { Status = 200, Message = "Đã khóa thẻ thành công.", Data = "Locked" });
     }
 
+    [HttpPost("unlock-card/{accountId}")]
+public async Task<IActionResult> UnlockCard(int accountId)
+{
+    var customerId = GetCustomerIdFromToken();
+
+    var account = await _context.Accounts
+        .FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
+
+    if (account == null)
+        return NotFound(new ApiError
+        {
+            Status = 404,
+            Error = "NotFound",
+            Message = "Không tìm thấy thẻ hoặc thẻ không thuộc về bạn."
+        });
+
+    if (account.Status != "Locked")
+    {
+        return BadRequest(new ApiError
+        {
+            Status = 400,
+            Error = "NotLocked",
+            Message = "Thẻ này không bị khóa, không cần mở khóa."
+        });
+    }
+
+    account.Status = "Active";
+    await _context.SaveChangesAsync();
+
+    return Ok(new ApiResponse<string>
+    {
+        Status = 200,
+        Message = "Mở khóa thẻ thành công.",
+        Data = "Unlocked"
+    });
+}
+
     [HttpDelete("delete-card/{accountId}")]
     public async Task<IActionResult> DeleteCard(int accountId)
     {
@@ -128,53 +165,32 @@ public class Accounts_manager : ControllerBase
         return Ok(new ApiResponse<string> { Status = 200, Message = "Đã xóa thẻ thành công.", Data = "Deleted" });
     }
 
-    [HttpGet("balance")]
-    public async Task<IActionResult> GetBalance()
+    [HttpGet("balance/{accountId}")]
+public async Task<IActionResult> GetBalance(int accountId)
+{
+    var customerId = GetCustomerIdFromToken();
+
+    var account = await _context.Accounts
+        .FirstOrDefaultAsync(a => a.customer_id == customerId && a.account_id == accountId);
+
+    if (account == null)
     {
-        var customerId = GetCustomerIdFromToken();
-        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.customer_id == customerId);
-
-        if (account == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy tài khoản." });
-
-        return Ok(new ApiResponse<decimal>
+        return NotFound(new ApiError
         {
-            Status = 200,
-            Message = "Lấy số dư thành công",
-            Data = account.Balance
+            Status = 404,
+            Error = "NotFound",
+            Message = "Không tìm thấy thẻ hoặc thẻ không thuộc về bạn."
         });
     }
 
-    [HttpGet("transactions")]
-    public async Task<IActionResult> GetTransactionHistory([FromQuery] int? month, [FromQuery] int? year)
+    return Ok(new ApiResponse<decimal>
     {
-        var customerId = GetCustomerIdFromToken();
+        Status = 200,
+        Message = "Lấy số dư thành công",
+        Data = account.Balance
+    });
+}
 
-        var accountIds = await _context.Accounts
-            .Where(a => a.customer_id == customerId)
-            .Select(a => a.account_id)
-            .ToListAsync();
-
-        var transactions = await _context.transaction_Participants
-            .Include(tp => tp.transactions)
-            .Where(tp => accountIds.Contains(tp.AccountId))
-            .Select(tp => tp.transactions)
-            .ToListAsync();
-
-        if (month.HasValue && year.HasValue)
-        {
-            transactions = transactions
-                .Where(t => t.TransactionDate.Month == month && t.TransactionDate.Year == year)
-                .ToList();
-        }
-
-        return Ok(new ApiResponse<List<Transactions>>
-        {
-            Status = 200,
-            Message = "Lấy lịch sử giao dịch thành công",
-            Data = transactions
-        });
-    }
 
     [HttpPost("transactions/export/send-mail")]
     public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year)
