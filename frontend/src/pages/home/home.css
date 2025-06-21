@@ -1,0 +1,222 @@
+.home-container {
+  padding: 32px 48px;
+  width: 100%;
+  max-width: 1600px; /* Tăng từ 1200px lên 1600px */
+  margin: 0 auto;
+}
+
+.home-header {
+  margin-bottom: 40px;
+  font-weight: 600;
+  color: #333;
+}
+
+.home-header h4 {
+  font-size: 2.5rem; /* Tăng kích thước tiêu đề */
+  font-weight: 700;
+}
+
+.card-section {
+  width: 100%;
+  margin-bottom: 32px;
+  border-radius: 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-section .MuiCardContent-root {
+  padding: 32px; /* Tăng padding bên trong card */
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.section-header h6 {
+  font-size: 1.5rem; /* Tăng kích thước tiêu đề section */
+  font-weight: 600;
+}
+
+.view-all-btn {
+  color: #d70000;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: 0.2s;
+}
+
+.view-all-btn:hover {
+  background-color: rgba(215, 0, 0, 0.08);
+  transform: translateX(2px);
+}
+
+.account-card {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  border: 1px solid #e0e0e0;
+  border-radius: 20px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.account-card .MuiCardContent-root {
+  padding: 28px 32px; /* Tăng padding cho account card */
+}
+
+.account-card:hover {
+  transform: translateY(-4px);
+  border-color: #d70000;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+}
+
+.account-avatar {
+  background-color: #d70000;
+  width: 64px; /* Tăng từ 48px */
+  height: 64px;
+  border-radius: 16px;
+}
+
+.account-card .MuiTypography-body1 {
+  font-size: 1.2rem; /* Tăng kích thước text */
+  font-weight: 600;
+}
+
+.account-card .MuiTypography-body2 {
+  font-size: 1rem;
+  font-family: 'monospace';
+  letter-spacing: 2px; /* Tăng letter spacing */
+  margin-top: 4px;
+}
+
+.amount-text {
+  font-weight: 700;
+  color: #333;
+  letter-spacing: -0.5px;
+  font-size: 1.8rem !important; /* Tăng kích thước số tiền */
+}
+
+.activity-avatar {
+  background-color: #10b981;
+  width: 56px; /* Tăng từ 40px */
+  height: 56px;
+  border-radius: 14px;
+}
+
+.activity-card {
+  background: #f9fafb;
+  border: 1px solid #f0f0f0;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-bottom: 16px;
+}
+
+.activity-card .MuiCardContent-root {
+  padding: 24px 28px; /* Tăng padding cho activity card */
+}
+
+.activity-card:hover {
+  background-color: #f0f0f0;
+  transform: translateX(6px);
+  border-color: #e0e0e0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.activity-card .MuiTypography-body2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.activity-card .MuiTypography-caption {
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.income-chip {
+  background: transparent;
+  color: #10b981;
+  font-weight: 700;
+  font-size: 1.1rem; /* Tăng kích thước chip */
+  padding: 8px 16px;
+  border-radius: 12px;
+  border: 2px solid #10b981;
+}
+
+.btn-view-transactions {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+  color: white;
+  padding: 16px 48px; /* Tăng padding cho button */
+  border-radius: 16px;
+  font-weight: 600;
+  text-transform: none;
+  font-size: 1.1rem; /* Tăng kích thước text button */
+  box-shadow: 0 6px 20px rgba(31, 41, 55, 0.3);
+  transition: 0.3s;
+  min-width: 200px;
+}
+
+.btn-view-transactions:hover {
+  background: linear-gradient(135deg, #374151 0%, #4b5563 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 35px rgba(31, 41, 55, 0.4);
+}
+
+/* Responsive cho màn hình lớn hơn */
+@media (min-width: 1400px) {
+  .home-container {
+    padding: 40px 64px;
+    max-width: 1800px;
+  }
+  
+  .home-header h4 {
+    font-size: 3rem;
+  }
+  
+  .section-header h6 {
+    font-size: 1.75rem;
+  }
+  
+  .amount-text {
+    font-size: 2.2rem !important;
+  }
+}
+
+/* Cải thiện cho tablet landscape */
+@media (min-width: 1024px) and (max-width: 1399px) {
+  .home-container {
+    padding: 28px 40px;
+    max-width: 1400px;
+  }
+}
+
+/* Tăng khoảng cách giữa các phần tử */
+.card-section + .card-section {
+  margin-top: 40px;
+}
+
+/* Styling cho date labels */
+.MuiTypography-caption {
+  font-weight: 600;
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+/* Hover effects cho toàn bộ activity groups */
+.activity-group {
+  transition: 0.2s;
+}
+
+.activity-group:hover {
+  transform: translateX(2px);
+}
