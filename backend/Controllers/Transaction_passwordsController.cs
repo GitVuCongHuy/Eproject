@@ -64,20 +64,25 @@ public class Transaction_passwordsController : Controller
                 };
                 _context.transaction_Passwords.Add(TransactionPassword_new);
                 await _context.SaveChangesAsync();
+                return Ok(new ApiResponse<object>
+                {
+                    Status = 200,
+                    Message = "Tạo mật khẩu thành công",
+                });
             }
             else
             {
                 TransactionPassword_.TransactionPassword = view.TransactionPassword;
                 await _context.SaveChangesAsync();
+                return Ok(new ApiResponse<object>
+                {
+                    Status = 200,
+                    Message = "Cập nhật mật khẩu thành công",
+                });
             }
 
 
-            return Ok(new ApiResponse<object>
-            {
-                Status = 200,
-                Message = "Log in successfully",
-                Data = new { Customer_id = customerId }  // ✅ trả token dạng string
-            });
+           
         }
         catch (Exception ex)
         {
@@ -88,39 +93,72 @@ public class Transaction_passwordsController : Controller
 
 
 
-    // [HttpPost("check")]
-    // public async Task<IActionResult> Check_Transaction_passwords([FromBody] Transaction_passwordsView view)
-    // {
-    //     try
-    //     {
-    //         var token = _jwtTokenHelper.GetBearerToken(HttpContext);
+    [HttpGet("check")]
+    public async Task<IActionResult> Check_Transaction_passwords([FromBody] Transaction_passwordsView view)
+    {
+        try
+        {
+            var token = _jwtTokenHelper.GetBearerToken(HttpContext);
 
-    //         if (string.IsNullOrEmpty(token))
-    //         {
-    //             return BadRequest(new ApiError
-    //             {
-    //                 Status = 400,
-    //                 Error = "There are no tokens yet",
-    //                 Message = "Chưa có token được truyền vào"
-    //             });
-    //         }
-    //         var principal = _jwtTokenHelper.DecodeToken(token);
-    //         var customerId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-    //         int customerId2 = int.Parse(customerId);
-
-
-    //         var TransactionPassword_ = await _context.transaction_Passwords.FirstOrDefaultAsync(x => x.CustomerId == customerId2);
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "There are no tokens yet",
+                    Message = "Chưa có token được truyền vào"
+                });
+            }
+            var principal = _jwtTokenHelper.DecodeToken(token);
+            var customerId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            int customerId2 = int.Parse(customerId);
 
 
+            var TransactionPassword_ = await _context.transaction_Passwords.FirstOrDefaultAsync(x => x.CustomerId == customerId2);
+
+            if (TransactionPassword_ == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Code has not been generated yet",
+                    Message = "Chưa có mã chuyển khoản vui lòng tạo"
+                });
+            }
+
+            if (TransactionPassword_.TransactionPassword != view.TransactionPassword)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Incorrect transfer code",
+                    Message = "Mã chuyển khoản không đúng"
+                });
+            }
+
+
+
+         
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Mã chuyển khoản đúng ",
+                 // ✅ trả token dạng string
+            });
+
+
+
+            
 
 
 
 
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         return StatusCode(500, $"Lỗi server: {ex.Message}");
-    //     }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Lỗi server: {ex.Message}");
+        }
 
-    // }
+    }
 }
