@@ -19,7 +19,7 @@ public class ApplicationDbContext : DbContext
     // public DbSet<Transaction> transactions { get; set; }
     public DbSet<Transaction_Participants> transaction_Participants { get; set; }
     public DbSet<Transactions> transactions { get; set; }
+     public DbSet<Service_request> Service_requests { get; set; }
 
-   
 }
 
