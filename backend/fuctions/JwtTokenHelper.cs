@@ -70,4 +70,16 @@ public class JwtTokenHelper
 
 
 
+    public  string? GetBearerToken(HttpContext context)
+    {
+        var authHeader = context.Request.Headers["Authorization"].ToString();
+
+        if (!string.IsNullOrEmpty(authHeader) && authHeader.StartsWith("Bearer "))
+        {
+            return authHeader.Substring("Bearer ".Length).Trim();
+        }
+
+        return null;
+    }
+
 }

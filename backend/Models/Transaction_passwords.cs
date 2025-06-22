@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Transaction_passwords
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
 
     public int CustomerId { get; set; }

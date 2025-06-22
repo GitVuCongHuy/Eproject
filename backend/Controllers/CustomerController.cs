@@ -234,7 +234,7 @@ public class CustomerController : Controller
 
             //Tạo Token
             var tokenString = _jwtTokenHelper.GenerateToken(existUser.customer_id);
-
+        
             return Ok(new ApiResponse<object>
             {
                 Status = 200,
