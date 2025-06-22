@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Accounts
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int account_id { get; set; }
 
     public int customer_id { get; set; }
