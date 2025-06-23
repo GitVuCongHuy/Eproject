@@ -191,4 +191,51 @@ public class ServiceRequestController : ControllerBase
             Data = request
         });
     }
+
+    // ===== ADMIN trực tiếp xử lý không qua Service_request =====
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost("admin/lock-card/{accountId}")]
+    public async Task<IActionResult> LockCard(int accountId)
+    {
+        var account = await _context.Accounts.FindAsync(accountId);
+        if (account == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy thẻ." });
+
+        account.Status = "Locked";
+        await _context.SaveChangesAsync();
+
+        return Ok(new ApiResponse<string> { Status = 200, Message = "Đã khóa thẻ thành công.", Data = "Locked" });
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpPost("admin/unlock-card/{accountId}")]
+    public async Task<IActionResult> UnlockCard(int accountId)
+    {
+        var account = await _context.Accounts.FindAsync(accountId);
+        if (account == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy thẻ." });
+
+        account.Status = "Active";
+        await _context.SaveChangesAsync();
+
+        return Ok(new ApiResponse<string> { Status = 200, Message = "Đã mở khóa thẻ thành công.", Data = "Unlocked" });
+    }
+
+    [Authorize(Roles = "Admin")]
+    [HttpDelete("admin/delete-card/{accountId}")]
+    public async Task<IActionResult> DeleteCard(int accountId)
+    {
+        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId);
+        if (account == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy thẻ." });
+
+        if (account.Balance > 0)
+            return BadRequest(new ApiError { Status = 400, Error = "BalanceNotZero", Message = "Không thể xóa thẻ có số dư lớn hơn 0." });
+
+        _context.Accounts.Remove(account);
+        await _context.SaveChangesAsync();
+
+        return Ok(new ApiResponse<string> { Status = 200, Message = "Đã xóa thẻ thành công.", Data = "Deleted" });
+    }
 }

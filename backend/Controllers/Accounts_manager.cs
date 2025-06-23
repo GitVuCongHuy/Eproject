@@ -89,58 +89,34 @@ public class Accounts_manager : ControllerBase
         _context.Accounts.Add(newAccount);
         await _context.SaveChangesAsync();
 
-        return Ok(new ApiResponse<Accounts> { Status = 200, Message = "Tạo thẻ thành công", Data = newAccount });
-    }
-
-    [HttpPost("unlock-card/{accountId}")]
-    public async Task<IActionResult> UnlockCard(int accountId)
-    {
-        var customerId = GetCustomerIdFromToken();
-        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
-        if (account == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy thẻ để mở." });
-        if (account.Status != "Locked")
-            return BadRequest(new ApiError { Status = 400, Error = "NotLocked", Message = "Thẻ này chưa bị khóa." });
-
-        account.Status = "Active";
-        await _context.SaveChangesAsync();
-        return Ok(new ApiResponse<string> { Status = 200, Message = "Mở khóa thẻ thành công.", Data = "Unlocked" });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Tạo thẻ thành công",
+        });
     }
 
     [HttpGet("cards")]
     public async Task<IActionResult> GetCards()
     {
         var customerId = GetCustomerIdFromToken();
-        var accounts = await _context.Accounts.Where(a => a.customer_id == customerId).ToListAsync();
-        return Ok(new ApiResponse<List<Accounts>> { Status = 200, Message = "Lấy danh sách thẻ thành công", Data = accounts });
-    }
+        var accounts = await _context.Accounts
+            .Where(a => a.customer_id == customerId)
+            .Select(a => new
+            {
+                a.account_id,
+                a.CardNumber,
+                a.Balance,
+                a.Status
+            })
+            .ToListAsync();
 
-    [HttpPost("lock-card/{accountId}")]
-    public async Task<IActionResult> LockCard(int accountId)
-    {
-        var customerId = GetCustomerIdFromToken();
-        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
-        if (account == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy thẻ để khóa." });
-        if (account.Status == "Locked")
-            return BadRequest(new ApiError { Status = 400, Error = "AlreadyLocked", Message = "Thẻ đã bị khóa trước đó." });
-        account.Status = "Locked";
-        await _context.SaveChangesAsync();
-        return Ok(new ApiResponse<string> { Status = 200, Message = "Đã khóa thẻ thành công.", Data = "Locked" });
-    }
-
-    [HttpDelete("delete-card/{accountId}")]
-    public async Task<IActionResult> DeleteCard(int accountId)
-    {
-        var customerId = GetCustomerIdFromToken();
-        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
-        if (account == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy thẻ." });
-        if (account.Balance > 0)
-            return BadRequest(new ApiError { Status = 400, Error = "HasBalance", Message = "Thẻ còn tiền. Không thể xóa." });
-        _context.Accounts.Remove(account);
-        await _context.SaveChangesAsync();
-        return Ok(new ApiResponse<string> { Status = 200, Message = "Đã xóa thẻ thành công.", Data = "Deleted" });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Lấy danh sách thẻ thành công",
+            Data = accounts
+        });
     }
 
     [HttpGet("balance")]
