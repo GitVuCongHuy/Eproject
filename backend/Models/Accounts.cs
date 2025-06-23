@@ -6,18 +6,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Accounts
 {
     [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int account_id { get; set; }
 
-    [ForeignKey("Customer")]
     public int customer_id { get; set; }
+
+    [ForeignKey("customer_id")]
     public Customer customer { get; set; }
 
-    // Số dư (balance) dưới dạng decimal, ví dụ 1000 VND
-    [Column("balance", TypeName = "decimal(18,2)")]
+    [Required]
+    [StringLength(10, MinimumLength = 10)]
+    public string CardNumber { get; set; }
+
+
+    [Column(TypeName = "decimal(18,2)")]
     public decimal Balance { get; set; }
 
-    // Trạng thái giao dịch (status), ví dụ "Completed", "Pending", "Failed"
     [MaxLength(20)]
     public string Status { get; set; }
-
 }

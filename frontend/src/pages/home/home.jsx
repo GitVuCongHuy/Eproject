@@ -1,85 +1,236 @@
 import React from 'react';
-import { Box, Typography, Card, CardContent, Divider, Avatar, Button, Stack } from '@mui/material';
-import CreditCardIcon from '@mui/icons-material/CreditCard';
-import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import {
+  Box,
+  Typography,
+  Card,
+  CardContent,
+  Button,
+  Avatar,
+  Chip,
+  useTheme,
+  GlobalStyles
+} from '@mui/material';
+import {
+  CreditCard,
+  Info,
+  ChevronRight,
+  ArrowUpward,
+} from '@mui/icons-material';
 
-const transactions = [
-  {
-    date: 'Chủ Nhật, 01 tháng 6, 2025',
-    description: 'Tiền chuyển vào',
-    detail: 'Interest amount for account in 05/2025',
-    amount: '+5',
-  },
-  {
-    date: 'Chủ Nhật, 27 tháng 4, 2025',
-    description: 'Tiền chuyển vào',
-    detail: 'Interest amount for account in 04/2025',
-    amount: '+4',
-  },
-];
+// --- Bảng màu mới ---
+// Màu đen chính, thay thế cho màu đỏ
+const primaryBlack = '#333'; 
+// Màu xám cho các chi tiết phụ
+const mediumGray = '#757575'; 
+// Màu xanh lá cho các trường hợp ngoại lệ
+const exceptionGreen = '#2e7d32'; // Một màu xanh lá đậm
+// Màu nền sáng
+const lightGray = '#fafafa';
 
-const Dashboard = () => {
+const Home = () => {
+  const theme = useTheme();
+
   return (
-    <Box sx={{ p: 4, backgroundColor: '#f9f9fb', minHeight: '100vh' }}>
-      <Typography variant="h5" fontWeight="bold" mb={3}>
-        Xin chào, <strong>VU THIEN HUU</strong>
-      </Typography>
+    <>
+      {/* Override class bên ngoài */}
+      <GlobalStyles styles={{
+        '._mainContent_b1piq_13': {
+          marginLeft: '30px !important',
+          marginTop: '30px!important',
+        },
+        'html, body': {
+            overflow: 'hidden',            
+            backgroundColor: '#fff',
+          },
+      }} />
 
-      {/* Tài khoản & thẻ */}
-      <Card sx={{ mb: 3, p: 2 }}>
-        <CardContent sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Box>
-            <Typography variant="subtitle1" fontWeight="bold">Tài khoản & Thẻ</Typography>
-            <Stack direction="row" alignItems="center" mt={1} spacing={1}>
-              <CreditCardIcon color="action" />
-              <Box>
-                <Typography variant="body1">Tài khoản thanh toán</Typography>
-                <Typography variant="caption" color="text.secondary">1907 1903 0300 17</Typography>
-              </Box>
-            </Stack>
-          </Box>
-          <Box textAlign="right">
-            <Typography variant="body2" color="text.secondary">VND</Typography>
-            <Typography variant="h6" fontWeight="bold">95,245</Typography>
-          </Box>
-        </CardContent>
-      </Card>
+      {/* Main container */}
+      <Box
+        sx={{
+          p: 3,
+          backgroundColor: '#ffffff',
+          minHeight: '100vh',
+        }}
+      >
+        {/* Header */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 4,
+          }}
+        >
+          <Typography variant="h5" fontWeight={700} color={primaryBlack}>
+            Xin chào, VU THIEN HUU
+          </Typography>
+          <Avatar sx={{ bgcolor: primaryBlack, width: 42, height: 42 }}>VH</Avatar>
+        </Box>
 
-      {/* Hoạt động gần đây */}
-      <Card>
-        <CardContent>
-          <Stack direction="row" justifyContent="space-between" alignItems="center" mb={2}>
-            <Typography variant="subtitle1" fontWeight="bold">Hoạt động gần đây</Typography>
-            <InfoOutlinedIcon fontSize="small" color="disabled" />
-          </Stack>
-
-          {transactions.map((item, index) => (
-            <Box key={index} mb={2}>
-              <Typography variant="caption" color="text.secondary">{item.date}</Typography>
-              <Stack direction="row" alignItems="flex-start" justifyContent="space-between" mt={1}>
-                <Stack direction="row" spacing={1}>
-                  <AccessTimeIcon color="success" fontSize="small" />
-                  <Box>
-                    <Typography variant="body1" fontWeight="medium">{item.description}</Typography>
-                    <Typography variant="caption" color="text.secondary">{item.detail}</Typography>
-                  </Box>
-                </Stack>
-                <Typography variant="body1" color="success.main" fontWeight="bold">{item.amount}</Typography>
-              </Stack>
-              {index !== transactions.length - 1 && <Divider sx={{ mt: 2 }} />}
+        {/* Tài khoản & Thẻ */}
+        <Card
+          sx={{
+            mb: 4,
+            borderRadius: 2,
+            backgroundColor: lightGray,
+            boxShadow: theme.shadows[1],
+            borderLeft: `4px solid ${primaryBlack}`,
+          }}
+        >
+          <CardContent>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mb: 2,
+              }}
+            >
+              <Typography variant="h6" fontWeight={600} color={primaryBlack}>Tài khoản & Thẻ</Typography>
+              <Button
+                variant="text"
+                endIcon={<ChevronRight fontSize="small" />}
+                sx={{ textTransform: 'none', color: primaryBlack }}
+              >
+                Xem tất cả
+              </Button>
             </Box>
-          ))}
 
-          <Box textAlign="center" mt={3}>
-            <Button variant="contained" sx={{ borderRadius: 20, px: 3, backgroundColor: '#000' }}>
-              Xem tất cả giao dịch
-            </Button>
-          </Box>
-        </CardContent>
-      </Card>
-    </Box>
+            <Card
+              sx={{
+                borderRadius: 2,
+                boxShadow: theme.shadows[1],
+                backgroundColor: '#fff',
+              }}
+            >
+              <CardContent>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                    <Avatar sx={{ bgcolor: mediumGray }}>
+                      <CreditCard />
+                    </Avatar>
+                    <Box>
+                      <Typography variant="body1" fontWeight={600}>Tài khoản thanh toán</Typography>
+                      <Typography variant="body2" sx={{ fontFamily: 'monospace', letterSpacing: '1px', opacity: 0.7 }}>
+                        1907 1903 0300 17
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Box textAlign="right">
+                    <Typography variant="caption" sx={{ opacity: 0.7 }}>VND</Typography>
+                    <Typography variant="h5" fontWeight={700} sx={{ color: primaryBlack }}>95,245</Typography>
+                  </Box>
+                </Box>
+              </CardContent>
+            </Card>
+          </CardContent>
+        </Card>
+
+        {/* Hoạt động gần đây */}
+        <Card
+          sx={{
+            mb: 4,
+            borderRadius: 2,
+            backgroundColor: lightGray,
+            boxShadow: theme.shadows[1],
+            borderLeft: `4px solid ${primaryBlack}`,
+          }}
+        >
+          <CardContent>
+            <Box
+              sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                mb: 2,
+              }}
+            >
+              <Typography variant="h6" fontWeight={600} color={primaryBlack}>Hoạt động gần đây</Typography>
+              <Info sx={{ color: mediumGray, cursor: 'pointer' }} />
+            </Box>
+
+            <Box display="flex" flexDirection="column" gap={2}>
+              {[
+                {
+                  date: 'Chủ Nhật, 01 tháng 6, 2025',
+                  amount: '+5',
+                  note: 'Lãi suất tài khoản tháng 05/2025'
+                },
+                {
+                  date: 'Chủ Nhật, 27 tháng 4, 2025',
+                  amount: '+4',
+                  note: 'Lãi suất tài khoản tháng 04/2025'
+                }
+              ].map((item, i) => (
+                <Box key={i}>
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      textTransform: 'uppercase',
+                      fontWeight: 500,
+                      color: 'text.secondary',
+                      mb: 1,
+                      display: 'block'
+                    }}
+                  >
+                    {item.date}
+                  </Typography>
+                  <Card
+                    sx={{
+                      borderRadius: 2,
+                      boxShadow: theme.shadows[1],
+                      backgroundColor: '#fff',
+                    }}
+                  >
+                    <CardContent>
+                      <Box display="flex" justifyContent="space-between" alignItems="center">
+                        <Box display="flex" alignItems="center" gap={2}>
+                          {/* --- NGOẠI LỆ: ICON MÀU XANH LÁ --- */}
+                          <Avatar sx={{ bgcolor: exceptionGreen, color: '#fff' }}>
+                            <ArrowUpward />
+                          </Avatar>
+                          <Box>
+                            <Typography variant="body2" fontWeight={600}>Tiền chuyển vào</Typography>
+                            <Typography variant="caption" color="text.secondary">{item.note}</Typography>
+                          </Box>
+                        </Box>
+                         {/* --- NGOẠI LỆ: SỐ TIỀN MÀU XANH LÁ --- */}
+                        <Chip
+                          label={item.amount}
+                          sx={{
+                            bgcolor: exceptionGreen,
+                            color: '#fff',
+                            fontWeight: 600
+                          }}
+                        />
+                      </Box>
+                    </CardContent>
+                  </Card>
+                </Box>
+              ))}
+            </Box>
+          </CardContent>
+        </Card>
+
+        {/* Button */}
+        <Box display="flex" justifyContent="center" mt={4}>
+          <Button
+            variant="contained"
+            
+            sx={{
+              backgroundColor: primaryBlack,
+              '&:hover': {
+                backgroundColor: '#000', 
+              },
+              borderRadius: 5,
+            }}
+          >
+            Xem tất cả giao dịch
+          </Button>
+        </Box>
+      </Box>
+    </>
   );
 };
 
-export default Dashboard;
+export default Home;

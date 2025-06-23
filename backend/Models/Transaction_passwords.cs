@@ -1,16 +1,16 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-
 public class Transaction_passwords
 {
     [Key]
-    public int id { get; set; }
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    public int Id { get; set; }
 
-    [ForeignKey("Customer")]
-    public int customer_id { get; set; }
-    public Customer customer { get; set; }
+    public int CustomerId { get; set; }
 
-    public int transaction_password { get; set; }
+    [ForeignKey("CustomerId")]
+    public Customer Customer { get; set; }
+
+    public int TransactionPassword { get; set; }
 }

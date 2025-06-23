@@ -9,6 +9,12 @@ import {
   Settings, LogoutRounded
 } from '@mui/icons-material';
 
+// --- Bảng màu Đen & Trắng ---
+const primaryBlack = '#333';
+const mediumGray = '#616161';
+const lightGrayHover = '#f5f5f5'; // Màu nền khi hover
+const darkGray = '#212121'; // Màu đậm hơn cho hover button
+
 const menuItems = [
   {
     id: 'home', name: 'Trang chủ', path: '/', icon: <Home />
@@ -44,7 +50,7 @@ const Sidebar = () => {
   };
 
   const isActive = (path) =>
-    location.pathname === path || location.pathname.startsWith(path + '/');
+    location.pathname === path || (path !== '/' && location.pathname.startsWith(path));
 
   return (
     <Drawer
@@ -62,49 +68,54 @@ const Sidebar = () => {
       }}
     >
       {/* Logo */}
-      <Box textAlign="center" mb={1}>
+      <Box textAlign="center" mb={2}>
         <img
           src="https://techcombank.com/content/dam/techcombank/public-site/seo/techcombank_logo_svg_86201e50d1.svg"
           alt="Logo"
-          style={{ height: 40, width: 240 }}
+          style={{ height: 40, width: 240 }} // Chuyển logo thành trắng đen
         />
       </Box>
 
-      <Box display="flex" alignItems="center" px={2} py={1}>
-        <Avatar sx={{ bgcolor: '#d70000', fontSize: 14, width: 42, height: 42 }}>
+      <Box display="flex" alignItems="center" px={2} py={1}> 
+        <Avatar sx={{ fontSize: 14, width: 42, height: 42 }}>
           VH
         </Avatar>
         <Box ml={2}>
-          <Typography fontSize={14} fontWeight={600}>VU THIEN HUU</Typography>
+          <Typography fontSize={14} fontWeight={600}>{`VU THIEN HUU`}</Typography>
           <Typography fontSize={12} color="text.secondary">Thông tin cá nhân</Typography>
         </Box>
       </Box>
 
       <Divider sx={{ my: 1 }} />
 
-      <List>
+      <List component="nav">
         {menuItems.map((item) => (
           <React.Fragment key={item.id}>
             <ListItemButton
               onClick={() => item.hasSubmenu && handleToggle(item.id)}
               component={!item.hasSubmenu ? Link : 'button'}
               to={!item.hasSubmenu ? item.path : undefined}
-              selected={isActive(item.path)}
               sx={{
-                borderLeft: isActive(item.path) ? '4px solid #d70000' : '4px solid transparent',
-                color: isActive(item.path) ? '#d70000' : '#333',
-                backgroundColor: openMenu === item.id ? '#fef2f2' : 'transparent',
+                borderLeft: isActive(item.path) ? `4px solid ${primaryBlack}` : '4px solid transparent',
+                color: isActive(item.path) ? primaryBlack : mediumGray,
+                backgroundColor: openMenu === item.id ? lightGrayHover : 'transparent',
+                '&.Mui-selected': { // Style cho mục được chọn
+                    backgroundColor: 'transparent',
+                    color: primaryBlack,
+                    '&:hover': {
+                        backgroundColor: lightGrayHover,
+                    },
+                },
                 minWidth:
                   item.id === 'transfer' ? 290 :
                   item.id === 'features' ? 290 :
                   'auto',
                 '&:hover': {
-                  backgroundColor: '#fef2f2',
-                  color: '#d70000'
+                  backgroundColor: lightGrayHover,
+                  color: primaryBlack
                 }
               }}
             >
-
               <ListItemIcon sx={{ color: 'inherit' }}>{item.icon}</ListItemIcon>
               <ListItemText primary={item.name} />
               {item.hasSubmenu &&
@@ -115,34 +126,39 @@ const Sidebar = () => {
               <Collapse in={openMenu === item.id} timeout="auto" unmountOnExit>
                 <List disablePadding>
                   {item.submenu.map((sub, idx) => (
-                  <ListItemButton
-                    key={idx}
-                    component={Link}
-                    to={sub.path}
-                    selected={location.pathname === sub.path}
-                    sx={{
-                      pl: 7,
-                      pr: 3,
-                      py: 1.2,
-                      mx: 1.5,
-                      my: 0.5,
-                      borderRadius: 1,
-                      fontSize: 13.5,
-                      color: location.pathname === sub.path ? '#d70000' : '#555',
-                      backgroundColor: location.pathname === sub.path ? '#fff5f5' : 'transparent',
-                      '&:hover': {
-                        backgroundColor: '#fef2f2',
-                        color: '#d70000'
-                      },
-                      transition: 'all 0.2s ease-in-out'
-                    }}
-                  >
-                    <ListItemText
-                      primary={sub.name}
-                      primaryTypographyProps={{ noWrap: true, fontWeight: 500 }}
-                    />
-                  </ListItemButton>
-
+                    <ListItemButton
+                      key={idx}
+                      component={Link}
+                      to={sub.path}
+                      selected={location.pathname === sub.path}
+                      sx={{
+                        pl: 7,
+                        pr: 3,
+                        py: 1.2,
+                        mx: 1.5,
+                        my: 0.5,
+                        borderRadius: 1,
+                        fontSize: 13.5,
+                        color: location.pathname === sub.path ? primaryBlack : mediumGray,
+                        backgroundColor: location.pathname === sub.path ? lightGrayHover : 'transparent',
+                        '&.Mui-selected': {
+                            backgroundColor: lightGrayHover,
+                            '&:hover': {
+                                backgroundColor: lightGrayHover,
+                            },
+                        },
+                        '&:hover': {
+                          backgroundColor: lightGrayHover,
+                          color: primaryBlack
+                        },
+                        transition: 'all 0.2s ease-in-out'
+                      }}
+                    >
+                      <ListItemText
+                        primary={sub.name}
+                        primaryTypographyProps={{ noWrap: true, fontWeight: 500 }}
+                      />
+                    </ListItemButton>
                   ))}
                 </List>
               </Collapse>
@@ -151,17 +167,19 @@ const Sidebar = () => {
         ))}
       </List>
 
-      <Box mt="auto" p={2} mb={1}>
+      <Box mt="auto" p={2} mb={1} display="flex" justifyContent="center" >
         <Button
           variant="contained"
           fullWidth
           startIcon={<LogoutRounded />}
           sx={{
-            backgroundColor: '#d70000',
+            borderRadius: 5,
+            backgroundColor: primaryBlack,
             '&:hover': {
-              backgroundColor: '#b80000'
+              backgroundColor: darkGray,
             },
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            // py: 1.2
           }}
         >
           Đăng xuất
