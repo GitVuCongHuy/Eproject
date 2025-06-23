@@ -85,7 +85,7 @@ public class CustomerController : Controller
                 mobile = model.Mobile,
                 number_login = 0,
                 locked = false,
-                bank_id = 1,
+                // bank_id = 1,
 
             };
 
@@ -186,10 +186,28 @@ public class CustomerController : Controller
 
 
             //Kra có phải thiết bị mới không 
-            var new_device = await _context.Login_Attempts.FirstOrDefaultAsync(x => x.customer_id == existUser.customer_id);
-            if (new_device == null)
-            {
+            // var new_device = await _context.Login_Attempts.FirstOrDefaultAsync(x => x.customer_id == existUser.customer_id);
+            // if (new_device == null)
+            // {
 
+            //     string code = _emailHelper.GenerateRandomCode(6);
+            //     existUser.authentication_code = code;
+            //     await _context.SaveChangesAsync();
+            //     await Verify_Code(code, existUser.email);
+
+            //     return BadRequest(new ApiError
+            //     {
+            //         Status = 400,
+            //         Error = "New equipment",
+            //         Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
+            //     });
+
+
+            // }
+
+
+            if (existUser.device != viewModel.deviceId || existUser.device == null)
+            {
                 string code = _emailHelper.GenerateRandomCode(6);
                 existUser.authentication_code = code;
                 await _context.SaveChangesAsync();
@@ -201,28 +219,27 @@ public class CustomerController : Controller
                     Error = "New equipment",
                     Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
                 });
-
-
             }
+         
 
-            if (new_device.device != viewModel.deviceId)
-            {
-                string code = _emailHelper.GenerateRandomCode(6);
-                existUser.authentication_code = code;
-                await _context.SaveChangesAsync();
+            // if (new_device.device != viewModel.deviceId)
+            // {
+            //     string code = _emailHelper.GenerateRandomCode(6);
+            //     existUser.authentication_code = code;
+            //     await _context.SaveChangesAsync();
 
 
-                await Verify_Code(code, existUser.email);
+            //     await Verify_Code(code, existUser.email);
 
-                return BadRequest(new ApiError
-                {
-                    Status = 400,
-                    Error = "New equipment",
-                    Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
-                });
+            //     return BadRequest(new ApiError
+            //     {
+            //         Status = 400,
+            //         Error = "New equipment",
+            //         Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
+            //     });
 
-            }
-            ;
+            // }
+            // ;
 
 
 
@@ -305,26 +322,10 @@ public class CustomerController : Controller
 
 
             
-            var Login_attempts_Search =   await _context.Login_Attempts.FirstOrDefaultAsync(x => x.customer_id == existUser.customer_id);
-            if (Login_attempts_Search != null)
-            {
-                Login_attempts_Search.device = viewModel.deviceId;
-                await _context.SaveChangesAsync();
-            }
-            else
-            {   
-
-                var Login_Attempts = new Login_attempts
-                {
-                    device = viewModel.deviceId,
-                    success = false,
-                    customer_id = existUser.customer_id
-
-                };
-                _context.Login_Attempts.Add(Login_Attempts);
-                await _context.SaveChangesAsync();
-            }
-
+          
+ 
+            existUser.device = viewModel.deviceId;
+            await _context.SaveChangesAsync();
 
 
 

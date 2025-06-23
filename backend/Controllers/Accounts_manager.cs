@@ -160,130 +160,130 @@ public class Accounts_manager : ControllerBase
         });
     }
 
-    [HttpGet("transactions")]
-    public async Task<IActionResult> GetTransactionHistory([FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
-    {
-        var customerId = GetCustomerIdFromToken();
+    // [HttpGet("transactions")]
+    // public async Task<IActionResult> GetTransactionHistory([FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
+    // {
+    //     var customerId = GetCustomerIdFromToken();
 
-        List<int> accountIds;
+    //     List<int> accountIds;
 
-        if (accountId.HasValue)
-        {
-            var isOwned = await _context.Accounts.AnyAsync(a => a.customer_id == customerId && a.account_id == accountId.Value);
-            if (!isOwned)
-                return BadRequest(new ApiError { Status = 400, Error = "InvalidAccount", Message = "Thẻ không thuộc quyền sở hữu." });
+    //     if (accountId.HasValue)
+    //     {
+    //         var isOwned = await _context.Accounts.AnyAsync(a => a.customer_id == customerId && a.account_id == accountId.Value);
+    //         if (!isOwned)
+    //             return BadRequest(new ApiError { Status = 400, Error = "InvalidAccount", Message = "Thẻ không thuộc quyền sở hữu." });
 
-            accountIds = new List<int> { accountId.Value };
-        }
-        else
-        {
-            accountIds = await _context.Accounts
-                .Where(a => a.customer_id == customerId)
-                .Select(a => a.account_id)
-                .ToListAsync();
-        }
+    //         accountIds = new List<int> { accountId.Value };
+    //     }
+    //     else
+    //     {
+    //         accountIds = await _context.Accounts
+    //             .Where(a => a.customer_id == customerId)
+    //             .Select(a => a.account_id)
+    //             .ToListAsync();
+    //     }
 
-        var transactions = await _context.transaction_Participants
-            .Include(tp => tp.transactions)
-            .Where(tp => accountIds.Contains(tp.AccountId))
-            .Select(tp => tp.transactions)
-            .ToListAsync();
+    //     var transactions = await _context.transaction_Participants
+    //         .Include(tp => tp.transactions)
+    //         .Where(tp => accountIds.Contains(tp.AccountId))
+    //         .Select(tp => tp.transactions)
+    //         .ToListAsync();
 
-        if (month.HasValue && year.HasValue)
-        {
-            transactions = transactions
-                .Where(t => t.TransactionDate.Month == month && t.TransactionDate.Year == year)
-                .ToList();
-        }
+    //     if (month.HasValue && year.HasValue)
+    //     {
+    //         transactions = transactions
+    //             .Where(t => t.TransactionDate.Month == month && t.TransactionDate.Year == year)
+    //             .ToList();
+    //     }
 
-        return Ok(new ApiResponse<List<Transactions>>
-        {
-            Status = 200,
-            Message = "Lấy lịch sử giao dịch thành công",
-            Data = transactions
-        });
-    }
+    //     return Ok(new ApiResponse<List<Transactions>>
+    //     {
+    //         Status = 200,
+    //         Message = "Lấy lịch sử giao dịch thành công",
+    //         Data = transactions
+    //     });
+    // }
 
-    [HttpPost("transactions/export/send-mail")]
-    public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year)
-    {
-        var customerId = GetCustomerIdFromToken();
+    // [HttpPost("transactions/export/send-mail")]
+    // public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year)
+    // {
+    //     var customerId = GetCustomerIdFromToken();
 
-        var customer = await _context.Customers.FirstOrDefaultAsync(c => c.customer_id == customerId);
-        if (customer == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
+    //     var customer = await _context.Customers.FirstOrDefaultAsync(c => c.customer_id == customerId);
+    //     if (customer == null)
+    //         return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
 
-        var accountIds = await _context.Accounts
-            .Where(a => a.customer_id == customerId)
-            .Select(a => a.account_id)
-            .ToListAsync();
+    //     var accountIds = await _context.Accounts
+    //         .Where(a => a.customer_id == customerId)
+    //         .Select(a => a.account_id)
+    //         .ToListAsync();
 
-        var transactions = await _context.transaction_Participants
-            .Include(tp => tp.transactions)
-            .Where(tp => accountIds.Contains(tp.AccountId))
-            .Select(tp => tp.transactions)
-            .Where(t => t.TransactionDate.Month == month && t.TransactionDate.Year == year)
-            .ToListAsync();
+    //     var transactions = await _context.transaction_Participants
+    //         .Include(tp => tp.transactions)
+    //         .Where(tp => accountIds.Contains(tp.AccountId))
+    //         .Select(tp => tp.transactions)
+    //         .Where(t => t.TransactionDate.Month == month && t.TransactionDate.Year == year)
+    //         .ToListAsync();
 
-        if (!transactions.Any())
-            return NotFound(new ApiError { Status = 404, Error = "NoTransactions", Message = "Không có giao dịch trong khoảng thời gian này." });
+    //     if (!transactions.Any())
+    //         return NotFound(new ApiError { Status = 404, Error = "NoTransactions", Message = "Không có giao dịch trong khoảng thời gian này." });
 
-        var pdfBytes = GenerateTransactionPdf(transactions);
+    //     var pdfBytes = GenerateTransactionPdf(transactions);
 
-        string subject = $"Lịch sử giao dịch tháng {month}/{year}";
-        string body = "Vui lòng xem file đính kèm để xem chi tiết lịch sử giao dịch.";
+    //     string subject = $"Lịch sử giao dịch tháng {month}/{year}";
+    //     string body = "Vui lòng xem file đính kèm để xem chi tiết lịch sử giao dịch.";
 
-        await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"transactions_{month}_{year}.pdf");
+    //     await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"transactions_{month}_{year}.pdf");
 
-        return Ok(new ApiResponse<string>
-        {
-            Status = 200,
-            Message = "Đã gửi file PDF qua email.",
-            Data = "Gửi thành công"
-        });
-    }
+    //     return Ok(new ApiResponse<string>
+    //     {
+    //         Status = 200,
+    //         Message = "Đã gửi file PDF qua email.",
+    //         Data = "Gửi thành công"
+    //     });
+    // }
 
-    private byte[] GenerateTransactionPdf(List<Transactions> transactions)
-    {
-        var doc = Document.Create(container =>
-        {
-            container.Page(page =>
-            {
-                page.Size(PageSizes.A4);
-                page.Margin(30);
-                page.Header().Text("LỊCH SỬ GIAO DỊCH").FontSize(20).Bold();
+    // // private byte[] GenerateTransactionPdf(List<Transactions> transactions)
+    // {
+    //     var doc = Document.Create(container =>
+    //     {
+    //         container.Page(page =>
+    //         {
+    //             page.Size(PageSizes.A4);
+    //             page.Margin(30);
+    //             page.Header().Text("LỊCH SỬ GIAO DỊCH").FontSize(20).Bold();
 
-                page.Content().Table(table =>
-                {
-                    table.ColumnsDefinition(columns =>
-                    {
-                        columns.RelativeColumn();
-                        columns.RelativeColumn();
-                        columns.RelativeColumn();
-                        columns.RelativeColumn();
-                    });
+    //             page.Content().Table(table =>
+    //             {
+    //                 table.ColumnsDefinition(columns =>
+    //                 {
+    //                     columns.RelativeColumn();
+    //                     columns.RelativeColumn();
+    //                     columns.RelativeColumn();
+    //                     columns.RelativeColumn();
+    //                 });
 
-                    table.Header(header =>
-                    {
-                        header.Cell().Text("Ngày").Bold();
-                        header.Cell().Text("Số tiền").Bold();
-                        header.Cell().Text("Loại").Bold();
-                        header.Cell().Text("Trạng thái").Bold();
-                    });
+    //                 table.Header(header =>
+    //                 {
+    //                     header.Cell().Text("Ngày").Bold();
+    //                     header.Cell().Text("Số tiền").Bold();
+    //                     header.Cell().Text("Loại").Bold();
+    //                     header.Cell().Text("Trạng thái").Bold();
+    //                 });
 
-                    foreach (var t in transactions)
-                    {
-                        table.Cell().Text(t.TransactionDate.ToString("dd/MM/yyyy"));
-                        table.Cell().Text(t.Amount.ToString("N0") + " VND");
-                        table.Cell().Text(t.TransactionType);
-                        table.Cell().Text(t.Status);
-                    }
-                });
+    //                 foreach (var t in transactions)
+    //                 {
+    //                     table.Cell().Text(t.TransactionDate.ToString("dd/MM/yyyy"));
+    //                     table.Cell().Text(t.Amount.ToString("N0") + " VND");
+    //                     table.Cell().Text(t.TransactionType);
+    //                     table.Cell().Text(t.Status);
+    //                 }
+    //             });
 
-                page.Footer().AlignCenter().Text("Generated by Online Banking System");
-            });
-        });
+    //             page.Footer().AlignCenter().Text("Generated by Online Banking System");
+    //         });
+    //     });
 
-        return doc.GeneratePdf();
-    }
+    //     return doc.GeneratePdf();
+    // }
 }

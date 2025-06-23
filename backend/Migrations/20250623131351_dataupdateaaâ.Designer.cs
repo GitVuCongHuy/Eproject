@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250623131351_dataupdateaaâ")]
+    partial class dataupdateaaâ
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,6 +101,9 @@ namespace backend.Migrations
                     b.Property<string>("authentication_code")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("bank_id")
+                        .HasColumnType("int");
+
                     b.Property<string>("device")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -133,6 +139,8 @@ namespace backend.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.HasKey("customer_id");
+
+                    b.HasIndex("bank_id");
 
                     b.ToTable("Customers");
                 });
@@ -249,10 +257,6 @@ namespace backend.Migrations
                     b.Property<int>("id_banking_sender")
                         .HasColumnType("int");
 
-                    b.Property<string>("transaction_status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("TransactionId");
 
                     b.ToTable("transactions");
@@ -267,6 +271,17 @@ namespace backend.Migrations
                         .IsRequired();
 
                     b.Navigation("customer");
+                });
+
+            modelBuilder.Entity("Customer", b =>
+                {
+                    b.HasOne("Bank", "bank")
+                        .WithMany()
+                        .HasForeignKey("bank_id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("bank");
                 });
 
             modelBuilder.Entity("Service_request", b =>

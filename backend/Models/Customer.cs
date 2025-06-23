@@ -9,12 +9,6 @@ public class Customer
     public int customer_id { get; set; }
 
 
-    public int bank_id { get; set; }
-
-    [ForeignKey(nameof(bank_id))] // hoặc "bank_id"
-    public Bank bank { get; set; }
-
-
 
 
     [MaxLength(50)]
@@ -38,10 +32,13 @@ public class Customer
     public int number_login { get; set; }
 
     public bool locked { get; set; }
-    
-    public string? authentication_code { get; set; }
 
+    public string? authentication_code { get; set; }
     
+
+    public string device { get; set; }
+
+    public int TransactionPassword { get; set; }
 
 
 }
