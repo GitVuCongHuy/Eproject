@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -289,4 +287,3 @@ public class Accounts_manager : ControllerBase
         return doc.GeneratePdf();
     }
 }
->>>>>>> a434763da9025523af69451b2b538e872cfcd5db
