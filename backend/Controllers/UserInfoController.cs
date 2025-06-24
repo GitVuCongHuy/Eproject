@@ -49,7 +49,7 @@ namespace YourNamespace.Controllers
                         c.email,
                         c.mobile,
                         c.locked,
-                        c.bank_id
+                        
                     })
                     .FirstOrDefaultAsync();
 
