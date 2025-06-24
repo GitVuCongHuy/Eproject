@@ -34,11 +34,13 @@ public class Customer
     public bool locked { get; set; }
 
     public string? authentication_code { get; set; }
-    
+
 
     public string device { get; set; }
 
     public int TransactionPassword { get; set; }
 
+    [MaxLength(12)]
+    public string citizen_identification_card { get; set; }
 
 }

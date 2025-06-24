@@ -1,194 +1,253 @@
-// using Microsoft.AspNetCore.Authorization;
-// using Microsoft.AspNetCore.Mvc;
-// using Microsoft.EntityFrameworkCore;
-// using System;
-// using System.Linq;
-// using System.Security.Claims;
-// using System.Text.Json;
-// using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
+using System.Text.Json;
+using System.Threading.Tasks;
 
-// [ApiController]
-// [Route("backend/[controller]")]
-// public class ServiceRequestController : ControllerBase
-// {
-//     private readonly ApplicationDbContext _context;
+[ApiController]
+[Route("backend/[controller]")]
+public class ServiceRequestController : ControllerBase
+{
+    private readonly ApplicationDbContext _context;
 
-//     public ServiceRequestController(ApplicationDbContext context)
-//     {
-//         _context = context;
-//     }
+    public ServiceRequestController(ApplicationDbContext context)
+    {
+        _context = context;
+    }
 
-//     private int GetCustomerIdFromToken()
-//     {
-//         var identity = HttpContext.User.Identity as ClaimsIdentity;
-//         var claim = identity?.FindFirst(ClaimTypes.NameIdentifier);
-//         return claim != null ? int.Parse(claim.Value) : 0;
-//     }
+    private int GetCustomerIdFromToken()
+    {
+        var identity = HttpContext.User.Identity as ClaimsIdentity;
+        var claim = identity?.FindFirst(ClaimTypes.NameIdentifier);
+        return claim != null ? int.Parse(claim.Value) : 0;
+    }
 
-//     [Authorize]
-//     [HttpPost("create-request")]
-//     public async Task<IActionResult> CreateServiceRequest([FromBody] CreateRequestModel model)
-//     {
-//         var customerId = GetCustomerIdFromToken();
+    [Authorize]
+    [HttpPost("create-request")]
+    public async Task<IActionResult> CreateServiceRequest([FromBody] CreateRequestModel model)
+    {
+        var customerId = GetCustomerIdFromToken();
 
-//         if (string.IsNullOrEmpty(model.RequestType) || string.IsNullOrEmpty(model.RequestDetail))
-//         {
-//             return BadRequest(new ApiError
-//             {
-//                 Status = 400,
-//                 Error = "MissingData",
-//                 Message = "Thiếu loại yêu cầu hoặc chi tiết yêu cầu."
-//             });
-//         }
+        if (string.IsNullOrEmpty(model.RequestType) || string.IsNullOrEmpty(model.RequestDetail))
+        {
+            return BadRequest(new ApiError
+            {
+                Status = 400,
+                Error = "MissingData",
+                Message = "Thiếu loại yêu cầu hoặc chi tiết yêu cầu."
+            });
+        }
 
-//         var request = new Service_request
-//         {
-//             CustomerId = customerId,
-//             RequestType = model.RequestType,
-//             RequestDetail = model.RequestDetail,
-//             RequestDate = DateTime.Now,
-//             Status = "Pending"
-//         };
+        var request = new Service_request
+        {
+            CustomerId = customerId,
+            RequestType = model.RequestType,
+            RequestDetail = model.RequestDetail,
+            RequestDate = DateTime.Now,
+            Status = "Pending"
+        };
 
-//         _context.Service_requests.Add(request);
-//         await _context.SaveChangesAsync();
+        _context.Service_requests.Add(request);
+        await _context.SaveChangesAsync();
 
-//         return Ok(new ApiResponse<object>
-//         {
-//             Status = 200,
-//             Message = "Tạo yêu cầu dịch vụ thành công.",
-//             Data = request
-//         });
-//     }
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Tạo yêu cầu dịch vụ thành công.",
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDetail,
+                request.RequestDate,
+                request.Status
+            }
+        });
+    }
 
-//     [Authorize]
-//     [HttpGet("list-requests")]
-//     public async Task<IActionResult> GetAllRequests()
-//     {
-//         var customerId = GetCustomerIdFromToken();
-//         var requests = await _context.Service_requests
-//             .Where(r => r.CustomerId == customerId)
-//             .OrderByDescending(r => r.RequestDate)
-//             .ToListAsync();
+    [Authorize]
+    [HttpGet("list-requests")]
+    public async Task<IActionResult> GetAllRequests()
+    {
+        var customerId = GetCustomerIdFromToken();
+        var requests = await _context.Service_requests
+            .Where(r => r.CustomerId == customerId)
+            .Select(r => new
+            {
+                r.RequestId,
+                r.RequestType,
+                r.RequestDetail,
+                r.RequestDate,
+                r.Status
+            })
+            .OrderByDescending(r => r.RequestDate)
+            .ToListAsync();
 
-//         return Ok(new ApiResponse<object>
-//         {
-//             Status = 200,
-//             Message = "Lấy danh sách yêu cầu thành công.",
-//             Data = requests
-//         });
-//     }
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Lấy danh sách yêu cầu thành công.",
+            Data = requests
+        });
+    }
 
-//     [Authorize(Roles = "Admin")]
-//     [HttpPost("process-request/{requestId}")]
-//     public async Task<IActionResult> ProcessServiceRequest(int requestId)
-//     {
-//         var request = await _context.Service_requests.Include(r => r.customer).FirstOrDefaultAsync(r => r.RequestId == requestId);
+    [Authorize(Roles = "Admin")]
+    [HttpGet("admin/list-all-requests")]
+    public async Task<IActionResult> GetAllCustomerRequests()
+    {
+        var requests = await _context.Service_requests
+            .Include(r => r.customer)
+            .Select(r => new
+            {
+                r.RequestId,
+                r.RequestType,
+                r.RequestDetail,
+                r.RequestDate,
+                r.Status,
+                Customer = new
+                {
+                    r.customer.username,
+                    r.customer.full_name,
+                    r.customer.email,
+                    r.customer.mobile
+                }
+            })
+            .OrderByDescending(r => r.RequestDate)
+            .ToListAsync();
 
-//         if (request == null)
-//             return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy yêu cầu." });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Lấy danh sách tất cả yêu cầu thành công.",
+            Data = requests
+        });
+    }
 
-//         if (request.Status != "Pending")
-//             return BadRequest(new ApiError { Status = 400, Error = "AlreadyProcessed", Message = "Yêu cầu đã được xử lý." });
+    [Authorize(Roles = "Admin")]
+    [HttpPost("process-request/{requestId}")]
+    public async Task<IActionResult> ProcessServiceRequest(int requestId)
+    {
+        var request = await _context.Service_requests.Include(r => r.customer).FirstOrDefaultAsync(r => r.RequestId == requestId);
 
-//         switch (request.RequestType)
-//         {
-//             case "LockCard":
-//                 var card = await _context.Accounts.FirstOrDefaultAsync(a => a.customer_id == request.CustomerId && a.Status != "Locked");
-//                 if (card != null)
-//                 {
-//                     card.Status = "Locked";
-//                     request.Status = "Approved";
-//                 }
-//                 else request.Status = "Rejected";
-//                 break;
+        if (request == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy yêu cầu." });
 
-//             case "UnlockAccount":
-//                 var customer = await _context.Customers.FindAsync(request.CustomerId);
-//                 if (customer != null && customer.locked)
-//                 {
-//                     customer.locked = false;
-//                     customer.number_login = 0;
-//                     request.Status = "Approved";
-//                 }
-//                 else request.Status = "Rejected";
-//                 break;
+        if (request.Status != "Pending")
+            return BadRequest(new ApiError { Status = 400, Error = "AlreadyProcessed", Message = "Yêu cầu đã được xử lý." });
 
-//             case "CloseAccount":
-//                 var accounts = await _context.Accounts.Where(a => a.customer_id == request.CustomerId && a.Balance == 0).ToListAsync();
-//                 if (accounts.Any())
-//                 {
-//                     _context.Accounts.RemoveRange(accounts);
-//                     request.Status = "Approved";
-//                 }
-//                 else request.Status = "Rejected";
-//                 break;
+        switch (request.RequestType)
+        {
+            case "LockCard":
+                var card = await _context.Accounts.FirstOrDefaultAsync(a => a.customer_id == request.CustomerId && a.Status != "Locked");
+                if (card != null)
+                {
+                    card.Status = "Locked";
+                    request.Status = "Approved";
+                }
+                else request.Status = "Rejected";
+                break;
 
-//             case "UpdateInfo":
-//                 try
-//                 {
-//                     var updateData = JsonSerializer.Deserialize<UpdateInfoModel>(request.RequestDetail);
-//                     var cust = await _context.Customers.FindAsync(request.CustomerId);
+            case "UnlockAccount":
+                var customer = await _context.Customers.FindAsync(request.CustomerId);
+                if (customer != null && customer.locked)
+                {
+                    customer.locked = false;
+                    customer.number_login = 0;
+                    request.Status = "Approved";
+                }
+                else request.Status = "Rejected";
+                break;
 
-//                     if (cust != null)
-//                     {
-//                         if (!string.IsNullOrEmpty(updateData.FullName)) cust.full_name = updateData.FullName;
-//                         if (!string.IsNullOrEmpty(updateData.Email)) cust.email = updateData.Email;
-//                         if (!string.IsNullOrEmpty(updateData.Mobile)) cust.mobile = updateData.Mobile;
-//                         if (!string.IsNullOrEmpty(updateData.Password))
-//                             cust.password = BCrypt.Net.BCrypt.HashPassword(updateData.Password);
+            case "CloseAccount":
+                var accounts = await _context.Accounts.Where(a => a.customer_id == request.CustomerId && a.Balance == 0).ToListAsync();
+                if (accounts.Any())
+                {
+                    _context.Accounts.RemoveRange(accounts);
+                    request.Status = "Approved";
+                }
+                else request.Status = "Rejected";
+                break;
 
-//                         request.Status = "Approved";
-//                     }
-//                     else
-//                     {
-//                         request.Status = "Rejected";
-//                     }
-//                 }
-//                 catch
-//                 {
-//                     return BadRequest(new ApiError
-//                     {
-//                         Status = 400,
-//                         Error = "InvalidJson",
-//                         Message = "RequestDetail không đúng định dạng JSON."
-//                     });
-//                 }
-//                 break;
+            case "UpdateInfo":
+                try
+                {
+                    var updateData = JsonSerializer.Deserialize<UpdateInfoModel>(request.RequestDetail);
+                    var cust = await _context.Customers.FindAsync(request.CustomerId);
 
-//             default:
-//                 return BadRequest(new ApiError { Status = 400, Error = "InvalidType", Message = "Loại yêu cầu không hợp lệ." });
-//         }
+                    if (cust != null)
+                    {
+                        if (!string.IsNullOrEmpty(updateData.FullName)) cust.full_name = updateData.FullName;
+                        if (!string.IsNullOrEmpty(updateData.Email)) cust.email = updateData.Email;
+                        if (!string.IsNullOrEmpty(updateData.Mobile)) cust.mobile = updateData.Mobile;
+                        if (!string.IsNullOrEmpty(updateData.Password))
+                            cust.password = BCrypt.Net.BCrypt.HashPassword(updateData.Password);
 
-//         await _context.SaveChangesAsync();
+                        request.Status = "Approved";
+                    }
+                    else
+                    {
+                        request.Status = "Rejected";
+                    }
+                }
+                catch
+                {
+                    return BadRequest(new ApiError
+                    {
+                        Status = 400,
+                        Error = "InvalidJson",
+                        Message = "RequestDetail không đúng định dạng JSON."
+                    });
+                }
+                break;
 
-//         return Ok(new ApiResponse<object>
-//         {
-//             Status = 200,
-//             Message = $"Đã xử lý yêu cầu {request.RequestType} - {request.Status}.",
-//             Data = request
-//         });
-//     }
+            default:
+                return BadRequest(new ApiError { Status = 400, Error = "InvalidType", Message = "Loại yêu cầu không hợp lệ." });
+        }
 
-//     [Authorize(Roles = "Admin")]
-//     [HttpPost("reject-request/{requestId}")]
-//     public async Task<IActionResult> RejectRequest(int requestId)
-//     {
-//         var request = await _context.Service_requests.FindAsync(requestId);
-//         if (request == null)
-//             return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy yêu cầu." });
+        await _context.SaveChangesAsync();
 
-//         if (request.Status != "Pending")
-//             return BadRequest(new ApiError { Status = 400, Error = "AlreadyProcessed", Message = "Yêu cầu đã được xử lý." });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = $"Đã xử lý yêu cầu {request.RequestType} - {request.Status}.",
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDetail,
+                request.RequestDate,
+                request.Status
+            }
+        });
+    }
 
-//         request.Status = "Rejected";
-//         await _context.SaveChangesAsync();
+    [Authorize(Roles = "Admin")]
+    [HttpPost("reject-request/{requestId}")]
+    public async Task<IActionResult> RejectRequest(int requestId)
+    {
+        var request = await _context.Service_requests.FindAsync(requestId);
+        if (request == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy yêu cầu." });
 
-//         return Ok(new ApiResponse<object>
-//         {
-//             Status = 200,
-//             Message = "Yêu cầu đã bị từ chối.",
-//             Data = request
-//         });
-//     }
-// }
+        if (request.Status != "Pending")
+            return BadRequest(new ApiError { Status = 400, Error = "AlreadyProcessed", Message = "Yêu cầu đã được xử lý." });
+
+        request.Status = "Rejected";
+        await _context.SaveChangesAsync();
+
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Yêu cầu đã bị từ chối.",
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDetail,
+                request.RequestDate,
+                request.Status
+            }
+        });
+    }
+}

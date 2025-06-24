@@ -30,7 +30,7 @@ public class Transaction
     /// </summary>
     public decimal amount { get; set; }
     public string description { get; set; }
-    public DateTime dransactionDate { get; set; }
+    public DateTime transactionDate { get; set; }
     public string transaction_status { get; set; }
 
 

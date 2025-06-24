@@ -9,18 +9,21 @@ using QuestPDF.Helpers;
 using QuestPDF.Infrastructure;
 using System.Net.Mail;
 using System.Net;
+using backend.ViewModel;
 
 [ApiController]
 [Route("backend/[controller]")]
-public class Accounts_manager : ControllerBase
+public class Accounts_manager : Controller
 {
     private readonly ApplicationDbContext _context;
     private readonly JwtTokenHelper _jwtHelper;
     private readonly EmailHelper _emailHelper;
+    private readonly IConfiguration _configuration;
 
-    public Accounts_manager(ApplicationDbContext context, JwtTokenHelper jwtHelper, EmailHelper emailHelper)
+    public Accounts_manager(ApplicationDbContext context, IConfiguration configuration, JwtTokenHelper jwtHelper, EmailHelper emailHelper)
     {
         _context = context;
+        _configuration = configuration;
         _jwtHelper = jwtHelper;
         _emailHelper = emailHelper;
     }
@@ -29,9 +32,7 @@ public class Accounts_manager : ControllerBase
     {
         var identity = HttpContext.User.Identity as ClaimsIdentity;
         var customerIdClaim = identity?.FindFirst(ClaimTypes.NameIdentifier);
-        return customerIdClaim != null && int.TryParse(customerIdClaim.Value, out int customerId)
-            ? customerId
-            : 0;
+        return customerIdClaim != null && int.TryParse(customerIdClaim.Value, out int customerId) ? customerId : 0;
     }
 
     private async Task<string> GenerateUniqueCardNumberAsync()
@@ -56,44 +57,37 @@ public class Accounts_manager : ControllerBase
 
         var customer = await _context.Customers.FindAsync(customerId);
         if (customer == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng trong hệ thống." });
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
 
         if (customer.locked == true)
-            return BadRequest(new ApiError
-            {
-                Status = 400,
-                Error = "Account lock",
-                Message = "Tài khoản này đã bị khóa , vui lòng ra ngân hàng gần nhất để mở"
-            });
+            return BadRequest(new ApiError { Status = 400, Error = "AccountLocked", Message = "Tài khoản đã bị khóa." });
 
-        if (model == null || model.BankId <= 0)
-            return BadRequest(new ApiError { Status = 400, Error = "MissingData", Message = "Thiếu thông tin ngân hàng" });
+        if (string.IsNullOrWhiteSpace(model.CardType) || (model.CardType != "Normal" && model.CardType != "Credit"))
+            return BadRequest(new ApiError { Status = 400, Error = "InvalidCardType", Message = "Loại thẻ không hợp lệ (Normal hoặc Credit)." });
 
-        if (model.InitialBalance < 0)
-            return BadRequest(new ApiError { Status = 400, Error = "InvalidData", Message = "Số dư khởi tạo không hợp lệ." });
+        var existingAccounts = await _context.Accounts.Where(a => a.customer_id == customerId).ToListAsync();
+        if (existingAccounts.Count >= 3)
+            return BadRequest(new ApiError { Status = 400, Error = "CardLimitReached", Message = "Tổng số thẻ không được vượt quá 3." });
 
-        var existingCardCount = await _context.Accounts.CountAsync(a => a.customer_id == customerId);
-        if (existingCardCount >= 5)
-            return BadRequest(new ApiError { Status = 400, Error = "LimitReached", Message = "Bạn đã tạo tối đa 5 thẻ." });
+        if (model.CardType == "Credit" && existingAccounts.Any(a => a.CardType == "Credit"))
+            return BadRequest(new ApiError { Status = 400, Error = "CreditCardLimit", Message = "Chỉ được tạo 1 thẻ ghi nợ." });
 
-        string cardNumber = await GenerateUniqueCardNumberAsync();
+        var cardNumber = await GenerateUniqueCardNumberAsync();
 
         var newAccount = new Accounts
         {
             customer_id = customerId,
-            Balance = model.InitialBalance,
-            Status = "Active",
             CardNumber = cardNumber,
+            CardType = model.CardType,
+            Status = "Active",
+            Balance = model.CardType == "Credit" ? 10_000_000 : model.InitialBalance,
+            CreditIssuedDate = model.CardType == "Credit" ? DateTime.UtcNow : null
         };
 
         _context.Accounts.Add(newAccount);
         await _context.SaveChangesAsync();
 
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Tạo thẻ thành công",
-        });
+        return Ok(new ApiResponse<object> { Status = 200, Message = "Tạo thẻ thành công" });
     }
 
     [HttpGet("cards")]
@@ -102,21 +96,10 @@ public class Accounts_manager : ControllerBase
         var customerId = GetCustomerIdFromToken();
         var accounts = await _context.Accounts
             .Where(a => a.customer_id == customerId)
-            .Select(a => new
-            {
-                a.account_id,
-                a.CardNumber,
-                a.Balance,
-                a.Status
-            })
+            .Select(a => new { a.account_id, a.CardNumber, a.Balance, a.Status, a.CardType })
             .ToListAsync();
 
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Lấy danh sách thẻ thành công",
-            Data = accounts
-        });
+        return Ok(new ApiResponse<object> { Status = 200, Message = "Lấy danh sách thẻ thành công", Data = accounts });
     }
 
     [HttpGet("balance")]
@@ -124,142 +107,140 @@ public class Accounts_manager : ControllerBase
     {
         var customerId = GetCustomerIdFromToken();
         var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
-
         if (account == null)
             return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy tài khoản." });
 
-        return Ok(new ApiResponse<decimal>
-        {
-            Status = 200,
-            Message = "Lấy số dư thành công",
-            Data = account.Balance
-        });
+        return Ok(new ApiResponse<decimal> { Status = 200, Message = "Lấy số dư thành công", Data = account.Balance });
     }
 
-    // [HttpGet("transactions")]
-    // public async Task<IActionResult> GetTransactionHistory([FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
-    // {
-    //     var customerId = GetCustomerIdFromToken();
+    [HttpGet("transactions")]
+    public async Task<IActionResult> GetTransactionHistory([FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
+    {
+        var customerId = GetCustomerIdFromToken();
+        var query = _context.Transaction.AsQueryable();
 
-    //     List<int> accountIds;
+        if (accountId.HasValue)
+        {
+            bool ownsAccount = await _context.Accounts.AnyAsync(a => a.customer_id == customerId && a.account_id == accountId.Value);
+            if (!ownsAccount)
+                return BadRequest(new ApiError { Status = 400, Error = "InvalidAccount", Message = "Tài khoản không thuộc quyền sở hữu." });
 
-    //     if (accountId.HasValue)
-    //     {
-    //         var isOwned = await _context.Accounts.AnyAsync(a => a.customer_id == customerId && a.account_id == accountId.Value);
-    //         if (!isOwned)
-    //             return BadRequest(new ApiError { Status = 400, Error = "InvalidAccount", Message = "Thẻ không thuộc quyền sở hữu." });
+            query = query.Where(t => t.SenderAccount == accountId.Value || t.ReceiverAccount == accountId.Value);
+        }
+        else
+        {
+            var accountIds = await _context.Accounts.Where(a => a.customer_id == customerId).Select(a => a.account_id).ToListAsync();
+            query = query.Where(t => accountIds.Contains(t.SenderAccount) || accountIds.Contains(t.ReceiverAccount));
+        }
 
-    //         accountIds = new List<int> { accountId.Value };
-    //     }
-    //     else
-    //     {
-    //         accountIds = await _context.Accounts
-    //             .Where(a => a.customer_id == customerId)
-    //             .Select(a => a.account_id)
-    //             .ToListAsync();
-    //     }
+        if (month.HasValue && year.HasValue)
+        {
+            query = query.Where(t => t.transactionDate.Month == month && t.transactionDate.Year == year);
+        }
 
-    //     var transactions = await _context.transaction_Participants
-    //         .Include(tp => tp.transactions)
-    //         .Where(tp => accountIds.Contains(tp.AccountId))
-    //         .Select(tp => tp.transactions)
-    //         .ToListAsync();
+        var transactions = await query.OrderByDescending(t => t.transactionDate).ToListAsync();
+        return Ok(new ApiResponse<List<Transaction>> { Status = 200, Message = "Lịch sử giao dịch", Data = transactions });
+    }
 
-    //     if (month.HasValue && year.HasValue)
-    //     {
-    //         transactions = transactions
-    //             .Where(t => t.TransactionDate.Month == month && t.TransactionDate.Year == year)
-    //             .ToList();
-    //     }
+    [HttpPost("transactions/export/send-mail")]
+    public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year)
+    {
+        var customerId = GetCustomerIdFromToken();
+        var customer = await _context.Customers.FindAsync(customerId);
+        if (customer == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
 
-    //     return Ok(new ApiResponse<List<Transactions>>
-    //     {
-    //         Status = 200,
-    //         Message = "Lấy lịch sử giao dịch thành công",
-    //         Data = transactions
-    //     });
-    // }
+        var accountIds = await _context.Accounts.Where(a => a.customer_id == customerId).Select(a => a.account_id).ToListAsync();
+        var transactions = await _context.Transaction
+            .Where(t => (accountIds.Contains(t.SenderAccount) || accountIds.Contains(t.ReceiverAccount)) &&
+                        t.transactionDate.Month == month &&
+                        t.transactionDate.Year == year)
+            .ToListAsync();
 
-    // [HttpPost("transactions/export/send-mail")]
-    // public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year)
-    // {
-    //     var customerId = GetCustomerIdFromToken();
+        if (!transactions.Any())
+            return NotFound(new ApiError { Status = 404, Error = "NoTransactions", Message = "Không có giao dịch trong thời gian này." });
 
-    //     var customer = await _context.Customers.FirstOrDefaultAsync(c => c.customer_id == customerId);
-    //     if (customer == null)
-    //         return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
+        var pdfBytes = GenerateTransactionPdf(transactions);
+        string subject = $"Sao kê giao dịch tháng {month}/{year}";
+        string body = "Vui lòng xem file đính kèm để xem chi tiết sao kê giao dịch.";
 
-    //     var accountIds = await _context.Accounts
-    //         .Where(a => a.customer_id == customerId)
-    //         .Select(a => a.account_id)
-    //         .ToListAsync();
+        await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"statement_{month}_{year}.pdf");
 
-    //     var transactions = await _context.transaction_Participants
-    //         .Include(tp => tp.transactions)
-    //         .Where(tp => accountIds.Contains(tp.AccountId))
-    //         .Select(tp => tp.transactions)
-    //         .Where(t => t.TransactionDate.Month == month && t.TransactionDate.Year == year)
-    //         .ToListAsync();
+        return Ok(new ApiResponse<string> { Status = 200, Message = "Đã gửi file PDF qua email", Data = "Gửi thành công" });
+    }
 
-    //     if (!transactions.Any())
-    //         return NotFound(new ApiError { Status = 404, Error = "NoTransactions", Message = "Không có giao dịch trong khoảng thời gian này." });
+    private byte[] GenerateTransactionPdf(List<Transaction> transactions)
+    {
+        var doc = Document.Create(container =>
+        {
+            container.Page(page =>
+            {
+                page.Size(PageSizes.A4);
+                page.Margin(30);
+                page.Header().Text("SAO KÊ GIAO DỊCH").FontSize(20).Bold();
+                page.Content().Table(table =>
+                {
+                    table.ColumnsDefinition(columns =>
+                    {
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                        columns.RelativeColumn();
+                    });
 
-    //     var pdfBytes = GenerateTransactionPdf(transactions);
+                    table.Header(header =>
+                    {
+                        header.Cell().Text("Ngày").Bold();
+                        header.Cell().Text("Số tiền").Bold();
+                        header.Cell().Text("Mô tả").Bold();
+                        header.Cell().Text("Trạng thái").Bold();
+                    });
 
-    //     string subject = $"Lịch sử giao dịch tháng {month}/{year}";
-    //     string body = "Vui lòng xem file đính kèm để xem chi tiết lịch sử giao dịch.";
+                    foreach (var t in transactions)
+                    {
+                        table.Cell().Text(t.transactionDate.ToString("dd/MM/yyyy"));
+                        table.Cell().Text(t.amount.ToString("N0") + " VND");
+                        table.Cell().Text(t.description ?? "-");
+                        table.Cell().Text(t.transaction_status ?? "-");
+                    }
+                });
 
-    //     await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"transactions_{month}_{year}.pdf");
+                page.Footer().AlignCenter().Text("Generated by Online Banking System");
+            });
+        });
 
-    //     return Ok(new ApiResponse<string>
-    //     {
-    //         Status = 200,
-    //         Message = "Đã gửi file PDF qua email.",
-    //         Data = "Gửi thành công"
-    //     });
-    // }
+        return doc.GeneratePdf();
+    }
 
-    // // private byte[] GenerateTransactionPdf(List<Transactions> transactions)
-    // {
-    //     var doc = Document.Create(container =>
-    //     {
-    //         container.Page(page =>
-    //         {
-    //             page.Size(PageSizes.A4);
-    //             page.Margin(30);
-    //             page.Header().Text("LỊCH SỬ GIAO DỊCH").FontSize(20).Bold();
+    [HttpPost("check-credit-overdue")]
+    public async Task<IActionResult> CheckCreditCardOverdue()
+    {
+        var overdueAccounts = await _context.Accounts
+            .Include(a => a.customer)
+            .Where(a => a.CardType == "Credit"
+                    && a.Balance < 0
+                    && a.CreditIssuedDate != null
+                    && EF.Functions.DateDiffDay(a.CreditIssuedDate.Value, DateTime.UtcNow) > 30)
+            .ToListAsync();
 
-    //             page.Content().Table(table =>
-    //             {
-    //                 table.ColumnsDefinition(columns =>
-    //                 {
-    //                     columns.RelativeColumn();
-    //                     columns.RelativeColumn();
-    //                     columns.RelativeColumn();
-    //                     columns.RelativeColumn();
-    //                 });
+        foreach (var account in overdueAccounts)
+        {
+            string subject = "Cảnh báo quá hạn thẻ ghi nợ";
+            string body = $@"
+                Chào {account.customer.full_name},<br><br>
+                Thẻ ghi nợ số {account.CardNumber} của bạn đã quá hạn thanh toán 1 tháng.<br>
+                Số tiền còn nợ: {Math.Abs(account.Balance):N0} VND.<br><br>
+                Vui lòng thanh toán sớm để tránh các hình phạt hoặc khóa thẻ.<br><br>
+                Trân trọng,<br>Ngân hàng Online.";
 
-    //                 table.Header(header =>
-    //                 {
-    //                     header.Cell().Text("Ngày").Bold();
-    //                     header.Cell().Text("Số tiền").Bold();
-    //                     header.Cell().Text("Loại").Bold();
-    //                     header.Cell().Text("Trạng thái").Bold();
-    //                 });
+            await _emailHelper.SendEmailWithAttachmentAsync(account.customer.email, subject, body, null);
+        }
 
-    //                 foreach (var t in transactions)
-    //                 {
-    //                     table.Cell().Text(t.TransactionDate.ToString("dd/MM/yyyy"));
-    //                     table.Cell().Text(t.Amount.ToString("N0") + " VND");
-    //                     table.Cell().Text(t.TransactionType);
-    //                     table.Cell().Text(t.Status);
-    //                 }
-    //             });
-
-    //             page.Footer().AlignCenter().Text("Generated by Online Banking System");
-    //         });
-    //     });
-
-    //     return doc.GeneratePdf();
-    // }
+        return Ok(new ApiResponse<int>
+        {
+            Status = 200,
+            Message = "Đã xử lý các thẻ ghi nợ quá hạn",
+            Data = overdueAccounts.Count
+        });
+    }
 }
