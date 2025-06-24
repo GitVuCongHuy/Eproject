@@ -7,6 +7,8 @@ import DefaultLayout from "./layouts/default_layout/default_layout";
 import Internal from "./pages/transfer/internal";
 import External from "./pages/transfer/external";
 import Bill from "./pages/transfer/bills";
+import CheckRequest from "./pages/home/chequebook";
+import Statement from "./pages/home/statement";
 function App() {
   return (
     <AuthProvider>
@@ -19,6 +21,8 @@ function App() {
               <Route path="transfer/external" element={<External />} />
               <Route path="transfer/bills" element={<Bill />} />
             <Route path="account" element={<AccountAndCards />} />
+            <Route path="statement" element={<Statement />} />
+            <Route path="chequebook" element={<CheckRequest />} />
            
           </Route>
         </Routes>
