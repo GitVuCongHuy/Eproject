@@ -30,10 +30,6 @@ public class CustomerController : Controller
     }
 
 
-    // public CustomerController(ApplicationDbContext context)
-    // {
-    //     _context = context;
-    // }
 
     [HttpPost("register")]
     public async Task<IActionResult> Register([FromBody] RegisterViewModel model)
@@ -185,26 +181,7 @@ public class CustomerController : Controller
             }
 
 
-            //Kra có phải thiết bị mới không 
-            // var new_device = await _context.Login_Attempts.FirstOrDefaultAsync(x => x.customer_id == existUser.customer_id);
-            // if (new_device == null)
-            // {
-
-            //     string code = _emailHelper.GenerateRandomCode(6);
-            //     existUser.authentication_code = code;
-            //     await _context.SaveChangesAsync();
-            //     await Verify_Code(code, existUser.email);
-
-            //     return BadRequest(new ApiError
-            //     {
-            //         Status = 400,
-            //         Error = "New equipment",
-            //         Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
-            //     });
-
-
-            // }
-
+         
 
             if (existUser.device != viewModel.deviceId || existUser.device == null)
             {
@@ -221,25 +198,6 @@ public class CustomerController : Controller
                 });
             }
          
-
-            // if (new_device.device != viewModel.deviceId)
-            // {
-            //     string code = _emailHelper.GenerateRandomCode(6);
-            //     existUser.authentication_code = code;
-            //     await _context.SaveChangesAsync();
-
-
-            //     await Verify_Code(code, existUser.email);
-
-            //     return BadRequest(new ApiError
-            //     {
-            //         Status = 400,
-            //         Error = "New equipment",
-            //         Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
-            //     });
-
-            // }
-            // ;
 
 
 
