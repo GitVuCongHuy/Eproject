@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace YourNamespace.Controllers
 {
@@ -16,17 +16,21 @@ namespace YourNamespace.Controllers
             _context = context;
         }
 
+        private int GetCustomerIdFromToken()
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            var customerIdClaim = identity?.FindFirst(ClaimTypes.NameIdentifier);
+            return int.TryParse(customerIdClaim?.Value, out var id) ? id : 0;
+        }
+
         [Authorize]
         [HttpGet("me")]
         public async Task<IActionResult> GetCurrentUserInfo()
         {
             try
             {
-                // Lấy customer_id từ token
-                var identity = HttpContext.User.Identity as ClaimsIdentity;
-                var customerIdClaim = identity?.FindFirst(ClaimTypes.NameIdentifier);
-
-                if (customerIdClaim == null)
+                var customerId = GetCustomerIdFromToken();
+                if (customerId == 0)
                 {
                     return Unauthorized(new ApiError
                     {
@@ -36,20 +40,16 @@ namespace YourNamespace.Controllers
                     });
                 }
 
-                int customerId = int.Parse(customerIdClaim.Value);
-
-                // Truy vấn thông tin người dùng từ database
                 var customer = await _context.Customers
                     .Where(c => c.customer_id == customerId)
                     .Select(c => new
                     {
-                        c.customer_id,
                         c.username,
                         c.full_name,
                         c.email,
                         c.mobile,
                         c.locked,
-                        
+                        c.citizen_identification_card
                     })
                     .FirstOrDefaultAsync();
 
@@ -66,7 +66,7 @@ namespace YourNamespace.Controllers
                 return Ok(new ApiResponse<object>
                 {
                     Status = 200,
-                    Message = "Lấy thông tin thành công",
+                    Message = "Lấy thông tin thành công.",
                     Data = customer
                 });
             }

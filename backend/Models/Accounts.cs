@@ -29,9 +29,8 @@ public class Accounts
     [MaxLength(20)]
     public string AccountType { get; set; }
 
-
-    [MaxLength(12)]
-    public int citizen_identification_card { get; set; }
+    public string CardType { get; set; } 
+    public DateTime? CreditIssuedDate { get; set; } 
 
     
 }

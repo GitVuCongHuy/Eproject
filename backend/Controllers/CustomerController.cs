@@ -1,6 +1,7 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using backend.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -40,7 +41,8 @@ public class CustomerController : Controller
             || string.IsNullOrWhiteSpace(model.Mobile)
             || string.IsNullOrWhiteSpace(model.Email)
             || string.IsNullOrWhiteSpace(model.Username)
-            || string.IsNullOrWhiteSpace(model.Password))
+            || string.IsNullOrWhiteSpace(model.Password)
+            || string.IsNullOrWhiteSpace(model.CitizenIdentificationCard))
             {
                 return BadRequest(new ApiError
                 {
@@ -50,6 +52,7 @@ public class CustomerController : Controller
                 });
             }
 
+            // Check username
             var existUser = await _context.Customers.FirstOrDefaultAsync(x => x.username == model.Username);
             if (existUser != null)
             {
@@ -61,14 +64,28 @@ public class CustomerController : Controller
                 });
             }
 
+            // Check CMND/CCCD trùng
+            var existCccd = await _context.Customers
+                .FirstOrDefaultAsync(x => x.citizen_identification_card == model.CitizenIdentificationCard);
+            if (existCccd != null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "CIC_Exists",
+                    Message = "Căn cước công dân đã được đăng ký."
+                });
+            }
+
+            // Check ngân hàng
             var bank = await _context.Banks.FindAsync(1);
             if (bank == null)
             {
                 return BadRequest(new ApiError
                 {
                     Status = 400,
-                    Error = "Lack_of_Bankss",
-                    Message = "Thiếu Ngân hàng"
+                    Error = "Lack_of_Bank",
+                    Message = "Thiếu thông tin ngân hàng."
                 });
             }
 
@@ -81,8 +98,7 @@ public class CustomerController : Controller
                 mobile = model.Mobile,
                 number_login = 0,
                 locked = false,
-                // bank_id = 1,
-
+                citizen_identification_card = model.CitizenIdentificationCard
             };
 
             _context.Customers.Add(customer);
@@ -92,15 +108,22 @@ public class CustomerController : Controller
             {
                 Status = 200,
                 Message = "Đăng ký thành công",
-                Data = new { customer.username, customer.customer_id }
+                Data = new
+                {
+                    customer.username,
+                    customer.customer_id,
+                    customer.full_name,
+                    customer.email,
+                    customer.citizen_identification_card
+                }
             });
         }
         catch (Exception ex)
         {
-            // Có thể log ex.Message vào file hoặc database
             return StatusCode(500, $"Lỗi server: {ex.Message}");
         }
     }
+
 
 
 
@@ -360,5 +383,59 @@ public class CustomerController : Controller
 
     }
     
-   
+   [HttpPost("resend_code")]
+public async Task<IActionResult> ResendCode([FromBody] ResendCodeViewModel model)
+{
+    try
+    {
+        if (string.IsNullOrWhiteSpace(model.Username))
+        {
+            return BadRequest(new ApiError
+            {
+                Status = 400,
+                Error = "Missing_data",
+                Message = "Thiếu tên đăng nhập"
+            });
+        }
+
+        var customer = await _context.Customers.FirstOrDefaultAsync(x => x.username == model.Username);
+        if (customer == null)
+        {
+            return BadRequest(new ApiError
+            {
+                Status = 404,
+                Error = "User_Not_Found",
+                Message = "Không tìm thấy người dùng"
+            });
+        }
+
+        if (customer.locked)
+        {
+            return BadRequest(new ApiError
+            {
+                Status = 400,
+                Error = "Account_Locked",
+                Message = "Tài khoản đã bị khóa"
+            });
+        }
+
+        string code = _emailHelper.GenerateRandomCode(6);
+        customer.authentication_code = code;
+        await _context.SaveChangesAsync();
+
+        await Verify_Code(code, customer.email); 
+
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Đã gửi lại mã xác thực thành công",
+            Data = new { customer.username }
+        });
+    }
+    catch (Exception ex)
+    {
+        return StatusCode(500, $"Lỗi server: {ex.Message}");
+    }
+}
+
 }
