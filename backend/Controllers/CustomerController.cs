@@ -508,6 +508,18 @@ public class CustomerController : Controller
     {
         try
         {
+
+            if (model.TransactionPassword == null || string.IsNullOrWhiteSpace(model.TransactionPassword.ToString()))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Empty_Transaction_Password",
+                    Message = "Vui lòng nhập mật khẩu giao dịch"
+                });
+            }
+
+
             var token = _jwtTokenHelper.GetBearerToken(HttpContext);
 
             if (string.IsNullOrEmpty(token))
