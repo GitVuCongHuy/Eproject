@@ -16,6 +16,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Statements> statements { get; set; }
     public DbSet<Bank_Transaction> bank_Transaction { get; set; }
+    public DbSet<Cheque> Cheques { get; set; }
 
 }
 
