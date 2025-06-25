@@ -1,26 +1,27 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-public class Transaction
+
+
+public class Bank_Transaction
 {
     [Key]
-
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int TransactionId { get; set; }
 
     /// <summary>
     /// người chuyển
     /// </summary>
-    public int SenderAccount { get; set; }
+    public string SenderAccount { get; set; }
 
-    public int id_banking_sender { get; set; }
+    public int? id_banking_sender { get; set; }
 
 
     /// <summary>
     /// người nhận
     /// </summary>
-    public int ReceiverAccount { get; set; }
-    public int id_banking_Receiver { get; set; }
+    public string ReceiverAccount { get; set; }
+    public int? id_banking_Receiver { get; set; }
 
 
 

@@ -15,7 +15,7 @@ public class ApplicationDbContext : DbContext
    public DbSet<Service_request> Service_requests { get; set; }
 
     public DbSet<Statements> statements { get; set; }
-    public DbSet<Transaction> Transaction { get; set; }
+    public DbSet<Bank_Transaction> bank_Transaction { get; set; }
 
 }
 
