@@ -113,61 +113,147 @@ public class Accounts_manager : Controller
         return Ok(new ApiResponse<decimal> { Status = 200, Message = "Lấy số dư thành công", Data = account.Balance });
     }
 
-    [HttpGet("transactions")]
-    public async Task<IActionResult> GetTransactionHistory([FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
+        [HttpGet("transactions")]
+    public async Task<IActionResult> GetTransactionHistory([FromQuery] int? day, [FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
     {
         var customerId = GetCustomerIdFromToken();
         var query = _context.bank_Transaction.AsQueryable();
 
+        
         if (accountId.HasValue)
         {
-            bool ownsAccount = await _context.Accounts.AnyAsync(a => a.customer_id == customerId && a.account_id == accountId.Value);
-            if (!ownsAccount)
-                return BadRequest(new ApiError { Status = 400, Error = "InvalidAccount", Message = "Tài khoản không thuộc quyền sở hữu." });
+            var accountCardNumber = await _context.Accounts
+                .Where(a => a.customer_id == customerId && a.account_id == accountId.Value)
+                .Select(a => a.CardNumber)
+                .FirstOrDefaultAsync();
 
-            query = query.Where(t => t.SenderAccount == accountId.Value || t.ReceiverAccount == accountId.Value);
+            if (accountCardNumber == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InvalidAccount",
+                    Message = "Tài khoản không thuộc quyền sở hữu."
+                });
+            }
+
+            query = query.Where(t => t.SenderAccount == accountCardNumber || t.ReceiverAccount == accountCardNumber);
         }
         else
         {
-            var accountIds = await _context.Accounts.Where(a => a.customer_id == customerId).Select(a => a.account_id).ToListAsync();
-            query = query.Where(t => accountIds.Contains(t.SenderAccount) || accountIds.Contains(t.ReceiverAccount));
+            var accountCardNumbers = await _context.Accounts
+                .Where(a => a.customer_id == customerId)
+                .Select(a => a.CardNumber)
+                .ToListAsync();
+
+            query = query.Where(t => accountCardNumbers.Contains(t.SenderAccount) || accountCardNumbers.Contains(t.ReceiverAccount));
         }
 
-        if (month.HasValue && year.HasValue)
+    
+        if (day.HasValue && month.HasValue && year.HasValue)
         {
-            query = query.Where(t => t.transactionDate.Month == month && t.transactionDate.Year == year);
+            query = query.Where(t =>
+                t.transactionDate.Day == day.Value &&
+                t.transactionDate.Month == month.Value &&
+                t.transactionDate.Year == year.Value);
+        }
+        else if (month.HasValue && year.HasValue)
+        {
+            query = query.Where(t =>
+                t.transactionDate.Month == month.Value &&
+                t.transactionDate.Year == year.Value);
+        }
+        else if (year.HasValue)
+        {
+            query = query.Where(t => t.transactionDate.Year == year.Value);
         }
 
         var transactions = await query.OrderByDescending(t => t.transactionDate).ToListAsync();
-        return Ok(new ApiResponse<List<Bank_Transaction>> { Status = 200, Message = "Lịch sử giao dịch", Data = transactions });
+
+        return Ok(new ApiResponse<List<Bank_Transaction>>
+        {
+            Status = 200,
+            Message = "Lịch sử giao dịch",
+            Data = transactions
+        });
     }
 
     [HttpPost("transactions/export/send-mail")]
-    public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year)
+public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year, [FromQuery] int? accountId)
+{
+    var customerId = GetCustomerIdFromToken();
+    var customer = await _context.Customers.FindAsync(customerId);
+
+    if (customer == null)
     {
-        var customerId = GetCustomerIdFromToken();
-        var customer = await _context.Customers.FindAsync(customerId);
-        if (customer == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
-
-        var accountIds = await _context.Accounts.Where(a => a.customer_id == customerId).Select(a => a.account_id).ToListAsync();
-        var transactions = await _context.bank_Transaction
-            .Where(t => (accountIds.Contains(t.SenderAccount) || accountIds.Contains(t.ReceiverAccount)) &&
-                        t.transactionDate.Month == month &&
-                        t.transactionDate.Year == year)
-            .ToListAsync();
-
-        if (!transactions.Any())
-            return NotFound(new ApiError { Status = 404, Error = "NoTransactions", Message = "Không có giao dịch trong thời gian này." });
-
-        var pdfBytes = GenerateTransactionPdf(transactions);
-        string subject = $"Sao kê giao dịch tháng {month}/{year}";
-        string body = "Vui lòng xem file đính kèm để xem chi tiết sao kê giao dịch.";
-
-        await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"statement_{month}_{year}.pdf");
-
-        return Ok(new ApiResponse<string> { Status = 200, Message = "Đã gửi file PDF qua email", Data = "Gửi thành công" });
+        return NotFound(new ApiError
+        {
+            Status = 404,
+            Error = "NotFound",
+            Message = "Không tìm thấy khách hàng."
+        });
     }
+
+    List<string> accountCardNumbers;
+
+    if (accountId.HasValue)
+    {
+        var accountCardNumber = await _context.Accounts
+            .Where(a => a.customer_id == customerId && a.account_id == accountId.Value)
+            .Select(a => a.CardNumber)
+            .FirstOrDefaultAsync();
+
+        if (accountCardNumber == null)
+        {
+            return BadRequest(new ApiError
+            {
+                Status = 400,
+                Error = "InvalidAccount",
+                Message = "Tài khoản không thuộc quyền sở hữu."
+            });
+        }
+
+        accountCardNumbers = new List<string> { accountCardNumber };
+    }
+    else
+    {
+        accountCardNumbers = await _context.Accounts
+            .Where(a => a.customer_id == customerId)
+            .Select(a => a.CardNumber)
+            .ToListAsync();
+    }
+
+    var transactions = await _context.bank_Transaction
+        .Where(t =>
+            (accountCardNumbers.Contains(t.SenderAccount) || accountCardNumbers.Contains(t.ReceiverAccount)) &&
+            t.transactionDate.Month == month &&
+            t.transactionDate.Year == year)
+        .ToListAsync();
+
+    if (!transactions.Any())
+    {
+        return NotFound(new ApiError
+        {
+            Status = 404,
+            Error = "NoTransactions",
+            Message = "Không có giao dịch trong thời gian này."
+        });
+    }
+
+    var pdfBytes = GenerateTransactionPdf(transactions); 
+    string subject = $"Sao kê giao dịch tháng {month}/{year}";
+    string body = "Vui lòng xem file đính kèm để xem chi tiết sao kê giao dịch.";
+
+    await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"statement_{month}_{year}.pdf");
+
+    return Ok(new ApiResponse<string>
+    {
+        Status = 200,
+        Message = "Đã gửi file PDF qua email",
+        Data = "Gửi thành công"
+    });
+}
+
 
     private byte[] GenerateTransactionPdf(List<Bank_Transaction> transactions)
     {
