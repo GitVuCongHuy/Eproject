@@ -52,6 +52,16 @@ public class CustomerController : Controller
                 });
             }
 
+            if (model.CitizenIdentificationCard.Length != 12)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Invalid_Citizen_Identification_Card",
+                    Message = "Căn cước công dân phải có 12 ký tự."
+                });
+            }
+
             // Check username
             var existUser = await _context.Customers.FirstOrDefaultAsync(x => x.username == model.Username);
             if (existUser != null)

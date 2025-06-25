@@ -117,7 +117,7 @@ public class Accounts_manager : Controller
     public async Task<IActionResult> GetTransactionHistory([FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
     {
         var customerId = GetCustomerIdFromToken();
-        var query = _context.Transaction.AsQueryable();
+        var query = _context.bank_Transaction.AsQueryable();
 
         if (accountId.HasValue)
         {
@@ -139,7 +139,7 @@ public class Accounts_manager : Controller
         }
 
         var transactions = await query.OrderByDescending(t => t.transactionDate).ToListAsync();
-        return Ok(new ApiResponse<List<Transaction>> { Status = 200, Message = "Lịch sử giao dịch", Data = transactions });
+        return Ok(new ApiResponse<List<Bank_Transaction>> { Status = 200, Message = "Lịch sử giao dịch", Data = transactions });
     }
 
     [HttpPost("transactions/export/send-mail")]
@@ -151,7 +151,7 @@ public class Accounts_manager : Controller
             return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
 
         var accountIds = await _context.Accounts.Where(a => a.customer_id == customerId).Select(a => a.account_id).ToListAsync();
-        var transactions = await _context.Transaction
+        var transactions = await _context.bank_Transaction
             .Where(t => (accountIds.Contains(t.SenderAccount) || accountIds.Contains(t.ReceiverAccount)) &&
                         t.transactionDate.Month == month &&
                         t.transactionDate.Year == year)
@@ -169,7 +169,7 @@ public class Accounts_manager : Controller
         return Ok(new ApiResponse<string> { Status = 200, Message = "Đã gửi file PDF qua email", Data = "Gửi thành công" });
     }
 
-    private byte[] GenerateTransactionPdf(List<Transaction> transactions)
+    private byte[] GenerateTransactionPdf(List<Bank_Transaction> transactions)
     {
         var doc = Document.Create(container =>
         {

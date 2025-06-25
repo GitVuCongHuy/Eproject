@@ -164,7 +164,7 @@ public class Transaction_Controler : Controller
 
 
 
-                var transaction_new = new Transaction
+                var transaction_new = new Bank_Transaction
                 {
                     SenderAccount = view.SenderAccount,
                     ReceiverAccount = view.ReceiverAccount,
@@ -175,7 +175,7 @@ public class Transaction_Controler : Controller
                     // id_banking_sender = senderAccount.account_id,
                     // id_banking_Receiver = receiverAccount.account_id
                 };
-                _context.Transaction.Add(transaction_new);
+                _context.bank_Transaction.Add(transaction_new);
                 await _context.SaveChangesAsync();
 
                 await transaction.CommitAsync();
