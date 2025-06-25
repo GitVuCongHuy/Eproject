@@ -160,6 +160,8 @@ public class Transaction_Controler : Controller
                 receiverAccount.Balance += view.Amount;
                 _context.Accounts.Update(senderAccount);
                 _context.Accounts.Update(receiverAccount);
+
+                
                 await _context.SaveChangesAsync();
 
 

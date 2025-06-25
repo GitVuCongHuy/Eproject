@@ -6,23 +6,22 @@ using System.ComponentModel.DataAnnotations.Schema;
 public class Bank_Transaction
 {
     [Key]
-
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public string TransactionId { get; set; }
+    public int TransactionId { get; set; }
 
     /// <summary>
     /// người chuyển
     /// </summary>
     public string SenderAccount { get; set; }
 
-    public int id_banking_sender { get; set; }
+    public int? id_banking_sender { get; set; }
 
 
     /// <summary>
     /// người nhận
     /// </summary>
     public string ReceiverAccount { get; set; }
-    public int id_banking_Receiver { get; set; }
+    public int? id_banking_Receiver { get; set; }
 
 
 
