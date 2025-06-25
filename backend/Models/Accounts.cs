@@ -25,10 +25,7 @@ public class Accounts
     [MaxLength(20)]
     public string Status { get; set; }
 
-
     [MaxLength(20)]
-    public string AccountType { get; set; }
-
     public string CardType { get; set; } 
     public DateTime? CreditIssuedDate { get; set; } 
 
