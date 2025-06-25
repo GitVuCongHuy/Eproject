@@ -108,14 +108,6 @@ public class CustomerController : Controller
             {
                 Status = 200,
                 Message = "Đăng ký thành công",
-                Data = new
-                {
-                    customer.username,
-                    customer.customer_id,
-                    customer.full_name,
-                    customer.email,
-                    customer.citizen_identification_card
-                }
             });
         }
         catch (Exception ex)
@@ -204,7 +196,7 @@ public class CustomerController : Controller
             }
 
 
-         
+
 
             if (existUser.device != viewModel.deviceId || existUser.device == null)
             {
@@ -220,7 +212,7 @@ public class CustomerController : Controller
                     Message = "Thiết bị mới đăng nhập , vùi lòng xác minh mã code"
                 });
             }
-         
+
 
 
 
@@ -232,7 +224,7 @@ public class CustomerController : Controller
 
             //Tạo Token
             var tokenString = _jwtTokenHelper.GenerateToken(existUser.customer_id);
-        
+
             return Ok(new ApiResponse<object>
             {
                 Status = 200,
@@ -251,7 +243,7 @@ public class CustomerController : Controller
 
 
     [HttpPost("login_verify")]
-    public async Task<IActionResult> LogInVerifyCode([FromBody] LoginVerifyModel viewModel) 
+    public async Task<IActionResult> LogInVerifyCode([FromBody] LoginVerifyModel viewModel)
     {
         try
         {
@@ -302,9 +294,9 @@ public class CustomerController : Controller
             }
 
 
-            
-          
- 
+
+
+
             existUser.device = viewModel.deviceId;
             await _context.SaveChangesAsync();
 
@@ -338,7 +330,7 @@ public class CustomerController : Controller
                 existUser.number_login = 0;
                 await _context.SaveChangesAsync();
             }
-              //Tạo Token
+            //Tạo Token
             var tokenString = _jwtTokenHelper.GenerateToken(existUser.customer_id);
 
             return Ok(new ApiResponse<object>
@@ -354,8 +346,8 @@ public class CustomerController : Controller
         {
             return StatusCode(500, $"Lỗi server: {ex.Message}");
         }
-    }   
-    
+    }
+
 
     public async Task Verify_Code(string Code, string toEmail)
     {
@@ -382,60 +374,200 @@ public class CustomerController : Controller
         await _emailHelper.SendEmailAsync(toEmail, subject, body, false);
 
     }
-    
-   [HttpPost("resend_code")]
-public async Task<IActionResult> ResendCode([FromBody] ResendCodeViewModel model)
-{
-    try
+
+
+    [HttpPost("resend_code")]
+    public async Task<IActionResult> ResendCode([FromBody] ResendCodeViewModel model)
     {
-        if (string.IsNullOrWhiteSpace(model.Username))
+        try
         {
-            return BadRequest(new ApiError
+            if (string.IsNullOrWhiteSpace(model.Username))
             {
-                Status = 400,
-                Error = "Missing_data",
-                Message = "Thiếu tên đăng nhập"
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Missing_data",
+                    Message = "Thiếu tên đăng nhập"
+                });
+            }
+
+            var customer = await _context.Customers.FirstOrDefaultAsync(x => x.username == model.Username);
+            if (customer == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 404,
+                    Error = "User_Not_Found",
+                    Message = "Không tìm thấy người dùng"
+                });
+            }
+
+            if (customer.locked)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Account_Locked",
+                    Message = "Tài khoản đã bị khóa"
+                });
+            }
+
+            string code = _emailHelper.GenerateRandomCode(6);
+            customer.authentication_code = code;
+            await _context.SaveChangesAsync();
+
+            await Verify_Code(code, customer.email);
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Đã gửi lại mã xác thực thành công",
+                Data = new { customer.username }
             });
         }
-
-        var customer = await _context.Customers.FirstOrDefaultAsync(x => x.username == model.Username);
-        if (customer == null)
+        catch (Exception ex)
         {
-            return BadRequest(new ApiError
-            {
-                Status = 404,
-                Error = "User_Not_Found",
-                Message = "Không tìm thấy người dùng"
-            });
+            return StatusCode(500, $"Lỗi server: {ex.Message}");
         }
-
-        if (customer.locked)
-        {
-            return BadRequest(new ApiError
-            {
-                Status = 400,
-                Error = "Account_Locked",
-                Message = "Tài khoản đã bị khóa"
-            });
-        }
-
-        string code = _emailHelper.GenerateRandomCode(6);
-        customer.authentication_code = code;
-        await _context.SaveChangesAsync();
-
-        await Verify_Code(code, customer.email); 
-
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Đã gửi lại mã xác thực thành công",
-            Data = new { customer.username }
-        });
     }
-    catch (Exception ex)
+
+
+
+    [HttpPost("create_transaction_password")]
+    public async Task<IActionResult> CreateTransactionPassword([FromBody] Transaction_passwordsView model)
     {
-        return StatusCode(500, $"Lỗi server: {ex.Message}");
+        try
+        {
+
+
+            var token = _jwtTokenHelper.GetBearerToken(HttpContext);
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "There are no tokens yet",
+                    Message = "Chưa có token được truyền vào"
+                });
+            }
+
+            var principal = _jwtTokenHelper.DecodeToken(token);
+            var customerId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (customerId == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Token Expired",
+                    Message = "Phiên đăng nhập đã hết hạn , vui lòng đăng nhập lại"
+                });
+            }
+
+
+            var existUser = await _context.Customers.FindAsync(int.Parse(customerId));
+
+            if (existUser == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 404,
+                    Error = "User_Not_Found",
+                    Message = "Không tìm thấy người dùng"
+                });
+            }
+
+            existUser.TransactionPassword = BCrypt.Net.BCrypt.HashPassword(model.TransactionPassword.ToString());
+            await _context.SaveChangesAsync();
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "cập nhật mật khẩu giao dịch thành công",
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Lỗi server: {ex.Message}");
+        }
     }
-}
+
+    [HttpPost("check_transaction_password")]
+    public async Task<IActionResult> CheckTransactionPassword([FromBody] Transaction_passwordsView model)
+    {
+        try
+        {
+            var token = _jwtTokenHelper.GetBearerToken(HttpContext);
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "There are no tokens yet",
+                    Message = "Chưa có token được truyền vào"
+                });
+            }
+
+            var principal = _jwtTokenHelper.DecodeToken(token);
+            var customerId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (customerId == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Token Expired",
+                    Message = "Phiên đăng nhập đã hết hạn , vui lòng đăng nhập lại"
+                });
+            }
+
+
+            var existUser = await _context.Customers.FirstOrDefaultAsync(x => x.customer_id == int.Parse(customerId));
+            if (existUser == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 404,
+                    Error = "User_Not_Found",
+                    Message = "Không tìm thấy người dùng"
+                });
+            }
+
+            if (existUser.TransactionPassword == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Transaction_Password_Not_Set",
+                    Message = "Mật khẩu giao dịch chưa được thiết lập"
+                });
+            }
+
+            bool is_TransactionPassword = BCrypt.Net.BCrypt.Verify(model.TransactionPassword.ToString(), existUser.TransactionPassword);
+            if (!is_TransactionPassword)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Invalid_Transaction_Password",
+                    Message = "Mật khẩu giao dịch không chính xác"
+                });
+            }
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Mật khẩu giao dịch hợp lệ",
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Lỗi server: {ex.Message}");
+        }
+    }
+
+
 
 }

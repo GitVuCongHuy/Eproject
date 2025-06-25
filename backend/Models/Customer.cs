@@ -38,7 +38,7 @@ public class Customer
 
     public string device { get; set; }
 
-    public int TransactionPassword { get; set; }
+    public string TransactionPassword { get; set; }
 
     [MaxLength(12)]
     public string citizen_identification_card { get; set; }
