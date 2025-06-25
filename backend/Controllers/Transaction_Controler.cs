@@ -23,6 +23,7 @@ public class Transaction_Controler : Controller
     }
 
 
+    [HttpPost("Bank_transfer")]
     public async Task<IActionResult> Bank_transfer([FromBody] Transfer_View view)
     {
         using (IDbContextTransaction transaction = await _context.Database.BeginTransactionAsync())
@@ -71,9 +72,9 @@ public class Transaction_Controler : Controller
 
 
                 ///Lấy danh sách tài khoản của khách hàng
-                List<int> accountIds = await _context.Accounts
+                List<string> accountIds = await _context.Accounts
                         .Where(x => x.customer_id == int.Parse(customerId))
-                        .Select(x => x.account_id)
+                        .Select(x => x.CardNumber)
                         .ToListAsync();
 
                 ///kiểm tra xem tài khoản gửi có hợp lệ không
@@ -89,12 +90,12 @@ public class Transaction_Controler : Controller
 
 
                 ///kiểm tra xem tài khoản gửi có hợp lệ không
-                int receiving_accountid = await _context.Accounts
-                    .Where(x => x.account_id == view.ReceiverAccount)
-                    .Select(x => x.account_id)
+                string receiving_accountid = await _context.Accounts
+                    .Where(x => x.CardNumber == view.ReceiverAccount)
+                    .Select(x => x.CardNumber)
                     .FirstOrDefaultAsync();
 
-                if (receiving_accountid == 0)
+                if (string.IsNullOrEmpty(receiving_accountid))
                 {
                     return BadRequest(new ApiError
                     {
@@ -135,7 +136,7 @@ public class Transaction_Controler : Controller
 
                 ///kiểm tra xem số dư có đủ để chuyển khoản không
                 var senderAccount = await _context.Accounts
-                    .Where(x => x.account_id == view.SenderAccount)
+                    .Where(x => x.CardNumber == view.SenderAccount)
                     .FirstOrDefaultAsync();
 
                 if (senderAccount == null || senderAccount.Balance < view.Amount)
@@ -151,7 +152,7 @@ public class Transaction_Controler : Controller
 
 
                 var receiverAccount = await _context.Accounts
-                    .Where(x => x.account_id == view.ReceiverAccount)
+                    .Where(x => x.CardNumber == view.ReceiverAccount)
                     .FirstOrDefaultAsync();
 
                 ///tiến hành chuyển khoản
@@ -192,7 +193,7 @@ public class Transaction_Controler : Controller
             {
                 await transaction.RollbackAsync();
                 return StatusCode(500, $"Lỗi server: {ex.Message}");
-                
+
             }
         }
     }

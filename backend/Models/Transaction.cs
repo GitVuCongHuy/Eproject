@@ -8,12 +8,12 @@ public class Bank_Transaction
     [Key]
 
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int TransactionId { get; set; }
+    public string TransactionId { get; set; }
 
     /// <summary>
     /// người chuyển
     /// </summary>
-    public int SenderAccount { get; set; }
+    public string SenderAccount { get; set; }
 
     public int id_banking_sender { get; set; }
 
@@ -21,7 +21,7 @@ public class Bank_Transaction
     /// <summary>
     /// người nhận
     /// </summary>
-    public int ReceiverAccount { get; set; }
+    public string ReceiverAccount { get; set; }
     public int id_banking_Receiver { get; set; }
 
 
