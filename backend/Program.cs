@@ -74,8 +74,10 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 // Định tuyến
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers(); // <-- Thêm dòng này!
+
 
 app.Run();

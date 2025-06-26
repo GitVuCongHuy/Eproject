@@ -9,6 +9,10 @@ import External from "./pages/transfer/external";
 import Bill from "./pages/transfer/bills";
 import CheckRequest from "./pages/home/chequebook";
 import Statement from "./pages/home/statement";
+import Guide from "./pages/home/Guide";
+import Admin from "./pages/account/Admin";
+import CancelCheckPayment from "./pages/home/ChequebookDelete";
+
 function App() {
   return (
     <AuthProvider>
@@ -23,7 +27,9 @@ function App() {
             <Route path="account" element={<AccountAndCards />} />
             <Route path="statement" element={<Statement />} />
             <Route path="chequebook" element={<CheckRequest />} />
-           
+            <Route path="guide" element={<Guide />} />
+            <Route path="admin" element={<Admin />} />
+            <Route path="cancel" element={<CancelCheckPayment />} />
           </Route>
         </Routes>
       </Router>

@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Eproject\\backend\\backend.csproj": {}
+    "D:\\Eproject\\backend\\backend.csproj": {}
   },
   "projects": {
-    "E:\\Eproject\\backend\\backend.csproj": {
+    "D:\\Eproject\\backend\\backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Eproject\\backend\\backend.csproj",
+        "projectUniqueName": "D:\\Eproject\\backend\\backend.csproj",
         "projectName": "backend",
-        "projectPath": "E:\\Eproject\\backend\\backend.csproj",
-        "packagesPath": "C:\\Users\\huyhu\\.nuget\\packages\\",
-        "outputPath": "E:\\Eproject\\backend\\obj\\",
+        "projectPath": "D:\\Eproject\\backend\\backend.csproj",
+        "packagesPath": "C:\\Users\\DELL\\.nuget\\packages\\",
+        "outputPath": "D:\\Eproject\\backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\huyhu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\DELL\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -85,7 +85,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
