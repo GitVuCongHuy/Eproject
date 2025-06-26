@@ -109,9 +109,9 @@ const Home = () => {
         <Typography variant="h5" fontWeight={700} color={primaryBlack}>
           Xin chào, {user?.full_name?.toUpperCase()}
         </Typography>
-        <Avatar sx={{ bgcolor: primaryBlack, width: 42, height: 42 }}>
+        {/* <Avatar sx={{ bgcolor: primaryBlack, width: 42, height: 42 }}>
           {getInitials(user?.full_name)}
-        </Avatar>
+        </Avatar> */}
       </Box>
 
       {/* Tài khoản & Thẻ */}
