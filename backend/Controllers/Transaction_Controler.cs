@@ -161,7 +161,7 @@ public class Transaction_Controler : Controller
                 _context.Accounts.Update(senderAccount);
                 _context.Accounts.Update(receiverAccount);
 
-                
+
                 await _context.SaveChangesAsync();
 
 
@@ -200,7 +200,161 @@ public class Transaction_Controler : Controller
         }
     }
 
+    [HttpPost("Send_OTP")]
+    public async Task<IActionResult> Send_OTP()
+    {
+        try
+        {
+            var token = _jwtTokenHelper.GetBearerToken(HttpContext);
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "There are no tokens yet",
+                    Message = "Chưa có token được truyền vào"
+                });
+            }
+
+            var principal = _jwtTokenHelper.DecodeToken(token);
+            var customerId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(customerId))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "There are no customer IDs yet",
+                    Message = "Chưa có customer ID được truyền vào"
+                });
+            }
+
+            // Generate OTP
+            string otpCode = new Random().Next(100000, 999999).ToString();
+
+            var authentication_code = await _context.Customers
+                .Where(c => c.customer_id == int.Parse(customerId))
+                .Select(c => c.authentication_code)
+                .FirstOrDefaultAsync();
+
+            authentication_code = otpCode;
+            await _context.SaveChangesAsync();
 
 
+
+            // Send OTP via email
+            var customerEmail = await _context.Customers
+                .Where(c => c.customer_id == int.Parse(customerId))
+                .Select(c => c.email)
+                .FirstOrDefaultAsync();
+
+            if (string.IsNullOrEmpty(customerEmail))
+            {
+                return NotFound(new ApiError
+                {
+                    Status = 404,
+                    Error = "UserNotFound",
+                    Message = "Không tìm thấy người dùng."
+                });
+            }
+
+            await _emailHelper.SendEmailAsync(customerEmail, "Your OTP Code", $"Your OTP code is: {otpCode}");
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "OTP đã được gửi thành công."
+            });
+
+
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ApiError
+            {
+                Status = 500,
+                Error = "ServerError",
+                Message = ex.Message
+            });
+        }
+    }
+
+
+
+    [HttpPost("Verify_OTP")]
+    public async Task<IActionResult> Verify_OTP([FromBody] Otp_Wiew view)
+    {
+        try
+        {
+            var token = _jwtTokenHelper.GetBearerToken(HttpContext);
+            if (string.IsNullOrEmpty(token))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "There are no tokens yet",
+                    Message = "Chưa có token được truyền vào"
+                });
+            }
+
+            var principal = _jwtTokenHelper.DecodeToken(token);
+            var customerId = principal.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (string.IsNullOrEmpty(customerId))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "There are no customer IDs yet",
+                    Message = "Chưa có customer ID được truyền vào"
+                });
+            }
+
+            var customer = await _context.Customers
+                .Where(c => c.customer_id == int.Parse(customerId))
+                .FirstOrDefaultAsync();
+
+            if (customer == null)
+            {
+                return NotFound(new ApiError
+                {
+                    Status = 404,
+                    Error = "UserNotFound",
+                    Message = "Không tìm thấy người dùng."
+                });
+            }
+
+            if (customer.authentication_code != view.Otp)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Invalid OTP",
+                    Message = "Mã OTP không hợp lệ."
+                });
+            }
+
+            // Xóa mã OTP sau khi xác thực thành công
+            customer.authentication_code = null;
+            await _context.SaveChangesAsync();
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "OTP xác thực thành công."
+            });
+
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ApiError
+            {
+                Status = 500,
+                Error = "ServerError",
+                Message = ex.Message
+            });
+        }
+    }
+   
 
 }
