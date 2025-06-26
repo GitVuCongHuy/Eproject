@@ -200,7 +200,7 @@ public class Transaction_Controler : Controller
         }
     }
 
-    [HttpPost("Send_OTP")]
+    [HttpPut("Send_OTP")]
     public async Task<IActionResult> Send_OTP()
     {
         try
@@ -232,23 +232,19 @@ public class Transaction_Controler : Controller
             // Generate OTP
             string otpCode = new Random().Next(100000, 999999).ToString();
 
-            var authentication_code = await _context.Customers
+            var customer = await _context.Customers
                 .Where(c => c.customer_id == int.Parse(customerId))
-                .Select(c => c.authentication_code)
                 .FirstOrDefaultAsync();
 
-            authentication_code = otpCode;
+            customer.authentication_code = otpCode;
             await _context.SaveChangesAsync();
 
 
 
             // Send OTP via email
-            var customerEmail = await _context.Customers
-                .Where(c => c.customer_id == int.Parse(customerId))
-                .Select(c => c.email)
-                .FirstOrDefaultAsync();
 
-            if (string.IsNullOrEmpty(customerEmail))
+
+            if (string.IsNullOrEmpty(customer.email))
             {
                 return NotFound(new ApiError
                 {
@@ -258,7 +254,7 @@ public class Transaction_Controler : Controller
                 });
             }
 
-            await _emailHelper.SendEmailAsync(customerEmail, "Your OTP Code", $"Your OTP code is: {otpCode}");
+            await _emailHelper.SendEmailAsync(customer.email, "Your OTP Code", $"Your OTP code is: {otpCode}");
 
             return Ok(new ApiResponse<object>
             {
@@ -355,6 +351,57 @@ public class Transaction_Controler : Controller
             });
         }
     }
-   
 
+
+
+    [HttpGet("Get_Customer_Account")]
+    public async Task<IActionResult> Get_Customer_Account([FromBody] Account_get_Customer account_Get_Customer) 
+    {
+        try
+        {
+          
+         
+
+         
+
+            var account = await _context.Accounts
+                .Where(a => a.CardNumber == account_Get_Customer.CardNumber).FirstOrDefaultAsync();
+
+            if (account == null )
+            {
+                return NotFound(new ApiError
+                {
+                    Status = 404,
+                    Error = "NoAccountsFound",
+                    Message = "Không tìm thấy tài khoản nào cho thẻ này "
+                });
+            }
+
+                string Name_customer = await _context.Customers
+                    .Where(c => c.customer_id == account.customer_id)
+                    .Select(c => c.full_name)
+                    .FirstOrDefaultAsync();
+
+
+
+            
+                return Ok(new ApiResponse<object>
+                {
+                    Status = 200,
+                    Message = "get success",
+                    Data = new { Name_customer = Name_customer }  // ✅ trả token dạng string
+                });
+
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ApiError
+            {
+                Status = 500,
+                Error = "ServerError",
+                Message = ex.Message
+            });
+        }
+    }
+    
 }
