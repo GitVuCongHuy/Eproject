@@ -10,7 +10,8 @@ import {
   Container,
   Paper,
   Divider,
-  Button
+  Button,
+  GlobalStyles
 } from '@mui/material';
 import {
   CheckCircle,
@@ -31,6 +32,19 @@ export default function BankTransferPage() {
   }));
 
   return (
+     <>
+                  {/* Override class bên ngoài */}
+                  <GlobalStyles styles={{
+                    '._mainContent_b1piq_13': {
+                      marginLeft: '30px !important',
+                      marginTop: '30px!important',
+                    },
+                    'html, body': {
+                        overflow: 'y',            
+                        backgroundColor: '#fff',
+                
+                      },
+                  }} />
     <Box sx={{ 
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
@@ -76,7 +90,7 @@ export default function BankTransferPage() {
         </Box>
       ))}
 
-      <Container maxWidth="sm">
+      <Container maxWidth="1300">
         {/* Header */}
         <Box sx={{ 
           display: 'flex', 
@@ -279,5 +293,6 @@ export default function BankTransferPage() {
         }
       `}</style>
     </Box>
+    </>
   );
 }
