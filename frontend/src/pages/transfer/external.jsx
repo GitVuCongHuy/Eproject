@@ -1,6 +1,34 @@
 import React, { useState } from 'react';
-import {  Box,  Paper,  Typography,  TextField,  Button,  FormControl,  FormLabel,  RadioGroup,  FormControlLabel, Radio,  Switch,  Divider,  Grid,  Card,  CardContent,  Alert,  CircularProgress,  InputAdornment,  IconButton} from '@mui/material';import {
-  ContentCopy,  AccountBalance,  Person,  Phone,  AttachMoney} from '@mui/icons-material';
+import {
+  Box,
+  Paper,
+  Typography,
+  TextField,
+  Button,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Switch,
+  Divider,
+  Grid,
+  Card,
+  CardContent,
+  Alert,
+  CircularProgress,
+  InputAdornment,
+  IconButton,
+  GlobalStyles
+} from '@mui/material';
+import {
+  ContentCopy,
+  AccountBalance,
+  Person,
+  Phone,
+  AttachMoney
+} from '@mui/icons-material';
+
 const BankTransferPage = () => {
   const [formData, setFormData] = useState({
     beneficiaryBank: 'MB',
@@ -64,7 +92,21 @@ const BankTransferPage = () => {
   };
 
   return (
-    <Box sx={{ maxWidth: 800, mx: 'auto', p: 3, bgcolor: '#f5f5f5', minHeight: '100vh' }}>
+     <>
+              {/* Override class bên ngoài */}
+              <GlobalStyles styles={{
+                '._mainContent_b1piq_13': {
+                  marginLeft: '30px !important',
+                  marginTop: '30px!important',
+                },
+                'html, body': {
+                    overflow: 'y',            
+                    backgroundColor: '#fff',
+            
+                  },
+              }} />
+        
+    <Box sx={{ maxWidth: 1500, mx: 'auto', p: 3, bgcolor: '#f5f5f5', minHeight: '100vh' }}>
       <Paper elevation={3} sx={{ p: 4, borderRadius: 2 }}>
         <Typography variant="h5" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>
           Chuyển tiền tới ngân hàng khác
@@ -279,6 +321,7 @@ const BankTransferPage = () => {
         </form>
       </Paper>
     </Box>
+    </>
   );
 };
 
