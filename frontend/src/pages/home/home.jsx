@@ -1,14 +1,8 @@
 // src/pages/Home/Home.jsx
 import React, { useEffect, useState } from 'react'; // << 1. Thêm useEffect, useState
 import { useAuth } from '../../context/context'; // << 2. Import useAuth
-import {
-  Box, Typography, Card, CardContent, Button, Avatar, Chip,
-  useTheme, CircularProgress, Alert , GlobalStyles
-} from '@mui/material';
-import {
-  CreditCard, Info, ChevronRight, ArrowUpward, ArrowDownward
-} from '@mui/icons-material';
-
+import {  Box, Typography, Card, CardContent, Button, Avatar, Chip,  useTheme, CircularProgress, Alert , GlobalStyles} from '@mui/material';
+import {  CreditCard, Info, ChevronRight, ArrowUpward, ArrowDownward} from '@mui/icons-material';
 // --- Bảng màu không đổi ---
 const primaryBlack = '#333'; 
 const mediumGray = '#757575'; 
@@ -123,11 +117,7 @@ const Home = () => {
       {/* Tài khoản & Thẻ */}
       <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
         <CardContent>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 2 }}>
-            <Typography variant="h6" fontWeight={600} color={primaryBlack}>Tài khoản & Thẻ</Typography>
-            <Button variant="text" endIcon={<ChevronRight fontSize="small" />} sx={{ textTransform: 'none', color: primaryBlack }}>Xem tất cả</Button>
-          </Box>
-          
+         
           {/* Map qua danh sách thẻ từ API */}
           {cards.length > 0 ? cards.map(card => (
             <Card key={card.account_id} sx={{ borderRadius: 2, boxShadow: theme.shadows[1], backgroundColor: '#fff', mt: 2 }}>

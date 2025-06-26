@@ -1,24 +1,6 @@
 import React from 'react';
-import {
-  Box,
-  Card,
-  CardContent,
-  Typography,
-  Avatar,
-  Chip,
-  IconButton,
-  Container,
-  Paper,
-  Divider,
-  Button
-} from '@mui/material';
-import {
-  CheckCircle,
-  ArrowBack,
-  Close,
-  MoreHoriz,
-  KeyboardArrowRight
-} from '@mui/icons-material';
+import {  Box,  Card,  CardContent,  Typography,  Avatar,  Chip,  IconButton,  Container,  Paper,  Divider,  Button} from '@mui/material';
+import {  CheckCircle,  ArrowBack,  Close,  MoreHoriz,  KeyboardArrowRight} from '@mui/icons-material';
 
 export default function BankTransferPage() {
   const floatingCoins = Array.from({ length: 15 }, (_, i) => ({

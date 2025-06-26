@@ -1,17 +1,7 @@
 import React from 'react';
 
-import {
-  Box,
-  Typography,
-  Card,
-  CardContent,
-  Button,
-  Avatar,
-} from '@mui/material';
-import {
-  CreditCard,
-  ChevronRight
-} from '@mui/icons-material';
+import {  Box,  Typography,  Card,  CardContent,  Button,  Avatar,} from '@mui/material';
+import {  CreditCard,  ChevronRight} from '@mui/icons-material';
 import './AccountAndCard.css'; // Assuming you have a CSS file for styles
 
 const AccountAndCards = () => {

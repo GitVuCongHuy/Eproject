@@ -1,37 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Container,
-  Typography,
-  TextField,
-  Paper,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Avatar,
-  Button,
-  Tabs,
-  Tab,
-  InputAdornment,
-  IconButton,
-  Chip,
-  Card,
-  CardContent,
-  Divider,
-  Grid,
-  GlobalStyles
-} from '@mui/material';
-import {
-  Search,
-  PersonAdd,
-  AccountBalance,
-  Person,
-  Star,
-  Phone,
-  Email,
-  Business
-} from '@mui/icons-material';
+import {  Box,  Container,  Typography,  TextField,  Paper,  List,  ListItem,  ListItemAvatar,  ListItemText,  Avatar,  Button,  Tabs,  Tab,  InputAdornment,  IconButton,  Chip,  Card,  CardContent,  Divider,  Grid,  GlobalStyles} from '@mui/material';
+import {  Search,  PersonAdd,  AccountBalance,  Person,  Star,  Phone,  Email,  Business} from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({

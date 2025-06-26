@@ -1,33 +1,6 @@
 import React, { useState } from 'react';
-import {
-  Box,
-  Paper,
-  Typography,
-  TextField,
-  Button,
-  FormControl,
-  FormLabel,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
-  Switch,
-  Divider,
-  Grid,
-  Card,
-  CardContent,
-  Alert,
-  CircularProgress,
-  InputAdornment,
-  IconButton
-} from '@mui/material';
-import {
-  ContentCopy,
-  AccountBalance,
-  Person,
-  Phone,
-  AttachMoney
-} from '@mui/icons-material';
-
+import {  Box,  Paper,  Typography,  TextField,  Button,  FormControl,  FormLabel,  RadioGroup,  FormControlLabel, Radio,  Switch,  Divider,  Grid,  Card,  CardContent,  Alert,  CircularProgress,  InputAdornment,  IconButton} from '@mui/material';import {
+  ContentCopy,  AccountBalance,  Person,  Phone,  AttachMoney} from '@mui/icons-material';
 const BankTransferPage = () => {
   const [formData, setFormData] = useState({
     beneficiaryBank: 'MB',
