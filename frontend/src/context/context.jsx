@@ -1,17 +1,14 @@
 import { createContext, useContext } from "react";
 
-// Hằng số cho địa chỉ cơ sở của API, dễ dàng thay đổi khi cần
 const API_BASE_URL = 'http://localhost:5028/backend';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
 
-  // --- HÀM HELPER ĐỂ LẤY HEADERS XÁC THỰC ---
   const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      console.error("Không tìm thấy token trong localStorage.");
       return { 'Content-Type': 'application/json' };
     }
     return {
@@ -19,8 +16,6 @@ export const AuthProvider = ({ children }) => {
       'Authorization': `Bearer ${token}`
     };
   };
-
-  // --- CÁC HÀM XÁC THỰC (Đã có) ---
 
   const login = async (username, password, deviceId) => {
     try {
@@ -36,7 +31,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Login API error:", error);
       return { success: false, message: "Không thể kết nối đến máy chủ." };
     }
   };
@@ -55,7 +49,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Verify Login API error:", error);
       return { success: false, message: "Không thể kết nối đến máy chủ." };
     }
   };
@@ -64,8 +57,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     window.location.href = '/login'; 
   };
-
-  // --- API LẤY THÔNG TIN NGƯỜI DÙNG ---
 
   const getUserInfo = async () => {
     try {
@@ -79,12 +70,9 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get User Info API error:", error);
       return { success: false, message: "Lỗi khi lấy thông tin người dùng." };
     }
   };
-
-  // --- CÁC API QUẢN LÝ TÀI KHOẢN/THẺ ---
 
   const getCards = async () => {
     try {
@@ -98,7 +86,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Cards API error:", error);
       return { success: false, message: "Lỗi khi lấy danh sách thẻ." };
     }
   };
@@ -115,7 +102,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Balance API error:", error);
       return { success: false, message: "Lỗi khi lấy số dư." };
     }
   };
@@ -133,7 +119,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Create Card API error:", error);
       return { success: false, message: "Lỗi khi tạo thẻ mới." };
     }
   };
@@ -150,7 +135,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Lock Card API error:", error);
       return { success: false, message: "Lỗi khi khóa thẻ." };
     }
   };
@@ -167,12 +151,9 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Delete Card API error:", error);
       return { success: false, message: "Lỗi khi xóa thẻ." };
     }
   };
-
-  // --- CÁC API VỀ GIAO DỊCH ---
 
   const getTransactions = async (accountId, month, year) => {
     try {
@@ -186,7 +167,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Transactions API error:", error);
       return { success: false, message: "Lỗi khi lấy lịch sử giao dịch." };
     }
   };
@@ -203,37 +183,28 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Export Transactions API error:", error);
       return { success: false, message: "Lỗi khi xuất sao kê." };
     }
   };
 
-  // <<<<< START: HÀM MỚI ĐƯỢC THÊM VÀO >>>>>
   const getCustomerAccount = async (cardNumber) => {
-    // Lưu ý: Theo đặc tả, đây là request GET nhưng gửi dữ liệu trong body.
-    // Điều này không phổ biến nhưng vẫn thực hiện được với fetch.
     try {
       const response = await fetch(`${API_BASE_URL}/transaction_Controler/Get_Customer_Account`, {
         method: 'GET',
         headers: getAuthHeaders(),
-        body: JSON.stringify({ cardNumber }), // Gửi số thẻ trong body
+        body: JSON.stringify({ cardNumber }),
       });
       const data = await response.json();
 
       if (data.status === 200) {
-        // Thành công, trả về dữ liệu chứa tên khách hàng
         return { success: true, data: data.data };
       }
-      // Thất bại (ví dụ: status 404), trả về thông báo lỗi từ API
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Customer Account API error:", error);
       return { success: false, message: "Lỗi khi kiểm tra tài khoản người nhận." };
     }
   };
-  // <<<<< END: HÀM MỚI ĐƯỢC THÊM VÀO >>>>>
 
-  // --- Cung cấp tất cả các hàm cho các component con ---
   const value = {
     login,
     verifyLogin,
@@ -246,7 +217,7 @@ export const AuthProvider = ({ children }) => {
     deleteCard,
     getTransactions,
     exportTransactions,
-    getCustomerAccount, // <<<<< THÊM HÀM MỚI VÀO CONTEXT VALUE
+    getCustomerAccount
   };
 
   return (
