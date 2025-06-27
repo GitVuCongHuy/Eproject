@@ -14,10 +14,9 @@ export const AuthProvider = ({ children }) => {
       console.error("Không tìm thấy token trong localStorage.");
       return { 'Content-Type': 'application/json' };
     }
-    // Sửa ở đây: Thêm "Bearer " vào trước token
     return {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}` // <<< SỬA LẠI THÀNH DÒNG NÀY
+      'Authorization': `Bearer ${token}`
     };
   };
 
@@ -63,7 +62,6 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     localStorage.removeItem('token');
-    // Có thể thêm logic chuyển hướng người dùng về trang đăng nhập ở đây
     window.location.href = '/login'; 
   };
 
@@ -210,6 +208,31 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  // <<<<< START: HÀM MỚI ĐƯỢC THÊM VÀO >>>>>
+  const getCustomerAccount = async (cardNumber) => {
+    // Lưu ý: Theo đặc tả, đây là request GET nhưng gửi dữ liệu trong body.
+    // Điều này không phổ biến nhưng vẫn thực hiện được với fetch.
+    try {
+      const response = await fetch(`${API_BASE_URL}/transaction_Controler/Get_Customer_Account`, {
+        method: 'GET',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ cardNumber }), // Gửi số thẻ trong body
+      });
+      const data = await response.json();
+
+      if (data.status === 200) {
+        // Thành công, trả về dữ liệu chứa tên khách hàng
+        return { success: true, data: data.data };
+      }
+      // Thất bại (ví dụ: status 404), trả về thông báo lỗi từ API
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      console.error("Get Customer Account API error:", error);
+      return { success: false, message: "Lỗi khi kiểm tra tài khoản người nhận." };
+    }
+  };
+  // <<<<< END: HÀM MỚI ĐƯỢC THÊM VÀO >>>>>
+
   // --- Cung cấp tất cả các hàm cho các component con ---
   const value = {
     login,
@@ -223,6 +246,7 @@ export const AuthProvider = ({ children }) => {
     deleteCard,
     getTransactions,
     exportTransactions,
+    getCustomerAccount, // <<<<< THÊM HÀM MỚI VÀO CONTEXT VALUE
   };
 
   return (
