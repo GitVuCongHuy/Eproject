@@ -9,6 +9,7 @@ export const AuthProvider = ({ children }) => {
   const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
     if (!token) {
+      // Trong trường hợp thực tế, bạn có thể muốn xử lý lỗi hoặc redirect ở đây
       return { 'Content-Type': 'application/json' };
     }
     return {
@@ -17,6 +18,7 @@ export const AuthProvider = ({ children }) => {
     };
   };
 
+  // ... (Các hàm đã có từ trước: login, verifyLogin, logout, etc.)
   const login = async (username, password, deviceId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/customer/login`, {
@@ -190,7 +192,7 @@ export const AuthProvider = ({ children }) => {
   const getCustomerAccount = async (cardNumber) => {
     try {
       const response = await fetch(`${API_BASE_URL}/transaction_Controler/Get_Customer_Account`, {
-        method: 'GET',
+        method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({ cardNumber }),
       });
@@ -205,6 +207,117 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const bankTransfer = async (transferDetails) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/transaction_Controler/Bank_transfer`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(transferDetails),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi thực hiện chuyển khoản. Vui lòng thử lại." };
+    }
+  };
+
+  // ===================================================================
+  // BẮT ĐẦU PHẦN TÍCH HỢP OTP & MẬT KHẨU GIAO DỊCH
+  // ===================================================================
+  
+  /**
+   * Gửi yêu cầu mã OTP về email của người dùng.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const sendOTP = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/transaction_Controler/Send_OTP`, {
+        method: 'PUT', // Lưu ý phương thức là PUT
+        headers: getAuthHeaders(),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi gửi mã OTP." };
+    }
+  };
+
+  /**
+   * Xác thực mã OTP.
+   * @param {string} otp - Mã OTP người dùng nhập vào.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const verifyOTP = async (otp) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/transaction_Controler/Verify_OTP`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ otp }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi xác thực OTP." };
+    }
+  };
+
+  /**
+   * Kiểm tra mật khẩu giao dịch đã được thiết lập hay chưa và có đúng không.
+   * @param {number} transactionPassword - Mật khẩu giao dịch cần kiểm tra.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const checkTransactionPassword = async (transactionPassword) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/customer/check_transaction_password`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ transactionPassword }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi kiểm tra mật khẩu giao dịch." };
+    }
+  };
+  
+  /**
+   * Tạo hoặc cập nhật mật khẩu giao dịch mới.
+   * @param {number} transactionPassword - Mật khẩu giao dịch mới.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const createOrUpdateTransactionPassword = async (transactionPassword) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/customer/create_transaction_password`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ transactionPassword }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi tạo mật khẩu giao dịch." };
+    }
+  };
+  
+  // ===================================================================
+  // KẾT THÚC PHẦN TÍCH HỢP
+  // ===================================================================
+
   const value = {
     login,
     verifyLogin,
@@ -217,7 +330,13 @@ export const AuthProvider = ({ children }) => {
     deleteCard,
     getTransactions,
     exportTransactions,
-    getCustomerAccount
+    getCustomerAccount,
+    bankTransfer,
+    // Thêm các hàm mới vào context value
+    sendOTP,
+    verifyOTP,
+    checkTransactionPassword,
+    createOrUpdateTransactionPassword,
   };
 
   return (

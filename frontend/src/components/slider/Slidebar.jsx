@@ -28,7 +28,7 @@ const menuItems = [
     hasSubmenu: true,
     submenu: [
       { name: 'Giữa các tài khoản của tôi', path: '/transfer/internal' },
-      { name: 'Tới tài khoản khác', path: '/transfer/external' },
+      // { name: 'Tới tài khoản khác', path: '/transfer/external' },
       { name: 'Theo lô', path: '/transfer/batch' },
       { name: 'Thanh toán hóa đơn', path: '/transfer/bills' }
     ]

@@ -35,39 +35,36 @@ function TabPanel({ children, value, index }) {
   return (<div hidden={value !== index}>{value === index && <Box sx={{ pt: 2 }}>{children}</Box>}</div>);
 }
 
-function RecipientList({ recipients }) {
+// <<< SỬA: Thêm prop `onRecipientClick`
+function RecipientList({ recipients, onRecipientClick }) {
   return (
     <List sx={{ width: '100%' }}>
       {recipients.map((recipient, index) => (
         <React.Fragment key={recipient.id}>
-          <ListItem sx={{
-            borderRadius: 2,
-            mb: 1,
-            transition: 'all 0.2s ease-in-out',
-            '&:hover': {
-              backgroundColor: 'rgba(25, 118, 210, 0.04)',
-              transform: 'translateY(-1px)',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
-            },
-            cursor: 'pointer'
-          }}>
+          {/* <<< SỬA: Thêm onClick và thuộc tính button */}
+          <ListItem 
+            button
+            onClick={() => onRecipientClick(recipient)}
+            sx={{
+              borderRadius: 2,
+              mb: 1,
+              transition: 'all 0.2s ease-in-out',
+              '&:hover': {
+                backgroundColor: 'rgba(25, 118, 210, 0.04)',
+                transform: 'translateY(-1px)',
+                boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+              }
+            }}
+          >
             <ListItemAvatar>
-              <Avatar sx={{
-                bgcolor: recipient.color,
-                width: 48,
-                height: 48,
-                fontSize: '1.2rem',
-                fontWeight: 600
-              }}>
+              <Avatar sx={{ bgcolor: recipient.color, width: 48, height: 48, fontSize: '1.2rem', fontWeight: 600 }}>
                 {recipient.avatar}
               </Avatar>
             </ListItemAvatar>
             <ListItemText
               primary={
                 <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                  <Typography variant="subtitle1" fontWeight={500}>
-                    {recipient.name}
-                  </Typography>
+                  <Typography variant="subtitle1" fontWeight={500}>{recipient.name}</Typography>
                   {recipient.favorite && (<Star sx={{ color: '#ffc107', fontSize: 16 }} />)}
                 </Box>
               }
@@ -78,9 +75,7 @@ function RecipientList({ recipients }) {
                   </Typography>
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap' }}>
                     <Chip label={recipient.account} size="small" variant="outlined" sx={{ height: 20, fontSize: '0.75rem' }} />
-                    <Typography variant="caption" color="text.secondary">
-                      {recipient.bank}
-                    </Typography>
+                    <Typography variant="caption" color="text.secondary">{recipient.bank}</Typography>
                   </Box>
                 </Box>
               }
@@ -95,13 +90,13 @@ function RecipientList({ recipients }) {
 
 export default function MoneyTransferPage() {
   const [customerName, setCustomerName] = useState('');
-
   const [searchTerm, setSearchTerm] = useState('');
   const [tabValue, setTabValue] = useState(0);
   const [open, setOpen] = useState(false);
   const [newAccountNumber, setNewAccountNumber] = useState('');
   const [checkingAccount, setCheckingAccount] = useState(false);
   const [accountError, setAccountError] = useState('');
+  
   const { getCustomerAccount } = useAuth();
   const navigate = useNavigate();
 
@@ -110,38 +105,57 @@ export default function MoneyTransferPage() {
     setOpen(false);
     setAccountError('');
     setNewAccountNumber('');
+    setCustomerName(''); // Reset state khi đóng dialog
   };
 
-const handleCheckAccount = async () => {
-  if (!newAccountNumber) {
-    setAccountError('Vui lòng nhập số tài khoản.');
+  const handleCheckAccount = async () => {
+    if (!newAccountNumber) {
+      setAccountError('Vui lòng nhập số tài khoản.');
+      return;
+    }
+
+    setCheckingAccount(true);
+    setAccountError('');
     setCustomerName('');
-    return;
-  }
 
-  setCheckingAccount(true);
-  setAccountError('');
-  setCustomerName('');
+    const result = await getCustomerAccount(newAccountNumber);
+    if (result.success) {
+      setCustomerName(result.data.name_customer);
+    } else {
+      setAccountError(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+    }
 
-  const result = await getCustomerAccount(newAccountNumber);
-  if (result.success) {
-    setCustomerName(result.data.name_customer);
-  } else {
-    setAccountError(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
-  }
+    setCheckingAccount(false);
+  };
 
-  setCheckingAccount(false);
-};
+  // <<< THÊM: Hàm xử lý khi nhấn "Tiếp tục"
+  const handleContinue = () => {
+    if (!customerName || !newAccountNumber) return;
 
+    navigate('/transfer/external', { // Thay đổi '/transfer/external' thành đúng đường dẫn của bạn
+      state: {
+        cardNumber: newAccountNumber,
+        beneficiaryName: customerName
+      }
+    });
+    handleClose();
+  };
+
+  // <<< THÊM: Hàm xử lý khi click vào người nhận đã lưu
+  const handleRecipientClick = (recipient) => {
+    navigate('/transfer/external', { // Thay đổi '/transfer/external' thành đúng đường dẫn của bạn
+      state: {
+        cardNumber: recipient.account,
+        beneficiaryName: recipient.fullName
+      }
+    });
+  };
 
   const filteredRecipients = recipients.filter(recipient =>
     recipient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
     recipient.fullName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     recipient.account.includes(searchTerm)
   );
-
-  const favoriteRecipients = filteredRecipients.filter(r => r.favorite);
-  const allRecipients = filteredRecipients;
 
   const handleTabChange = (event, newValue) => { setTabValue(newValue); };
 
@@ -154,6 +168,7 @@ const handleCheckAccount = async () => {
       <ThemeProvider theme={theme}>
         <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 3 }}>
           <Container maxWidth="1000px">
+            {/* PHẦN CODE BỊ MẤT ĐÃ ĐƯỢC KHÔI PHỤC */}
             <Paper elevation={0} sx={{
               p: 3, mb: 3,
               background: 'linear-gradient(135deg,rgb(226, 99, 120) 0%,rgb(230, 36, 22) 100%)',
@@ -170,48 +185,20 @@ const handleCheckAccount = async () => {
             <Paper elevation={2} sx={{ p: 3, mb: 3, borderRadius: 3 }}>
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={12} md={8}>
-                  <TextField
-                    fullWidth
-                    placeholder="Tìm người nhận đã lưu"
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    InputProps={{
-                      startAdornment: (
-                        <InputAdornment position="start">
-                          <Search color="action" />
-                        </InputAdornment>
-                      )
-                    }}
-                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
-                  />
+                  <TextField fullWidth placeholder="Tìm người nhận đã lưu" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} InputProps={{startAdornment: (<InputAdornment position="start"><Search color="action" /></InputAdornment>)}} sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}/>
                 </Grid>
                 <Grid item xs={12} md={4}>
-                  <Button
-                    variant="contained"
-                    startIcon={<PersonAdd />}
-                    fullWidth
-                    sx={{ py: 1.5, borderRadius: 2, textTransform: 'none', fontWeight: 500 }}
-                    onClick={handleOpen}
-                  >
+                  <Button variant="contained" startIcon={<PersonAdd />} fullWidth sx={{ py: 1.5, borderRadius: 2, textTransform: 'none', fontWeight: 500 }} onClick={handleOpen}>
                     Người nhận mới
                   </Button>
                 </Grid>
               </Grid>
             </Paper>
+            {/* KẾT THÚC PHẦN KHÔI PHỤC */}
 
             <Paper elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 3 }}>
-                <Tabs
-                  value={tabValue}
-                  onChange={handleTabChange}
-                  sx={{
-                    '& .MuiTab-root': {
-                      textTransform: 'none',
-                      fontWeight: 500,
-                      fontSize: '1rem'
-                    }
-                  }}
-                >
+                <Tabs value={tabValue} onChange={handleTabChange} sx={{ '& .MuiTab-root': { textTransform: 'none', fontWeight: 500, fontSize: '1rem' }}}>
                   <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Star /> Tất cả người nhận</Box>} />
                   <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><AccountBalance /> trong Techcombank</Box>} />
                   <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Business /> Ngân hàng khác</Box>} />
@@ -219,34 +206,27 @@ const handleCheckAccount = async () => {
               </Box>
               <Box sx={{ p: 3 }}>
                 <TabPanel value={tabValue} index={0}>
-                  {allRecipients.length > 0 ? (
-                    <RecipientList recipients={allRecipients} />
+                  {filteredRecipients.length > 0 ? (
+                    // <<< SỬA: Truyền prop onRecipientClick
+                    <RecipientList recipients={filteredRecipients} onRecipientClick={handleRecipientClick} />
                   ) : (
                     <Box sx={{ textAlign: 'center', py: 4 }}>
                       <Person sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-                      <Typography variant="h6" color="text.secondary">
-                        Không tìm thấy người nhận
-                      </Typography>
-                      <Typography variant="body2" color="text.secondary">
-                        Thử tìm kiếm với từ khóa khác
-                      </Typography>
+                      <Typography variant="h6" color="text.secondary">Không tìm thấy người nhận</Typography>
                     </Box>
                   )}
                 </TabPanel>
+                {/* PHẦN CODE BỊ MẤT ĐÃ ĐƯỢC KHÔI PHỤC */}
                 <TabPanel value={tabValue} index={1}>
                   <Box sx={{ textAlign: 'center', py: 4 }}>
                     <AccountBalance sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-                    <Typography variant="h6" color="text.secondary">
-                      Techcombank Recipients
-                    </Typography>
-                    <Typography variant="body2" color="text.secondary">
-                      Danh sách người nhận trong Techcombank
-                    </Typography>
+                    <Typography variant="h6" color="text.secondary">Danh sách người nhận trong Techcombank</Typography>
                   </Box>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
-                  <RecipientList recipients={allRecipients} />
+                   <RecipientList recipients={filteredRecipients} onRecipientClick={handleRecipientClick} />
                 </TabPanel>
+                {/* KẾT THÚC PHẦN KHÔI PHỤC */}
               </Box>
             </Paper>
           </Container>
@@ -258,43 +238,25 @@ const handleCheckAccount = async () => {
             <DialogContentText sx={{ mb: 2 }}>
               Vui lòng nhập số thẻ hoặc số tài khoản của người nhận để hệ thống kiểm tra.
             </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="account-number"
-              label="Số thẻ / Số tài khoản"
-              type="text"
-              fullWidth
-              variant="outlined"
-              value={newAccountNumber}
-              onChange={(e) => {
-  setNewAccountNumber(e.target.value);
-  setCustomerName('');
-  setAccountError('');
-}}
-onBlur={handleCheckAccount}
-              error={!!accountError}
-              helperText={accountError}
-              disabled={checkingAccount}
-              onKeyPress={(e) => e.key === 'Enter' && handleCheckAccount()}
-            />
+            <TextField autoFocus margin="dense" id="account-number" label="Số thẻ / Số tài khoản" type="text" fullWidth variant="outlined" value={newAccountNumber} onChange={(e) => {setNewAccountNumber(e.target.value); setCustomerName(''); setAccountError('');}} onBlur={handleCheckAccount} error={!!accountError} helperText={accountError} disabled={checkingAccount} onKeyPress={(e) => e.key === 'Enter' && handleCheckAccount()}/>
             {customerName && (
-  <Typography variant="subtitle1" sx={{ mt: 2, fontWeight: 500 }}>
-    Tên người nhận: {customerName}
-  </Typography>
-)}
-
+              <Typography variant="subtitle1" sx={{ mt: 2, fontWeight: 500, color: 'green' }}>
+                Tên người nhận: {customerName}
+              </Typography>
+            )}
           </DialogContent>
           <DialogActions sx={{ p: 3, pt: 0 }}>
             <Button onClick={handleClose} color="inherit">Hủy</Button>
-            <Button
-              onClick={handleCheckAccount}
-              variant="contained"
-              disabled={checkingAccount}
-              startIcon={checkingAccount ? <CircularProgress size={20} color="inherit" /> : null}
-            >
-              {checkingAccount ? 'Đang kiểm tra...' : 'Kiểm tra & Tiếp tục'}
-            </Button>
+            {/* <<< SỬA: Thay đổi nút bấm linh hoạt */}
+            {customerName ? (
+              <Button onClick={handleContinue} variant="contained">
+                Tiếp tục
+              </Button>
+            ) : (
+              <Button onClick={handleCheckAccount} variant="contained" disabled={checkingAccount || !newAccountNumber} startIcon={checkingAccount ? <CircularProgress size={20} color="inherit" /> : null}>
+                {checkingAccount ? 'Đang kiểm tra...' : 'Kiểm tra'}
+              </Button>
+            )}
           </DialogActions>
         </Dialog>
       </ThemeProvider>
