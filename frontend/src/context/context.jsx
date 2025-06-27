@@ -18,6 +18,68 @@ export const AuthProvider = ({ children }) => {
     };
   };
 
+  const requestIssueCheque = async (accountId, amount) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/ServiceRequest/create-request`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          RequestType: 'IssueCheque',
+          RequestDetail: JSON.stringify({ AccountId: accountId, Amount: amount }),
+        }),
+      });
+      const data = await response.json();
+      return data.status === 200
+        ? { success: true, message: data.message }
+        : { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi gửi yêu cầu cấp séc." };
+    }
+  };
+
+ const requestCancelCheque = async (chequeId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/ServiceRequest/create-request`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        RequestType: 'CancelCheque',
+        RequestDetail: JSON.stringify({
+          ChequeId: chequeId  // 👈 Truyền đúng field mà backend cần
+        }),
+      }),
+    });
+
+    const data = await response.json();
+    return data.status === 200
+      ? { success: true, message: data.message }
+      : { success: false, message: data.message, errorType: data.error };
+  } catch (error) {
+    return { success: false, message: "Lỗi khi gửi yêu cầu hủy séc." };
+  }
+};
+
+
+
+
+
+
+
+  const getMyServiceRequests = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/ServiceRequest/my-requests`, {
+        method: 'GET',
+        headers: getAuthHeaders(),
+      });
+      const data = await response.json();
+      return data.status === 200
+        ? { success: true, data: data.data }
+        : { success: false, message: data.message };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi lấy danh sách yêu cầu." };
+    }
+  };
+
   // ... (Các hàm đã có từ trước: login, verifyLogin, logout, etc.)
   const login = async (username, password, deviceId) => {
     try {
@@ -337,6 +399,11 @@ export const AuthProvider = ({ children }) => {
     verifyOTP,
     checkTransactionPassword,
     createOrUpdateTransactionPassword,
+    requestIssueCheque,
+  getMyRequests: getMyServiceRequests,
+  requestCancelCheque,
+  
+
   };
 
   return (

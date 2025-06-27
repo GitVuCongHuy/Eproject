@@ -37,7 +37,10 @@ const menuItems = [
     id: 'features', name: 'Tính năng khác', path: '/features', icon: <Settings />,
     hasSubmenu: true,
     submenu: [
-      { name: 'Cài đặt', path: '/features/settings' }
+      { name: 'Cài đặt', path: '/features/settings' },
+      { name: 'Yêu cầu sổ séc', path: '/chequebook'},
+      { name: 'Hủy sổ séc', path: '/cancel'},
+      { name: 'Sao kê', path: '/statement'}
     ]
   }
 ];
