@@ -42,5 +42,6 @@ public class Customer
 
     [MaxLength(12)]
     public string citizen_identification_card { get; set; }
+    public string adress { get; set; }
 
 }

@@ -113,7 +113,7 @@ public class Accounts_manager : Controller
         return Ok(new ApiResponse<decimal> { Status = 200, Message = "Lấy số dư thành công", Data = account.Balance });
     }
 
-        [HttpGet("transactions")]
+    [HttpGet("transactions")]
     public async Task<IActionResult> GetTransactionHistory([FromQuery] int? day, [FromQuery] int? month, [FromQuery] int? year, [FromQuery] int? accountId)
     {
         var customerId = GetCustomerIdFromToken();

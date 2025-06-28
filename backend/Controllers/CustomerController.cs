@@ -87,17 +87,8 @@ public class CustomerController : Controller
                 });
             }
 
-            // Check ngân hàng
-            // var bank = await _context.Banks.FindAsync(1);
-            // if (bank == null)
-            // {
-            //     return BadRequest(new ApiError
-            //     {
-            //         Status = 400,
-            //         Error = "Lack_of_Bank",
-            //         Message = "Thiếu thông tin ngân hàng."
-            //     });
-            // }
+          
+         
 
             var customer = new Customer
             {
@@ -108,7 +99,8 @@ public class CustomerController : Controller
                 mobile = model.Mobile,
                 number_login = 0,
                 locked = false,
-                citizen_identification_card = model.CitizenIdentificationCard
+                citizen_identification_card = model.CitizenIdentificationCard,
+                adress = model.Adress,
             };
 
             _context.Customers.Add(customer);
