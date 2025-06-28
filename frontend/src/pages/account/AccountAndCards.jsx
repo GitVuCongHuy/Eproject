@@ -18,6 +18,10 @@ import SecurityIcon from '@mui/icons-material/Security';
 
 import { 
   Container,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
   Typography, 
   Button, 
   Tabs, 
@@ -62,6 +66,7 @@ const colors = {
 
 export default function TechcombankAccountsPage() {
   const theme = useTheme();
+  const [openDialog, setOpenDialog] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -162,6 +167,7 @@ export default function TechcombankAccountsPage() {
           <Button 
             variant="contained" 
             startIcon={<Plus />}
+            onClick={() => setOpenDialog(true)}
             sx={{
               background: colors.gradientPrimary,
               borderRadius: 3,
@@ -344,6 +350,7 @@ export default function TechcombankAccountsPage() {
                   fullWidth
                   variant="outlined"
                   startIcon={<Plus />}
+                  onClick={() => setOpenDialog(true)}
                   sx={{
                     borderRadius: 3,
                     py: 2,
@@ -440,7 +447,7 @@ export default function TechcombankAccountsPage() {
       }} />
 
       <Box sx={{ background: `linear-gradient(135deg, ${colors.background} 0%, #edf2f7 100%)`, minHeight: '100vh', py: 4 }}>
-        <Container maxWidth="lg">
+        <Container maxWidth="100vw">
           {/* Header hiện đại */}
           <Fade in={true} timeout={400}>
             <Box sx={{ mb: 6 }}>
@@ -456,6 +463,7 @@ export default function TechcombankAccountsPage() {
                 <Button 
                   variant="contained" 
                   startIcon={<Plus size={18} />}
+                  onClick={() => setOpenDialog(true)}
                   sx={{
                     background: colors.gradientPrimary,
                     borderRadius: 3,
@@ -721,6 +729,95 @@ export default function TechcombankAccountsPage() {
           </Fade>
         </Container>
       </Box>
+     <Dialog 
+  open={openDialog} 
+  onClose={() => setOpenDialog(false)} 
+  maxWidth="xs" 
+  fullWidth
+  PaperProps={{
+    sx: {
+      borderRadius: 5,
+      p: 4,
+      background: 'rgba(255, 255, 255, 0.7)',
+      backdropFilter: 'blur(12px)',
+      boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
+      textAlign: 'center',
+      position: 'relative',
+      overflow: 'hidden'
+    }
+  }}
+>
+  {/* Vòng tròn nền phía sau */}
+  <Box
+    sx={{
+      position: 'absolute',
+      width: 160,
+      height: 160,
+      background: colors.primaryLight,
+      borderRadius: '50%',
+      top: -40,
+      right: -40,
+      opacity: 0.3,
+      zIndex: 0
+    }}
+  />
+  
+  <Avatar
+    sx={{
+      width: 72,
+      height: 72,
+      bgcolor: colors.primary,
+      color: 'white',
+      mx: 'auto',
+      mb: 2,
+      zIndex: 1,
+      boxShadow: '0 6px 20px rgba(0,0,0,0.15)'
+    }}
+  >
+    <Plus />
+  </Avatar>
+
+  <DialogTitle sx={{ 
+    fontWeight: 700, 
+    fontSize: '1.6rem', 
+    color: colors.primaryDark,
+    zIndex: 1
+  }}>
+    Mở tài khoản
+  </DialogTitle>
+
+  <DialogContent sx={{ zIndex: 1 }}>
+    <Typography 
+      variant="body1" 
+      sx={{ mt: 1.5, mb: 2, color: colors.textPrimary }}
+    >
+      Vui lòng đến <strong>chi nhánh gần nhất</strong> để mở tài khoản.
+    </Typography>
+  </DialogContent>
+
+  <DialogActions sx={{ justifyContent: 'center', zIndex: 1 }}>
+    <Button 
+      variant="contained" 
+      onClick={() => setOpenDialog(false)} 
+      sx={{ 
+        borderRadius: 4, 
+        background: colors.gradientPrimary,
+        textTransform: 'none',
+        fontWeight: 600,
+        px: 5,
+        py: 1.25,
+        boxShadow: '0 4px 12px rgba(229,62,62,0.4)',
+        '&:hover': {
+          background: colors.primaryDark
+        }
+      }}
+    >
+      Đã hiểu
+    </Button>
+  </DialogActions>
+</Dialog>
+ 
     </>
+    
   );
 }

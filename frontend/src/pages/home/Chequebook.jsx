@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import {
-  Box, Typography, Card, CardContent, Button, Avatar, TextField,
+  Box, Typography, Card, CardContent, Button, TextField,
   MenuItem, FormControlLabel, Checkbox, useTheme, GlobalStyles,
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
-  Paper, CircularProgress, Alert,
+  Paper, CircularProgress, Alert, Chip, Divider, Stack
 } from '@mui/material';
-import { RequestPage, ChevronRight, ArrowUpward, ArrowDownward } from '@mui/icons-material';
+import { 
+  Receipt, History, Send, ArrowBack, CheckCircle
+} from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/context';
-
-const primaryBlack = '#333';
-const mediumGray = '#757575';
-const exceptionGreen = '#2e7d32';
-const lightGray = '#fafafa';
 
 const CheckRequest = () => {
   const theme = useTheme();
@@ -118,96 +115,213 @@ const CheckRequest = () => {
     }
   };
 
+  const getStatusChip = (status) => {
+    const statusMap = {
+      'APPROVED': { label: 'Đã duyệt', color: 'success' },
+      'REJECTED': { label: 'Từ chối', color: 'error' },
+      'PENDING': { label: 'Đang xử lý', color: 'warning' }
+    };
+    
+    const config = statusMap[status] || statusMap['PENDING'];
+    return <Chip label={config.label} color={config.color} size="small" />;
+  };
+
   return (
     <>
       <GlobalStyles styles={{
         '._mainContent_b1piq_13': { marginLeft: '30px !important', marginTop: '30px !important' },
-        'html, body': { overflow: 'auto', backgroundColor: '#fff' },
+        'html, body': { overflow: 'auto', backgroundColor: '#fafafa' },
       }} />
 
-      <Box sx={{ ml: '30px', mt: '30px', mr: '30px' }}>
-        <Typography variant="h5" fontWeight={700} color={primaryBlack} mb={3}>
-          Yêu cầu sổ séc
-        </Typography>
+      <Box sx={{ maxWidth: 1800, mx: 'auto', p: 3, minHeight: '100vh' }}>
+        {/* Header */}
+        <Box sx={{ mb: 4 }}>
+          <Typography variant="h4" fontWeight={600} color="#1a1a1a" sx={{ mb: 1 }}>
+            Yêu cầu sổ séc
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Đặt hàng sổ séc mới cho tài khoản của bạn
+          </Typography>
+        </Box>
 
+        {/* Alert */}
         {error && (
-          <Alert severity={error.includes('thành công') ? 'success' : 'error'} sx={{ mb: 2 }}>
+          <Alert 
+            severity={error.includes('thành công') ? 'success' : 'error'} 
+            sx={{ mb: 3, borderRadius: 2 }}
+            onClose={() => setError('')}
+          >
             {error}
           </Alert>
         )}
 
-        <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
-          <CardContent>
-            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
-              <Typography variant="h6" fontWeight={600} color={primaryBlack}>Thông tin yêu cầu</Typography>
-              <Button onClick={handleShowHistory} disabled={loading} endIcon={<ChevronRight />}>Xem lịch sử</Button>
-            </Box>
+        <Stack spacing={3}>
+          {/* Main Form */}
+          <Card sx={{ borderRadius: 3, boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
+            <CardContent sx={{ p: 4 }}>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+                <Receipt color="primary" />
+                <Typography variant="h6" fontWeight={600}>
+                  Thông tin yêu cầu
+                </Typography>
+                <Box sx={{ flexGrow: 1 }} />
+                <Button 
+                  startIcon={<History />}
+                  onClick={handleShowHistory} 
+                  disabled={loading}
+                  sx={{ textTransform: 'none' }}
+                >
+                  Lịch sử
+                </Button>
+              </Box>
 
-            <TextField select fullWidth label="Tài khoản thanh toán" name="accountNumber" value={formData.accountNumber} onChange={handleChange} sx={{ mb: 2 }}>
-              {cards.map(card => (
-                <MenuItem key={card.account_id} value={card.cardNumber}>{card.cardNumber}</MenuItem>
-              ))}
-            </TextField>
+              <Stack spacing={3}>
+                <TextField 
+                  select 
+                  fullWidth 
+                  label="Tài khoản thanh toán" 
+                  name="accountNumber" 
+                  value={formData.accountNumber} 
+                  onChange={handleChange}
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                >
+                  {cards.map(card => (
+                    <MenuItem key={card.account_id} value={card.cardNumber}>
+                      {card.cardNumber}
+                    </MenuItem>
+                  ))}
+                </TextField>
 
-            <TextField select fullWidth label="Số lượng tờ séc" name="checkQuantity" value={formData.checkQuantity} onChange={handleChange} sx={{ mb: 2 }}>
-              <MenuItem value="25">25 tờ</MenuItem>
-              <MenuItem value="50">50 tờ</MenuItem>
-              <MenuItem value="100">100 tờ</MenuItem>
-            </TextField>
+                <TextField 
+                  select 
+                  fullWidth 
+                  label="Số lượng tờ séc" 
+                  name="checkQuantity" 
+                  value={formData.checkQuantity} 
+                  onChange={handleChange}
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                >
+                  <MenuItem value="25">25 tờ</MenuItem>
+                  <MenuItem value="50">50 tờ</MenuItem>
+                  <MenuItem value="100">100 tờ</MenuItem>
+                </TextField>
 
-            <TextField fullWidth label="Địa chỉ giao hàng" name="deliveryAddress" value={formData.deliveryAddress} onChange={handleChange} multiline rows={3} sx={{ mb: 2 }} />
+                <TextField 
+                  fullWidth 
+                  label="Địa chỉ giao hàng" 
+                  name="deliveryAddress" 
+                  value={formData.deliveryAddress} 
+                  onChange={handleChange} 
+                  multiline 
+                  rows={3}
+                  placeholder="Nhập địa chỉ chi tiết..."
+                  sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}
+                />
 
-            <FormControlLabel
-              control={<Checkbox checked={formData.termsAccepted} name="termsAccepted" onChange={handleChange} />}
-              label="Tôi đồng ý với điều khoản và điều kiện."
-            />
+                <Divider />
 
-            <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
-              <Button variant="outlined" onClick={() => navigate(-1)}>Hủy</Button>
-              <Button variant="contained" onClick={handleSubmit} disabled={!formData.termsAccepted || loading}>Gửi yêu cầu</Button>
-            </Box>
-          </CardContent>
-        </Card>
+                <FormControlLabel
+                  control={
+                    <Checkbox 
+                      checked={formData.termsAccepted} 
+                      name="termsAccepted" 
+                      onChange={handleChange}
+                    />
+                  }
+                  label="Tôi đồng ý với điều khoản và điều kiện"
+                />
 
-        {showHistory && (
-          <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
-            <CardContent>
-              <Typography variant="h6" fontWeight={600} color={primaryBlack} mb={2}>Lịch sử yêu cầu</Typography>
-              <TableContainer component={Paper}>
-                <Table>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>Ngày</TableCell>
-                      <TableCell>Loại</TableCell>
-                      <TableCell>Chi tiết</TableCell>
-                      <TableCell align="center">Trạng thái</TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {loading ? (
-                      <TableRow><TableCell colSpan={4} align="center"><CircularProgress /></TableCell></TableRow>
-                    ) : requests.length === 0 ? (
-                      <TableRow><TableCell colSpan={4} align="center">Không có yêu cầu.</TableCell></TableRow>
-                    ) : (
-                      requests.map((r) => (
-                        <TableRow key={r.requestId}>
-                          <TableCell>{new Date(r.requestDate).toLocaleDateString('vi-VN')}</TableCell>
-                          <TableCell>{getRequestTypeDisplay(r.requestType)}</TableCell>
-                          <TableCell>
-                            <Typography variant="body2">
-                              {r.requestDetail ? JSON.stringify(JSON.parse(r.requestDetail), null, 2) : '-'}
-                            </Typography>
-                          </TableCell>
-                          <TableCell align="center">{r.status === 'APPROVED' ? 'Đã duyệt' : r.status === 'REJECTED' ? 'Từ chối' : 'Đang xử lý'}</TableCell>
-                        </TableRow>
-                      ))
-                    )}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end' }}>
+                  <Button 
+                    variant="outlined" 
+                    startIcon={<ArrowBack />}
+                    onClick={() => navigate(-1)}
+                    sx={{ textTransform: 'none', borderRadius: 2 }}
+                  >
+                    Quay lại
+                  </Button>
+                  <Button 
+                    variant="contained" 
+                    startIcon={loading ? <CircularProgress size={16} color="inherit" /> : <Send />}
+                    onClick={handleSubmit} 
+                    disabled={!formData.termsAccepted || loading}
+                    sx={{ textTransform: 'none', borderRadius: 2, px: 3 }}
+                  >
+                    {loading ? 'Đang gửi...' : 'Gửi yêu cầu'}
+                  </Button>
+                </Box>
+              </Stack>
             </CardContent>
           </Card>
-        )}
+
+          {/* History Table */}
+          {showHistory && (
+            <Card sx={{ borderRadius: 3, boxShadow: '0 2px 12px rgba(0,0,0,0.08)' }}>
+              <CardContent sx={{ p: 0 }}>
+                <Box sx={{ p: 3, borderBottom: '1px solid #eee' }}>
+                  <Typography variant="h6" fontWeight={600}>
+                    Lịch sử yêu cầu
+                  </Typography>
+                </Box>
+                
+                <TableContainer>
+                  <Table>
+                    <TableHead sx={{ backgroundColor: '#f8f9fa' }}>
+                      <TableRow>
+                        <TableCell sx={{ fontWeight: 600 }}>Ngày</TableCell>
+                        <TableCell sx={{ fontWeight: 600 }}>Loại</TableCell>
+                        <TableCell sx={{ fontWeight: 600 }}>Chi tiết</TableCell>
+                        <TableCell align="center" sx={{ fontWeight: 600 }}>Trạng thái</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {loading ? (
+                        <TableRow>
+                          <TableCell colSpan={4} align="center" sx={{ py: 4 }}>
+                            <CircularProgress size={32} />
+                          </TableCell>
+                        </TableRow>
+                      ) : requests.length === 0 ? (
+                        <TableRow>
+                          <TableCell colSpan={4} align="center" sx={{ py: 4 }}>
+                            <Typography color="text.secondary">
+                              Chưa có yêu cầu nào
+                            </Typography>
+                          </TableCell>
+                        </TableRow>
+                      ) : (
+                        requests.map((request) => (
+                          <TableRow 
+                            key={request.requestId}
+                            sx={{ '&:hover': { backgroundColor: '#f8f9fa' } }}
+                          >
+                            <TableCell>
+                              {new Date(request.requestDate).toLocaleDateString('vi-VN')}
+                            </TableCell>
+                            <TableCell>
+                              {getRequestTypeDisplay(request.requestType)}
+                            </TableCell>
+                            <TableCell>
+                              <Typography variant="body2">
+                                {request.requestDetail ? 
+                                  JSON.stringify(JSON.parse(request.requestDetail), null, 2) : 
+                                  '-'
+                                }
+                              </Typography>
+                            </TableCell>
+                            <TableCell align="center">
+                              {getStatusChip(request.status)}
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </CardContent>
+            </Card>
+          )}
+        </Stack>
       </Box>
     </>
   );

@@ -55,10 +55,10 @@ const colors = {
   textPrimary: '#1e293b',
   textSecondary: '#64748b',
   border: '#e2e8f0',
-  gradientPrimary: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  gradientPrimary: 'linear-gradient(135deg,rgb(234, 155, 102) 0%, #764ba2 100%)',
   gradientSuccess: 'linear-gradient(135deg, #00d4aa 0%, #01a085 100%)',
   gradientWarning: 'linear-gradient(135deg, #ff6b35 0%, #f7931e 100%)',
-  cardGradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+  cardGradient: 'linear-gradient(135deg,rgb(234, 150, 102) 0%, #764ba2 100%)',
   glassEffect: 'rgba(255, 255, 255, 0.25)',
 };
 
@@ -138,14 +138,14 @@ const Home = () => {
     doc.setFont('Roboto-Regular', 'normal');
 
     doc.setFontSize(18);
-    doc.text("LỊCH SỬ GIAO DỊCH", 14, 22);
+    doc.text("LICH SU GIAO DICH", 14, 22);
     doc.setFontSize(11);
     doc.setTextColor(100);
-    doc.text(`Chủ tài khoản: ${user?.full_name || 'N/A'}`, 14, 29);
-    doc.text(`Số thẻ: ${cards.length > 0 ? cards[0].cardNumber : 'N/A'}`, 14, 36);
-    doc.text(`Ngày xuất: ${new Date().toLocaleDateString('vi-VN')}`, 14, 43);
+    doc.text(`Chu tai khoan: ${user?.full_name || 'N/A'}`, 14, 29);
+    doc.text(`So the: ${cards.length > 0 ? cards[0].cardNumber : 'N/A'}`, 14, 36);
+    doc.text(`Ngay xuat: ${new Date().toLocaleDateString('vi-VN')}`, 14, 43);
 
-    const tableColumn = ["Ngày", "Mô tả", "Số tiền (VND)", "Loại", "Trạng thái"];
+    const tableColumn = ["Ngay", "Mo ta", "So tien (VND)", "Loai", "Trang thai"];
     const tableRows = [];
 
     transactionsToExport.forEach(item => {
@@ -153,7 +153,7 @@ const Home = () => {
         new Date(item.transactionDate).toLocaleDateString('vi-VN', { day: '2-digit', month: '2-digit', year: 'numeric' }),
         item.description,
         `${item.transactionType === 'Deposit' ? '+' : '-'}${formatCurrency(item.amount)}`,
-        item.transactionType === 'Deposit' ? 'Nhận tiền' : 'Chuyển/Rút tiền',
+        item.transactionType === 'Deposit' ? 'Nhan tien' : 'Chuyen/Rut tien',
         item.status
       ];
       tableRows.push(transactionData);
@@ -207,10 +207,10 @@ const Home = () => {
         styles={{ 
           '._mainContent_b1piq_13': { 
             marginLeft: '30px !important', 
-            marginTop: '30px!important' 
+            // marginTop: '30px!important' 
           }, 
           'html, body': { 
-            overflow: 'hidden', 
+            overflow: 'auto',
             backgroundColor: colors.background 
           } 
         }} 
@@ -435,7 +435,7 @@ const Home = () => {
                     sx={{ width: '200px' }}
                   />
                   
-                  <Button 
+                  {/* <Button 
                     variant="outlined" 
                     endIcon={<ChevronRight />} 
                     sx={{ 
@@ -451,7 +451,7 @@ const Home = () => {
                     }}
                   >
                     Xem tất cả
-                  </Button>
+                  </Button> */}
                 </Stack>
               </Stack>
             </Box>
@@ -461,7 +461,7 @@ const Home = () => {
               sx={{ 
                 p: 3,
                 maxHeight: '600px',
-                overflowY: 'auto',
+                overflowY: 'hiiden',
                 '&::-webkit-scrollbar': { 
                   width: '8px' 
                 }, 

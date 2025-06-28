@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Thêm useEffect ở đây
+
 import {
   Box, Container, Typography, TextField, Paper, List, ListItem, ListItemAvatar, ListItemText,
   Avatar, Button, Tabs, Tab, InputAdornment, Chip, Card, CardContent, Divider, Grid, GlobalStyles,
@@ -89,6 +90,8 @@ function RecipientList({ recipients, onRecipientClick }) {
 }
 
 export default function MoneyTransferPage() {
+  const [myAccountIds, setMyAccountIds] = useState([]); // State mới để lưu ID tài khoản của người dùng
+
   const [customerName, setCustomerName] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [tabValue, setTabValue] = useState(0);
@@ -97,8 +100,19 @@ export default function MoneyTransferPage() {
   const [checkingAccount, setCheckingAccount] = useState(false);
   const [accountError, setAccountError] = useState('');
   
-  const { getCustomerAccount } = useAuth();
+  const { getCustomerAccount, getCards } = useAuth();
   const navigate = useNavigate();
+  useEffect(() => {
+    const fetchMyAccounts = async () => {
+      const result = await getCards();
+      if (result.success && result.data) {
+        // SỬA LẠI ĐÂY: Lấy 'cardNumber' thay vì 'accountId'
+        const ids = result.data.map(card => card.cardNumber); // Dòng đã sửa
+        setMyAccountIds(ids);
+      }
+    };
+    fetchMyAccounts();
+  }, [getCards]);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
@@ -108,25 +122,34 @@ export default function MoneyTransferPage() {
     setCustomerName(''); // Reset state khi đóng dialog
   };
 
-  const handleCheckAccount = async () => {
-    if (!newAccountNumber) {
-      setAccountError('Vui lòng nhập số tài khoản.');
-      return;
-    }
+const handleCheckAccount = async () => {
+  if (!newAccountNumber) {
+    setAccountError('Vui lòng nhập số tài khoản.');
+    return;
+  }
 
-    setCheckingAccount(true);
-    setAccountError('');
-    setCustomerName('');
+  // <<< THÊM: Kiểm tra xem số tài khoản mới nhập có phải là tài khoản của chính người dùng không
+  if (myAccountIds.includes(newAccountNumber)) {
+    setAccountError('Không thể chuyển tiền cho chính tài khoản của bạn.');
+    setCustomerName(''); // Xóa tên khách hàng nếu có để tránh nhầm lẫn
+    return; // Ngăn không cho tiếp tục kiểm tra
+  }
+  // KẾT THÚC THÊM
 
-    const result = await getCustomerAccount(newAccountNumber);
-    if (result.success) {
-      setCustomerName(result.data.name_customer);
-    } else {
-      setAccountError(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
-    }
+  setCheckingAccount(true);
+  setAccountError('');
+  setCustomerName('');
 
-    setCheckingAccount(false);
-  };
+  const result = await getCustomerAccount(newAccountNumber);
+  if (result.success) {
+    setCustomerName(result.data.name_customer);
+  } else {
+    setAccountError(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+  }
+
+  setCheckingAccount(false);
+};
+
 
   // <<< THÊM: Hàm xử lý khi nhấn "Tiếp tục"
   const handleContinue = () => {
@@ -142,14 +165,22 @@ export default function MoneyTransferPage() {
   };
 
   // <<< THÊM: Hàm xử lý khi click vào người nhận đã lưu
-  const handleRecipientClick = (recipient) => {
-    navigate('/transfer/external', { // Thay đổi '/transfer/external' thành đúng đường dẫn của bạn
-      state: {
-        cardNumber: recipient.account,
-        beneficiaryName: recipient.fullName
-      }
-    });
-  };
+const handleRecipientClick = (recipient) => {
+  // <<< THÊM: Kiểm tra xem tài khoản của người nhận đã chọn có phải là tài khoản của chính người dùng không
+  if (myAccountIds.includes(recipient.account)) {
+    alert('Không thể chuyển tiền cho chính tài khoản của bạn.'); // Hoặc hiển thị một thông báo lỗi đẹp hơn
+    return; // Ngăn không cho điều hướng
+  }
+  // KẾT THÚC THÊM
+
+  navigate('/transfer/external', {
+    state: {
+      cardNumber: recipient.account,
+      beneficiaryName: recipient.fullName
+    }
+  });
+};
+
 
   const filteredRecipients = recipients.filter(recipient =>
     recipient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

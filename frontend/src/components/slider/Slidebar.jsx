@@ -1,57 +1,80 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuth } from '../../context/context'; // Import useAuth
+import { useAuth } from '../../context/context';
 import {
   Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse,
-  Avatar, Typography, Box, Button, Divider
+  Avatar, Typography, Box, Button, Divider, Chip
 } from '@mui/material';
 import {
   Home, CreditCard, Send, ExpandLess, ExpandMore,
-  Settings, LogoutRounded
+  Settings, LogoutRounded, ChevronRight
 } from '@mui/icons-material';
 
-// --- Bảng màu gốc của bạn ---
-const primaryBlack = '#333';
-const mediumGray = '#616161';
-const lightGrayHover = '#f5f5f5';
-const darkGray = '#212121';
+// --- Bảng màu hiện đại phù hợp với Techcombank ---
+const colors = {
+  primary: '#e53e3e',
+  primaryDark: '#c53030',
+  secondary: '#f8f9fa',
+  text: {
+    primary: '#2d3748',
+    secondary: '#718096',
+    light: '#adb5bd'
+  },
+  background: {
+    main: '#ffffff',
+    hover: '#f8f9fa',
+    active: '#feb2b2',
+    gradient: 'linear-gradient(135deg, #e53e3e 0%, #c53030 100%)'
+  },
+  border: '#e2e8f0',
+  shadow: '0 2px 10px rgba(0,0,0,0.08)'
+};
 
 const menuItems = [
   {
-    id: 'home', name: 'Trang chủ', path: '/', icon: <Home />
+    id: 'home', 
+    name: 'Trang chủ', 
+    path: '/', 
+    icon: <Home />,
+    badge: null
   },
   {
-    id: 'account', name: 'Tài khoản', path: '/account', icon: <CreditCard />
+    id: 'account', 
+    name: 'Tài khoản', 
+    path: '/account', 
+    icon: <CreditCard />,
+    badge: null
   },
   {
-    id: 'transfer', name: 'Dịch vụ khác', path: '/transfer', icon: <Send />,
+    id: 'transfer', 
+    name: 'Dịch vụ khác', 
+    path: '/transfer', 
+    icon: <Send />,
     hasSubmenu: true,
+    badge: 'Mới',
     submenu: [
-      { name: 'Chuyển tiền', path: '/transfer/internal' },  
-      { name: 'Thanh toán hóa đơn', path: '/transfer/bills' },
-      { name: 'Yêu cầu sổ séc', path: '/chequebook' },
-      { name: 'Yêu cầu chặn thanh toán séc', path: '/chequebook/delete' },
-      { name: 'Chặn thanh toán séc', path: '/cancel' },
-      { name: 'Sao kê giao dịch', path: '/statement' }
+      { name: 'Chuyển tiền', path: '/transfer/internal', icon: '💸' },  
+      { name: 'Yêu cầu sổ séc', path: '/chequebook', icon: '📝' },
+      { name: 'Chặn thanh toán séc', path: '/cancel', icon: '🚫' },
+      { name: 'Sao kê giao dịch', path: '/statement', icon: '📊' }
     ]
   },
   {
-    id: 'features', name: 'Tính năng khác', path: '/features', icon: <Settings />,
+    id: 'features', 
+    name: 'Tính năng khác', 
+    path: '/features', 
+    icon: <Settings />,
     hasSubmenu: true,
+    badge: null,
     submenu: [
-      { name: 'Cài đặt', path: '/features/settings' },
-<<<<<<< HEAD
-      { name: 'Hướng dẫn', path: '/guide' },
-=======
-      { name: 'Yêu cầu sổ séc', path: '/chequebook'},
-      { name: 'Hủy sổ séc', path: '/cancel'},
-      { name: 'Sao kê', path: '/statement'}
->>>>>>> 694551867629c69165cda541191ee8d702111048
+      { name: 'Cài đặt', path: '/features/settings', icon: '⚙️' },
+      { name: 'Yêu cầu sổ séc', path: '/chequebook', icon: '📝' },
+      { name: 'Hủy sổ séc', path: '/cancel', icon: '❌' },
+      { name: 'Sao kê', path: '/statement', icon: '📋' }
     ]
   }
 ];
 
-// Hàm helper để lấy chữ cái đầu của tên
 const getInitials = (name = '') => {
   if (!name) return '';
   const nameParts = name.trim().split(' ');
@@ -63,14 +86,12 @@ const getInitials = (name = '') => {
   return name.substring(0, 2).toUpperCase();
 };
 
-
 const Sidebar = () => {
   const location = useLocation();
-  const { getUserInfo, logout } = useAuth(); // Lấy hàm từ context
-  const [user, setUser] = useState(null); // State để lưu thông tin user
+  const { getUserInfo, logout } = useAuth();
+  const [user, setUser] = useState(null);
   const [openMenu, setOpenMenu] = useState('');
 
-  // useEffect để lấy thông tin user khi component được mount
   useEffect(() => {
     const fetchUser = async () => {
       const result = await getUserInfo();
@@ -94,122 +115,256 @@ const Sidebar = () => {
       variant="permanent"
       anchor="left"
       sx={{
-        width: 280,
+        width: 300,
         '& .MuiDrawer-paper': {
-          width: 280,
-          backgroundColor: '#fff',
-          boxShadow: '2px 0 10px rgba(0,0,0,0.05)',
-          borderRight: 'none',
-          paddingTop: 2
+          width: 300,
+          backgroundColor: colors.background.main,
+          boxShadow: colors.shadow,
+          borderRight: `1px solid ${colors.border}`,
+          paddingTop: 0,
+          background: `linear-gradient(180deg, ${colors.background.main} 0%, #fafbfc 100%)`
         }
       }}
     >
-      {/* Logo */}
-      <Box textAlign="center" mb={2}>
-        <img
-          src="https://techcombank.com/content/dam/techcombank/public-site/seo/techcombank_logo_svg_86201e50d1.svg"
-          alt="Logo"
-          style={{ height: 40, width: 240 }} // << Đã xóa filter: grayscale(100%)
-        />
-      </Box>
+      {/* Header với gradient */}
+      <Box 
+        sx={{
+          background: colors.background.gradient,
+          padding: '24px 20px',
+          position: 'relative',
+          '&::after': {
+            content: '""',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: '1px',
+            background: 'rgba(255,255,255,0.2)'
+          }
+        }}
+      >
+        {/* Logo */}
+        <Box textAlign="center" mb={3}>
+          <Box
+            sx={{
+              backgroundColor: 'rgba(255,255,255,0.15)',
+              borderRadius: '12px',
+              padding: '12px',
+              display: 'inline-block',
+              backdropFilter: 'blur(10px)'
+            }}
+          >
+            <img
+              src="https://techcombank.com/content/dam/techcombank/public-site/seo/techcombank_logo_svg_86201e50d1.svg"
+              alt="Logo"
+              style={{ 
+                height: 32, 
+                width: 200,
+                filter: 'brightness(0) invert(1)'
+              }}
+            />
+          </Box>
+        </Box>
 
-      {/* Thông tin người dùng động */}
-      <Box display="flex" alignItems="center" px={2} py={1}> 
-        <Avatar sx={{ bgcolor: primaryBlack, fontSize: 14, width: 42, height: 42 }}>
-          {user ? getInitials(user.full_name) : '...'}
-        </Avatar>
-        <Box ml={2}>
-          <Typography fontSize={14} fontWeight={600}>
-            {user ? user.full_name.toUpperCase() : 'Đang tải...'}
-          </Typography>
-          <Typography fontSize={12} color="text.secondary">Thông tin cá nhân</Typography>
+        {/* Thông tin người dùng */}
+        <Box 
+          display="flex" 
+          alignItems="center" 
+          sx={{
+            backgroundColor: 'rgba(255,255,255,0.1)',
+            borderRadius: '16px',
+            padding: '16px',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.2)'
+          }}
+        > 
+          <Avatar 
+            sx={{ 
+              background: 'linear-gradient(135deg, #e53e3e 0%, #c53030 100%)',
+              fontSize: 16, 
+              width: 48, 
+              height: 48,
+              fontWeight: 'bold',
+              border: '2px solid rgba(255,255,255,0.3)'
+            }}
+          >
+            {user ? getInitials(user.full_name) : '...'}
+          </Avatar>
+          <Box ml={2} flex={1}>
+            <Typography 
+              fontSize={15} 
+              fontWeight={600}
+              color="white"
+              sx={{ 
+                textShadow: '0 1px 2px rgba(0,0,0,0.1)',
+                marginBottom: '2px'
+              }}
+            >
+              {user ? user.full_name : 'Đang tải...'}
+            </Typography>
+            <Typography 
+              fontSize={12} 
+              sx={{ 
+                color: 'rgba(255,255,255,0.8)',
+                textShadow: '0 1px 2px rgba(0,0,0,0.1)'
+              }}
+            >
+              Khách hàng VIP
+            </Typography>
+          </Box>
         </Box>
       </Box>
 
-      <Divider sx={{ my: 1 }} />
-
-      {/* Phần menu giữ nguyên style gốc của bạn */}
-      <List component="nav">
-        {menuItems.map((item) => (
-          <React.Fragment key={item.id}>
-            <ListItemButton
-              onClick={() => item.hasSubmenu && handleToggle(item.id)}
-              component={!item.hasSubmenu ? Link : 'button'}
-              to={!item.hasSubmenu ? item.path : undefined}
-              sx={{
-                borderLeft: isActive(item.path) ? `4px solid ${primaryBlack}` : '4px solid transparent',
-                color: isActive(item.path) ? primaryBlack : mediumGray,
-                backgroundColor: openMenu === item.id ? lightGrayHover : 'transparent',
-                '&.Mui-selected': {
-                    backgroundColor: 'transparent',
-                    color: primaryBlack,
+      {/* Menu */}
+      <Box sx={{ padding: '16px 12px', flex: 1 }}>
+        <List component="nav" sx={{ padding: 0 }}>
+          {menuItems.map((item, index) => (
+            <React.Fragment key={item.id}>
+              <ListItemButton
+                onClick={() => item.hasSubmenu && handleToggle(item.id)}
+                component={!item.hasSubmenu ? Link : 'button'}
+                to={!item.hasSubmenu ? item.path : undefined}
+                sx={{
+                  borderRadius: '12px',
+                  margin: '4px 0',
+                  padding: '12px 16px',
+                  minHeight: '48px',
+                  backgroundColor: isActive(item.path) ? colors.background.active : 'transparent',
+                  color: isActive(item.path) ? colors.primary : colors.text.secondary,
+                  border: isActive(item.path) ? `1px solid ${colors.primary}20` : '1px solid transparent',
+                  position: 'relative',
+                  overflow: 'hidden',
+                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  '&::before': {
+                    content: '""',
+                    position: 'absolute',
+                    left: 0,
+                    top: 0,
+                    height: '100%',
+                    width: isActive(item.path) ? '4px' : '0px',
+                    backgroundColor: colors.primary,
+                    transition: 'width 0.3s ease',
+                    borderRadius: '0 4px 4px 0'
+                  },
+                  '&:hover': {
+                    backgroundColor: colors.background.hover,
+                    color: colors.text.primary,
+                    transform: 'translateX(4px)',
+                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
+                  }
+                }}
+              >
+                <ListItemIcon 
+                  sx={{ 
+                    color: 'inherit',
+                    minWidth: '40px',
+                    transition: 'transform 0.3s ease',
                     '&:hover': {
-                        backgroundColor: lightGrayHover,
-                    },
-                },
-                minWidth: item.id === 'transfer' || item.id === 'features' ? 290 : 'auto',
-                '&:hover': {
-                  backgroundColor: lightGrayHover,
-                  color: primaryBlack
-                }
-              }}
-            >
-              <ListItemIcon sx={{ color: 'inherit' }}>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.name} />
-              {item.hasSubmenu && (openMenu === item.id ? <ExpandLess /> : <ExpandMore />)}
-            </ListItemButton>
+                      transform: 'scale(1.1)'
+                    }
+                  }}
+                >
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText 
+                  primary={item.name}
+                  primaryTypographyProps={{
+                    fontWeight: isActive(item.path) ? 600 : 500,
+                    fontSize: '14px'
+                  }}
+                />
+                {item.badge && (
+                  <Chip
+                    label={item.badge}
+                    size="small"
+                    sx={{
+                      height: '20px',
+                      fontSize: '10px',
+                      fontWeight: 'bold',
+                      backgroundColor: colors.primary,
+                      color: 'white',
+                      marginRight: '8px'
+                    }}
+                  />
+                )}
+                {item.hasSubmenu && (
+                  <Box
+                    sx={{
+                      transition: 'transform 0.3s ease',
+                      transform: openMenu === item.id ? 'rotate(90deg)' : 'rotate(0deg)'
+                    }}
+                  >
+                    <ChevronRight fontSize="small" />
+                  </Box>
+                )}
+              </ListItemButton>
 
-            {item.hasSubmenu && (
-              <Collapse in={openMenu === item.id} timeout="auto" unmountOnExit>
-                <List disablePadding>
-                  {item.submenu.map((sub, idx) => (
-                    <ListItemButton
-                      key={idx}
-                      component={Link}
-                      to={sub.path}
-                      selected={location.pathname === sub.path}
-                      sx={{
-                        pl: 7, pr: 3, py: 1.2, mx: 1.5, my: 0.5, borderRadius: 1, fontSize: 13.5,
-                        color: location.pathname === sub.path ? primaryBlack : mediumGray,
-                        backgroundColor: location.pathname === sub.path ? lightGrayHover : 'transparent',
-                        '&.Mui-selected': {
-                            backgroundColor: lightGrayHover,
-                            '&:hover': { backgroundColor: lightGrayHover },
-                        },
-                        '&:hover': {
-                          backgroundColor: lightGrayHover,
-                          color: primaryBlack
-                        },
-                        transition: 'all 0.2s ease-in-out'
-                      }}
-                    >
-                      <ListItemText
-                        primary={sub.name}
-                        primaryTypographyProps={{ noWrap: true, fontWeight: 500 }}
-                      />
-                    </ListItemButton>
-                  ))}
-                </List>
-              </Collapse>
-            )}
-          </React.Fragment>
-        ))}
-      </List>
+              {item.hasSubmenu && (
+                <Collapse in={openMenu === item.id} timeout={300}>
+                  <Box sx={{ padding: '0 8px', marginBottom: '8px' }}>
+                    {item.submenu.map((sub, idx) => (
+                      <ListItemButton
+                        key={idx}
+                        component={Link}
+                        to={sub.path}
+                        sx={{
+                          borderRadius: '8px',
+                          margin: '2px 0',
+                          padding: '8px 16px 8px 48px',
+                          minHeight: '40px',
+                          color: location.pathname === sub.path ? colors.primary : colors.text.light,
+                          backgroundColor: location.pathname === sub.path ? colors.background.active : 'transparent',
+                          fontSize: '13px',
+                          transition: 'all 0.2s ease',
+                          '&:hover': {
+                            backgroundColor: colors.background.hover,
+                            color: colors.text.primary,
+                            paddingLeft: '52px'
+                          }
+                        }}
+                      >
+                        <Box component="span" sx={{ marginRight: '12px', fontSize: '14px' }}>
+                          {sub.icon}
+                        </Box>
+                        <ListItemText
+                          primary={sub.name}
+                          primaryTypographyProps={{ 
+                            fontSize: '13px',
+                            fontWeight: location.pathname === sub.path ? 600 : 400
+                          }}
+                        />
+                      </ListItemButton>
+                    ))}
+                  </Box>
+                </Collapse>
+              )}
+            </React.Fragment>
+          ))}
+        </List>
+      </Box>
 
-      {/* Nút đăng xuất đã thêm onClick và giữ style gốc của bạn */}
-      <Box mt="auto" p={2} mb={1}>
+      {/* Nút đăng xuất */}
+      <Box sx={{ padding: '16px 20px 24px' }}>
+        <Divider sx={{ marginBottom: '16px', borderColor: colors.border }} />
         <Button
           variant="contained"
           fullWidth
           startIcon={<LogoutRounded />}
-          onClick={logout} // << THÊM CHỨC NĂNG ĐĂNG XUẤT
+          onClick={logout}
           sx={{
-            borderRadius: 5,
-            backgroundColor: primaryBlack,
+            borderRadius: '12px',
+            padding: '12px 16px',
+            backgroundColor: colors.text.secondary,
+            fontSize: '14px',
+            fontWeight: 600,
+            textTransform: 'none',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+            transition: 'all 0.3s ease',
             '&:hover': {
-              backgroundColor: darkGray,
-            },
-            fontWeight: 'bold',
+              backgroundColor: colors.text.primary,
+              transform: 'translateY(-2px)',
+              boxShadow: '0 6px 20px rgba(0,0,0,0.2)'
+            }
           }}
         >
           Đăng xuất
