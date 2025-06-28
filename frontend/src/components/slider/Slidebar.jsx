@@ -40,7 +40,13 @@ const menuItems = [
     hasSubmenu: true,
     submenu: [
       { name: 'Cài đặt', path: '/features/settings' },
+<<<<<<< HEAD
       { name: 'Hướng dẫn', path: '/guide' },
+=======
+      { name: 'Yêu cầu sổ séc', path: '/chequebook'},
+      { name: 'Hủy sổ séc', path: '/cancel'},
+      { name: 'Sao kê', path: '/statement'}
+>>>>>>> 694551867629c69165cda541191ee8d702111048
     ]
   }
 ];

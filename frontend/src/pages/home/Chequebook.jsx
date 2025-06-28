@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
-import {  Box,  Typography,  Card,  CardContent,  Button,  Avatar,  TextField,  MenuItem,  FormControlLabel,  Checkbox,  useTheme,  GlobalStyles,} from '@mui/material';
-import {  RequestPage,  ChevronRight} from '@mui/icons-material';
+import React, { useState, useEffect } from 'react';
+import {
+  Box, Typography, Card, CardContent, Button, Avatar, TextField,
+  MenuItem, FormControlLabel, Checkbox, useTheme, GlobalStyles,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Paper, CircularProgress, Alert,
+} from '@mui/material';
+import { RequestPage, ChevronRight, ArrowUpward, ArrowDownward } from '@mui/icons-material';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../../context/context';
 
-// --- Bảng màu từ Home ---
 const primaryBlack = '#333';
 const mediumGray = '#757575';
 const exceptionGreen = '#2e7d32';
@@ -10,248 +16,198 @@ const lightGray = '#fafafa';
 
 const CheckRequest = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+  const { getCards, getUserInfo, requestIssueCheque, getMyRequests } = useAuth();
+
   const [formData, setFormData] = useState({
-    accountNumber: '1907 1903 0300 17',
+    accountNumber: '',
     checkQuantity: '25',
     deliveryAddress: '',
     termsAccepted: false,
   });
 
+  const [cards, setCards] = useState([]);
+  const [requests, setRequests] = useState([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [showHistory, setShowHistory] = useState(false);
 
-  // Danh sách tài khoản thanh toán mẫu
-  const accounts = [
-    { number: '1907 1903 0300 17', name: 'Tài khoản chính' },
-    { number: '1907 1903 0300 18', name: 'Tài khoản phụ 1' },
-    { number: '1907 1903 0300 19', name: 'Tài khoản phụ 2' },
-  ];
+  useEffect(() => {
+    const fetchCards = async () => {
+      setLoading(true);
+      setError('');
+      try {
+        const res = await getCards();
+        if (res.success && res.data.length > 0) {
+          setCards(res.data);
+          setFormData(prev => ({ ...prev, accountNumber: res.data[0].cardNumber }));
+        } else {
+          setError('Không tìm thấy thẻ nào.');
+        }
+      } catch {
+        setError('Lỗi khi lấy danh sách thẻ.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchCards();
+  }, [getCards]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
+    setFormData(prev => ({
+      ...prev,
       [name]: type === 'checkbox' ? checked : value,
-    });
-    if (name === 'termsAccepted' && checked) {
-      setError('');
+    }));
+  };
+
+  const handleSubmit = async () => {
+    if (!formData.termsAccepted) return setError('Vui lòng chấp nhận điều khoản.');
+    if (!formData.deliveryAddress.trim()) return setError('Vui lòng nhập địa chỉ.');
+
+    const quantity = parseInt(formData.checkQuantity);
+    if (isNaN(quantity) || quantity < 25 || quantity > 100) {
+      return setError('Số lượng tờ séc phải từ 25 đến 100.');
+    }
+
+    const selectedCard = cards.find(card => card.cardNumber === formData.accountNumber);
+    if (!selectedCard) return setError('Tài khoản không hợp lệ.');
+
+    try {
+      setLoading(true);
+      const userInfo = await getUserInfo();
+      const customerId = userInfo?.data?.customerId;
+
+      const res = await requestIssueCheque(selectedCard.account_id, quantity);
+
+      if (res.success) {
+        setError('Yêu cầu sổ séc đã được gửi thành công!');
+        setFormData({ accountNumber: cards[0].cardNumber, checkQuantity: '25', deliveryAddress: '', termsAccepted: false });
+      } else {
+        setError(res.message || 'Lỗi khi gửi yêu cầu.');
+      }
+    } catch {
+      setError('Lỗi khi gửi yêu cầu.');
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleSubmit = () => {
-    if (!formData.termsAccepted) {
-      setError('Vui lòng xác nhận điều khoản trước khi gửi yêu cầu.');
-      return;
-    }
-    // Xử lý gửi yêu cầu (chưa implement logic thật)
-    console.log('Yêu cầu sổ séc:', formData);
+  const handleShowHistory = async () => {
+    setShowHistory(true);
+    setLoading(true);
     setError('');
+    try {
+      const res = await getMyRequests();
+      if (res.success) {
+        setRequests(res.data);
+      } else {
+        setError('Lỗi khi lấy danh sách yêu cầu.');
+      }
+    } catch {
+      setError('Lỗi khi lấy danh sách yêu cầu.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getRequestTypeDisplay = (type) => {
+    switch (type) {
+      case 'IssueCheque': return 'Yêu cầu sổ séc';
+      default: return type;
+    }
   };
 
   return (
     <>
-      {/* Override class bên ngoài */}
       <GlobalStyles styles={{
-        '._mainContent_b1piq_13': {
-          marginLeft: '30px !important',
-          marginTop: '30px!important',
-        },
-        'html, body': {
-          overflow: 'auto',
-          backgroundColor: '#fff',
-        },
+        '._mainContent_b1piq_13': { marginLeft: '30px !important', marginTop: '30px !important' },
+        'html, body': { overflow: 'auto', backgroundColor: '#fff' },
       }} />
 
-      {/* Main container */}
-      <Box
-        sx={{
-          p: 3,
-          backgroundColor: '#ffffff',
-          minHeight: '100vh',
-        }}
-      >
-        {/* Header */}
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            mb: 4,
-          }}
-        >
-          <Typography variant="h5" fontWeight={700} color={primaryBlack}>
-            Yêu cầu sổ séc
-          </Typography>
-          <Avatar sx={{ bgcolor: primaryBlack, width: 42, height: 42 }}>VH</Avatar>
-        </Box>
+      <Box sx={{ ml: '30px', mt: '30px', mr: '30px' }}>
+        <Typography variant="h5" fontWeight={700} color={primaryBlack} mb={3}>
+          Yêu cầu sổ séc
+        </Typography>
 
-        {/* Form Card */}
-        <Card
-          sx={{
-            mb: 4,
-            borderRadius: 2,
-            backgroundColor: lightGray,
-            boxShadow: theme.shadows[1],
-            borderLeft: `4px solid ${primaryBlack}`,
-          }}
-        >
+        {error && (
+          <Alert severity={error.includes('thành công') ? 'success' : 'error'} sx={{ mb: 2 }}>
+            {error}
+          </Alert>
+        )}
+
+        <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
           <CardContent>
-            <Box
-              sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                mb: 2,
-              }}
-            >
-                <Typography variant="h6" fontWeight={600} color={primaryBlack}>
-                Thông tin yêu cầu
-              </Typography>
-              <Button
-                variant="text"
-                endIcon={<ChevronRight fontSize="small" />}
-                sx={{ textTransform: 'none', color: primaryBlack }}
-              >
-                Xem lịch sử yêu cầu
-              </Button>
+            <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
+              <Typography variant="h6" fontWeight={600} color={primaryBlack}>Thông tin yêu cầu</Typography>
+              <Button onClick={handleShowHistory} disabled={loading} endIcon={<ChevronRight />}>Xem lịch sử</Button>
             </Box>
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 3,
-              }}
-            >
-              <Box display="flex" alignItems="center" gap={2}>
-                <Avatar sx={{ bgcolor: exceptionGreen, color: '#fff' }}>
-                  <RequestPage />
-                </Avatar>
-                <TextField
-                  select
-                  label="Tài khoản thanh toán"
-                  name="accountNumber"
-                  value={formData.accountNumber}
-                  onChange={handleChange}
-                  fullWidth
-                  sx={{ bgcolor: '#fff' }}
-                >
-                  {accounts.map((account) => (
-                    <MenuItem key={account.number} value={account.number}>
-                      {account.name} ({account.number})
-                    </MenuItem>
-                  ))}
-                </TextField>
-              </Box>
+            <TextField select fullWidth label="Tài khoản thanh toán" name="accountNumber" value={formData.accountNumber} onChange={handleChange} sx={{ mb: 2 }}>
+              {cards.map(card => (
+                <MenuItem key={card.account_id} value={card.cardNumber}>{card.cardNumber}</MenuItem>
+              ))}
+            </TextField>
 
-              <TextField
-                select
-                label="Số lượng tờ séc"
-                name="checkQuantity"
-                value={formData.checkQuantity}
-                onChange={handleChange}
-                fullWidth
-                sx={{ bgcolor: '#fff' }}
-              >
-                <MenuItem value="25">25 tờ</MenuItem>
-                <MenuItem value="50">50 tờ</MenuItem>
-                <MenuItem value="100">100 tờ</MenuItem>
-              </TextField>
+            <TextField select fullWidth label="Số lượng tờ séc" name="checkQuantity" value={formData.checkQuantity} onChange={handleChange} sx={{ mb: 2 }}>
+              <MenuItem value="25">25 tờ</MenuItem>
+              <MenuItem value="50">50 tờ</MenuItem>
+              <MenuItem value="100">100 tờ</MenuItem>
+            </TextField>
 
-              <TextField
-                label="Địa chỉ giao hàng"
-                name="deliveryAddress"
-                value={formData.deliveryAddress}
-                onChange={handleChange}
-                fullWidth
-                multiline
-                rows={3}
-                sx={{ bgcolor: '#fff' }}
-                placeholder="Nhập địa chỉ nhận sổ séc"
-              />
+            <TextField fullWidth label="Địa chỉ giao hàng" name="deliveryAddress" value={formData.deliveryAddress} onChange={handleChange} multiline rows={3} sx={{ mb: 2 }} />
 
-              {/* Thông báo phí phát hành */}
-              <Box
-                sx={{
-                  bgcolor: '#fff',
-                  p: 2,
-                  borderRadius: 1,
-                  border: `1px solid ${mediumGray}`,
-                }}
-              >
-                <Typography variant="body2" fontWeight={600} color={primaryBlack}>
-                  Phí phát hành sổ séc
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  - 25 tờ: 50,000 VND
-                  <br />
-                  - 50 tờ: 80,000 VND
-                  <br />
-                  - 100 tờ: 120,000 VND
-                  <br />
-                  Phí sẽ được trừ trực tiếp từ tài khoản thanh toán của bạn.
-                </Typography>
-              </Box>
+            <FormControlLabel
+              control={<Checkbox checked={formData.termsAccepted} name="termsAccepted" onChange={handleChange} />}
+              label="Tôi đồng ý với điều khoản và điều kiện."
+            />
 
-              {/* Xác nhận điều khoản */}
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    name="termsAccepted"
-                    checked={formData.termsAccepted}
-                    onChange={handleChange}
-                    sx={{
-                      color: primaryBlack,
-                      '&.Mui-checked': {
-                        color: exceptionGreen,
-                      },
-                    }}
-                  />
-                }
-                label={
-                  <Typography variant="body2" color={primaryBlack}>
-                    Tôi đồng ý với các điều khoản và điều kiện phát hành sổ séc.
-                  </Typography>
-                }
-              />
-
-              {error && (
-                <Typography variant="body2" color="error">
-                  {error}
-                </Typography>
-              )}
+            <Box display="flex" justifyContent="flex-end" gap={2} mt={2}>
+              <Button variant="outlined" onClick={() => navigate(-1)}>Hủy</Button>
+              <Button variant="contained" onClick={handleSubmit} disabled={!formData.termsAccepted || loading}>Gửi yêu cầu</Button>
             </Box>
           </CardContent>
         </Card>
 
-        {/* Action Buttons */}
-        <Box display="flex" justifyContent="center" gap={2} mt={4}>
-          <Button
-            variant="outlined"
-            sx={{
-              borderColor: primaryBlack,
-              color: primaryBlack,
-              borderRadius: 5,
-              textTransform: 'none',
-            }}
-          >
-            Hủy
-          </Button>
-          <Button
-            variant="contained"
-            onClick={handleSubmit}
-            disabled={!formData.termsAccepted}
-            sx={{
-              backgroundColor: primaryBlack,
-              '&:hover': {
-                backgroundColor: '#000',
-              },
-              borderRadius: 5,
-              textTransform: 'none',
-            }}
-          >
-            Gửi yêu cầu
-          </Button>
-        </Box>
+        {showHistory && (
+          <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
+            <CardContent>
+              <Typography variant="h6" fontWeight={600} color={primaryBlack} mb={2}>Lịch sử yêu cầu</Typography>
+              <TableContainer component={Paper}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Ngày</TableCell>
+                      <TableCell>Loại</TableCell>
+                      <TableCell>Chi tiết</TableCell>
+                      <TableCell align="center">Trạng thái</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {loading ? (
+                      <TableRow><TableCell colSpan={4} align="center"><CircularProgress /></TableCell></TableRow>
+                    ) : requests.length === 0 ? (
+                      <TableRow><TableCell colSpan={4} align="center">Không có yêu cầu.</TableCell></TableRow>
+                    ) : (
+                      requests.map((r) => (
+                        <TableRow key={r.requestId}>
+                          <TableCell>{new Date(r.requestDate).toLocaleDateString('vi-VN')}</TableCell>
+                          <TableCell>{getRequestTypeDisplay(r.requestType)}</TableCell>
+                          <TableCell>
+                            <Typography variant="body2">
+                              {r.requestDetail ? JSON.stringify(JSON.parse(r.requestDetail), null, 2) : '-'}
+                            </Typography>
+                          </TableCell>
+                          <TableCell align="center">{r.status === 'APPROVED' ? 'Đã duyệt' : r.status === 'REJECTED' ? 'Từ chối' : 'Đang xử lý'}</TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </CardContent>
+          </Card>
+        )}
       </Box>
     </>
   );
