@@ -1,17 +1,15 @@
 import { createContext, useContext } from "react";
 
-// Hằng số cho địa chỉ cơ sở của API, dễ dàng thay đổi khi cần
 const API_BASE_URL = 'http://localhost:5028/backend';
 
 const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
 
-  // --- HÀM HELPER ĐỂ LẤY HEADERS XÁC THỰC ---
   const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
     if (!token) {
-      console.error("Không tìm thấy token trong localStorage.");
+      // Trong trường hợp thực tế, bạn có thể muốn xử lý lỗi hoặc redirect ở đây
       return { 'Content-Type': 'application/json' };
     }
     return {
@@ -20,8 +18,69 @@ export const AuthProvider = ({ children }) => {
     };
   };
 
-  // --- CÁC HÀM XÁC THỰC (Đã có) ---
+  const requestIssueCheque = async (accountId, amount) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/ServiceRequest/create-request`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          RequestType: 'IssueCheque',
+          RequestDetail: JSON.stringify({ AccountId: accountId, Amount: amount }),
+        }),
+      });
+      const data = await response.json();
+      return data.status === 200
+        ? { success: true, message: data.message }
+        : { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi gửi yêu cầu cấp séc." };
+    }
+  };
 
+ const requestCancelCheque = async (chequeId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/ServiceRequest/create-request`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        RequestType: 'CancelCheque',
+        RequestDetail: JSON.stringify({
+          ChequeId: chequeId  // 👈 Truyền đúng field mà backend cần
+        }),
+      }),
+    });
+
+    const data = await response.json();
+    return data.status === 200
+      ? { success: true, message: data.message }
+      : { success: false, message: data.message, errorType: data.error };
+  } catch (error) {
+    return { success: false, message: "Lỗi khi gửi yêu cầu hủy séc." };
+  }
+};
+
+
+
+
+
+
+
+  const getMyServiceRequests = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/ServiceRequest/my-requests`, {
+        method: 'GET',
+        headers: getAuthHeaders(),
+      });
+      const data = await response.json();
+      return data.status === 200
+        ? { success: true, data: data.data }
+        : { success: false, message: data.message };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi lấy danh sách yêu cầu." };
+    }
+  };
+
+  // ... (Các hàm đã có từ trước: login, verifyLogin, logout, etc.)
   const login = async (username, password, deviceId) => {
     try {
       const response = await fetch(`${API_BASE_URL}/customer/login`, {
@@ -36,7 +95,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Login API error:", error);
       return { success: false, message: "Không thể kết nối đến máy chủ." };
     }
   };
@@ -55,7 +113,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Verify Login API error:", error);
       return { success: false, message: "Không thể kết nối đến máy chủ." };
     }
   };
@@ -64,8 +121,6 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     window.location.href = '/login'; 
   };
-
-  // --- API LẤY THÔNG TIN NGƯỜI DÙNG ---
 
   const getUserInfo = async () => {
     try {
@@ -79,12 +134,9 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get User Info API error:", error);
       return { success: false, message: "Lỗi khi lấy thông tin người dùng." };
     }
   };
-
-  // --- CÁC API QUẢN LÝ TÀI KHOẢN/THẺ ---
 
   const getCards = async () => {
     try {
@@ -98,7 +150,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Cards API error:", error);
       return { success: false, message: "Lỗi khi lấy danh sách thẻ." };
     }
   };
@@ -115,7 +166,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Balance API error:", error);
       return { success: false, message: "Lỗi khi lấy số dư." };
     }
   };
@@ -133,7 +183,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Create Card API error:", error);
       return { success: false, message: "Lỗi khi tạo thẻ mới." };
     }
   };
@@ -150,7 +199,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Lock Card API error:", error);
       return { success: false, message: "Lỗi khi khóa thẻ." };
     }
   };
@@ -167,12 +215,9 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Delete Card API error:", error);
       return { success: false, message: "Lỗi khi xóa thẻ." };
     }
   };
-
-  // --- CÁC API VỀ GIAO DỊCH ---
 
   const getTransactions = async (accountId, month, year) => {
     try {
@@ -186,7 +231,6 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Transactions API error:", error);
       return { success: false, message: "Lỗi khi lấy lịch sử giao dịch." };
     }
   };
@@ -203,37 +247,139 @@ export const AuthProvider = ({ children }) => {
       }
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Export Transactions API error:", error);
       return { success: false, message: "Lỗi khi xuất sao kê." };
     }
   };
 
-  // <<<<< START: HÀM MỚI ĐƯỢC THÊM VÀO >>>>>
   const getCustomerAccount = async (cardNumber) => {
-    // Lưu ý: Theo đặc tả, đây là request GET nhưng gửi dữ liệu trong body.
-    // Điều này không phổ biến nhưng vẫn thực hiện được với fetch.
     try {
       const response = await fetch(`${API_BASE_URL}/transaction_Controler/Get_Customer_Account`, {
-        method: 'GET',
+        method: 'POST',
         headers: getAuthHeaders(),
-        body: JSON.stringify({ cardNumber }), // Gửi số thẻ trong body
+        body: JSON.stringify({ cardNumber }),
       });
       const data = await response.json();
 
       if (data.status === 200) {
-        // Thành công, trả về dữ liệu chứa tên khách hàng
         return { success: true, data: data.data };
       }
-      // Thất bại (ví dụ: status 404), trả về thông báo lỗi từ API
       return { success: false, message: data.message, errorType: data.error };
     } catch (error) {
-      console.error("Get Customer Account API error:", error);
       return { success: false, message: "Lỗi khi kiểm tra tài khoản người nhận." };
     }
   };
-  // <<<<< END: HÀM MỚI ĐƯỢC THÊM VÀO >>>>>
 
-  // --- Cung cấp tất cả các hàm cho các component con ---
+  const bankTransfer = async (transferDetails) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/transaction_Controler/Bank_transfer`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify(transferDetails),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi thực hiện chuyển khoản. Vui lòng thử lại." };
+    }
+  };
+
+  // ===================================================================
+  // BẮT ĐẦU PHẦN TÍCH HỢP OTP & MẬT KHẨU GIAO DỊCH
+  // ===================================================================
+  
+  /**
+   * Gửi yêu cầu mã OTP về email của người dùng.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const sendOTP = async () => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/transaction_Controler/Send_OTP`, {
+        method: 'PUT', // Lưu ý phương thức là PUT
+        headers: getAuthHeaders(),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi gửi mã OTP." };
+    }
+  };
+
+  /**
+   * Xác thực mã OTP.
+   * @param {string} otp - Mã OTP người dùng nhập vào.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const verifyOTP = async (otp) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/transaction_Controler/Verify_OTP`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ otp }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi xác thực OTP." };
+    }
+  };
+
+  /**
+   * Kiểm tra mật khẩu giao dịch đã được thiết lập hay chưa và có đúng không.
+   * @param {number} transactionPassword - Mật khẩu giao dịch cần kiểm tra.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const checkTransactionPassword = async (transactionPassword) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/customer/check_transaction_password`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ transactionPassword }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi kiểm tra mật khẩu giao dịch." };
+    }
+  };
+  
+  /**
+   * Tạo hoặc cập nhật mật khẩu giao dịch mới.
+   * @param {number} transactionPassword - Mật khẩu giao dịch mới.
+   * @returns {Promise<{success: boolean, message: string, errorType?: string}>}
+   */
+  const createOrUpdateTransactionPassword = async (transactionPassword) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/customer/create_transaction_password`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({ transactionPassword }),
+      });
+      const data = await response.json();
+      if (data.status === 200) {
+        return { success: true, message: data.message };
+      }
+      return { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi tạo mật khẩu giao dịch." };
+    }
+  };
+  
+  // ===================================================================
+  // KẾT THÚC PHẦN TÍCH HỢP
+  // ===================================================================
+
   const value = {
     login,
     verifyLogin,
@@ -246,7 +392,18 @@ export const AuthProvider = ({ children }) => {
     deleteCard,
     getTransactions,
     exportTransactions,
-    getCustomerAccount, // <<<<< THÊM HÀM MỚI VÀO CONTEXT VALUE
+    getCustomerAccount,
+    bankTransfer,
+    // Thêm các hàm mới vào context value
+    sendOTP,
+    verifyOTP,
+    checkTransactionPassword,
+    createOrUpdateTransactionPassword,
+    requestIssueCheque,
+  getMyRequests: getMyServiceRequests,
+  requestCancelCheque,
+  
+
   };
 
   return (

@@ -354,7 +354,7 @@ public class Transaction_Controler : Controller
 
 
 
-    [HttpGet("Get_Customer_Account")]
+    [HttpPost("Get_Customer_Account")]
     public async Task<IActionResult> Get_Customer_Account([FromBody] Account_get_Customer account_Get_Customer) 
     {
         try

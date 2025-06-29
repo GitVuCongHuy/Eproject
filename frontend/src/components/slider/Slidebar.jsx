@@ -21,23 +21,32 @@ const menuItems = [
     id: 'home', name: 'Trang chủ', path: '/', icon: <Home />
   },
   {
-    id: 'account', name: 'Tài khoản & Thẻ', path: '/account', icon: <CreditCard />
+    id: 'account', name: 'Tài khoản', path: '/account', icon: <CreditCard />
   },
   {
-    id: 'transfer', name: 'Chuyển tiền', path: '/transfer', icon: <Send />,
+    id: 'transfer', name: 'Dịch vụ khác', path: '/transfer', icon: <Send />,
     hasSubmenu: true,
     submenu: [
-      { name: 'Giữa các tài khoản của tôi', path: '/transfer/internal' },
-      { name: 'Tới tài khoản khác', path: '/transfer/external' },
-      { name: 'Theo lô', path: '/transfer/batch' },
-      { name: 'Thanh toán hóa đơn', path: '/transfer/bills' }
+      { name: 'Chuyển tiền', path: '/transfer/internal' },  
+      { name: 'Thanh toán hóa đơn', path: '/transfer/bills' },
+      { name: 'Yêu cầu sổ séc', path: '/chequebook' },
+      { name: 'Yêu cầu chặn thanh toán séc', path: '/chequebook/delete' },
+      { name: 'Chặn thanh toán séc', path: '/cancel' },
+      { name: 'Sao kê giao dịch', path: '/statement' }
     ]
   },
   {
     id: 'features', name: 'Tính năng khác', path: '/features', icon: <Settings />,
     hasSubmenu: true,
     submenu: [
-      { name: 'Cài đặt', path: '/features/settings' }
+      { name: 'Cài đặt', path: '/features/settings' },
+<<<<<<< HEAD
+      { name: 'Hướng dẫn', path: '/guide' },
+=======
+      { name: 'Yêu cầu sổ séc', path: '/chequebook'},
+      { name: 'Hủy sổ séc', path: '/cancel'},
+      { name: 'Sao kê', path: '/statement'}
+>>>>>>> 694551867629c69165cda541191ee8d702111048
     ]
   }
 ];
