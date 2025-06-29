@@ -100,7 +100,7 @@ public class CustomerController : Controller
                 number_login = 0,
                 locked = false,
                 citizen_identification_card = model.CitizenIdentificationCard,
-                adress = model.Adress,
+                // adress = model.Adress,
             };
 
             _context.Customers.Add(customer);

@@ -1,5 +1,4 @@
-// src/pages/Admin.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Typography,
@@ -25,8 +24,8 @@ import {
   CheckCircle,
   Cancel,
 } from '@mui/icons-material';
-import { useAuth } from '../../context/context';
 
+// --- Bảng màu từ các trang trước ---
 const primaryBlack = '#333';
 const mediumGray = '#757575';
 const exceptionGreen = '#2e7d32';
@@ -35,69 +34,93 @@ const lightGray = '#fafafa';
 const Admin = () => {
   const theme = useTheme();
   const [tabValue, setTabValue] = useState(0);
-  const { getMyRequests, updateRequestStatus } = useAuth();
-  const [checkRequests, setCheckRequests] = useState([]);
-  const [cancelRequests, setCancelRequests] = useState([]);
 
-  const fetchRequests = async () => {
-    const response = await getMyRequests();
-    if (response.success && Array.isArray(response.data)) {
-      const issue = response.data.filter(r => r.requestType === 'IssueCheque');
-      const cancel = response.data.filter(r => r.requestType === 'CancelCheque');
-      setCheckRequests(issue);
-      setCancelRequests(cancel);
-    }
+  // Dữ liệu mẫu cho yêu cầu sổ séc
+  const [checkRequests, setCheckRequests] = useState([
+    {
+      id: 1,
+      accountNumber: '1907 1903 0300 17',
+      checkQuantity: '25',
+      deliveryAddress: '123 Đường Láng, Hà Nội',
+      status: 'pending',
+    },
+    {
+      id: 2,
+      accountNumber: '1907 1903 0300 18',
+      checkQuantity: '50',
+      deliveryAddress: '456 Lê Lợi, TP.HCM',
+      status: 'pending',
+    },
+    {
+      id: 3,
+      accountNumber: '1907 1903 0300 19',
+      checkQuantity: '100',
+      deliveryAddress: '789 Nguyễn Huệ, Đà Nẵng',
+      status: 'approved',
+    },
+  ]);
+
+  // Dữ liệu mẫu cho yêu cầu hủy séc
+  const [cancelRequests, setCancelRequests] = useState([
+    {
+      id: 1,
+      accountNumber: '1907 1903 0300 17',
+      checkNumber: 'CHK123456',
+      status: 'pending',
+    },
+    {
+      id: 2,
+      accountNumber: '1907 1903 0300 18',
+      checkNumber: 'CHK789012',
+      status: 'pending',
+    },
+    {
+      id: 3,
+      accountNumber: '1907 1903 0300 19',
+      checkNumber: 'CHK345678',
+      status: 'rejected',
+    },
+  ]);
+
+  const handleApproveCheck = (id) => {
+    setCheckRequests(
+      checkRequests.map((req) =>
+        req.id === id ? { ...req, status: 'approved' } : req
+      )
+    );
   };
 
-  useEffect(() => {
-    fetchRequests();
-  }, [getMyRequests]);
-
-  const handleApproveCheck = async (id) => {
-    const res = await updateRequestStatus(id, 'Approved');
-    if (res.success) fetchRequests();
+  const handleRejectCheck = (id) => {
+    setCheckRequests(
+      checkRequests.map((req) =>
+        req.id === id ? { ...req, status: 'rejected' } : req
+      )
+    );
   };
 
-  const handleRejectCheck = async (id) => {
-    const res = await updateRequestStatus(id, 'Rejected');
-    if (res.success) fetchRequests();
+  const handleApproveCancel = (id) => {
+    setCancelRequests(
+      cancelRequests.map((req) =>
+        req.id === id ? { ...req, status: 'approved' } : req
+      )
+    );
   };
 
-  const handleApproveCancel = async (id) => {
-    const res = await updateRequestStatus(id, 'Approved');
-    if (res.success) fetchRequests();
-  };
-
-  const handleRejectCancel = async (id) => {
-    const res = await updateRequestStatus(id, 'Rejected');
-    if (res.success) fetchRequests();
+  const handleRejectCancel = (id) => {
+    setCancelRequests(
+      cancelRequests.map((req) =>
+        req.id === id ? { ...req, status: 'rejected' } : req
+      )
+    );
   };
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
   };
 
-  const renderStatusChip = (status) => {
-    const normalized = status?.toLowerCase();
-    const label = normalized === 'pending'
-      ? 'Đang chờ'
-      : normalized === 'approved'
-      ? 'Đã phê duyệt'
-      : normalized === 'rejected'
-      ? 'Đã từ chối'
-      : status;
-    const color = normalized === 'pending'
-      ? mediumGray
-      : normalized === 'approved'
-      ? exceptionGreen
-      : normalized === 'rejected'
-      ? '#d32f2f'
-      : '#999';
-    return <Chip label={label} sx={{ bgcolor: color, color: '#fff', fontWeight: 600 }} />;
-  };
-
   return (
     <>
+      {/* Override class bên ngoài */}
       <GlobalStyles
         styles={{
           '._mainContent_b1piq_13': {
@@ -111,8 +134,23 @@ const Admin = () => {
         }}
       />
 
-      <Box sx={{ p: 3, backgroundColor: '#ffffff', minHeight: '100vh' }}>
-        <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
+      {/* Main container */}
+      <Box
+        sx={{
+          p: 3,
+          backgroundColor: '#ffffff',
+          minHeight: '100vh',
+        }}
+      >
+        {/* Header */}
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            mb: 4,
+          }}
+        >
           <Typography variant="h5" fontWeight={700} color={primaryBlack}>
             Bảng điều khiển quản trị
           </Typography>
@@ -121,50 +159,145 @@ const Admin = () => {
           </Avatar>
         </Box>
 
+        {/* Tabs */}
         <Tabs
           value={tabValue}
           onChange={handleTabChange}
           sx={{
             mb: 4,
-            '& .MuiTab-root': { textTransform: 'none', color: mediumGray, fontWeight: 600 },
-            '& .Mui-selected': { color: primaryBlack },
-            '& .MuiTabs-indicator': { backgroundColor: exceptionGreen },
+            '& .MuiTab-root': {
+              textTransform: 'none',
+              color: mediumGray,
+              fontWeight: 600,
+            },
+            '& .Mui-selected': {
+              color: primaryBlack,
+            },
+            '& .MuiTabs-indicator': {
+              backgroundColor: exceptionGreen,
+            },
           }}
         >
           <Tab label="Yêu cầu sổ séc" />
           <Tab label="Yêu cầu hủy séc" />
         </Tabs>
 
+        {/* Check Requests Table */}
         {tabValue === 0 && (
-          <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
+          <Card
+            sx={{
+              mb: 4,
+              borderRadius: 2,
+              backgroundColor: lightGray,
+              boxShadow: theme.shadows[1],
+              borderLeft: `4px solid ${primaryBlack}`,
+            }}
+          >
             <CardContent>
               <Typography variant="h6" fontWeight={600} color={primaryBlack} mb={2}>
                 Danh sách yêu cầu sổ séc
               </Typography>
+
               <TableContainer component={Paper} sx={{ boxShadow: theme.shadows[1] }}>
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Tài khoản</Typography></TableCell>
-                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Chi tiết</Typography></TableCell>
-                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Trạng thái</Typography></TableCell>
-                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Hành động</Typography></TableCell>
+                      <TableCell>
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Tài khoản
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Số lượng tờ séc
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Địa chỉ giao
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Trạng thái
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Hành động
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {checkRequests.map((request) => (
                       <TableRow key={request.id}>
-                        <TableCell>{request.customerId || '---'}</TableCell>
-                        <TableCell>{request.requestDetail}</TableCell>
-                        <TableCell align="center">{renderStatusChip(request.status)}</TableCell>
+                        <TableCell>
+                          <Typography variant="body2" color="text.secondary">
+                            {request.accountNumber}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="body2" color="text.secondary">
+                            {request.checkQuantity} tờ
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="body2" color="text.secondary">
+                            {request.deliveryAddress}
+                          </Typography>
+                        </TableCell>
                         <TableCell align="center">
-                          {request.status?.toLowerCase() === 'pending' && (
+                          <Chip
+                            label={
+                              request.status === 'pending'
+                                ? 'Đang chờ'
+                                : request.status === 'approved'
+                                ? 'Đã phê duyệt'
+                                : 'Đã từ chối'
+                            }
+                            sx={{
+                              bgcolor:
+                                request.status === 'pending'
+                                  ? mediumGray
+                                  : request.status === 'approved'
+                                  ? exceptionGreen
+                                  : '#d32f2f',
+                              color: '#fff',
+                              fontWeight: 600,
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell align="center">
+                          {request.status === 'pending' && (
                             <Box display="flex" gap={1} justifyContent="center">
-                              <Button variant="contained" size="small" onClick={() => handleApproveCheck(request.id)} sx={{ backgroundColor: exceptionGreen, '&:hover': { backgroundColor: '#1b5e20' }, textTransform: 'none' }}>
-                                <CheckCircle fontSize="small" sx={{ mr: 1 }} /> Phê duyệt
+                              <Button
+                                variant="contained"
+                                size="small"
+                                onClick={() => handleApproveCheck(request.id)}
+                                sx={{
+                                  backgroundColor: exceptionGreen,
+                                  '&:hover': {
+                                    backgroundColor: '#1b5e20',
+                                  },
+                                  textTransform: 'none',
+                                }}
+                              >
+                                <CheckCircle fontSize="small" sx={{ mr: 1 }} />
+                                Phê duyệt
                               </Button>
-                              <Button variant="outlined" size="small" onClick={() => handleRejectCheck(request.id)} sx={{ borderColor: '#d32f2f', color: '#d32f2f', textTransform: 'none' }}>
-                                <Cancel fontSize="small" sx={{ mr: 1 }} /> Từ chối
+                              <Button
+                                variant="outlined"
+                                size="small"
+                                onClick={() => handleRejectCheck(request.id)}
+                                sx={{
+                                  borderColor: '#d32f2f',
+                                  color: '#d32f2f',
+                                  textTransform: 'none',
+                                }}
+                              >
+                                <Cancel fontSize="small" sx={{ mr: 1 }} />
+                                Từ chối
                               </Button>
                             </Box>
                           )}
@@ -178,36 +311,112 @@ const Admin = () => {
           </Card>
         )}
 
+        {/* Cancel Check Requests Table */}
         {tabValue === 1 && (
-          <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
+          <Card
+            sx={{
+              mb: 4,
+              borderRadius: 2,
+              backgroundColor: lightGray,
+              boxShadow: theme.shadows[1],
+              borderLeft: `4px solid ${primaryBlack}`,
+            }}
+          >
             <CardContent>
               <Typography variant="h6" fontWeight={600} color={primaryBlack} mb={2}>
                 Danh sách yêu cầu hủy séc
               </Typography>
+
               <TableContainer component={Paper} sx={{ boxShadow: theme.shadows[1] }}>
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Tài khoản</Typography></TableCell>
-                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Chi tiết</Typography></TableCell>
-                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Trạng thái</Typography></TableCell>
-                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Hành động</Typography></TableCell>
+                      <TableCell>
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Tài khoản
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Số séc
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Trạng thái
+                        </Typography>
+                      </TableCell>
+                      <TableCell align="center">
+                        <Typography variant="body2" fontWeight={600} color={primaryBlack}>
+                          Hành động
+                        </Typography>
+                      </TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
                     {cancelRequests.map((request) => (
                       <TableRow key={request.id}>
-                        <TableCell>{request.customerId || '---'}</TableCell>
-                        <TableCell>{request.requestDetail}</TableCell>
-                        <TableCell align="center">{renderStatusChip(request.status)}</TableCell>
+                        <TableCell>
+                          <Typography variant="body2" color="text.secondary">
+                            {request.accountNumber}
+                          </Typography>
+                        </TableCell>
+                        <TableCell>
+                          <Typography variant="body2" color="text.secondary">
+                            {request.checkNumber}
+                          </Typography>
+                        </TableCell>
                         <TableCell align="center">
-                          {request.status?.toLowerCase() === 'pending' && (
+                          <Chip
+                            label={
+                              request.status === 'pending'
+                                ? 'Đang chờ'
+                                : request.status === 'approved'
+                                ? 'Đã phê duyệt'
+                                : 'Đã từ chối'
+                            }
+                            sx={{
+                              bgcolor:
+                                request.status === 'pending'
+                                  ? mediumGray
+                                  : request.status === 'approved'
+                                  ? exceptionGreen
+                                  : '#d32f2f',
+                              color: '#fff',
+                              fontWeight: 600,
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell align="center">
+                          {request.status === 'pending' && (
                             <Box display="flex" gap={1} justifyContent="center">
-                              <Button variant="contained" size="small" onClick={() => handleApproveCancel(request.id)} sx={{ backgroundColor: exceptionGreen, '&:hover': { backgroundColor: '#1b5e20' }, textTransform: 'none' }}>
-                                <CheckCircle fontSize="small" sx={{ mr: 1 }} /> Phê duyệt
+                              <Button
+                                variant="contained"
+                                size="small"
+                                onClick={() => handleApproveCancel(request.id)}
+                                sx={{
+                                  backgroundColor: exceptionGreen,
+                                  '&:hover': {
+                                    backgroundColor: '#1b5e20',
+                                  },
+                                  textTransform: 'none',
+                                }}
+                              >
+                                <CheckCircle fontSize="small" sx={{ mr: 1 }} />
+                                Phê duyệt
                               </Button>
-                              <Button variant="outlined" size="small" onClick={() => handleRejectCancel(request.id)} sx={{ borderColor: '#d32f2f', color: '#d32f2f', textTransform: 'none' }}>
-                                <Cancel fontSize="small" sx={{ mr: 1 }} /> Từ chối
+                              <Button
+                                variant="outlined"
+                                size="small"
+                                onClick={() => handleRejectCancel(request.id)}
+                                sx={{
+                                  borderColor: '#d32f2f',
+                                  color: '#d32f2f',
+                                  textTransform: 'none',
+                                }}
+                              >
+                                <Cancel fontSize="small" sx={{ mr: 1 }} />
+                                Từ chối
                               </Button>
                             </Box>
                           )}

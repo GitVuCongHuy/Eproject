@@ -7,6 +7,6 @@ public class RegisterViewModel
     public string Mobile { get; set; }
     public string CitizenIdentificationCard { get; set; }
 
-    public string Adress;
+    // public string Adress;
  
 }
