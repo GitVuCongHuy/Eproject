@@ -13,6 +13,11 @@ import Guide from "./pages/home/Guide";
 import Admin from "./pages/account/Admin";
 import CancelCheckPayment from "./pages/home/ChequebookDelete";
 
+//KienDev
+import AdminLayout from "./layouts/admin_layout/admin_layout";
+import Admin_Main from "./pages/admin/Admin_Main";
+//KienDev
+
 function App() {
   return (
     <AuthProvider>
@@ -21,16 +26,18 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<DefaultLayout />}>
             <Route index element={<Home />} />
-              <Route path="transfer/internal" element={<Internal />} />
-              <Route path="transfer/external" element={<External />} />
-              <Route path="transfer/bills" element={<Bill />} />
+            <Route path="transfer/internal" element={<Internal />} />
+            <Route path="transfer/external" element={<External />} />
+            <Route path="transfer/bills" element={<Bill />} />
             <Route path="account" element={<AccountAndCards />} />
             <Route path="statement" element={<Statement />} />
             <Route path="chequebook" element={<CheckRequest />} />
             <Route path="guide" element={<Guide />} />
             <Route path="admin" element={<Admin />} />
             <Route path="cancel" element={<CancelCheckPayment />} />
+            
           </Route>
+          <Route path="admin_main" element={<AdminLayout><Admin_Main/></AdminLayout>} />
         </Routes>
       </Router>
     </AuthProvider>
