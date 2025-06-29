@@ -38,12 +38,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import vi from 'date-fns/locale/vi';
 
-// Import thư viện PDF và font chữ
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { callAddFont } from '../../Roboto-Regular-normal.js'; 
 
-// Bảng màu hiện đại với gradient
 const colors = {
   primary: '#1a1a2e',
   secondary: '#16213e',
@@ -62,9 +60,8 @@ const colors = {
   glassEffect: 'rgba(255, 255, 255, 0.25)',
 };
 
-// Hàm helper để định dạng tiền tệ
 const formatCurrency = (amount) => {
-  if (typeof amount !== 'number') return amount;
+    if (typeof amount !== 'number') return amount;
   return amount.toLocaleString('vi-VN');
 };
 
@@ -124,7 +121,6 @@ const Home = () => {
     return transactionDate.toDateString() === selectedDate.toDateString();
   });
 
-  // Hàm xử lý xuất PDF
   const handleExportPDF = () => {
     const transactionsToExport = filteredTransactions;
     if (transactionsToExport.length === 0) {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom'; // << THÊM useNavigate
 import { useAuth } from '../../context/context';
 import {
   Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse,
@@ -88,6 +88,7 @@ const getInitials = (name = '') => {
 
 const Sidebar = () => {
   const location = useLocation();
+  const navigate = useNavigate(); // << KHỞI TẠO useNavigate
   const { getUserInfo, logout } = useAuth();
   const [user, setUser] = useState(null);
   const [openMenu, setOpenMenu] = useState('');
@@ -101,14 +102,21 @@ const Sidebar = () => {
         console.error("Failed to fetch user info:", result.message);
         if (result.errorType === 'InvalidToken') {
           logout();
+          navigate('/login', { replace: true }); // << CHUYỂN HƯỚNG KHI TOKEN KHÔNG HỢP LỆ
         }
       }
     };
     fetchUser();
-  }, [getUserInfo, logout]);
+  }, [getUserInfo, logout, navigate]); // << THÊM navigate VÀO DEPENDENCY ARRAY
 
   const handleToggle = (id) => setOpenMenu(openMenu === id ? '' : id);
   const isActive = (path) => location.pathname === path || (path !== '/' && location.pathname.startsWith(path));
+
+  // << HÀM XỬ LÝ ĐĂNG XUẤT MỚI
+  const handleLogout = () => {
+    logout(); // Gọi hàm logout từ context (hàm này sẽ xóa token)
+    navigate('/login', { replace: true }); // Chuyển hướng về trang đăng nhập và thay thế lịch sử
+  };
 
   return (
     <Drawer
@@ -160,7 +168,7 @@ const Sidebar = () => {
               style={{ 
                 height: 32, 
                 width: 200,
-                filter: 'brightness(0) invert(1)'
+                filter: 'brightness(0 ) invert(1)'
               }}
             />
           </Box>
@@ -234,7 +242,6 @@ const Sidebar = () => {
                   border: isActive(item.path) ? `1px solid ${colors.primary}20` : '1px solid transparent',
                   position: 'relative',
                   overflow: 'hidden',
-                  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   '&::before': {
                     content: '""',
                     position: 'absolute',
@@ -350,7 +357,7 @@ const Sidebar = () => {
           variant="contained"
           fullWidth
           startIcon={<LogoutRounded />}
-          onClick={logout}
+          onClick={handleLogout} // << GỌI HÀM handleLogout
           sx={{
             borderRadius: '12px',
             padding: '12px 16px',
