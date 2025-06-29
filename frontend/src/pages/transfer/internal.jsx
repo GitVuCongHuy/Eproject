@@ -7,7 +7,7 @@ import {
 } from '@mui/material';
 import { Search, PersonAdd, AccountBalance, Person, Star, Business } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useAuth } from '../../context/context';
+import { useAuth } from '../../context/Context';
 import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme({
@@ -193,8 +193,8 @@ const handleRecipientClick = (recipient) => {
   return (
     <>
       <GlobalStyles styles={{
-        '._mainContent_b1piq_13': { marginLeft: '30px !important', marginTop: '30px!important' },
-        'html, body': { backgroundColor: '#fff' }
+        '._mainContent_b1piq_13': { marginLeft: '10px !important', marginTop: '0px!important' },
+        'html, body': { backgroundColor: '#fff', overflow:'hidden'}
       }} />
       <ThemeProvider theme={theme}>
         <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 3 }}>
@@ -209,7 +209,7 @@ const handleRecipientClick = (recipient) => {
                 Chuyển tiền tới tài khoản khác
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                Bao gồm chuyển tiền trong Techcombank, Liên Ngân hàng, chuyển nhanh Napas 24/7 và chuyển tiền tới tài khoản chứng khoán
+                Chỉ chuyển tiền trong nội ngân hàng
               </Typography>
             </Paper>
 
@@ -231,11 +231,10 @@ const handleRecipientClick = (recipient) => {
               <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 3 }}>
                 <Tabs value={tabValue} onChange={handleTabChange} sx={{ '& .MuiTab-root': { textTransform: 'none', fontWeight: 500, fontSize: '1rem' }}}>
                   <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Star /> Tất cả người nhận</Box>} />
-                  <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><AccountBalance /> trong Techcombank</Box>} />
                   <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Business /> Ngân hàng khác</Box>} />
                 </Tabs>
               </Box>
-              <Box sx={{ p: 3 }}>
+              <Box sx={{ p: 2, height:'500px',overflowY:'scroll'}}>
                 <TabPanel value={tabValue} index={0}>
                   {filteredRecipients.length > 0 ? (
                     // <<< SỬA: Truyền prop onRecipientClick
@@ -251,7 +250,7 @@ const handleRecipientClick = (recipient) => {
                 <TabPanel value={tabValue} index={1}>
                   <Box sx={{ textAlign: 'center', py: 4 }}>
                     <AccountBalance sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-                    <Typography variant="h6" color="text.secondary">Danh sách người nhận trong Techcombank</Typography>
+                    <Typography variant="h6" color="text.secondary">Xin lỗi quý khách, chúng tôi đang cập nhật chức năng này</Typography>
                   </Box>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>

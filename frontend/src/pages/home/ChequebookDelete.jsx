@@ -14,7 +14,7 @@ import {
   Info
 } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
-import { useAuth } from '../../context/context';
+import { useAuth } from '../../context/Context';
 
 const primaryBlack = '#1a1a1a';
 const mediumGray = '#6b7280';

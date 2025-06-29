@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // << THÊM useNavigate
-import { useAuth } from '../../context/context';
+import { useAuth } from '../../context/Context';
 import {
   Drawer, List, ListItemButton, ListItemIcon, ListItemText, Collapse,
   Avatar, Typography, Box, Button, Divider, Chip
@@ -53,10 +53,11 @@ const menuItems = [
     hasSubmenu: true,
     badge: 'Mới',
     submenu: [
-      { name: 'Chuyển tiền', path: '/transfer/internal', icon: '💸' },  
-      { name: 'Yêu cầu sổ séc', path: '/chequebook', icon: '📝' },
-      { name: 'Chặn thanh toán séc', path: '/cancel', icon: '🚫' },
-      { name: 'Sao kê giao dịch', path: '/statement', icon: '📊' }
+      { name: 'Chuyển tiền', path: '/transfer/internal', icon: '💸' },
+      { name: 'Yêu cầu thay đổi thông tin', path: '/update-info', icon: '📝' },
+      { name: 'Yêu cầu cấp sổ séc', path: '/chequebook', icon: '📒' },
+      { name: 'Hủy séc', path: '/cancel', icon: '🚫' },
+      { name: 'Sao kê giao dịch', path: '/statement', icon: '📊' },
     ]
   },
   {
@@ -67,10 +68,8 @@ const menuItems = [
     hasSubmenu: true,
     badge: null,
     submenu: [
-      { name: 'Cài đặt', path: '/features/settings', icon: '⚙️' },
-      { name: 'Yêu cầu sổ séc', path: '/chequebook', icon: '📝' },
-      { name: 'Hủy sổ séc', path: '/cancel', icon: '❌' },
-      { name: 'Sao kê', path: '/statement', icon: '📋' }
+      // { name: 'Cài đặt', path: '/settings', icon: '⚙️' },
+      { name: 'Hướng dẫn', path: '/guide', icon: '❓' },
     ]
   }
 ];

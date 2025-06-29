@@ -25,7 +25,7 @@ import {
   CheckCircle,
   Cancel,
 } from '@mui/icons-material';
-import { useAuth } from '../../context/context';
+import { useAuth } from '../../context/Context';
 
 const primaryBlack = '#333';
 const mediumGray = '#757575';

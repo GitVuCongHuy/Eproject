@@ -1,7 +1,7 @@
 // src/pages/Login/Login.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // << 1. Import useNavigate
-import { useAuth } from "../../context/context";
+import { useAuth } from "../../context/Context";
 import "./Login.css";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 

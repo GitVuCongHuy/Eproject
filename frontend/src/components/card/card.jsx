@@ -1,1 +1,0 @@
-// code các thẻ card ở đây

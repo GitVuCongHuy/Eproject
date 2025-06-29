@@ -21,7 +21,7 @@ import {
   ArrowBack
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/context';
+import { useAuth } from '../../context/Context';
 
 const primaryBlack = '#1a1a1a';
 const mediumGray = '#6b7280';
@@ -49,12 +49,17 @@ const Statement = () => {
 
   // Calculate summary statistics
   const totalCredit = transactions
+
     .filter(t => t.type === 'credit')
-    .reduce((sum, t) => sum + parseFloat(t.amount.replace(/[^\d.-]/g, '')), 0);
+
+    .reduce((sum, t) => sum + t.rawAmount, 0); 
   
+
   const totalDebit = transactions
+
     .filter(t => t.type === 'debit')
-    .reduce((sum, t) => sum + parseFloat(t.amount.replace(/[^\d.-]/g, '')), 0);
+
+    .reduce((sum, t) => sum + t.rawAmount, 0); // Sử dụng rawAmount
 
   const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN', {
     style: 'currency',
@@ -194,10 +199,11 @@ const Statement = () => {
           marginTop: '30px !important',
         },
         'html, body': {
-          overflow: 'auto',
+          overflowY: 'scroll', // Thay đổi thành overflowY: 'scroll'
           backgroundColor: '#fff',
         },
       }} />
+
       
       <Box 
         sx={{ 
@@ -518,7 +524,7 @@ const Statement = () => {
                 </Box>
               </Box>
 
-              <TableContainer sx={{ maxHeight: 600 }}>
+              <TableContainer sx={{ maxHeight: 600, overflowX: 'hidden', overflowY: 'auto' }}>
                 <Table stickyHeader>
                   <TableHead>
                     <TableRow>

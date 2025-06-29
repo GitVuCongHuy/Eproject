@@ -17,7 +17,31 @@ export const AuthProvider = ({ children }) => {
       'Authorization': `Bearer ${token}`
     };
   };
+  const requestUpdateInfo = async (fullName, email, mobile, password) => {
+    try {
+      // Tạo đối tượng RequestDetail chỉ với các trường có giá trị
+      const requestDetailObj = {};
+      if (fullName !== undefined && fullName !== null) requestDetailObj.FullName = fullName;
+      if (email !== undefined && email !== null) requestDetailObj.Email = email;
+      if (mobile !== undefined && mobile !== null) requestDetailObj.Mobile = mobile;
+      if (password !== undefined && password !== null) requestDetailObj.Password = password;
 
+      const response = await fetch(`${API_BASE_URL}/ServiceRequest/create-request`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          RequestType: 'UpdateInfo',
+          RequestDetail: JSON.stringify(requestDetailObj), // Stringify đối tượng chi tiết
+        }),
+      });
+      const data = await response.json();
+      return data.status === 200
+        ? { success: true, message: data.message }
+        : { success: false, message: data.message, errorType: data.error };
+    } catch (error) {
+      return { success: false, message: "Lỗi khi gửi yêu cầu cập nhật thông tin." };
+    }
+  };
   const requestIssueCheque = async (accountId, amount) => {
     try {
       const response = await fetch(`${API_BASE_URL}/ServiceRequest/create-request`, {
@@ -402,7 +426,7 @@ export const AuthProvider = ({ children }) => {
     requestIssueCheque,
   getMyRequests: getMyServiceRequests,
   requestCancelCheque,
-  
+  requestUpdateInfo,
 
   };
 
