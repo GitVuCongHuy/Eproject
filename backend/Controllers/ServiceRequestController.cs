@@ -89,7 +89,8 @@ public class ServiceRequestController : ControllerBase
             RequestType = model.RequestType,
             RequestDetail = model.RequestDetail,
             RequestDate = DateTime.Now,
-            Status = "Pending"
+            Status = "Pending",
+            Reason = model.Reason
         };
 
         _context.Service_requests.Add(request);
@@ -99,7 +100,14 @@ public class ServiceRequestController : ControllerBase
         {
             Status = 200,
             Message = "Tạo yêu cầu thành công.",
-            Data = request
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDate,
+                request.Status,
+                request.Reason
+            }
         });
     }
 
@@ -119,7 +127,8 @@ public class ServiceRequestController : ControllerBase
             RequestType = RequestTypeEnum.UnlockAccount,
             RequestDetail = JsonSerializer.Serialize(new { model.Reason }),
             RequestDate = DateTime.Now,
-            Status = "Pending"
+            Status = "Pending",
+            Reason = model.Reason
         };
 
         _context.Service_requests.Add(request);
@@ -129,7 +138,14 @@ public class ServiceRequestController : ControllerBase
         {
             Status = 200,
             Message = "Đã gửi yêu cầu mở khóa tài khoản.",
-            Data = request
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDate,
+                request.Status,
+                request.Reason
+            }
         });
     }
 
@@ -155,7 +171,8 @@ public class ServiceRequestController : ControllerBase
             RequestType = RequestTypeEnum.UnlockAccountCard,
             RequestDetail = detail,
             RequestDate = DateTime.Now,
-            Status = "Pending"
+            Status = "Pending",
+            Reason = model.Reason
         };
 
         _context.Service_requests.Add(request);
@@ -165,7 +182,14 @@ public class ServiceRequestController : ControllerBase
         {
             Status = 200,
             Message = "Đã gửi yêu cầu mở khóa thẻ.",
-            Data = request
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDate,
+                request.Status,
+                request.Reason
+            }
         });
     }
 
@@ -184,7 +208,14 @@ public class ServiceRequestController : ControllerBase
         {
             Status = 200,
             Message = "Danh sách yêu cầu của bạn",
-            Data = requests
+            Data = requests.Select(r => new
+            {
+                r.RequestId,
+                r.RequestType,
+                r.RequestDate,
+                r.Status,
+                r.Reason
+            })
         });
     }
 
@@ -207,6 +238,7 @@ public class ServiceRequestController : ControllerBase
                 r.RequestType,
                 r.RequestDate,
                 r.Status,
+                r.Reason,
                 Customer = r.customer?.full_name
             })
         });
@@ -216,7 +248,7 @@ public class ServiceRequestController : ControllerBase
     [HttpPost("process-request/{requestId}")]
     public async Task<IActionResult> ProcessRequest(int requestId)
     {
-        var request = await _context.Service_requests.Include(r => r.customer).FirstOrDefaultAsync(r => r.RequestId == requestId);
+        var request = await _context.Service_requests.FindAsync(requestId);
         if (request == null || request.Status != "Pending")
             return BadRequest(new ApiError { Status = 400, Error = "InvalidRequest", Message = "Không tìm thấy hoặc đã xử lý." });
 
@@ -226,10 +258,10 @@ public class ServiceRequestController : ControllerBase
             {
                 case RequestTypeEnum.IssueCheque:
                     var issueData = JsonSerializer.Deserialize<ChequeRequestModel>(request.RequestDetail);
-                    var account = await _context.Accounts.FindAsync(issueData.AccountId);
-                    if (account != null && account.Balance >= issueData.Amount)
+                    var accIssue = await _context.Accounts.FindAsync(issueData.AccountId);
+                    if (accIssue != null && accIssue.Balance >= issueData.Amount)
                     {
-                        account.Balance -= issueData.Amount;
+                        accIssue.Balance -= issueData.Amount;
                         _context.Cheques.Add(new Cheque
                         {
                             AccountId = issueData.AccountId,
@@ -275,6 +307,45 @@ public class ServiceRequestController : ControllerBase
                     else request.Status = "Rejected";
                     break;
 
+                case RequestTypeEnum.CloseAccount:
+                    var accClose = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
+                    var closeAcc = await _context.Accounts.FindAsync(accClose.AccountId);
+                    if (closeAcc != null && closeAcc.Balance == 0 && closeAcc.Status == "Active")
+                    {
+                        closeAcc.Status = "Closed";
+                        request.Status = "Approved";
+                    }
+                    else request.Status = "Rejected";
+                    break;
+
+                case RequestTypeEnum.LockAccount:
+                    var accLock = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
+                    var lockAcc = await _context.Accounts.FindAsync(accLock.AccountId);
+                    if (lockAcc != null && lockAcc.Status == "Active")
+                    {
+                        lockAcc.Status = "Locked";
+                        request.Status = "Approved";
+                    }
+                    else request.Status = "Rejected";
+                    break;
+
+                case RequestTypeEnum.UpdateInfo:
+                     var info = JsonSerializer.Deserialize<UpdateInfoModel>(request.RequestDetail);
+                    var customer = await _context.Customers.FindAsync(request.CustomerId);
+                    if (customer != null)
+                    {
+                        if (!string.IsNullOrEmpty(info.FullName))
+                            customer.full_name = info.FullName;
+                        if (!string.IsNullOrEmpty(info.Email))
+                            customer.email = info.Email;
+                        if (!string.IsNullOrEmpty(info.Mobile))
+                            customer.mobile = info.Mobile;
+
+                        request.Status = "Approved";
+                    }
+                    else request.Status = "Rejected";
+                break;
+
                 default:
                     request.Status = "Rejected";
                     break;
@@ -287,7 +358,19 @@ public class ServiceRequestController : ControllerBase
 
         await _context.SaveChangesAsync();
 
-        return Ok(new ApiResponse<object> { Status = 200, Message = "Đã xử lý yêu cầu.", Data = request });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Đã xử lý yêu cầu.",
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDate,
+                request.Status,
+                request.Reason
+            }
+        });
     }
 
     [Authorize]
@@ -301,7 +384,19 @@ public class ServiceRequestController : ControllerBase
         request.Status = "Rejected";
         await _context.SaveChangesAsync();
 
-        return Ok(new ApiResponse<object> { Status = 200, Message = "Đã từ chối yêu cầu.", Data = request });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Đã từ chối yêu cầu.",
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDate,
+                request.Status,
+                request.Reason
+            }
+        });
     }
 
     [Authorize]
@@ -313,7 +408,12 @@ public class ServiceRequestController : ControllerBase
             .OrderByDescending(c => c.IssuedDate)
             .ToListAsync();
 
-        return Ok(new ApiResponse<object> { Status = 200, Message = "Lịch sử séc", Data = cheques });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Lịch sử séc",
+            Data = cheques
+        });
     }
 
     [Authorize]
@@ -328,6 +428,11 @@ public class ServiceRequestController : ControllerBase
         cheque.PaidDate = DateTime.Now;
         await _context.SaveChangesAsync();
 
-        return Ok(new ApiResponse<object> { Status = 200, Message = "Đã thanh toán séc.", Data = cheque });
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Đã thanh toán séc.",
+            Data = cheque
+        });
     }
 }
