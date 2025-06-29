@@ -1,7 +1,8 @@
 function Admin_Main(){
     return(<>
-        Đây là trang admin 
         
+      
+        Đây là trang admin
     </>)
 }
 

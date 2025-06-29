@@ -4715,16 +4715,11 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\kien2\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\huyhu\\.nuget\\packages\\": {}
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "D:\\hoctap\\DoAN\\backend\\backend.csproj",
       "projectName": "backend",
       "projectPath": "D:\\hoctap\\DoAN\\backend\\backend.csproj",
@@ -4733,16 +4728,6 @@
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\kien2\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-      "projectUniqueName": "E:\\Eproject\\backend\\backend.csproj",
-      "projectName": "backend",
-      "projectPath": "E:\\Eproject\\backend\\backend.csproj",
-      "packagesPath": "C:\\Users\\huyhu\\.nuget\\packages\\",
-      "outputPath": "E:\\Eproject\\backend\\obj\\",
-      "projectStyle": "PackageReference",
-      "configFilePaths": [
-        "C:\\Users\\huyhu\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -4832,11 +4817,7 @@
             "privateAssets": "all"
           }
         },
-<<<<<<< HEAD
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
-=======
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.408/PortableRuntimeIdentifierGraph.json"
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       }
     }
   }

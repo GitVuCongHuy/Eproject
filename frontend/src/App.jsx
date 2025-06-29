@@ -16,6 +16,8 @@ import CancelCheckPayment from "./pages/home/ChequebookDelete";
 //KienDev
 import AdminLayout from "./layouts/admin_layout/admin_layout";
 import Admin_Main from "./pages/admin/Admin_Main";
+import Admin_request from "./pages/admin/Admin_request";
+import Admin_account from "./pages/admin/Admin_account";
 //KienDev
 
 function App() {
@@ -37,7 +39,13 @@ function App() {
             <Route path="cancel" element={<CancelCheckPayment />} />
             
           </Route>
-          <Route path="admin_main" element={<AdminLayout><Admin_Main/></AdminLayout>} />
+
+          <Route path="/admin_new" element={<AdminLayout />}>
+              <Route path="admin_main" element={<Admin_Main/>} />
+              <Route path="admin_request" element={<Admin_request/>} />
+               <Route path="admin_account" element={<Admin_account/>} />
+          </Route>
+        
         </Routes>
       </Router>
     </AuthProvider>

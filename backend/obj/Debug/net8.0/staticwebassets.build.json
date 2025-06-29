@@ -1,10 +1,6 @@
 {
   "Version": 1,
-<<<<<<< HEAD
-  "Hash": "Oqw4HoskJ32MrA9N/mtiW1aDh06lW1swtFESCo+JS9E=",
-=======
-  "Hash": "xQPjXJw5jLLAnH8YgEWLnzwVP7C7HuX2HON+Mo+CPMs=",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
+  "Hash": "zjr3iiWvLwKiM3zKQ5us5WELjyq6EP/HliZizaXOtew=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
@@ -14,28 +10,17 @@
     {
       "Name": "backend\\wwwroot",
       "Source": "backend",
-<<<<<<< HEAD
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css",
       "SourceId": "backend",
       "SourceType": "Computed",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css",
-      "SourceId": "backend",
-      "SourceType": "Computed",
-      "ContentRoot": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "backend#[.{fingerprint}]?.styles.css",
       "AssetKind": "All",
@@ -50,7 +35,6 @@
       "Integrity": "LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-<<<<<<< HEAD
       "OriginalItemSpec": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css"
     },
     {
@@ -58,15 +42,6 @@
       "SourceId": "backend",
       "SourceType": "Computed",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
-=======
-      "OriginalItemSpec": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css"
-    },
-    {
-      "Identity": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css",
-      "SourceId": "backend",
-      "SourceType": "Computed",
-      "ContentRoot": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "backend#[.{fingerprint}]!.bundle.scp.css",
       "AssetKind": "All",
@@ -81,7 +56,6 @@
       "Integrity": "LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-<<<<<<< HEAD
       "OriginalItemSpec": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css"
     },
     {
@@ -89,15 +63,6 @@
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "OriginalItemSpec": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css"
-    },
-    {
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\css\\site.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "css/site#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -115,17 +80,10 @@
       "OriginalItemSpec": "wwwroot\\css\\site.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\favicon.ico",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\favicon.ico",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "favicon#[.{fingerprint}]?.ico",
       "AssetKind": "All",
@@ -143,17 +101,10 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\js\\site.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\js\\site.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "js/site#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -171,17 +122,10 @@
       "OriginalItemSpec": "wwwroot\\js\\site.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -199,17 +143,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -227,17 +164,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -255,17 +185,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -283,17 +206,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -311,17 +227,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -339,17 +248,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -367,17 +269,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -395,17 +290,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -423,17 +311,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -451,17 +332,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -479,17 +353,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -507,17 +374,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -535,17 +395,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -563,17 +416,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -591,17 +437,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -619,17 +458,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -647,17 +479,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -675,17 +500,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -703,17 +521,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -731,17 +542,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -759,17 +563,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -787,17 +584,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -815,17 +605,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -843,17 +626,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -871,17 +647,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -899,17 +668,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -927,17 +689,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -955,17 +710,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -983,17 +731,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1011,17 +752,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min#[.{fingerprint}]?.css",
       "AssetKind": "All",
@@ -1039,17 +773,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1067,17 +794,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1095,17 +815,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1123,17 +836,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1151,17 +857,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1179,17 +878,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1207,17 +899,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1235,17 +920,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1263,17 +941,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1291,17 +962,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1319,17 +983,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1347,17 +1004,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1375,17 +1025,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1403,17 +1046,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\LICENSE",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\LICENSE",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/bootstrap/LICENSE#[.{fingerprint}]?",
       "AssetKind": "All",
@@ -1431,17 +1067,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1459,17 +1088,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1487,17 +1109,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1515,17 +1130,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation/dist/additional-methods#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1543,17 +1151,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation/dist/additional-methods.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1571,17 +1172,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1599,17 +1193,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation/dist/jquery.validate.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1627,17 +1214,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery-validation/LICENSE#[.{fingerprint}]?.md",
       "AssetKind": "All",
@@ -1655,17 +1235,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery/dist/jquery#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1683,17 +1256,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.js",
       "AssetKind": "All",
@@ -1711,17 +1277,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.map",
       "AssetKind": "All",
@@ -1739,17 +1298,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-<<<<<<< HEAD
       "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "SourceId": "backend",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
-=======
-      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\LICENSE.txt",
-      "SourceId": "backend",
-      "SourceType": "Discovered",
-      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
->>>>>>> 8b074d9700b7112619480bb63e003a561f919925
       "BasePath": "_content/backend",
       "RelativePath": "lib/jquery/LICENSE#[.{fingerprint}]?.txt",
       "AssetKind": "All",
@@ -1791,7 +1343,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 27 Jun 2025 13:40:43 GMT"
+          "Value": "Sun, 29 Jun 2025 06:34:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1828,7 +1380,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 27 Jun 2025 13:40:43 GMT"
+          "Value": "Sun, 29 Jun 2025 06:34:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1873,7 +1425,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 27 Jun 2025 13:40:43 GMT"
+          "Value": "Sun, 29 Jun 2025 06:34:03 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -1918,7 +1470,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 27 Jun 2025 13:40:43 GMT"
+          "Value": "Sun, 29 Jun 2025 06:34:03 GMT"
         },
         {
           "Name": "Cache-Control",
