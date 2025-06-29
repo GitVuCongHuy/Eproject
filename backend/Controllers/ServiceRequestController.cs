@@ -193,6 +193,54 @@ public class ServiceRequestController : ControllerBase
         });
     }
 
+        [HttpPost("request-delete-card")]
+        public async Task<IActionResult> RequestDeleteCard([FromBody] DeleteCardRequestModel model)
+        {
+            if (string.IsNullOrWhiteSpace(model.CitizenIdentificationCard) ||
+                string.IsNullOrWhiteSpace(model.Email) ||
+                string.IsNullOrWhiteSpace(model.CardNumber) ||
+                string.IsNullOrWhiteSpace(model.Reason))
+            {
+                return BadRequest(new ApiError { Status = 400, Error = "MissingData", Message = "Thiếu thông tin yêu cầu." });
+            }
+
+            var customer = await _context.Customers.FirstOrDefaultAsync(c =>
+                c.citizen_identification_card == model.CitizenIdentificationCard &&
+                c.email == model.Email);
+
+            if (customer == null)
+                return NotFound(new ApiError { Status = 404, Error = "CustomerNotFound", Message = "Không tìm thấy người dùng." });
+
+            var account = await _context.Accounts.FirstOrDefaultAsync(a =>
+                a.CardNumber == model.CardNumber &&
+                a.customer_id == customer.customer_id);
+
+            if (account == null)
+                return NotFound(new ApiError { Status = 404, Error = "CardNotFound", Message = "Không tìm thấy thẻ." });
+
+            var detail = JsonSerializer.Serialize(new { AccountId = account.account_id, model.Reason });
+
+            var request = new Service_request
+            {
+                CustomerId = customer.customer_id,
+                RequestType = RequestTypeEnum.DeleteCard,
+                RequestDetail = detail,
+                RequestDate = DateTime.Now,
+                Status = "Pending",
+                Reason = model.Reason
+            };
+
+            _context.Service_requests.Add(request);
+            await _context.SaveChangesAsync();
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Đã gửi yêu cầu xóa thẻ.",
+                Data = new { request.RequestId }
+            });
+        }
+
     [Authorize]
     [HttpGet("my-requests")]
     public async Task<IActionResult> GetMyRequests()
@@ -262,13 +310,16 @@ public class ServiceRequestController : ControllerBase
                     if (accIssue != null && accIssue.Balance >= issueData.Amount)
                     {
                         accIssue.Balance -= issueData.Amount;
+
                         _context.Cheques.Add(new Cheque
                         {
                             AccountId = issueData.AccountId,
                             Amount = issueData.Amount,
                             IssuedDate = DateTime.Now,
-                            Status = "Issued"
+                            PaidDate = DateTime.Now, // đánh dấu đã thanh toán ngay lập tức
+                            Status = "Paid"
                         });
+
                         request.Status = "Approved";
                     }
                     else request.Status = "Rejected";
@@ -276,14 +327,47 @@ public class ServiceRequestController : ControllerBase
 
                 case RequestTypeEnum.CancelCheque:
                     var cancelData = JsonSerializer.Deserialize<CancelChequeModel>(request.RequestDetail);
-                    var cheque = await _context.Cheques.FindAsync(cancelData.ChequeId);
-                    if (cheque != null && cheque.Status == "Issued")
+                    var cheque = await _context.Cheques.Include(c => c.Account).FirstOrDefaultAsync(c => c.ChequeId == cancelData.ChequeId);
+
+                    if (cheque != null)
                     {
-                        cheque.Status = "Cancelled";
-                        request.Status = "Approved";
+                        if (cheque.Status == "Paid")
+                        {
+                            // Nếu đã thanh toán thì cộng lại tiền và huỷ séc
+                            cheque.Status = "Cancelled";
+                            cheque.Account.Balance += cheque.Amount;
+                            request.Status = "Approved";
+                        }
+                        else if (cheque.Status == "Issued")
+                        {
+                            // Nếu séc đã được phát hành nhưng chưa thanh toán, huỷ và không cần hoàn tiền
+                            cheque.Status = "Cancelled";
+                            request.Status = "Approved";
+                        }
+                        else
+                        {
+                            request.Status = "Rejected"; // Trạng thái không hợp lệ để hủy
+                        }
                     }
-                    else request.Status = "Rejected";
-                    break;
+                    else
+                    {
+                        // Nếu không có séc, có thể đang chờ phê duyệt tạo séc => hủy yêu cầu tạo séc
+                        var pendingIssueRequest = await _context.Service_requests.FirstOrDefaultAsync(r =>
+                            r.RequestType == RequestTypeEnum.IssueCheque &&
+                            r.Status == "Pending" &&
+                            r.RequestDetail.Contains($"\"ChequeId\":{cancelData.ChequeId}"));
+
+                        if (pendingIssueRequest != null)
+                        {
+                            pendingIssueRequest.Status = "Cancelled by user";
+                            request.Status = "Approved";
+                        }
+                        else
+                        {
+                            request.Status = "Rejected"; // Không có gì để huỷ
+                        }
+                    }
+                break;
 
                 case RequestTypeEnum.UnlockAccount:
                     var cust = await _context.Customers.FindAsync(request.CustomerId);
@@ -294,7 +378,7 @@ public class ServiceRequestController : ControllerBase
                         request.Status = "Approved";
                     }
                     else request.Status = "Rejected";
-                    break;
+                break;
 
                 case RequestTypeEnum.UnlockAccountCard:
                     var accData = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
@@ -310,13 +394,41 @@ public class ServiceRequestController : ControllerBase
                 case RequestTypeEnum.CloseAccount:
                     var accClose = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
                     var closeAcc = await _context.Accounts.FindAsync(accClose.AccountId);
-                    if (closeAcc != null && closeAcc.Balance == 0 && closeAcc.Status == "Active")
+
+                    if (closeAcc != null && closeAcc.Status == "Active")
                     {
+                       
+                        if (closeAcc.CardType == "Credit")
+                        {
+                            var creditLimit = 10_000_000; 
+                            var currentDebt = creditLimit - closeAcc.Balance;
+
+                            if (currentDebt > 0)
+                            {
+                                request.Status = "Rejected"; 
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            
+                            if (closeAcc.Balance > 0)
+                            {
+                                request.Status = "Rejected";
+                                break;
+                            }
+                        }
+
                         closeAcc.Status = "Closed";
                         request.Status = "Approved";
                     }
-                    else request.Status = "Rejected";
-                    break;
+                    else
+                    {
+                        request.Status = "Rejected";
+                    }
+                break;
+
+
 
                 case RequestTypeEnum.LockAccount:
                     var accLock = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
@@ -345,6 +457,20 @@ public class ServiceRequestController : ControllerBase
                     }
                     else request.Status = "Rejected";
                 break;
+                case RequestTypeEnum.DeleteCard:
+                    var deleteData = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
+                    var deleteAcc = await _context.Accounts.FindAsync(deleteData.AccountId);
+                    if (deleteAcc != null && deleteAcc.Status == "Closed")
+                    {
+                        _context.Accounts.Remove(deleteAcc);
+                        request.Status = "Approved";
+                    }
+                    else
+                    {
+                        request.Status = "Rejected";
+                    }
+                break;
+
 
                 default:
                     request.Status = "Rejected";
@@ -399,40 +525,5 @@ public class ServiceRequestController : ControllerBase
         });
     }
 
-    [Authorize]
-    [HttpGet("cheques/by-account/{accountId}")]
-    public async Task<IActionResult> GetChequesByAccount(int accountId)
-    {
-        var cheques = await _context.Cheques
-            .Where(c => c.AccountId == accountId)
-            .OrderByDescending(c => c.IssuedDate)
-            .ToListAsync();
-
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Lịch sử séc",
-            Data = cheques
-        });
-    }
-
-    [Authorize]
-    [HttpPost("cheques/pay/{chequeId}")]
-    public async Task<IActionResult> PayCheque(int chequeId)
-    {
-        var cheque = await _context.Cheques.FindAsync(chequeId);
-        if (cheque == null || cheque.Status != "Issued")
-            return BadRequest(new ApiError { Status = 400, Error = "InvalidCheque", Message = "Không hợp lệ hoặc đã thanh toán." });
-
-        cheque.Status = "Paid";
-        cheque.PaidDate = DateTime.Now;
-        await _context.SaveChangesAsync();
-
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Đã thanh toán séc.",
-            Data = cheque
-        });
-    }
+    
 }
