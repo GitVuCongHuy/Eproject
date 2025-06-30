@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -14,7 +13,9 @@ public class Cheque
 
     public DateTime IssuedDate { get; set; }
 
-    public string Status { get; set; } // "Issued", "Cancelled", "Paid"
+    public string Status { get; set; } // "Pending", "Paid", "Cancelled"
+
+    public string SerialNumber { get; set; } // VD: CHQ001234
 
     public DateTime? PaidDate { get; set; }
 

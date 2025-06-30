@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -35,5 +34,4 @@ public class Service_request
     [MaxLength(20)]
     [Column("status")]
     public string Status { get; set; }
-
 }
