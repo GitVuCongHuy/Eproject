@@ -54,7 +54,6 @@ const menuItems = [
     badge: 'Mới',
     submenu: [
       { name: 'Chuyển tiền', path: '/transfer/internal', icon: '💸' },
-      { name: 'Yêu cầu thay đổi thông tin', path: '/update-info', icon: '📝' },
       { name: 'Yêu cầu cấp sổ séc', path: '/chequebook', icon: '📒' },
       { name: 'Hủy séc', path: '/cancel', icon: '🚫' },
       { name: 'Sao kê giao dịch', path: '/statement', icon: '📊' },
@@ -70,6 +69,9 @@ const menuItems = [
     submenu: [
       // { name: 'Cài đặt', path: '/settings', icon: '⚙️' },
       { name: 'Hướng dẫn', path: '/guide', icon: '❓' },
+      { name: 'Mật khẩu chuyển khoản', path: '/password', icon: '⚙️'},
+      { name: 'Yêu cầu thay đổi thông tin', path: '/update-info', icon: '📝' },
+
     ]
   }
 ];
