@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react'; // Thêm useEffect ở đây
-
+import React, { useState, useEffect } from 'react';
 import {
   Box, Container, Typography, TextField, Paper, List, ListItem, ListItemAvatar, ListItemText,
   Avatar, Button, Tabs, Tab, InputAdornment, Chip, Card, CardContent, Divider, Grid, GlobalStyles,
-  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress
+  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, CircularProgress,
+  ToggleButton, ToggleButtonGroup, Alert
 } from '@mui/material';
 import { Search, PersonAdd, AccountBalance, Person, Star, Business } from '@mui/icons-material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -14,7 +14,8 @@ const theme = createTheme({
   palette: {
     primary: { main: '#1976d2' },
     secondary: { main: '#ff9800' },
-    background: { default: '#f5f7fa' }
+    background: { default: '#f5f7fa' },
+    success: { main: '#2e7d32' }
   },
   typography: {
     fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
@@ -36,13 +37,11 @@ function TabPanel({ children, value, index }) {
   return (<div hidden={value !== index}>{value === index && <Box sx={{ pt: 2 }}>{children}</Box>}</div>);
 }
 
-// <<< SỬA: Thêm prop `onRecipientClick`
 function RecipientList({ recipients, onRecipientClick }) {
   return (
     <List sx={{ width: '100%' }}>
       {recipients.map((recipient, index) => (
         <React.Fragment key={recipient.id}>
-          {/* <<< SỬA: Thêm onClick và thuộc tính button */}
           <ListItem 
             button
             onClick={() => onRecipientClick(recipient)}
@@ -90,24 +89,24 @@ function RecipientList({ recipients, onRecipientClick }) {
 }
 
 export default function MoneyTransferPage() {
-  const [myAccountIds, setMyAccountIds] = useState([]); // State mới để lưu ID tài khoản của người dùng
-
-  const [customerName, setCustomerName] = useState('');
+  const [myAccountIds, setMyAccountIds] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [tabValue, setTabValue] = useState(0);
-  const [open, setOpen] = useState(false);
-  const [newAccountNumber, setNewAccountNumber] = useState('');
-  const [checkingAccount, setCheckingAccount] = useState(false);
-  const [accountError, setAccountError] = useState('');
-  
   const { getCustomerAccount, getCards } = useAuth();
   const navigate = useNavigate();
+
+  const [open, setOpen] = useState(false);
+  const [transferType, setTransferType] = useState('internal');
+  const [newAccountNumber, setNewAccountNumber] = useState('');
+  const [customerName, setCustomerName] = useState('');
+  const [accountError, setAccountError] = useState('');
+  const [checkingAccount, setCheckingAccount] = useState(false);
+  
   useEffect(() => {
     const fetchMyAccounts = async () => {
       const result = await getCards();
       if (result.success && result.data) {
-        // SỬA LẠI ĐÂY: Lấy 'cardNumber' thay vì 'accountId'
-        const ids = result.data.map(card => card.cardNumber); // Dòng đã sửa
+        const ids = result.data.map(card => card.cardNumber);
         setMyAccountIds(ids);
       }
     };
@@ -115,47 +114,58 @@ export default function MoneyTransferPage() {
   }, [getCards]);
 
   const handleOpen = () => setOpen(true);
+  
   const handleClose = () => {
     setOpen(false);
-    setAccountError('');
-    setNewAccountNumber('');
-    setCustomerName(''); // Reset state khi đóng dialog
+    setTimeout(() => {
+        setTransferType('internal');
+        setNewAccountNumber('');
+        setCustomerName('');
+        setAccountError('');
+        setCheckingAccount(false);
+    }, 300);
   };
 
-const handleCheckAccount = async () => {
-  if (!newAccountNumber) {
-    setAccountError('Vui lòng nhập số tài khoản.');
-    return;
-  }
+  const handleTransferTypeChange = (event, newType) => {
+    if (newType !== null) {
+      setTransferType(newType);
+      setNewAccountNumber('');
+      setCustomerName('');
+      setAccountError('');
+    }
+  };
 
-  // <<< THÊM: Kiểm tra xem số tài khoản mới nhập có phải là tài khoản của chính người dùng không
-  if (myAccountIds.includes(newAccountNumber)) {
-    setAccountError('Không thể chuyển tiền cho chính tài khoản của bạn.');
-    setCustomerName(''); // Xóa tên khách hàng nếu có để tránh nhầm lẫn
-    return; // Ngăn không cho tiếp tục kiểm tra
-  }
-  // KẾT THÚC THÊM
+  // === HÀM ĐÃ ĐƯỢC SỬA LẠI CHO ĐÚNG ===
+  const handleCheckAccount = async () => {
+    if (!newAccountNumber) {
+      setAccountError('Vui lòng nhập số tài khoản.');
+      return;
+    }
+    if (myAccountIds.includes(newAccountNumber)) {
+      setAccountError('Không thể chuyển tiền cho chính tài khoản của bạn.');
+      setCustomerName('');
+      return;
+    }
+    
+    setCheckingAccount(true);
+    setAccountError('');
+    setCustomerName('');
+    
+    // Sử dụng lại hàm getCustomerAccount gốc của bạn
+    const result = await getCustomerAccount(newAccountNumber);
+    
+    if (result.success) {
+      setCustomerName(result.data.name_customer);
+    } else {
+      setAccountError(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+    }
 
-  setCheckingAccount(true);
-  setAccountError('');
-  setCustomerName('');
+    setCheckingAccount(false);
+  };
 
-  const result = await getCustomerAccount(newAccountNumber);
-  if (result.success) {
-    setCustomerName(result.data.name_customer);
-  } else {
-    setAccountError(result.message || 'Có lỗi xảy ra, vui lòng thử lại.');
-  }
-
-  setCheckingAccount(false);
-};
-
-
-  // <<< THÊM: Hàm xử lý khi nhấn "Tiếp tục"
   const handleContinue = () => {
     if (!customerName || !newAccountNumber) return;
-
-    navigate('/transfer/external', { // Thay đổi '/transfer/external' thành đúng đường dẫn của bạn
+    navigate('/transfer/external', { 
       state: {
         cardNumber: newAccountNumber,
         beneficiaryName: customerName
@@ -164,23 +174,18 @@ const handleCheckAccount = async () => {
     handleClose();
   };
 
-  // <<< THÊM: Hàm xử lý khi click vào người nhận đã lưu
-const handleRecipientClick = (recipient) => {
-  // <<< THÊM: Kiểm tra xem tài khoản của người nhận đã chọn có phải là tài khoản của chính người dùng không
-  if (myAccountIds.includes(recipient.account)) {
-    alert('Không thể chuyển tiền cho chính tài khoản của bạn.'); // Hoặc hiển thị một thông báo lỗi đẹp hơn
-    return; // Ngăn không cho điều hướng
-  }
-  // KẾT THÚC THÊM
-
-  navigate('/transfer/external', {
-    state: {
-      cardNumber: recipient.account,
-      beneficiaryName: recipient.fullName
+  const handleRecipientClick = (recipient) => {
+    if (myAccountIds.includes(recipient.account)) {
+      alert('Không thể chuyển tiền cho chính tài khoản của bạn.'); 
+      return; 
     }
-  });
-};
-
+    navigate('/transfer/external', {
+      state: {
+        cardNumber: recipient.account,
+        beneficiaryName: recipient.fullName
+      }
+    });
+  };
 
   const filteredRecipients = recipients.filter(recipient =>
     recipient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -199,7 +204,7 @@ const handleRecipientClick = (recipient) => {
       <ThemeProvider theme={theme}>
         <Box sx={{ bgcolor: 'background.default', minHeight: '100vh', py: 3 }}>
           <Container maxWidth="1000px">
-            {/* PHẦN CODE BỊ MẤT ĐÃ ĐƯỢC KHÔI PHỤC */}
+            {/* Các phần giao diện khác giữ nguyên */}
             <Paper elevation={0} sx={{
               p: 3, mb: 3,
               background: 'linear-gradient(135deg,rgb(226, 99, 120) 0%,rgb(230, 36, 22) 100%)',
@@ -209,7 +214,7 @@ const handleRecipientClick = (recipient) => {
                 Chuyển tiền tới tài khoản khác
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                Chỉ chuyển tiền trong nội ngân hàng
+                Chuyển tiền nhanh, tức thì 24/7
               </Typography>
             </Paper>
 
@@ -225,7 +230,6 @@ const handleRecipientClick = (recipient) => {
                 </Grid>
               </Grid>
             </Paper>
-            {/* KẾT THÚC PHẦN KHÔI PHỤC */}
 
             <Paper elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 3 }}>
@@ -237,7 +241,6 @@ const handleRecipientClick = (recipient) => {
               <Box sx={{ p: 2, height:'500px',overflowY:'scroll'}}>
                 <TabPanel value={tabValue} index={0}>
                   {filteredRecipients.length > 0 ? (
-                    // <<< SỬA: Truyền prop onRecipientClick
                     <RecipientList recipients={filteredRecipients} onRecipientClick={handleRecipientClick} />
                   ) : (
                     <Box sx={{ textAlign: 'center', py: 4 }}>
@@ -246,7 +249,6 @@ const handleRecipientClick = (recipient) => {
                     </Box>
                   )}
                 </TabPanel>
-                {/* PHẦN CODE BỊ MẤT ĐÃ ĐƯỢC KHÔI PHỤC */}
                 <TabPanel value={tabValue} index={1}>
                   <Box sx={{ textAlign: 'center', py: 4 }}>
                     <AccountBalance sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
@@ -256,7 +258,6 @@ const handleRecipientClick = (recipient) => {
                 <TabPanel value={tabValue} index={2}>
                    <RecipientList recipients={filteredRecipients} onRecipientClick={handleRecipientClick} />
                 </TabPanel>
-                {/* KẾT THÚC PHẦN KHÔI PHỤC */}
               </Box>
             </Paper>
           </Container>
@@ -264,28 +265,77 @@ const handleRecipientClick = (recipient) => {
 
         <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
           <DialogTitle fontWeight={600}>Thêm người nhận mới</DialogTitle>
-          <DialogContent>
-            <DialogContentText sx={{ mb: 2 }}>
-              Vui lòng nhập số thẻ hoặc số tài khoản của người nhận để hệ thống kiểm tra.
-            </DialogContentText>
-            <TextField autoFocus margin="dense" id="account-number" label="Số thẻ / Số tài khoản" type="text" fullWidth variant="outlined" value={newAccountNumber} onChange={(e) => {setNewAccountNumber(e.target.value); setCustomerName(''); setAccountError('');}} onBlur={handleCheckAccount} error={!!accountError} helperText={accountError} disabled={checkingAccount} onKeyPress={(e) => e.key === 'Enter' && handleCheckAccount()}/>
-            {customerName && (
-              <Typography variant="subtitle1" sx={{ mt: 2, fontWeight: 500, color: 'green' }}>
-                Tên người nhận: {customerName}
-              </Typography>
+          <DialogContent sx={{ minHeight: '230px' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
+              <ToggleButtonGroup
+                color="primary"
+                value={transferType}
+                exclusive
+                onChange={handleTransferTypeChange}
+                aria-label="Loại chuyển khoản"
+              >
+                <ToggleButton value="internal">Ngân hàng TCB</ToggleButton>
+                <ToggleButton value="interbank">Ngân hàng khác</ToggleButton>
+              </ToggleButtonGroup>
+            </Box>
+
+            {transferType === 'internal' ? (
+              <>
+                <DialogContentText sx={{ mb: 2 }}>
+                  Vui lòng nhập số thẻ hoặc số tài khoản của người nhận để hệ thống kiểm tra.
+                </DialogContentText>
+                <TextField 
+                  autoFocus 
+                  margin="dense" 
+                  id="account-number" 
+                  label="Số thẻ / Số tài khoản" 
+                  type="text" 
+                  fullWidth 
+                  variant="outlined" 
+                  value={newAccountNumber} 
+                  onChange={(e) => {
+                    setNewAccountNumber(e.target.value); 
+                    setCustomerName(''); 
+                    setAccountError('');
+                  }} 
+                  onBlur={handleCheckAccount} 
+                  error={!!accountError} 
+                  helperText={accountError} 
+                  disabled={checkingAccount} 
+                  onKeyPress={(e) => e.key === 'Enter' && handleCheckAccount()}
+                />
+                {customerName && (
+                  <Typography variant="subtitle1" sx={{ mt: 2, fontWeight: 500, color: 'success.main' }}>
+                    Tên người nhận: <strong>{customerName}</strong>
+                  </Typography>
+                )}
+              </>
+            ) : (
+              <Alert severity="info" sx={{ mt: 2 }}>
+                Tính năng này đang được phát triển. Vui lòng chọn "Nội ngân hàng" để tiếp tục.
+              </Alert>
             )}
           </DialogContent>
-          <DialogActions sx={{ p: 3, pt: 0 }}>
+          <DialogActions sx={{ p: 3, pt: 1 }}>
             <Button onClick={handleClose} color="inherit">Hủy</Button>
-            {/* <<< SỬA: Thay đổi nút bấm linh hoạt */}
-            {customerName ? (
-              <Button onClick={handleContinue} variant="contained">
-                Tiếp tục
-              </Button>
-            ) : (
-              <Button onClick={handleCheckAccount} variant="contained" disabled={checkingAccount || !newAccountNumber} startIcon={checkingAccount ? <CircularProgress size={20} color="inherit" /> : null}>
-                {checkingAccount ? 'Đang kiểm tra...' : 'Kiểm tra'}
-              </Button>
+            
+            {transferType === 'internal' && (
+              <>
+                {customerName ? (
+                  <Button onClick={handleContinue} variant="contained">
+                    Tiếp tục
+                  </Button>
+                ) : (
+                  <Button 
+                    onClick={handleCheckAccount} 
+                    variant="contained" 
+                    disabled={checkingAccount || !newAccountNumber} 
+                    startIcon={checkingAccount ? <CircularProgress size={20} color="inherit" /> : null}
+                  >
+                    {checkingAccount ? 'Đang kiểm tra...' : 'Kiểm tra'}
+                  </Button>
+                )}
+              </>
             )}
           </DialogActions>
         </Dialog>
