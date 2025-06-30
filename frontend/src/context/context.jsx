@@ -84,11 +84,6 @@ export const AuthProvider = ({ children }) => {
 };
 
 
-
-
-
-
-
   const getMyServiceRequests = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/ServiceRequest/my-requests`, {

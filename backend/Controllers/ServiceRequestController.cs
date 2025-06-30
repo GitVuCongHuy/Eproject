@@ -146,76 +146,76 @@ public class ServiceRequestController : ControllerBase
         });
     }
 
-    [Authorize] //(Roles = "Admin")]
+    // [Authorize] //(Roles = "Admin")]
     [HttpGet("all-requests")]
-public async Task<IActionResult> GetAllRequests()
-{
-    var requests = await _context.Service_requests
-        .Include(r => r.customer)
-        .OrderByDescending(r => r.RequestDate)
-        .ToListAsync();
-
-    var response = new List<object>();
-
-    foreach (var r in requests)
+    public async Task<IActionResult> GetAllRequests()
     {
-        decimal? balance = null;
+        var requests = await _context.Service_requests
+            .Include(r => r.customer)
+            .OrderByDescending(r => r.RequestDate)
+            .ToListAsync();
 
-        
-        if (r.RequestType == RequestTypeEnum.LockAccount ||
-            r.RequestType == RequestTypeEnum.UnlockAccountCard ||
-            r.RequestType == RequestTypeEnum.CloseAccount ||
-            r.RequestType == RequestTypeEnum.IssueCheque)
+        var response = new List<object>();
+
+        foreach (var r in requests)
         {
-            try
+            decimal? balance = null;
+
+            
+            if (r.RequestType == RequestTypeEnum.LockAccount ||
+                r.RequestType == RequestTypeEnum.UnlockAccountCard ||
+                r.RequestType == RequestTypeEnum.CloseAccount ||
+                r.RequestType == RequestTypeEnum.IssueCheque)
             {
-                var accountId = 0;
+                try
+                {
+                    var accountId = 0;
 
-                if (r.RequestType == RequestTypeEnum.IssueCheque)
-                {
-                    var chequeData = JsonSerializer.Deserialize<ChequeRequestModel>(r.RequestDetail);
-                    accountId = chequeData?.AccountId ?? 0;
-                }
-                else
-                {
-                    var accData = JsonSerializer.Deserialize<AccountActionModel>(r.RequestDetail);
-                    accountId = accData?.AccountId ?? 0;
-                }
+                    if (r.RequestType == RequestTypeEnum.IssueCheque)
+                    {
+                        var chequeData = JsonSerializer.Deserialize<ChequeRequestModel>(r.RequestDetail);
+                        accountId = chequeData?.AccountId ?? 0;
+                    }
+                    else
+                    {
+                        var accData = JsonSerializer.Deserialize<AccountActionModel>(r.RequestDetail);
+                        accountId = accData?.AccountId ?? 0;
+                    }
 
-                if (accountId > 0)
+                    if (accountId > 0)
+                    {
+                        var acc = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId);
+                        if (acc != null)
+                            balance = acc.Balance;
+                    }
+                }
+                catch
                 {
-                    var acc = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId);
-                    if (acc != null)
-                        balance = acc.Balance;
+                
                 }
             }
-            catch
+
+            response.Add(new
             {
-               
-            }
+                r.RequestId,
+                CustomerName = r.customer?.full_name,
+                r.RequestType,
+                r.RequestDetail,
+                r.RequestDate,
+                r.Status,
+                Balance = balance
+            });
         }
 
-        response.Add(new
+        return Ok(new ApiResponse<object>
         {
-            r.RequestId,
-            CustomerName = r.customer?.full_name,
-            r.RequestType,
-            r.RequestDetail,
-            r.RequestDate,
-            r.Status,
-            Balance = balance
+            Status = 200,
+            Message = "Danh sách tất cả yêu cầu",
+            Data = response
         });
-    }
+        }
 
-    return Ok(new ApiResponse<object>
-    {
-        Status = 200,
-        Message = "Danh sách tất cả yêu cầu",
-        Data = response
-    });
-    }
-
-    [Authorize]//(Roles = "Admin")]
+    // [Authorize]//(Roles = "Admin")]
     [HttpPost("process-request/{requestId}")]
     public async Task<IActionResult> ProcessServiceRequest(int requestId)
     {
@@ -308,7 +308,7 @@ public async Task<IActionResult> GetAllRequests()
         });
     }
 
-    [Authorize] //(Roles = "Admin")]
+    // [Authorize] //(Roles = "Admin")]
     [HttpPost("reject-request/{requestId}")]
     public async Task<IActionResult> RejectRequest(int requestId)
     {
