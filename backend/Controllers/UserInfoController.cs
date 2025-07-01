@@ -109,41 +109,34 @@ namespace YourNamespace.Controllers
             });
         }
 
-        // ✅ API 3: Đổi mật khẩu giao dịch (dùng BCrypt)
-        [HttpPost("change-transaction-password")]
-        public async Task<IActionResult> ChangeTransactionPassword([FromBody] ChangeTransactionPasswordModel model)
-        {
-            var customerId = GetCustomerIdFromToken();
-            var customer = await _context.Customers.FirstOrDefaultAsync(c => c.customer_id == customerId);
-            if (customer == null)
-                return NotFound(new ApiError { Status = 404, Error = "UserNotFound", Message = "Không tìm thấy người dùng." });
+    //       // ✅ API 3: Đổi mật khẩu giao dịch
+    //     [HttpPost("change-transaction-password")]
+    //     public async Task<IActionResult> ChangeTransactionPassword([FromBody] ChangeTransactionPasswordModel model)
+    //     {
+    //         var customerId = GetCustomerIdFromToken();
+    //         var customer = await _context.Customers.FirstOrDefaultAsync(c => c.customer_id == customerId);
+    //         if (customer == null)
+    //             return NotFound(new ApiError { Status = 404, Error = "UserNotFound", Message = "Không tìm thấy người dùng." });
 
-            if (!BCrypt.Net.BCrypt.Verify(model.CurrentTransactionPassword, customer.TransactionPassword))
-            {
-                return BadRequest(new ApiError
-                {
-                    Status = 400,
-                    Error = "InvalidTransactionPassword",
-                    Message = "Mật khẩu giao dịch hiện tại không đúng."
-                });
-            }
+    //         if (customer.TransactionPassword != model.CurrentTransactionPassword)
+    //             return BadRequest(new ApiError { Status = 400, Error = "InvalidTransactionPassword", Message = "Mật khẩu giao dịch hiện tại không đúng." });
 
-            if (string.IsNullOrWhiteSpace(model.NewTransactionPassword) || model.NewTransactionPassword.Length < 6)
-                return BadRequest(new ApiError { Status = 400, Error = "WeakTransactionPassword", Message = "Mật khẩu giao dịch mới phải có ít nhất 6 ký tự." });
+    //         if (string.IsNullOrWhiteSpace(model.NewTransactionPassword) || model.NewTransactionPassword.Length < 6)
+    //             return BadRequest(new ApiError { Status = 400, Error = "WeakTransactionPassword", Message = "Mật khẩu giao dịch mới phải có ít nhất 6 ký tự." });
 
-            customer.TransactionPassword = BCrypt.Net.BCrypt.HashPassword(model.NewTransactionPassword);
-            await _context.SaveChangesAsync();
+    //         customer.TransactionPassword = model.NewTransactionPassword;
+    //         await _context.SaveChangesAsync();
 
-            await _emailHelper.SendEmailAsync(customer.email, "Đổi mật khẩu giao dịch thành công",
-                $"Xin chào {customer.full_name},\n\nMật khẩu giao dịch của bạn đã được thay đổi thành công vào lúc {DateTime.Now:dd/MM/yyyy HH:mm}.",
-                false);
+    //         await _emailHelper.SendEmailAsync(customer.email, "Đổi mật khẩu giao dịch thành công",
+    //             $"Xin chào {customer.full_name},\n\nMật khẩu giao dịch của bạn đã được thay đổi thành công vào lúc {DateTime.Now:dd/MM/yyyy HH:mm}.",
+    //             false);
 
-            return Ok(new ApiResponse<string>
-            {
-                Status = 200,
-                Message = "Đổi mật khẩu giao dịch thành công.",
-                Data = "Mật khẩu giao dịch đã được cập nhật và email xác nhận đã được gửi."
-            });
-        }
-    }
+    //         return Ok(new ApiResponse<string>
+    //         {
+    //             Status = 200,
+    //             Message = "Đổi mật khẩu giao dịch thành công.",
+    //             Data = "Mật khẩu giao dịch đã được cập nhật và email xác nhận đã được gửi."
+    //         });
+    //     }
+     }
 }

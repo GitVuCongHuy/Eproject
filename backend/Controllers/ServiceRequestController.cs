@@ -162,16 +162,10 @@ public class ServiceRequestController : ControllerBase
         }
 
         decimal cancelFee = 5000m;
-        decimal refund = 0;
+        decimal refund = 0; 
 
-        // Xác định hoàn tiền sổ séc nếu đã phát hành
-        if (request.Status == "Approved" || request.Status == "Issued")
-        {
-            refund = detail.Quantity == 25 ? 25000m : 40000m;
-        }
-
-        // Kiểm tra số dư có đủ để trừ phí huỷ không
-        if (account.Balance + refund < cancelFee)
+        // Kiểm tra số dư có đủ để trừ phí huỷ
+        if (account.Balance < cancelFee)
         {
             return BadRequest(new ApiError
             {
@@ -181,7 +175,8 @@ public class ServiceRequestController : ControllerBase
             });
         }
 
-        account.Balance += refund - cancelFee;
+        // Trừ phí huỷ
+        account.Balance -= cancelFee;
         request.Status = "Cancelled by user";
 
         await _context.SaveChangesAsync();
@@ -189,9 +184,10 @@ public class ServiceRequestController : ControllerBase
         return Ok(new ApiResponse<object>
         {
             Status = 200,
-            Message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ {(refund > 0 ? $"và hoàn {refund:n0}đ phí sổ séc." : ".")}",
+            Message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ.",
             Data = new { request.RequestId }
         });
+
     }
 
 }
