@@ -175,63 +175,81 @@ public class ServiceRequestController : ControllerBase
         }
 
         decimal cancelFee = 5000m;
-        decimal refund = 0;
+        decimal refund = 0m;
+        string message;
 
-        if (request.Status == "Approved" || request.Status == "Issued")
+        // Nếu đang chờ duyệt, thì hoàn lại phí cấp sổ séc
+        if (request.Status == "Pending")
         {
             refund = detail.Quantity == 25 ? 25000m : 40000m;
-        }
 
-        if (account.Balance + refund < cancelFee)
-        {
-            return BadRequest(new ApiError
+            if (account.Balance + refund < cancelFee)
             {
-                Status = 400,
-                Error = "InsufficientFunds",
-                Message = "Không đủ số dư để huỷ yêu cầu."
-            });
-        }
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InsufficientFunds",
+                    Message = "Không đủ số dư để huỷ yêu cầu (sau khi hoàn tiền)."
+                });
+            }
 
-        // Cộng hoàn - trừ phí
-        account.Balance += refund - cancelFee;
+            account.Balance += refund - cancelFee;
 
-        // Ghi sao kê hoàn/trừ
-        if (refund > 0)
-        {
+            // Ghi dòng hoàn tiền
             _context.statements.Add(new Statements
             {
                 account_id = account.account_id,
                 PeriodType = "refund",
-                StartDate = DateTime.Today,
-                EndDate = DateTime.Today,
+                StartDate = DateTime.Now.Date,
+                EndDate = DateTime.Now.Date,
                 GeneratedOn = DateTime.Now,
                 FileUrl = ""
             });
+
+            message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ và hoàn {refund:n0}đ phí sổ séc.";
+        }
+        else
+        {
+            // Đã được duyệt => không hoàn
+            if (account.Balance < cancelFee)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InsufficientFunds",
+                    Message = "Không đủ số dư để huỷ yêu cầu."
+                });
+            }
+
+            account.Balance -= cancelFee;
+            message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ.";
         }
 
+        // Ghi dòng phí huỷ
         _context.statements.Add(new Statements
         {
             account_id = account.account_id,
             PeriodType = "cancel_fee",
-            StartDate = DateTime.Today,
-            EndDate = DateTime.Today,
+            StartDate = DateTime.Now.Date,
+            EndDate = DateTime.Now.Date,
             GeneratedOn = DateTime.Now,
             FileUrl = ""
         });
 
         request.Status = "Cancelled by user";
+
         await _context.SaveChangesAsync();
 
         return Ok(new ApiResponse<object>
         {
             Status = 200,
-            Message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ {(refund > 0 ? $"và hoàn {refund:n0}đ phí sổ séc." : "")}",
+            Message = message,
             Data = new
             {
                 request.RequestId,
-                AccountId = account.account_id,
-                AmountChanged = refund - cancelFee,
-                TransactionType = (refund - cancelFee) > 0 ? "Credit" : "Debit"
+                accountId = account.account_id,
+                amountChanged = refund - cancelFee,
+                transactionType = (refund - cancelFee) >= 0 ? "Credit" : "Debit"
             }
         });
     }
