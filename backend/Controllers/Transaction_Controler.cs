@@ -471,6 +471,61 @@ public class Transaction_Controler : Controller
     }
 
 
+    [HttpGet("Admin_Transaction_Statistics_ByRange")]
+    public async Task<IActionResult> Admin_Transaction_Statistics_ByRange([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+    {
+        try
+        {
+            // Đảm bảo endDate >= startDate
+            if (endDate < startDate)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InvalidDateRange",
+                    Message = "Ngày kết thúc phải lớn hơn hoặc bằng ngày bắt đầu."
+                });
+            }
 
+            // Lấy toàn bộ giao dịch trong khoảng ngày
+            var transactions = await _context.bank_Transaction
+                .Where(t => t.transactionDate.Date >= startDate.Date && t.transactionDate.Date <= endDate.Date)
+                .ToListAsync();
+
+            // Lặp qua từng ngày trong khoảng
+            List<object> dailyStatistics = new List<object>();
+            for (DateTime date = startDate.Date; date <= endDate.Date; date = date.AddDays(1))
+            {
+                var dayTransactions = transactions.Where(t => t.transactionDate.Date == date).ToList();
+                int total = dayTransactions.Count;
+                int success = dayTransactions.Count(t => t.transaction_status == "Success");
+                int failed = dayTransactions.Count(t => t.transaction_status == "Failed");
+
+                dailyStatistics.Add(new
+                {
+                    Date = date.ToString("yyyy-MM-dd"),
+                    TotalTransactions = total,
+                    SuccessTransactions = success,
+                    FailedTransactions = failed
+                });
+            }
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Thống kê theo khoảng ngày thành công",
+                Data = dailyStatistics
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new ApiError
+            {
+                Status = 500,
+                Error = "ServerError",
+                Message = ex.Message
+            });
+        }
+    }
 
 }
