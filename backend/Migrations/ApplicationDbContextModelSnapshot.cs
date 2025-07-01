@@ -148,6 +148,10 @@ namespace backend.Migrations
                     b.Property<DateTime?>("PaidDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("SerialNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -157,6 +161,19 @@ namespace backend.Migrations
                     b.HasIndex("AccountId");
 
                     b.ToTable("Cheques");
+                });
+
+            modelBuilder.Entity("ChequeFee", b =>
+                {
+                    b.Property<string>("FeeType")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("FeeAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("FeeType");
+
+                    b.ToTable("ChequeFees");
                 });
 
             modelBuilder.Entity("Customer", b =>
@@ -241,7 +258,7 @@ namespace backend.Migrations
                     b.Property<string>("RequestDetail")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("request_detail");
 
                     b.Property<string>("RequestType")

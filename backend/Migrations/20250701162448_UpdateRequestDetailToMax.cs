@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class request : Migration
+    public partial class UpdateRequestDetailToMax : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -44,6 +44,18 @@ namespace backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Banks", x => x.bank_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChequeFees",
+                columns: table => new
+                {
+                    FeeType = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FeeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChequeFees", x => x.FeeType);
                 });
 
             migrationBuilder.CreateTable(
@@ -101,7 +113,7 @@ namespace backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     customer_id = table.Column<int>(type: "int", nullable: false),
                     request_type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    request_detail = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    request_detail = table.Column<string>(type: "nvarchar(max)", maxLength: 100, nullable: false),
                     Reason = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     request_date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
@@ -127,6 +139,7 @@ namespace backend.Migrations
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IssuedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaidDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -194,6 +207,9 @@ namespace backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Banks");
+
+            migrationBuilder.DropTable(
+                name: "ChequeFees");
 
             migrationBuilder.DropTable(
                 name: "Cheques");
