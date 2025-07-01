@@ -1,25 +1,19 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
 public class Customer
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int customer_id { get; set; }
 
-
-
-
     [MaxLength(50)]
     public string username { get; set; }
 
-
-    [Required] //không nulll
+    [Required]
     public string password { get; set; }
 
     [MaxLength(100)]
-
     public string full_name { get; set; }
 
     [MaxLength(100)]
@@ -35,13 +29,10 @@ public class Customer
 
     public string? authentication_code { get; set; }
 
-
     public string? device { get; set; }
 
     public string? TransactionPassword { get; set; }
 
     [MaxLength(12)]
     public string citizen_identification_card { get; set; }
-    // public string adress { get; set; }
-
 }

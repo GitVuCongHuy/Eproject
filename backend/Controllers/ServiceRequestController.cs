@@ -3,8 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Text.Json;
-using System.Threading.Tasks;
 using backend.Enums;
+
 
 [ApiController]
 [Route("backend/[controller]")]
@@ -25,87 +25,52 @@ public class ServiceRequestController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("create-request")]
-    public async Task<IActionResult> CreateServiceRequest([FromBody] CreateRequestModel model)
+    [HttpPost("request-cheque-book")]
+    public async Task<IActionResult> RequestChequeBook([FromBody] ChequeBookRequestModel model)
     {
         var customerId = GetCustomerIdFromToken();
 
-        if (string.IsNullOrEmpty(model.RequestType) || string.IsNullOrEmpty(model.RequestDetail))
+        if (model.AccountId <= 0 || string.IsNullOrWhiteSpace(model.DeliveryAddress) ||
+            (model.Quantity != 25 && model.Quantity != 50))
         {
-            return BadRequest(new ApiError
-            {
-                Status = 400,
-                Error = "MissingData",
-                Message = "Thiếu loại yêu cầu hoặc chi tiết yêu cầu."
-            });
+            return BadRequest(new ApiError { Status = 400, Error = "InvalidData", Message = "Thông tin yêu cầu không hợp lệ." });
         }
 
-        if (!RequestTypeEnum.AllowedTypes.Contains(model.RequestType))
-        {
-            return BadRequest(new ApiError
+        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == model.AccountId && a.customer_id == customerId);
+            if (account == null || account.Status != "Active" || account.CardType == "Credit")
             {
-                Status = 400,
-                Error = "InvalidRequestType",
-                Message = $"Loại yêu cầu không hợp lệ. Chỉ chấp nhận: {string.Join(", ", RequestTypeEnum.AllowedTypes)}"
-            });
-        }
-
-        try
-        {
-            switch (model.RequestType)
-            {
-                case RequestTypeEnum.LockAccount:
-                case RequestTypeEnum.UnlockAccountCard:
-                case RequestTypeEnum.CloseAccount:
-                    var accData = JsonSerializer.Deserialize<AccountActionModel>(model.RequestDetail);
-                    if (accData == null || accData.AccountId <= 0)
-                        return BadRequest(new ApiError { Status = 400, Error = "InvalidAccountData", Message = "Dữ liệu tài khoản không hợp lệ." });
-
-                    var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accData.AccountId && a.customer_id == customerId);
-                    if (account == null)
-                        return BadRequest(new ApiError { Status = 400, Error = "AccountNotFound", Message = "Không tìm thấy tài khoản hoặc không thuộc quyền sở hữu." });
-                    break;
-
-                case RequestTypeEnum.IssueCheque:
-                    var chequeData = JsonSerializer.Deserialize<ChequeRequestModel>(model.RequestDetail);
-                    if (chequeData == null || chequeData.AccountId <= 0 || chequeData.Amount <= 0)
-                        return BadRequest(new ApiError { Status = 400, Error = "InvalidChequeData", Message = "Dữ liệu cấp séc không hợp lệ." });
-
-                    var chequeAccount = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == chequeData.AccountId && a.customer_id == customerId);
-                    if (chequeAccount == null)
-                        return BadRequest(new ApiError { Status = 400, Error = "AccountNotFound", Message = "Tài khoản không tồn tại hoặc không thuộc quyền sở hữu." });
-
-                    if (chequeAccount.CardType == "Credit")
-                        return BadRequest(new ApiError { Status = 400, Error = "InvalidCardType", Message = "Không thể yêu cầu cấp séc cho thẻ Credit." });
-                    break;
-
-                case RequestTypeEnum.CancelCheque:
-                    var cancelData = JsonSerializer.Deserialize<CancelChequeModel>(model.RequestDetail);
-                    if (cancelData == null || cancelData.ChequeId <= 0)
-                        return BadRequest(new ApiError { Status = 400, Error = "InvalidCancelData", Message = "Dữ liệu hủy séc không hợp lệ." });
-
-                    var cheque = await _context.Cheques.Include(c => c.Account).FirstOrDefaultAsync(c => c.ChequeId == cancelData.ChequeId && c.Account.customer_id == customerId);
-                    if (cheque == null)
-                        return BadRequest(new ApiError { Status = 400, Error = "NotFound", Message = "Không tìm thấy séc hoặc không thuộc quyền sở hữu." });
-                    break;
-
-                case RequestTypeEnum.UpdateInfo:
-                    JsonSerializer.Deserialize<UpdateInfoModel>(model.RequestDetail);
-                    break;
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InvalidAccount",
+                    Message = "Không thể yêu cầu sổ séc cho thẻ tín dụng."
+                });
             }
-        }
-        catch
-        {
-            return BadRequest(new ApiError { Status = 400, Error = "InvalidJson", Message = "Chi tiết yêu cầu không đúng định dạng JSON." });
-        }
+
+
+        // Hard-coded fee logic
+        decimal fee = model.Quantity == 25 ? 25000m : 40000m;
+        if (account.Balance < fee)
+            return BadRequest(new ApiError { Status = 400, Error = "InsufficientFunds", Message = "Không đủ số dư để gửi yêu cầu." });
+
+        account.Balance -= fee;
+
+       var detail = JsonSerializer.Serialize(new
+            {
+                model.AccountId,
+                model.DeliveryAddress,
+                Quantity = model.Quantity, 
+                model.Purpose
+            });
 
         var request = new Service_request
         {
             CustomerId = customerId,
-            RequestType = model.RequestType,
-            RequestDetail = model.RequestDetail,
+            RequestType = "IssueChequeBook",
+            RequestDetail = detail,
             RequestDate = DateTime.Now,
-            Status = "Pending"
+            Status = "Pending",
+            Reason = model.Purpose
         };
 
         _context.Service_requests.Add(request);
@@ -114,219 +79,87 @@ public class ServiceRequestController : ControllerBase
         return Ok(new ApiResponse<object>
         {
             Status = 200,
-            Message = "Tạo yêu cầu dịch vụ thành công.",
-            Data = request
+            Message = "Đã gửi yêu cầu cấp sổ séc.",
+            Data = new
+            {
+                request.RequestId,
+                request.RequestType,
+                request.RequestDate,
+                request.Status
+            }
         });
     }
-    
+
     [Authorize]
-    [HttpGet("my-requests")]
-    public async Task<IActionResult> GetMyRequests()
+    [HttpGet("my-cheque-requests")]
+    public async Task<IActionResult> GetMyChequeRequests()
     {
         var customerId = GetCustomerIdFromToken();
 
         var requests = await _context.Service_requests
-            .Where(r => r.CustomerId == customerId)
+            .Where(r => r.CustomerId == customerId && r.RequestType == "IssueChequeBook")
             .OrderByDescending(r => r.RequestDate)
-            .Select(r => new
-            {
-                r.RequestId,
-                r.RequestType,
-                r.RequestDetail,
-                r.RequestDate,
-                r.Status
-            })
             .ToListAsync();
 
         return Ok(new ApiResponse<object>
         {
             Status = 200,
-            Message = "Danh sách yêu cầu của bạn",
-            Data = requests
+            Message = "Danh sách yêu cầu cấp sổ séc.",
+            Data = requests.Select(r => new
+            {
+                r.RequestId,
+                r.RequestType,
+                r.RequestDate,
+                r.Status,
+                r.Reason
+            })
         });
     }
 
-    // [Authorize] //(Roles = "Admin")]
-    [HttpGet("all-requests")]
-    public async Task<IActionResult> GetAllRequests()
+    [Authorize]
+    [HttpPost("cancel-cheque-request/{requestId}")]
+    public async Task<IActionResult> CancelChequeRequest(int requestId)
     {
-        var requests = await _context.Service_requests
-            .Include(r => r.customer)
-            .OrderByDescending(r => r.RequestDate)
-            .ToListAsync();
+        var customerId = GetCustomerIdFromToken();
+        var request = await _context.Service_requests
+            .FirstOrDefaultAsync(r => r.RequestId == requestId && r.CustomerId == customerId && r.RequestType == "IssueChequeBook");
 
-        var response = new List<object>();
+        if (request == null || request.Status != "Pending")
+            return BadRequest(new ApiError { Status = 400, Error = "InvalidRequest", Message = "Không thể huỷ yêu cầu này." });
 
-        foreach (var r in requests)
+        var accountId = JsonSerializer.Deserialize<ChequeBookRequestModel>(request.RequestDetail)?.AccountId ?? 0;
+        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
+        
+        if (account == null)
         {
-            decimal? balance = null;
+            return NotFound(new ApiError { Status = 404, Error = "AccountNotFound", Message = "Không tìm thấy tài khoản." });
+        }
 
-            
-            if (r.RequestType == RequestTypeEnum.LockAccount ||
-                r.RequestType == RequestTypeEnum.UnlockAccountCard ||
-                r.RequestType == RequestTypeEnum.CloseAccount ||
-                r.RequestType == RequestTypeEnum.IssueCheque)
+        if (account.CardType == "Credit")
+        {
+            return BadRequest(new ApiError
             {
-                try
-                {
-                    var accountId = 0;
-
-                    if (r.RequestType == RequestTypeEnum.IssueCheque)
-                    {
-                        var chequeData = JsonSerializer.Deserialize<ChequeRequestModel>(r.RequestDetail);
-                        accountId = chequeData?.AccountId ?? 0;
-                    }
-                    else
-                    {
-                        var accData = JsonSerializer.Deserialize<AccountActionModel>(r.RequestDetail);
-                        accountId = accData?.AccountId ?? 0;
-                    }
-
-                    if (accountId > 0)
-                    {
-                        var acc = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId);
-                        if (acc != null)
-                            balance = acc.Balance;
-                    }
-                }
-                catch
-                {
-                
-                }
-            }
-
-            response.Add(new
-            {
-                r.RequestId,
-                CustomerName = r.customer?.full_name,
-                r.RequestType,
-                r.RequestDetail,
-                r.RequestDate,
-                r.Status,
-                Balance = balance
+                Status = 400,
+                Error = "InvalidAccount",
+                Message = "Không thể huỷ yêu cầu sổ séc cho thẻ tín dụng."
             });
         }
 
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Danh sách tất cả yêu cầu",
-            Data = response
-        });
-        }
+        decimal cancelFee = 5000m;
+        if (account.Balance < cancelFee)
+            return BadRequest(new ApiError { Status = 400, Error = "InsufficientFunds", Message = "Không đủ số dư để huỷ yêu cầu." });
 
-    // [Authorize]//(Roles = "Admin")]
-    [HttpPost("process-request/{requestId}")]
-    public async Task<IActionResult> ProcessServiceRequest(int requestId)
-    {
-        var request = await _context.Service_requests.Include(r => r.customer).FirstOrDefaultAsync(r => r.RequestId == requestId);
-        if (request == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy yêu cầu." });
-
-        if (request.Status != "Pending")
-            return BadRequest(new ApiError { Status = 400, Error = "AlreadyProcessed", Message = "Yêu cầu đã được xử lý." });
-
-        try
-        {
-            switch (request.RequestType)
-            {
-                case RequestTypeEnum.LockAccount:
-                    var lockData = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
-                    var accToLock = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == lockData.AccountId && a.customer_id == request.CustomerId);
-                    if (accToLock != null && accToLock.Status != "Locked")
-                    {
-                        accToLock.Status = "Locked";
-                        request.Status = "Approved";
-                    }
-                    else request.Status = "Rejected";
-                    break;
-
-                case RequestTypeEnum.UnlockAccountCard:
-                    var unlockData = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
-                    var accToUnlock = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == unlockData.AccountId && a.customer_id == request.CustomerId);
-                    if (accToUnlock != null && accToUnlock.Status == "Locked")
-                    {
-                        accToUnlock.Status = "Active";
-                        request.Status = "Approved";
-                    }
-                    else request.Status = "Rejected";
-                    break;
-
-                case RequestTypeEnum.CloseAccount:
-                    var closeData = JsonSerializer.Deserialize<AccountActionModel>(request.RequestDetail);
-                    var accToClose = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == closeData.AccountId && a.customer_id == request.CustomerId);
-                    if (accToClose != null && accToClose.Balance == 0)
-                    {
-                        _context.Accounts.Remove(accToClose);
-                        request.Status = "Approved";
-                    }
-                    else request.Status = "Rejected";
-                    break;
-
-                case RequestTypeEnum.UnlockAccount:
-                    var customer = await _context.Customers.FindAsync(request.CustomerId);
-                    if (customer != null && customer.locked)
-                    {
-                        customer.locked = false;
-                        customer.number_login = 0;
-                        request.Status = "Approved";
-                    }
-                    else request.Status = "Rejected";
-                    break;
-
-                case RequestTypeEnum.UpdateInfo:
-                    var updateData = JsonSerializer.Deserialize<UpdateInfoModel>(request.RequestDetail);
-                    var cust = await _context.Customers.FindAsync(request.CustomerId);
-                    if (cust != null)
-                    {
-                        if (!string.IsNullOrEmpty(updateData.FullName)) cust.full_name = updateData.FullName;
-                        if (!string.IsNullOrEmpty(updateData.Email)) cust.email = updateData.Email;
-                        if (!string.IsNullOrEmpty(updateData.Mobile)) cust.mobile = updateData.Mobile;
-                        if (!string.IsNullOrEmpty(updateData.Password))
-                            cust.password = BCrypt.Net.BCrypt.HashPassword(updateData.Password);
-                        request.Status = "Approved";
-                    }
-                    else request.Status = "Rejected";
-                    break;
-
-                default:
-                    return BadRequest(new ApiError { Status = 400, Error = "InvalidType", Message = "Loại yêu cầu không hợp lệ." });
-            }
-        }
-        catch
-        {
-            return BadRequest(new ApiError { Status = 400, Error = "InvalidJson", Message = "RequestDetail không đúng định dạng JSON." });
-        }
+        account.Balance -= cancelFee;
+        request.Status = "Cancelled by user";
 
         await _context.SaveChangesAsync();
 
         return Ok(new ApiResponse<object>
         {
             Status = 200,
-            Message = $"Đã xử lý yêu cầu {request.RequestType} - {request.Status}.",
-            Data = request
+            Message = "Đã huỷ yêu cầu thành công (phí đã được trừ).",
+            Data = new { request.RequestId }
         });
     }
 
-    // [Authorize] //(Roles = "Admin")]
-    [HttpPost("reject-request/{requestId}")]
-    public async Task<IActionResult> RejectRequest(int requestId)
-    {
-        var request = await _context.Service_requests.FindAsync(requestId);
-        if (request == null)
-            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy yêu cầu." });
-
-        if (request.Status != "Pending")
-            return BadRequest(new ApiError { Status = 400, Error = "AlreadyProcessed", Message = "Yêu cầu đã được xử lý." });
-
-        request.Status = "Rejected";
-        await _context.SaveChangesAsync();
-
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Yêu cầu đã bị từ chối.",
-            Data = request
-        });
-    }
 }
