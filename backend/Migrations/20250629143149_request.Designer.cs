@@ -11,8 +11,13 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250625115939_doiten")]
-    partial class doiten
+<<<<<<<< HEAD:backend/Migrations/20250626082845_ghichu_fix.Designer.cs
+    [Migration("20250626082845_ghichu_fix")]
+    partial class ghichu_fix
+========
+    [Migration("20250629143149_request")]
+    partial class request
+>>>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402:backend/Migrations/20250629143149_request.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,11 +37,6 @@ namespace backend.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("account_id"));
 
-                    b.Property<string>("AccountType")
-                        .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
                     b.Property<decimal>("Balance")
                         .HasColumnType("decimal(18,2)");
 
@@ -47,7 +47,8 @@ namespace backend.Migrations
 
                     b.Property<string>("CardType")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
 
                     b.Property<DateTime?>("CreditIssuedDate")
                         .HasColumnType("datetime2");
@@ -94,6 +95,81 @@ namespace backend.Migrations
                     b.ToTable("Banks");
                 });
 
+            modelBuilder.Entity("Bank_Transaction", b =>
+                {
+                    b.Property<int>("TransactionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
+
+                    b.Property<string>("ReceiverAccount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderAccount")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("id_banking_Receiver")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("id_banking_sender")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("transactionDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("transaction_status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TransactionId");
+
+                    b.ToTable("bank_Transaction");
+                });
+
+<<<<<<<< HEAD:backend/Migrations/20250626082845_ghichu_fix.Designer.cs
+========
+            modelBuilder.Entity("Cheque", b =>
+                {
+                    b.Property<int>("ChequeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ChequeId"));
+
+                    b.Property<int>("AccountId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<DateTime>("IssuedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("PaidDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ChequeId");
+
+                    b.HasIndex("AccountId");
+
+                    b.ToTable("Cheques");
+                });
+
+>>>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402:backend/Migrations/20250629143149_request.Designer.cs
             modelBuilder.Entity("Customer", b =>
                 {
                     b.Property<int>("customer_id")
@@ -103,7 +179,6 @@ namespace backend.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("customer_id"));
 
                     b.Property<string>("TransactionPassword")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("authentication_code")
@@ -115,7 +190,6 @@ namespace backend.Migrations
                         .HasColumnType("nvarchar(12)");
 
                     b.Property<string>("device")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("email")
@@ -165,6 +239,11 @@ namespace backend.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int")
                         .HasColumnName("customer_id");
+
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2")
@@ -235,45 +314,6 @@ namespace backend.Migrations
                     b.ToTable("statements");
                 });
 
-            modelBuilder.Entity("Transaction", b =>
-                {
-                    b.Property<int>("TransactionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TransactionId"));
-
-                    b.Property<int>("ReceiverAccount")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SenderAccount")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("amount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("id_banking_Receiver")
-                        .HasColumnType("int");
-
-                    b.Property<int>("id_banking_sender")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("transactionDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("transaction_status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("TransactionId");
-
-                    b.ToTable("BankTransactions");
-                });
-
             modelBuilder.Entity("Accounts", b =>
                 {
                     b.HasOne("Customer", "customer")
@@ -285,6 +325,20 @@ namespace backend.Migrations
                     b.Navigation("customer");
                 });
 
+<<<<<<<< HEAD:backend/Migrations/20250626082845_ghichu_fix.Designer.cs
+========
+            modelBuilder.Entity("Cheque", b =>
+                {
+                    b.HasOne("Accounts", "Account")
+                        .WithMany()
+                        .HasForeignKey("AccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Account");
+                });
+
+>>>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402:backend/Migrations/20250629143149_request.Designer.cs
             modelBuilder.Entity("Service_request", b =>
                 {
                     b.HasOne("Customer", "customer")

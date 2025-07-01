@@ -229,6 +229,11 @@ namespace backend.Migrations
                         .HasColumnType("int")
                         .HasColumnName("customer_id");
 
+                    b.Property<string>("Reason")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.Property<DateTime>("RequestDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("request_date");

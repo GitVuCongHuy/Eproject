@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,6 +23,9 @@ public class Service_request
     [Column("request_detail")]
     public string RequestDetail { get; set; }
 
+    [MaxLength(200)]
+    public string Reason { get; set; } 
+
     [Required]
     [Column("request_date")]
     public DateTime RequestDate { get; set; }
@@ -32,5 +34,4 @@ public class Service_request
     [MaxLength(20)]
     [Column("status")]
     public string Status { get; set; }
-
 }

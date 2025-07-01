@@ -1,8 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-
 public class Accounts
 {
     [Key]
@@ -18,7 +16,6 @@ public class Accounts
     [StringLength(10, MinimumLength = 10)]
     public string CardNumber { get; set; }
 
-
     [Column(TypeName = "decimal(18,2)")]
     public decimal Balance { get; set; }
 
@@ -27,7 +24,6 @@ public class Accounts
 
     [MaxLength(20)]
     public string CardType { get; set; } 
-    public DateTime? CreditIssuedDate { get; set; } 
 
-    
+    public DateTime? CreditIssuedDate { get; set; }
 }
