@@ -258,7 +258,7 @@ namespace backend.Migrations
                     b.Property<string>("RequestDetail")
                         .IsRequired()
                         .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)")
+                        .HasColumnType("nvarchar(max)")
                         .HasColumnName("request_detail");
 
                     b.Property<string>("RequestType")

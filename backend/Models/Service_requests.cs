@@ -20,7 +20,7 @@ public class Service_request
 
     [Required]
     [MaxLength(100)]
-    [Column("request_detail")]
+    [Column("request_detail", TypeName = "nvarchar(max)")]
     public string RequestDetail { get; set; }
 
     [MaxLength(200)]

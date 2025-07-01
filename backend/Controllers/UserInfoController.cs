@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using BCrypt.Net;
 using backend.ViewModel;
 using backend.Enums;
 
@@ -60,7 +61,7 @@ namespace YourNamespace.Controllers
             });
         }
 
-        // ✅ API 2: Đổi mật khẩu đăng nhập
+        // ✅ API 2: Đổi mật khẩu đăng nhập (dùng BCrypt)
         [HttpPost("change-password")]
         public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordModel model)
         {
@@ -69,13 +70,20 @@ namespace YourNamespace.Controllers
             if (customer == null)
                 return NotFound(new ApiError { Status = 404, Error = "UserNotFound", Message = "Không tìm thấy người dùng." });
 
-            if (customer.password != model.CurrentPassword)
-                return BadRequest(new ApiError { Status = 400, Error = "InvalidPassword", Message = "Mật khẩu hiện tại không đúng." });
+            if (!BCrypt.Net.BCrypt.Verify(model.CurrentPassword, customer.password))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InvalidPassword",
+                    Message = "Mật khẩu hiện tại không đúng."
+                });
+            }
 
             if (string.IsNullOrWhiteSpace(model.NewPassword) || model.NewPassword.Length < 6)
                 return BadRequest(new ApiError { Status = 400, Error = "WeakPassword", Message = "Mật khẩu mới phải có ít nhất 6 ký tự." });
 
-            customer.password = model.NewPassword;
+            customer.password = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
             await _context.SaveChangesAsync();
 
             await _emailHelper.SendEmailAsync(customer.email, "Đổi mật khẩu thành công",
@@ -90,7 +98,7 @@ namespace YourNamespace.Controllers
             });
         }
 
-        // ✅ API 3: Đổi mật khẩu giao dịch
+        // ✅ API 3: Đổi mật khẩu giao dịch (dùng BCrypt)
         [HttpPost("change-transaction-password")]
         public async Task<IActionResult> ChangeTransactionPassword([FromBody] ChangeTransactionPasswordModel model)
         {
@@ -99,13 +107,20 @@ namespace YourNamespace.Controllers
             if (customer == null)
                 return NotFound(new ApiError { Status = 404, Error = "UserNotFound", Message = "Không tìm thấy người dùng." });
 
-            if (customer.TransactionPassword != model.CurrentTransactionPassword)
-                return BadRequest(new ApiError { Status = 400, Error = "InvalidTransactionPassword", Message = "Mật khẩu giao dịch hiện tại không đúng." });
+            if (!BCrypt.Net.BCrypt.Verify(model.CurrentTransactionPassword, customer.TransactionPassword))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InvalidTransactionPassword",
+                    Message = "Mật khẩu giao dịch hiện tại không đúng."
+                });
+            }
 
             if (string.IsNullOrWhiteSpace(model.NewTransactionPassword) || model.NewTransactionPassword.Length < 6)
                 return BadRequest(new ApiError { Status = 400, Error = "WeakTransactionPassword", Message = "Mật khẩu giao dịch mới phải có ít nhất 6 ký tự." });
 
-            customer.TransactionPassword = model.NewTransactionPassword;
+            customer.TransactionPassword = BCrypt.Net.BCrypt.HashPassword(model.NewTransactionPassword);
             await _context.SaveChangesAsync();
 
             await _emailHelper.SendEmailAsync(customer.email, "Đổi mật khẩu giao dịch thành công",
