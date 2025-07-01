@@ -11,13 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:backend/Migrations/20250626082845_ghichu_fix.Designer.cs
-    [Migration("20250626082845_ghichu_fix")]
-    partial class ghichu_fix
-========
-    [Migration("20250629143149_request")]
-    partial class request
->>>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402:backend/Migrations/20250629143149_request.Designer.cs
+    [Migration("20250701080209_ghichu")]
+    partial class ghichu
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -136,8 +131,6 @@ namespace backend.Migrations
                     b.ToTable("bank_Transaction");
                 });
 
-<<<<<<<< HEAD:backend/Migrations/20250626082845_ghichu_fix.Designer.cs
-========
             modelBuilder.Entity("Cheque", b =>
                 {
                     b.Property<int>("ChequeId")
@@ -158,6 +151,10 @@ namespace backend.Migrations
                     b.Property<DateTime?>("PaidDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("SerialNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -169,7 +166,19 @@ namespace backend.Migrations
                     b.ToTable("Cheques");
                 });
 
->>>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402:backend/Migrations/20250629143149_request.Designer.cs
+            modelBuilder.Entity("ChequeFee", b =>
+                {
+                    b.Property<string>("FeeType")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("FeeAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("FeeType");
+
+                    b.ToTable("ChequeFees");
+                });
+
             modelBuilder.Entity("Customer", b =>
                 {
                     b.Property<int>("customer_id")
@@ -325,8 +334,6 @@ namespace backend.Migrations
                     b.Navigation("customer");
                 });
 
-<<<<<<<< HEAD:backend/Migrations/20250626082845_ghichu_fix.Designer.cs
-========
             modelBuilder.Entity("Cheque", b =>
                 {
                     b.HasOne("Accounts", "Account")
@@ -338,7 +345,6 @@ namespace backend.Migrations
                     b.Navigation("Account");
                 });
 
->>>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402:backend/Migrations/20250629143149_request.Designer.cs
             modelBuilder.Entity("Service_request", b =>
                 {
                     b.HasOne("Customer", "customer")

@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:backend/Migrations/20250624171129_ghichu.cs
     public partial class ghichu : Migration
-========
-    public partial class request : Migration
->>>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402:backend/Migrations/20250629143149_request.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -48,6 +44,18 @@ namespace backend.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Banks", x => x.bank_id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChequeFees",
+                columns: table => new
+                {
+                    FeeType = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FeeAmount = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChequeFees", x => x.FeeType);
                 });
 
             migrationBuilder.CreateTable(
@@ -131,6 +139,7 @@ namespace backend.Migrations
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IssuedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SerialNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     PaidDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
@@ -198,6 +207,9 @@ namespace backend.Migrations
 
             migrationBuilder.DropTable(
                 name: "Banks");
+
+            migrationBuilder.DropTable(
+                name: "ChequeFees");
 
             migrationBuilder.DropTable(
                 name: "Cheques");
