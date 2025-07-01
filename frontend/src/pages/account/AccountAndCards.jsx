@@ -1,48 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { 
-  Plus, 
-  CreditCard, 
-  PiggyBank, 
-  Facebook, 
-  Linkedin, 
-  Youtube, 
-  Smartphone,
-  TrendingUp,
-  Phone,
-  Mail,
-  MapPin,
-  ExternalLink,
-} from 'lucide-react';
+import { Plus, CreditCard, PiggyBank, Facebook, Linkedin, Youtube, Smartphone, TrendingUp, Phone, Mail, MapPin, ExternalLink, } from 'lucide-react';
 import AccountBalance from '@mui/icons-material/AccountBalance';
 import SecurityIcon from '@mui/icons-material/Security';
+import { Visibility, VisibilityOff } from '@mui/icons-material'; // Thêm import này
 
-import { 
-  Container,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Typography, 
-  Button, 
-  Tabs, 
-  Tab, 
-  Card, 
-  CardContent, 
-  Grid, 
-  Box, 
-  Divider, 
-  Stack, 
-  IconButton, 
-  Paper, 
-  GlobalStyles, 
-  CircularProgress,
-  Avatar,
-  Chip,
-  Fade,
-  Alert,
-  useTheme
-} from '@mui/material';
-import { useAuth } from '../../context/context';
+import { Container, Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button, Tabs, Tab, Card, CardContent, Grid, Box, Divider, Stack, IconButton, Tooltip, Paper, GlobalStyles, CircularProgress, Avatar, Chip, Fade, Alert, useTheme } from '@mui/material';
+import { useAuth } from '../../context/Context';
 
 // Bảng màu hiện đại
 const colors = {
@@ -71,8 +34,49 @@ export default function TechcombankAccountsPage() {
   const [accounts, setAccounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  // State để quản lý trạng thái hiển thị số dư của từng tài khoản
+  const [accountBalanceVisibility, setAccountBalanceVisibility] = useState({});
+  // State để quản lý trạng thái hiển thị của tổng tài sản
+  const [showTotalBalance, setShowTotalBalance] = useState(false); // Mặc định ẩn tổng tài sản
 
   const { getCards } = useAuth();
+
+  // Hàm để chuyển đổi trạng thái hiển thị số dư cho một tài khoản cụ thể
+  const toggleAccountBalanceVisibility = (accountId) => {
+    setAccountBalanceVisibility(prev => ({
+      ...prev,
+      [accountId]: !prev[accountId] // Đảo ngược trạng thái hiển thị của tài khoản có accountId tương ứng
+    }));
+  };
+
+  // Hàm để chuyển đổi trạng thái hiển thị tổng tài sản
+  const toggleTotalBalanceVisibility = () => {
+    setShowTotalBalance(prev => !prev);
+  };
+
+  // Hàm để lấy thông tin hiển thị cho cardType
+  const getCardTypeInfo = (cardType) => {
+    switch (cardType) {
+      case 'Credit':
+        return {
+          label: 'Thẻ tín dụng',
+          color: colors.warning,
+          bgColor: 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)'
+        };
+      case 'Normal':
+        return {
+          label: 'Thẻ thường',
+          color: colors.accent,
+          bgColor: 'linear-gradient(135deg, #3182ce 0%, #2c5aa0 100%)'
+        };
+      default:
+        return {
+          label: cardType || 'Không xác định',
+          color: colors.textSecondary,
+          bgColor: 'linear-gradient(135deg, #718096 0%, #4a5568 100%)'
+        };
+    }
+  };
 
   useEffect(() => {
     const fetchAccountData = async () => {
@@ -83,6 +87,12 @@ export default function TechcombankAccountsPage() {
 
         if (cardsResponse.success) {
           setAccounts(cardsResponse.data);
+          // Khởi tạo trạng thái hiển thị số dư cho mỗi tài khoản (mặc định là ẩn)
+          const initialVisibility = cardsResponse.data.reduce((acc, account) => {
+            acc[account.account_id] = false; // Mặc định ẩn số dư
+            return acc;
+          }, {});
+          setAccountBalanceVisibility(initialVisibility);
         } else {
           throw new Error(cardsResponse.message || 'Không thể lấy danh sách tài khoản.');
         }
@@ -98,6 +108,7 @@ export default function TechcombankAccountsPage() {
   }, [getCards]);
 
   const tabs = ['Tài khoản'];
+  // Tổng số dư không cần ẩn, chỉ số dư từng tài khoản mới cần
   const totalBalance = accounts.reduce((sum, acc) => sum + (acc.balance || 0), 0);
 
   const renderContent = () => {
@@ -116,9 +127,9 @@ export default function TechcombankAccountsPage() {
 
     if (error) {
       return (
-        <Alert 
-          severity="error" 
-          sx={{ 
+        <Alert
+          severity="error"
+          sx={{
             borderRadius: 3,
             my: 4,
             '& .MuiAlert-icon': {
@@ -147,11 +158,11 @@ export default function TechcombankAccountsPage() {
             border: `1px dashed ${colors.border}`
           }}
         >
-          <Avatar 
-            sx={{ 
-              width: 80, 
-              height: 80, 
-              mx: 'auto', 
+          <Avatar
+            sx={{
+              width: 80,
+              height: 80,
+              mx: 'auto',
               mb: 3,
               background: colors.gradientPrimary
             }}
@@ -164,8 +175,8 @@ export default function TechcombankAccountsPage() {
           <Typography color={colors.textSecondary} sx={{ mb: 4 }}>
             Hãy mở tài khoản đầu tiên để bắt đầu sử dụng dịch vụ
           </Typography>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             startIcon={<Plus />}
             onClick={() => setOpenDialog(true)}
             sx={{
@@ -185,6 +196,7 @@ export default function TechcombankAccountsPage() {
 
     return (
       <>
+
         {/* Tổng số dư */}
         <Fade in={true} timeout={600}>
           <Paper
@@ -214,16 +226,31 @@ export default function TechcombankAccountsPage() {
                   <Typography variant="body1" sx={{ opacity: 0.9, mb: 1 }}>
                     Tổng tài sản
                   </Typography>
-                  <Typography variant="h3" fontWeight={700}>
-                    {totalBalance.toLocaleString('vi-VN')} VND
-                  </Typography>
+                  <Stack direction="row" alignItems="center" spacing={1}> {/* Thêm Stack cho tổng tài sản */}
+                    <Typography variant="h3" fontWeight={700}>
+                      {showTotalBalance ? totalBalance.toLocaleString('vi-VN') : '******'}
+                    </Typography>
+                    {showTotalBalance && (
+                      <Typography variant="h3" fontWeight={700}>
+                        VND
+                      </Typography>
+                    )}
+                    <Tooltip title={showTotalBalance ? "Ẩn tổng tài sản" : "Hiện tổng tài sản"}>
+                      <IconButton
+                        onClick={toggleTotalBalanceVisibility}
+                        sx={{ color: 'white' }}
+                      >
+                        {showTotalBalance ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </Tooltip>
+                  </Stack>
                   <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
                     {accounts.length} tài khoản
                   </Typography>
                 </Box>
-                <Avatar 
-                  sx={{ 
-                    width: 80, 
+                <Avatar
+                  sx={{
+                    width: 80,
                     height: 80,
                     background: colors.glassEffect,
                     backdropFilter: 'blur(10px)',
@@ -239,94 +266,117 @@ export default function TechcombankAccountsPage() {
 
         {/* Danh sách tài khoản */}
         <Stack spacing={3} mb={4}>
-          {accounts.map((account, index) => (
-            <Fade key={account.account_id} in={true} timeout={800 + index * 100}>
-              <Paper
-                elevation={0}
-                sx={{
-                  borderRadius: 4,
-                  border: `1px solid ${colors.border}`,
-                  background: colors.surface,
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
-                    borderColor: colors.primary
-                  }
-                }}
-              >
-                <CardContent sx={{ p: '24px !important' }}>
-                  <Grid container alignItems="center" justifyContent="space-between">
-                    <Grid item xs={12} md={8}>
-                      <Stack direction="row" spacing={3} alignItems="center">
-                        <Avatar
-                          sx={{
-                            width: 56,
-                            height: 56,
-                            background: colors.gradientSecondary,
-                            color: 'white'
-                          }}
-                        >
-                          <CreditCard size={28} />
-                        </Avatar>
-                        <Box>
-                          <Typography variant="h6" fontWeight={600} color={colors.textPrimary}>
-                            Tài khoản thanh toán
+          {accounts.map((account, index) => {
+            // Lấy trạng thái hiển thị số dư của tài khoản hiện tại
+            const isBalanceVisible = accountBalanceVisibility[account.account_id];
+            // Lấy thông tin cardType
+            const cardTypeInfo = getCardTypeInfo(account.cardType);
+
+            return (
+              <Fade key={account.account_id} in={true} timeout={800 + index * 100}>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    borderRadius: 4,
+                    border: `1px solid ${colors.border}`,
+                    background: colors.surface,
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      transform: 'translateY(-4px)',
+                      boxShadow: '0 12px 30px rgba(0,0,0,0.1)',
+                      borderColor: colors.primary
+                    }
+                  }}
+                >
+                  <CardContent sx={{ p: '24px !important' }}>
+                    <Grid container alignItems="center" justifyContent="space-between">
+                      <Grid item xs={12} md={8}>
+                        <Stack direction="row" spacing={3} alignItems="center">
+                          <Avatar
+                            sx={{
+                              width: 56,
+                              height: 56,
+                              background: colors.gradientSecondary,
+                              color: 'white'
+                            }}
+                          >
+                            <CreditCard size={28} />
+                          </Avatar>
+                          <Box>
+                            <Typography variant="h6" fontWeight={600} color={colors.textPrimary}>
+                              Tài khoản thanh toán
+                            </Typography>
+                            {account.cardNumber && (
+                              <Typography
+                                variant="body1"
+                                sx={{
+                                  fontFamily: 'monospace',
+                                  letterSpacing: '2px',
+                                  color: colors.textSecondary,
+                                  mt: 0.5,
+                                  fontSize: '1.1rem'
+                                }}
+                              >
+                                {account.cardNumber}
+                              </Typography>
+                            )}
+                            <Stack direction="row" spacing={1} mt={1} flexWrap="wrap" gap={1}>
+                              <Chip
+                                label="Hoạt động"
+                                size="small"
+                                sx={{
+                                  background: colors.gradientSuccess,
+                                  color: 'white',
+                                  fontWeight: 500
+                                }}
+                              />
+  
+                              <Chip
+                                label={cardTypeInfo.label}
+                                size="small"
+                                sx={{
+                                  background: cardTypeInfo.bgColor,
+                                  color: 'white',
+                                  fontWeight: 500,
+                                  '& .MuiChip-label': {
+                                    fontSize: '0.75rem'
+                                  }
+                                }}
+                              />
+                            </Stack>
+                          </Box>
+                        </Stack>
+                      </Grid>
+                      <Grid item xs={12} md={4} sx={{ textAlign: { xs: 'left', md: 'right' }, mt: { xs: 2, md: 0 } }}>
+                        <Typography variant="body2" color={colors.textSecondary} sx={{ mb: 0.5 }}>
+                          Số dư khả dụng
+                        </Typography>
+                        {/* Stack để chứa số dư và nút mắt */}
+                        <Stack direction="row" alignItems="center" justifyContent={{ xs: 'flex-start', md: 'flex-end' }} spacing={1}>
+                          <Typography variant="h4" fontWeight={700} color={colors.textPrimary}>
+                            {isBalanceVisible ? account.balance.toLocaleString('vi-VN') : '******'}
                           </Typography>
-                          {account.cardNumber && (
-                            <Typography 
-                              variant="body1" 
-                              sx={{
-                                fontFamily: 'monospace',
-                                letterSpacing: '2px',
-                                color: colors.textSecondary,
-                                mt: 0.5,
-                                fontSize: '1.1rem'
-                              }}
-                            >
-                              {account.cardNumber}
+                          {isBalanceVisible && ( // Chỉ hiển thị "VND" nếu số dư đang hiển thị
+                            <Typography variant="h4" fontWeight={700} color={colors.textPrimary}>
+                              VND
                             </Typography>
                           )}
-                          <Stack direction="row" spacing={1} mt={1}>
-                            <Chip 
-                              label="Hoạt động" 
-                              size="small"
-                              sx={{
-                                background: colors.gradientSuccess,
-                                color: 'white',
-                                fontWeight: 500
-                              }}
-                            />
-                            <Chip 
-                              label="Chính" 
-                              size="small"
-                              variant="outlined"
-                              sx={{
-                                borderColor: colors.primary,
-                                color: colors.primary,
-                                fontWeight: 500
-                              }}
-                            />
-                          </Stack>
-                        </Box>
-                      </Stack>
+                          <Tooltip title={isBalanceVisible ? "Ẩn số dư" : "Hiện số dư"}>
+                            <IconButton
+                              onClick={() => toggleAccountBalanceVisibility(account.account_id)} // Truyền account_id vào hàm
+                              sx={{ color: colors.textPrimary }} // Điều chỉnh màu sắc icon cho phù hợp với theme
+                            >
+                              {isBalanceVisible ? <VisibilityOff /> : <Visibility />}
+                            </IconButton>
+                          </Tooltip>
+                        </Stack>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={12} md={4} sx={{ textAlign: { xs: 'left', md: 'right' }, mt: { xs: 2, md: 0 } }}>
-                      <Typography variant="body2" color={colors.textSecondary} sx={{ mb: 0.5 }}>
-                        Số dư khả dụng
-                      </Typography>
-                      <Typography variant="h4" fontWeight={700} color={colors.textPrimary}>
-                        {account.balance.toLocaleString('vi-VN')}
-                      </Typography>
-                      <Typography variant="body2" color={colors.textSecondary}>
-                        VND
-                      </Typography>
-                    </Grid>
-                  </Grid>
-                </CardContent>
-              </Paper>
-            </Fade>
-          ))}
+                  </CardContent>
+                </Paper>
+              </Fade>
+            );
+          })}
         </Stack>
 
         {/* Các tính năng nhanh */}
@@ -435,389 +485,294 @@ export default function TechcombankAccountsPage() {
 
   return (
     <>
-      <GlobalStyles styles={{
-        '._mainContent_b1piq_13': {
-          marginLeft: '30px !important',
-          marginTop: '30px!important',
-        },
-        'html, body': {
-          overflow: 'auto',
-          backgroundColor: colors.background,
-        },
-      }} />
-
-      <Box sx={{ background: `linear-gradient(135deg, ${colors.background} 0%, #edf2f7 100%)`, minHeight: '100vh', py: 4 }}>
-        <Container maxWidth="100vw">
-          {/* Header hiện đại */}
-          <Fade in={true} timeout={400}>
-            <Box sx={{ mb: 6 }}>
-              <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 2 }}>
-                <Box>
-                  <Typography variant="h4" fontWeight={700} color={colors.textPrimary}>
-                    Tài khoản & Thẻ
-                  </Typography>
-                  <Typography variant="body1" color={colors.textSecondary} sx={{ mt: 1 }}>
-                    Quản lý và theo dõi tất cả tài khoản của bạn
-                  </Typography>
-                </Box>
-                <Button 
-                  variant="contained" 
-                  startIcon={<Plus size={18} />}
-                  onClick={() => setOpenDialog(true)}
-                  sx={{
-                    background: colors.gradientPrimary,
-                    borderRadius: 3,
-                    textTransform: 'none',
-                    fontWeight: 600,
-                    px: 4,
-                    py: 1.5,
-                    display: { xs: 'none', sm: 'flex' }
-                  }}
-                >
-                  Mở tài khoản
-                </Button>
-              </Stack>
-            </Box>
-          </Fade>
-
-          {/* Tabs hiện đại */}
-          <Fade in={true} timeout={600}>
-            <Paper
-              elevation={0}
-              sx={{
-                borderRadius: 4,
-                mb: 4,
-                background: colors.surface,
-                border: `1px solid ${colors.border}`
-              }}
+        <GlobalStyles styles={{
+          '._mainContent_b1piq_13': {
+            marginLeft: '10px !important',
+            marginTop: '10px!important',
+          },
+          'html, body': {
+            overflowY: 'scroll', 
+            backgroundColor: colors.background,
+          },
+        }} />
+      <Container maxWidth="100vw" sx={{ py: 4 }}>
+        <Fade in={true} timeout={400}>
+          <Box>
+            <Typography
+              variant="h3"
+              fontWeight={700}
+              color={colors.textPrimary}
+              sx={{ mb: 1 }}
             >
-              <Tabs
-                value={activeTab}
-                onChange={(e, newVal) => setActiveTab(newVal)}
-                variant="scrollable"
-                scrollButtons="auto"
-                sx={{
-                  '& .MuiTab-root': {
-                    textTransform: 'none',
-                    fontWeight: 600,
-                    fontSize: '1rem',
-                    py: 2
-                  },
-                  '& .Mui-selected': {
-                    color: colors.primary
-                  },
-                  '& .MuiTabs-indicator': {
-                    backgroundColor: colors.primary,
-                    height: 3,
-                    borderRadius: '3px 3px 0 0'
-                  }
-                }}
-              >
-                {tabs.map((label) => (
-                  <Tab key={label} label={label} />
-                ))}
-              </Tabs>
-            </Paper>
-          </Fade>
-
-          {/* Nội dung chính */}
-          {renderContent()}
-
-          {/* Footer hiện đại */}
-          <Fade in={true} timeout={1400}>
-            <Paper 
-              elevation={0} 
-              sx={{ 
-                mt: 8, 
-                borderRadius: 4,
-                background: colors.surface,
-                border: `1px solid ${colors.border}`,
-                overflow: 'hidden'
-              }}
+              Tài khoản của tôi
+            </Typography>
+            <Typography
+              variant="h6"
+              color={colors.textSecondary}
+              sx={{ mb: 4 }}
             >
-              {/* Header của footer */}
-              <Box 
-                sx={{ 
-                  background: colors.gradientPrimary,
-                  color: 'white',
-                  p: 4,
-                  textAlign: 'center'
-                }}
-              >
-                <Stack direction="row" justifyContent="center" alignItems="center" spacing={2} sx={{ mb: 2 }}>
-                  <Avatar
+              Quản lý tài khoản và theo dõi số dư một cách dễ dàng
+            </Typography>
+          </Box>
+        </Fade>
+
+        <Paper
+          elevation={0}
+          sx={{
+            borderRadius: 4,
+            background: colors.surface,
+            border: `1px solid ${colors.border}`,
+            overflow: 'hidden'
+          }}
+        >
+          <Tabs
+            value={activeTab}
+            onChange={(e, newValue) => setActiveTab(newValue)}
+            sx={{
+              borderBottom: `1px solid ${colors.border}`,
+              '& .MuiTab-root': {
+                textTransform: 'none',
+                fontWeight: 600,
+                fontSize: '1rem',
+                color: colors.textSecondary,
+                '&.Mui-selected': {
+                  color: colors.primary,
+                },
+              },
+              '& .MuiTabs-indicator': {
+                backgroundColor: colors.primary,
+                height: 3,
+                borderRadius: '3px 3px 0 0',
+              },
+            }}
+          >
+            {tabs.map((tab, index) => (
+              <Tab key={index} label={tab} />
+            ))}
+          </Tabs>
+
+          <Box sx={{ p: 4 }}>
+            {renderContent()}
+          </Box>
+        </Paper>
+
+        {/* Footer thông tin liên hệ */}
+        <Fade in={true} timeout={1400}>
+          <Paper
+            elevation={0}
+            sx={{
+              borderRadius: 4,
+              background: colors.surface,
+              border: `1px solid ${colors.border}`,
+              p: 4,
+              mt: 4
+            }}
+          >
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={6}>
+                <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
+                  Hỗ trợ khách hàng
+                </Typography>
+                <Stack spacing={2}>
+                  <Stack direction="row" spacing={2} alignItems="center">
+                    <Phone size={20} color={colors.primary} />
+                    <Typography>1900 545 413</Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={2} alignItems="center">
+                    <Mail size={20} color={colors.primary} />
+                    <Typography>support@techcombank.com.vn</Typography>
+                  </Stack>
+                  <Stack direction="row" spacing={2} alignItems="center">
+                    <MapPin size={20} color={colors.primary} />
+                    <Typography>191 Bà Triệu, Hai Bà Trưng, Hà Nội</Typography>
+                  </Stack>
+                </Stack>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
+                  Kết nối với chúng tôi
+                </Typography>
+                <Stack direction="row" spacing={2}>
+                  <IconButton
                     sx={{
-                      width: 48,
-                      height: 48,
-                      bgcolor: 'white',
-                      color: colors.primary,
-                      fontWeight: 'bold',
-                      fontSize: '1.2rem'
+                      background: colors.gradientPrimary,
+                      color: 'white',
+                      '&:hover': { transform: 'scale(1.1)' }
                     }}
                   >
-                    TCB
-                  </Avatar>
-                  <Typography variant="h5" fontWeight={700}>
-                    Techcombank
-                  </Typography>
+                    <Facebook size={20} />
+                  </IconButton>
+                  <IconButton
+                    sx={{
+                      background: colors.gradientSecondary,
+                      color: 'white',
+                      '&:hover': { transform: 'scale(1.1)' }
+                    }}
+                  >
+                    <Linkedin size={20} />
+                  </IconButton>
+                  <IconButton
+                    sx={{
+                      background: colors.gradientSuccess,
+                      color: 'white',
+                      '&:hover': { transform: 'scale(1.1)' }
+                    }}
+                  >
+                    <Youtube size={20} />
+                  </IconButton>
                 </Stack>
-                <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                  Ngân hàng số hàng đầu Việt Nam
+                <Typography variant="body2" color={colors.textSecondary} sx={{ mt: 2 }}>
+                  Tải ứng dụng Techcombank Mobile để trải nghiệm dịch vụ tốt nhất
                 </Typography>
-              </Box>
-
-              <Box sx={{ p: 4 }}>
-                <Grid container spacing={4}>
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6" fontWeight={600} sx={{ mb: 3, color: colors.textPrimary }}>
-                      Thông tin liên hệ
-                    </Typography>
-                    <Stack spacing={2}>
-                      <Stack direction="row" spacing={2} alignItems="center">
-                        <Avatar sx={{ width: 32, height: 32, background: colors.gradientSuccess }}>
-                          <Phone size={16} />
-                        </Avatar>
-                        <Box>
-                          <Typography variant="body1" fontWeight={500}>Hotline 24/7</Typography>
-                          <Typography variant="body2" color={colors.textSecondary}>
-                            1800 588 822 / +84 243 944 6699
-                          </Typography>
-                        </Box>
-                      </Stack>
-                      
-                      <Stack direction="row" spacing={2} alignItems="center">
-                        <Avatar sx={{ width: 32, height: 32, background: colors.gradientSecondary }}>
-                          <Mail size={16} />
-                        </Avatar>
-                        <Box>
-                          <Typography variant="body1" fontWeight={500}>Email hỗ trợ</Typography>
-                          <Typography variant="body2" color={colors.textSecondary}>
-                            call_center@techcombank.com.vn
-                          </Typography>
-                        </Box>
-                      </Stack>
-
-                      <Stack direction="row" spacing={2} alignItems="flex-start">
-                        <Avatar sx={{ width: 32, height: 32, background: 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)' }}>
-                          <MapPin size={16} />
-                        </Avatar>
-                        <Box>
-                          <Typography variant="body1" fontWeight={500}>Trụ sở chính</Typography>
-                          <Typography variant="body2" color={colors.textSecondary}>
-                            Số 6 Phố Quang Trung, P. Trần Hưng Đạo,<br />
-                            Q. Hoàn Kiếm, Hà Nội
-                          </Typography>
-                          <Typography variant="body2" color={colors.textSecondary} sx={{ mt: 1 }}>
-                            <strong>Mã SWIFT:</strong> VTCBVNVX
-                          </Typography>
-                        </Box>
-                      </Stack>
-                    </Stack>
-
-                    <Stack direction="row" spacing={1} mt={3}>
-                      <IconButton 
-                        sx={{ 
-                          bgcolor: '#1877f2', 
-                          color: 'white',
-                          '&:hover': { bgcolor: '#166fe5' }
-                        }}
-                      >
-                        <Facebook size={18} />
-                      </IconButton>
-                      <IconButton 
-                        sx={{ 
-                          bgcolor: '#0077b5', 
-                          color: 'white',
-                          '&:hover': { bgcolor: '#006399' }
-                        }}
-                      >
-                        <Linkedin size={18} />
-                      </IconButton>
-                      <IconButton 
-                        sx={{ 
-                          bgcolor: '#ff0000', 
-                          color: 'white',
-                          '&:hover': { bgcolor: '#cc0000' }
-                        }}
-                      >
-                        <Youtube size={18} />
-                      </IconButton>
-                      <IconButton 
-                        sx={{ 
-                          bgcolor: '#0068ff', 
-                          color: 'white',
-                          '&:hover': { bgcolor: '#0052cc' }
-                        }}
-                      >
-                        <Typography fontSize={12} fontWeight="bold">Z</Typography>
-                      </IconButton>
-                    </Stack>
-                  </Grid>
-                  
-                  <Grid item xs={12} md={6}>
-                    <Typography variant="h6" fontWeight={600} sx={{ mb: 3, color: colors.textPrimary }}>
-                      Tải app ngay
-                    </Typography>
-                    <Stack spacing={3}>
-                      <Button 
-                        fullWidth
-                        variant="contained" 
-                        startIcon={<Smartphone size={20} />}
-                        endIcon={<ExternalLink size={16} />}
-                        sx={{ 
-                          bgcolor: '#000', 
-                          color: 'white',
-                          borderRadius: 3,
-                          py: 1.5,
-                          textTransform: 'none',
-                          fontWeight: 600,
-                          '&:hover': { bgcolor: '#333' }
-                        }}
-                      >
-                        Tải trên Google Play
-                      </Button>
-                      <Button 
-                        fullWidth
-                        variant="contained" 
-                        startIcon={<Typography fontSize={20}>🍎</Typography>}
-                        endIcon={<ExternalLink size={16} />}
-                        sx={{ 
-                          bgcolor: '#000', 
-                          color: 'white',
-                          borderRadius: 3,
-                          py: 1.5,
-                          textTransform: 'none',
-                          fontWeight: 600,
-                          '&:hover': { bgcolor: '#333' }
-                        }}
-                      >
-                        Tải trên App Store
-                      </Button>
-                    </Stack>
-                    
-                    <Typography variant="body2" color={colors.textSecondary} sx={{ mt: 3, lineHeight: 1.6 }}>
-                      Tải ứng dụng Techcombank Mobile để trải nghiệm dịch vụ ngân hàng điện tử 
-                      hiện đại, tiện lợi mọi nơi, mọi lúc.
-                    </Typography>
-
-                    <Box sx={{ mt: 3, p: 3, bgcolor: colors.background, borderRadius: 3 }}>
-                      <Typography variant="body2" fontWeight={500} sx={{ mb: 1 }}>
-                        Tính năng nổi bật:
-                      </Typography>
-                      <Typography variant="body2" color={colors.textSecondary}>
-                        • Chuyển tiền 24/7<br />
-                        • Thanh toán hóa đơn<br />
-                        • Quản lý tài chính thông minh<br />
-                        • Bảo mật sinh trắc học
-                      </Typography>
-                    </Box>
-                  </Grid>
-                </Grid>
-                
-                <Divider sx={{ my: 4 }} />
-                
-                <Typography 
-                  variant="body2" 
-                  color={colors.textSecondary} 
-                  align="center"
-                  sx={{ fontWeight: 500 }}
+                <Button
+                  variant="outlined"
+                  startIcon={<Smartphone />}
+                  endIcon={<ExternalLink size={16} />}
+                  sx={{
+                    mt: 2,
+                    borderRadius: 3,
+                    textTransform: 'none',
+                    borderColor: colors.primary,
+                    color: colors.primary,
+                    '&:hover': {
+                      background: colors.primary,
+                      color: 'white'
+                    }
+                  }}
                 >
-                  © 2024 Ngân Hàng TMCP Kỹ Thương Việt Nam - Techcombank. Bảo lưu mọi quyền.
-                </Typography>
-              </Box>
-            </Paper>
-          </Fade>
-        </Container>
-      </Box>
-     <Dialog 
-  open={openDialog} 
-  onClose={() => setOpenDialog(false)} 
-  maxWidth="xs" 
-  fullWidth
-  PaperProps={{
-    sx: {
-      borderRadius: 5,
-      p: 4,
-      background: 'rgba(255, 255, 255, 0.7)',
-      backdropFilter: 'blur(12px)',
-      boxShadow: '0 20px 60px rgba(0,0,0,0.25)',
-      textAlign: 'center',
-      position: 'relative',
-      overflow: 'hidden'
-    }
-  }}
->
-  {/* Vòng tròn nền phía sau */}
-  <Box
-    sx={{
-      position: 'absolute',
-      width: 160,
-      height: 160,
-      background: colors.primaryLight,
-      borderRadius: '50%',
-      top: -40,
-      right: -40,
-      opacity: 0.3,
-      zIndex: 0
-    }}
-  />
-  
-  <Avatar
-    sx={{
-      width: 72,
-      height: 72,
-      bgcolor: colors.primary,
-      color: 'white',
-      mx: 'auto',
-      mb: 2,
-      zIndex: 1,
-      boxShadow: '0 6px 20px rgba(0,0,0,0.15)'
-    }}
-  >
-    <Plus />
-  </Avatar>
+                  Tải ứng dụng
+                </Button>
+              </Grid>
+            </Grid>
+          </Paper>
+        </Fade>
 
-  <DialogTitle sx={{ 
-    fontWeight: 700, 
-    fontSize: '1.6rem', 
-    color: colors.primaryDark,
-    zIndex: 1
-  }}>
-    Mở tài khoản
-  </DialogTitle>
-
-  <DialogContent sx={{ zIndex: 1 }}>
-    <Typography 
-      variant="body1" 
-      sx={{ mt: 1.5, mb: 2, color: colors.textPrimary }}
-    >
-      Vui lòng đến <strong>chi nhánh gần nhất</strong> để mở tài khoản.
-    </Typography>
-  </DialogContent>
-
-  <DialogActions sx={{ justifyContent: 'center', zIndex: 1 }}>
-    <Button 
-      variant="contained" 
-      onClick={() => setOpenDialog(false)} 
-      sx={{ 
-        borderRadius: 4, 
-        background: colors.gradientPrimary,
-        textTransform: 'none',
-        fontWeight: 600,
-        px: 5,
-        py: 1.25,
-        boxShadow: '0 4px 12px rgba(229,62,62,0.4)',
-        '&:hover': {
-          background: colors.primaryDark
-        }
-      }}
-    >
-      Đã hiểu
-    </Button>
-  </DialogActions>
-</Dialog>
- 
+        {/* Dialog mở tài khoản mới */}
+        <Dialog
+          open={openDialog}
+          onClose={() => setOpenDialog(false)}
+          maxWidth="md"
+          fullWidth
+          PaperProps={{
+            sx: {
+              borderRadius: 4,
+              background: colors.surface
+            }
+          }}
+        >
+          <DialogTitle sx={{ pb: 2 }}>
+            <Typography variant="h5" fontWeight={600}>
+              Mở tài khoản mới
+            </Typography>
+            <Typography color={colors.textSecondary}>
+              Chọn loại tài khoản phù hợp với nhu cầu của bạn
+            </Typography>
+          </DialogTitle>
+          <DialogContent>
+            <Grid container spacing={3} sx={{ mt: 1 }}>
+              <Grid item xs={12} md={6}>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    p: 3,
+                    borderRadius: 3,
+                    border: `2px solid ${colors.border}`,
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      borderColor: colors.primary,
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
+                    }
+                  }}
+                >
+                  <Avatar
+                    sx={{
+                      width: 60,
+                      height: 60,
+                      background: colors.gradientPrimary,
+                      mb: 2
+                    }}
+                  >
+                    <CreditCard size={30} />
+                  </Avatar>
+                  <Typography variant="h6" fontWeight={600} sx={{ mb: 1 }}>
+                    Tài khoản thanh toán
+                  </Typography>
+                  <Typography color={colors.textSecondary} sx={{ mb: 2 }}>
+                    Tài khoản cơ bản cho các giao dịch hàng ngày
+                  </Typography>
+                  <Stack direction="row" spacing={1}>
+                    <Chip label="Miễn phí" size="small" color="success" />
+                    <Chip label="Phổ biến" size="small" sx={{ background: colors.primary, color: 'white' }} />
+                  </Stack>
+                </Paper>
+              </Grid>
+              <Grid item xs={12} md={6}>
+                <Paper
+                  elevation={0}
+                  sx={{
+                    p: 3,
+                    borderRadius: 3,
+                    border: `2px solid ${colors.border}`,
+                    cursor: 'pointer',
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      borderColor: colors.warning,
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
+                    }
+                  }}
+                >
+                  <Avatar
+                    sx={{
+                      width: 60,
+                      height: 60,
+                      background: 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)',
+                      mb: 2
+                    }}
+                  >
+                    <PiggyBank size={30} />
+                  </Avatar>
+                  <Typography variant="h6" fontWeight={600} sx={{ mb: 1 }}>
+                    Tài khoản tiết kiệm
+                  </Typography>
+                  <Typography color={colors.textSecondary} sx={{ mb: 2 }}>
+                    Tài khoản có lãi suất cao cho việc tiết kiệm
+                  </Typography>
+                  <Stack direction="row" spacing={1}>
+                    <Chip label="Lãi suất cao" size="small" sx={{ background: colors.warning, color: 'white' }} />
+                    <Chip label="Linh hoạt" size="small" variant="outlined" />
+                  </Stack>
+                </Paper>
+              </Grid>
+            </Grid>
+          </DialogContent>
+          <DialogActions sx={{ p: 3, pt: 2 }}>
+            <Button
+              onClick={() => setOpenDialog(false)}
+              sx={{
+                textTransform: 'none',
+                color: colors.textSecondary
+              }}
+            >
+              Hủy
+            </Button>
+            <Button
+              variant="contained"
+              sx={{
+                background: colors.gradientPrimary,
+                textTransform: 'none',
+                fontWeight: 600,
+                px: 4
+              }}
+            >
+              Tiếp tục
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Container>
     </>
-    
   );
 }
+
