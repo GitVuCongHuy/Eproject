@@ -27,4 +27,3 @@ public class CancelChequeModel
         public string Reason { get; set; }
     }
 
-

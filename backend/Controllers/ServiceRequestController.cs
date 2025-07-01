@@ -37,31 +37,40 @@ public class ServiceRequestController : ControllerBase
         }
 
         var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == model.AccountId && a.customer_id == customerId);
-            if (account == null || account.Status != "Active" || account.CardType == "Credit")
+        if (account == null || account.Status != "Active" || account.CardType == "Credit")
+        {
+            return BadRequest(new ApiError
             {
-                return BadRequest(new ApiError
-                {
-                    Status = 400,
-                    Error = "InvalidAccount",
-                    Message = "Không thể yêu cầu sổ séc cho thẻ tín dụng."
-                });
-            }
+                Status = 400,
+                Error = "InvalidAccount",
+                Message = "Không thể yêu cầu sổ séc cho thẻ tín dụng."
+            });
+        }
 
-
-        // Hard-coded fee logic
         decimal fee = model.Quantity == 25 ? 25000m : 40000m;
         if (account.Balance < fee)
             return BadRequest(new ApiError { Status = 400, Error = "InsufficientFunds", Message = "Không đủ số dư để gửi yêu cầu." });
 
         account.Balance -= fee;
 
-       var detail = JsonSerializer.Serialize(new
-            {
-                model.AccountId,
-                model.DeliveryAddress,
-                Quantity = model.Quantity, 
-                model.Purpose
-            });
+        // Ghi sao kê trừ phí
+        _context.statements.Add(new Statements
+        {
+            account_id = account.account_id,
+            PeriodType = "fee",
+            StartDate = DateTime.Today,
+            EndDate = DateTime.Today,
+            GeneratedOn = DateTime.Now,
+            FileUrl = "",
+        });
+
+        var detail = JsonSerializer.Serialize(new
+        {
+            model.AccountId,
+            model.DeliveryAddress,
+            Quantity = model.Quantity,
+            model.Purpose
+        });
 
         var request = new Service_request
         {
@@ -85,10 +94,14 @@ public class ServiceRequestController : ControllerBase
                 request.RequestId,
                 request.RequestType,
                 request.RequestDate,
-                request.Status
+                request.Status,
+                AccountId = account.account_id,
+                AmountChanged = -fee,
+                TransactionType = "Debit"
             }
         });
     }
+
 
     [Authorize]
     [HttpGet("my-cheque-requests")]
@@ -162,10 +175,14 @@ public class ServiceRequestController : ControllerBase
         }
 
         decimal cancelFee = 5000m;
-        decimal refund = 0; 
+        decimal refund = 0;
 
-        // Kiểm tra số dư có đủ để trừ phí huỷ
-        if (account.Balance < cancelFee)
+        if (request.Status == "Approved" || request.Status == "Issued")
+        {
+            refund = detail.Quantity == 25 ? 25000m : 40000m;
+        }
+
+        if (account.Balance + refund < cancelFee)
         {
             return BadRequest(new ApiError
             {
@@ -175,19 +192,49 @@ public class ServiceRequestController : ControllerBase
             });
         }
 
-        // Trừ phí huỷ
-        account.Balance -= cancelFee;
-        request.Status = "Cancelled by user";
+        // Cộng hoàn - trừ phí
+        account.Balance += refund - cancelFee;
 
+        // Ghi sao kê hoàn/trừ
+        if (refund > 0)
+        {
+            _context.statements.Add(new Statements
+            {
+                account_id = account.account_id,
+                PeriodType = "refund",
+                StartDate = DateTime.Today,
+                EndDate = DateTime.Today,
+                GeneratedOn = DateTime.Now,
+                FileUrl = ""
+            });
+        }
+
+        _context.statements.Add(new Statements
+        {
+            account_id = account.account_id,
+            PeriodType = "cancel_fee",
+            StartDate = DateTime.Today,
+            EndDate = DateTime.Today,
+            GeneratedOn = DateTime.Now,
+            FileUrl = ""
+        });
+
+        request.Status = "Cancelled by user";
         await _context.SaveChangesAsync();
 
         return Ok(new ApiResponse<object>
         {
             Status = 200,
-            Message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ.",
-            Data = new { request.RequestId }
+            Message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ {(refund > 0 ? $"và hoàn {refund:n0}đ phí sổ séc." : "")}",
+            Data = new
+            {
+                request.RequestId,
+                AccountId = account.account_id,
+                AmountChanged = refund - cancelFee,
+                TransactionType = (refund - cancelFee) > 0 ? "Credit" : "Debit"
+            }
         });
-
     }
+
 
 }
