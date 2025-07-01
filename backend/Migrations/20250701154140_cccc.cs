@@ -6,30 +6,30 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-    public partial class ghichu : Migration
+    public partial class cccc : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "bank_Transaction",
-                columns: table => new
-                {
-                    TransactionId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    SenderAccount = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    id_banking_sender = table.Column<int>(type: "int", nullable: true),
-                    ReceiverAccount = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    id_banking_Receiver = table.Column<int>(type: "int", nullable: true),
-                    amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    transactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    transaction_status = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_bank_Transaction", x => x.TransactionId);
-                });
+            // migrationBuilder.CreateTable(
+            //     name: "bank_Transaction",
+            //     columns: table => new
+            //     {
+            //         TransactionId = table.Column<int>(type: "int", nullable: false)
+            //             .Annotation("SqlServer:Identity", "1, 1"),
+            //         SenderAccount = table.Column<string>(type: "nvarchar(max)", nullable: false),
+            //         id_banking_sender = table.Column<int>(type: "int", nullable: true),
+            //         ReceiverAccount = table.Column<string>(type: "nvarchar(max)", nullable: false),
+            //         id_banking_Receiver = table.Column<int>(type: "int", nullable: true),
+            //         amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+            //         description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+            //         transactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+            //         transaction_status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+            //     },
+            //     constraints: table =>
+            //     {
+            //         table.PrimaryKey("PK_bank_Transaction", x => x.TransactionId);
+            //     });
 
             migrationBuilder.CreateTable(
                 name: "Banks",
@@ -39,7 +39,9 @@ namespace backend.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     bank_name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ContactNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
+                    BankType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ContactNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TotalBalance = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
                 },
                 constraints: table =>
                 {

@@ -1,14 +1,5 @@
-// function Admin_account(){
-//     return(<>
-    
-//         đây là trong quản lí tài khoản
-//     </>)
-// }
-
-// export default Admin_account;
-
-
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import {
   Box,
   Container,
@@ -38,7 +29,12 @@ import {
   MenuItem,
   Card,
   CardContent,
-  Tooltip
+  Tooltip,
+  List,
+  ListItem,
+  ListItemText,
+  Divider,
+  CircularProgress
 } from '@mui/material';
 import {
   Search,
@@ -48,8 +44,451 @@ import {
   Visibility,
   Refresh,
   PersonAdd,
-  FilterList
+  FilterList,
+  CreditCard,
+  AccountBalance,
+  Add,
+  Delete
 } from '@mui/icons-material';
+
+// Component hiển thị danh sách thẻ của khách hàng
+const CustomerCardsDialog = ({ open, onClose, customer }) => {
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [createCardOpen, setCreateCardOpen] = useState(false);
+  const [deleteCardId, setDeleteCardId] = useState(null);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'success' });
+
+ const fetchCustomerCards = async () => {
+  if (!customer?.customer_id) return;
+
+  setLoading(true);
+  setError('');
+
+  try {
+    const response = await axios.get(
+      `http://localhost:5028/backend/accounts_manager/get-accounts-by-customer`,
+      { params: { customerId: customer.customer_id } }
+    );
+
+    const data = response.data;
+
+    if (response.status === 200 && data.status === 200) {
+      setCards(data.data || []);
+    } else {
+      setError(data.message || 'Lỗi khi tải danh sách thẻ');
+    }
+  } catch (error) {
+    setError('Lỗi kết nối: ' + (error.response?.data?.message || error.message));
+  } finally {
+    setLoading(false);
+  }
+};
+
+ const handleDeleteCard = async (cardId) => {
+  try {
+    const response = await axios.delete(
+      `http://localhost:5028/backend/accounts_manager/admin_delete-card/${cardId}`
+    );
+
+    const data = response.data;
+
+    if (response.status === 200 && data.status === 200) {
+      setSnackbar({ open: true, message: 'Xóa thẻ thành công!', severity: 'success' });
+      fetchCustomerCards();
+    } else {
+      let errorMessage = 'Lỗi khi xóa thẻ';
+
+      switch (data.error) {
+        case 'NotFound':
+          errorMessage = 'Không tìm thấy thẻ';
+          break;
+        case 'NonZeroBalance':
+          errorMessage = 'Thẻ thường chỉ được xóa khi số dư bằng 0';
+          break;
+        case 'InvalidCreditBalance':
+          errorMessage = 'Thẻ ghi nợ chỉ được xóa khi số dư là 10.000.000 (vốn gốc)';
+          break;
+        case 'UnknownCardType':
+          errorMessage = 'Loại thẻ không xác định';
+          break;
+        default:
+          errorMessage = data.message || errorMessage;
+      }
+
+      setSnackbar({ open: true, message: errorMessage, severity: 'error' });
+    }
+  } catch (error) {
+    const message = error.response?.data?.message || error.message;
+    setSnackbar({ open: true, message: 'Lỗi kết nối: ' + message, severity: 'error' });
+  }
+
+  setDeleteCardId(null);
+};
+
+  useEffect(() => {
+    if (open && customer) {
+      fetchCustomerCards();
+    }
+  }, [open, customer]);
+
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    return new Date(dateString).toLocaleDateString('vi-VN');
+  };
+
+  const getCardTypeColor = (cardType) => {
+    switch (cardType) {
+      case 'Credit':
+        return 'warning';
+      case 'Normal':
+        return 'primary';
+      default:
+        return 'default';
+    }
+  };
+
+  const getStatusColor = (status) => {
+    switch (status) {
+      case 'Active':
+        return 'success';
+      case 'Inactive':
+        return 'error';
+      case 'Suspended':
+        return 'warning';
+      default:
+        return 'default';
+    }
+  };
+
+  const formatBalance = (balance) => {
+    return new Intl.NumberFormat('vi-VN', {
+      style: 'currency',
+      currency: 'VND'
+    }).format(balance);
+  };
+
+  return (
+    <>
+      <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
+        <DialogTitle>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <CreditCard />
+              Danh sách thẻ của khách hàng: {customer?.full_name}
+            </Box>
+            <Button
+              variant="contained"
+              startIcon={<Add />}
+              onClick={() => setCreateCardOpen(true)}
+              size="small"
+            >
+              Tạo thẻ mới
+            </Button>
+          </Box>
+        </DialogTitle>
+        <DialogContent>
+          {loading ? (
+            <Box sx={{ display: 'flex', justifyContent: 'center', p: 3 }}>
+              <CircularProgress />
+            </Box>
+          ) : error ? (
+            <Alert severity="error" sx={{ mb: 2 }}>
+              {error}
+            </Alert>
+          ) : cards.length === 0 ? (
+            <Box sx={{ textAlign: 'center', py: 4 }}>
+              <AccountBalance sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
+              <Typography variant="h6" color="text.secondary">
+                Khách hàng chưa có thẻ nào
+              </Typography>
+            </Box>
+          ) : (
+            <TableContainer component={Paper} variant="outlined">
+              <Table size="small">
+                <TableHead>
+                  <TableRow>
+                    <TableCell><strong>ID Tài khoản</strong></TableCell>
+                    <TableCell><strong>Số thẻ</strong></TableCell>
+                    <TableCell><strong>Loại thẻ</strong></TableCell>
+                    <TableCell><strong>Trạng thái</strong></TableCell>
+                    {/* <TableCell><strong>Số dư</strong></TableCell> */}
+                    <TableCell><strong>Ngày phát hành</strong></TableCell>
+                    <TableCell><strong>Thao tác</strong></TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {cards.map((card, index) => (
+                    <TableRow key={card.account_id || index} hover>
+                      <TableCell>{card.account_id}</TableCell>
+                      <TableCell>
+                        <Typography variant="body2" fontFamily="monospace">
+                          {card.cardNumber}
+                        </Typography>
+                      </TableCell>
+                      <TableCell>
+                        <Chip
+                          label={card.cardType}
+                          color={getCardTypeColor(card.cardType)}
+                          size="small"
+                          variant="outlined"
+                        />
+                      </TableCell>
+                      <TableCell>
+                        <Chip
+                          label={card.status}
+                          color={getStatusColor(card.status)}
+                          size="small"
+                        />
+                      </TableCell>
+                      {/* <TableCell>
+                        <Typography variant="body2" color={card.balance >= 0 ? 'success.main' : 'error.main'}>
+                          {formatBalance(card.balance)}
+                        </Typography>
+                      </TableCell> */}
+                      <TableCell>
+                        {formatDate(card.creditIssuedDate)}
+                      </TableCell>
+                      <TableCell>
+                        <IconButton
+                          size="small"
+                          color="error"
+                          onClick={() => setDeleteCardId(card.account_id)}
+                          title="Xóa thẻ"
+                        >
+                          <Delete />
+                        </IconButton>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+          )}
+          
+          {cards.length > 0 && (
+            <Box sx={{ mt: 2, p: 2, bgcolor: 'background.default', borderRadius: 1 }}>
+              <Typography variant="body2" color="text.secondary">
+                <strong>Tổng số thẻ:</strong> {cards.length}/3 thẻ
+              </Typography>
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={onClose}>Đóng</Button>
+          <Button 
+            onClick={fetchCustomerCards} 
+            startIcon={<Refresh />}
+            disabled={loading}
+          >
+            Làm mới
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Create Card Dialog */}
+      <CreateCardDialog
+        open={createCardOpen}
+        onClose={() => setCreateCardOpen(false)}
+        customer={customer}
+        onSuccess={() => {
+          fetchCustomerCards();
+          setSnackbar({ open: true, message: 'Tạo thẻ thành công!', severity: 'success' });
+        }}
+        onError={(message) => setSnackbar({ open: true, message, severity: 'error' })}
+      />
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog
+        open={deleteCardId !== null}
+        onClose={() => setDeleteCardId(null)}
+      >
+        <DialogTitle>Xác nhận xóa thẻ</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Bạn có chắc chắn muốn xóa thẻ này không? Thao tác này không thể hoàn tác.
+          </Typography>
+          <Alert severity="warning" sx={{ mt: 2 }}>
+            <strong>Lưu ý:</strong>
+            <br />• Thẻ thường chỉ được xóa khi số dư bằng 0
+            <br />• Thẻ ghi nợ chỉ được xóa khi số dư là 10.000.000 VND (vốn gốc)
+          </Alert>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setDeleteCardId(null)}>Hủy</Button>
+          <Button
+            onClick={() => handleDeleteCard(deleteCardId)}
+            color="error"
+            variant="contained"
+          >
+            Xóa
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Snackbar for notifications */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      >
+        <Alert
+          onClose={() => setSnackbar({ ...snackbar, open: false })}
+          severity={snackbar.severity}
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
+    </>
+  );
+};
+
+// Create Card Dialog Component
+const CreateCardDialog = ({ open, onClose, customer, onSuccess, onError }) => {
+  const [cardType, setCardType] = useState('');
+  const [initialBalance, setInitialBalance] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async () => {
+    if (!cardType) {
+      onError('Vui lòng chọn loại thẻ');
+      return;
+    }
+
+    if (cardType === 'Normal' && (!initialBalance || parseFloat(initialBalance) < 0)) {
+      onError('Vui lòng nhập số dư ban đầu hợp lệ cho thẻ thường');
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const requestBody = {
+        customer_id: customer.customer_id,
+        CardType: cardType,
+        ...(cardType === 'Normal' && { InitialBalance: parseFloat(initialBalance) })
+      };
+
+      const response = await fetch('http://localhost:5028/backend/accounts_manager/admin_create-card', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.status === 200) {
+        onSuccess();
+        handleClose();
+      } else {
+        let errorMessage = 'Lỗi khi tạo thẻ';
+        
+        // Xử lý các loại lỗi cụ thể
+        switch (data.error) {
+          case 'NotFound':
+            errorMessage = 'Không tìm thấy khách hàng';
+            break;
+          case 'AccountLocked':
+            errorMessage = 'Tài khoản đã bị khóa';
+            break;
+          case 'InvalidCardType':
+            errorMessage = 'Loại thẻ không hợp lệ (Normal hoặc Credit)';
+            break;
+          case 'CardLimitReached':
+            errorMessage = 'Tổng số thẻ không được vượt quá 3';
+            break;
+          case 'CreditCardLimit':
+            errorMessage = 'Chỉ được tạo 1 thẻ ghi nợ';
+            break;
+          default:
+            errorMessage = data.message || errorMessage;
+        }
+        
+        onError(errorMessage);
+      }
+    } catch (error) {
+      onError('Lỗi kết nối: ' + error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleClose = () => {
+    setCardType('');
+    setInitialBalance('');
+    setLoading(false);
+    onClose();
+  };
+
+  return (
+    <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
+      <DialogTitle>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+          <Add />
+          Tạo thẻ mới cho: {customer?.full_name}
+        </Box>
+      </DialogTitle>
+      <DialogContent>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 2 }}>
+          <FormControl fullWidth>
+            <InputLabel>Loại thẻ</InputLabel>
+            <Select
+              value={cardType}
+              label="Loại thẻ"
+              onChange={(e) => setCardType(e.target.value)}
+            >
+              <MenuItem value="Normal">Thẻ thường</MenuItem>
+              <MenuItem value="Credit">Thẻ ghi nợ</MenuItem>
+            </Select>
+          </FormControl>
+
+          {cardType === 'Normal' && (
+            <TextField
+              fullWidth
+              label="Số dư ban đầu"
+              type="number"
+              value={initialBalance}
+              onChange={(e) => setInitialBalance(e.target.value)}
+              InputProps={{
+                inputProps: { min: 0 }
+              }}
+              helperText="Nhập số dư ban đầu cho thẻ thường"
+            />
+          )}
+
+          {cardType === 'Credit' && (
+            <Alert severity="info">
+              Thẻ ghi nợ sẽ được tạo với số dư mặc định là 10.000.000 VND
+            </Alert>
+          )}
+
+          <Alert severity="warning">
+            <strong>Lưu ý:</strong>
+            <br />• Mỗi khách hàng tối đa 3 thẻ
+            <br />• Chỉ được tạo 1 thẻ ghi nợ duy nhất
+          </Alert>
+        </Box>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose} disabled={loading}>
+          Hủy
+        </Button>
+        <Button
+          onClick={handleSubmit}
+          variant="contained"
+          disabled={loading || !cardType}
+          startIcon={loading ? <CircularProgress size={20} /> : <Add />}
+        >
+          {loading ? 'Đang tạo...' : 'Tạo thẻ'}
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
+};
 
 // Component hiển thị chi tiết khách hàng
 const CustomerDetailDialog = ({ open, onClose, customer }) => {
@@ -350,6 +789,7 @@ const Admin_account = () => {
   const [detailDialog, setDetailDialog] = useState({ open: false, customer: null });
   const [updateCccdDialog, setUpdateCccdDialog] = useState({ open: false, customer: null });
   const [registerDialog, setRegisterDialog] = useState(false);
+  const [cardsDialog, setCardsDialog] = useState({ open: false, customer: null });
 
   // API functions
   const apiCall = async (url, method = 'GET', body = null) => {
@@ -599,13 +1039,22 @@ const Admin_account = () => {
                     </TableCell>
                     <TableCell>{customer.number_login}</TableCell>
                     <TableCell align="center">
-                      <Box sx={{ display: 'flex', gap: 0.5 }}>
+                      <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
                         <Tooltip title="Xem chi tiết">
                           <IconButton
                             size="small"
                             onClick={() => setDetailDialog({ open: true, customer })}
                           >
                             <Visibility />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Xem danh sách thẻ">
+                          <IconButton
+                            size="small"
+                            color="info"
+                            onClick={() => setCardsDialog({ open: true, customer })}
+                          >
+                            <CreditCard />
                           </IconButton>
                         </Tooltip>
                         <Tooltip title="Cập nhật CCCD">
@@ -669,6 +1118,12 @@ const Admin_account = () => {
         open={detailDialog.open}
         onClose={() => setDetailDialog({ open: false, customer: null })}
         customer={detailDialog.customer}
+      />
+
+      <CustomerCardsDialog
+        open={cardsDialog.open}
+        onClose={() => setCardsDialog({ open: false, customer: null })}
+        customer={cardsDialog.customer}
       />
 
       <UpdateCccdDialog
