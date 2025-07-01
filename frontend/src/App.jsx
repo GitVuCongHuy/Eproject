@@ -12,7 +12,7 @@ import Statement from "./pages/home/statement";
 import Guide from "./pages/home/Guide";
 import Admin from "./pages/account/Admin";
 import CancelCheckPayment from "./pages/home/ChequebookDelete";
-
+import  Settings from "./pages/features/settings";
 //KienDev
 import AdminLayout from "./layouts/admin_layout/admin_layout";
 import Admin_Main from "./pages/admin/Admin_Main";
@@ -37,7 +37,7 @@ function App() {
             <Route path="guide" element={<Guide />} />
             <Route path="admin" element={<Admin />} />
             <Route path="cancel" element={<CancelCheckPayment />} />
-            
+            <Route path="/features/settings" element={<Settings />} />
           </Route>
 
           <Route path="/admin_new" element={<AdminLayout />}>
