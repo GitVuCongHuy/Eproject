@@ -11,13 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:backend/Migrations/20250701080209_ghichu.Designer.cs
-    [Migration("20250701080209_ghichu")]
+    [Migration("20250701172118_ghichu")]
     partial class ghichu
-========
-    [Migration("20250701162448_UpdateRequestDetailToMax")]
-    partial class UpdateRequestDetailToMax
->>>>>>>> ef2f982a671e6ac6eb8a1fc67554d0339c62dccb:backend/Migrations/20250701162448_UpdateRequestDetailToMax.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

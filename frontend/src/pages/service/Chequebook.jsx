@@ -274,8 +274,41 @@ const CheckRequest = () => {
                               <TableRow key={request.requestId} sx={{ '&:hover': { background: 'linear-gradient(135deg, rgba(226, 99, 120, 0.05) 0%, rgba(230, 36, 22, 0.05) 100%)', transform: 'scale(1.01)', boxShadow: '0 4px 20px rgba(226, 99, 120, 0.15)' }, borderLeft: index % 2 === 0 ? '4px solid rgba(226, 99, 120, 0.3)' : '4px solid rgba(230, 36, 22, 0.3)' }}>
                                 <TableCell sx={{ fontWeight: 500 }}><Box sx={{ display: 'flex', flexDirection: 'column', gap: 0.5 }}><Typography variant="body2" fontWeight={600}>{new Date(request.requestDate).toLocaleDateString('vi-VN')}</Typography><Typography variant="caption" color="text.secondary">{new Date(request.requestDate).toLocaleTimeString('vi-VN')}</Typography></Box></TableCell>
                                 <TableCell><Chip label={getRequestTypeDisplay(request.requestType)} sx={{ background: 'linear-gradient(135deg, rgba(226, 99, 120, 0.1) 0%, rgba(230, 36, 22, 0.1) 100%)', color: 'rgb(226, 99, 120)', fontWeight: 600, border: '1px solid rgba(226, 99, 120, 0.3)' }} /></TableCell>
-                                <TableCell><Typography variant="body2" component="div" sx={{ mb: 1 }}><strong>Mục đích:</strong> {request.reason || 'N/A'}</Typography><Accordion variant="outlined" sx={{ boxShadow: 'none', fontSize: '0.8rem' }}><AccordionSummary expandIcon={<ExpandMore />} sx={{ minHeight: '32px', '& .MuiAccordionSummary-content': { my: 0 } }}><Typography variant="caption">Xem chi tiết JSON</Typography></AccordionSummary><AccordionDetails sx={{ p: 1, background: 'rgba(0,0,0,0.03)' }}><Typography sx={{ fontFamily: 'monospace', fontSize: '0.7rem', wordBreak: 'break-all', whiteSpace: 'pre-wrap' }}>{request.requestDetail ? JSON.stringify(JSON.parse(request.requestDetail), null, 2) : 'Không có'}</Typography></AccordionDetails></Accordion></TableCell>
-                                <TableCell align="center">{getStatusChip(request.status)}</TableCell>
+<TableCell>
+  {(() => {
+    // Phân tích chuỗi JSON một cách an toàn
+    let details = null;
+    try {
+      if (request.requestDetail) {
+        details = JSON.parse(request.requestDetail);
+      }
+    } catch (e) {
+      console.error("Lỗi parse JSON:", e);
+      return <Typography variant="caption" color="error">Lỗi dữ liệu</Typography>;
+    }
+
+    // Nếu có dữ liệu, hiển thị một cách thân thiện
+    if (details) {
+      return (
+        <Box sx={{ maxWidth: '300px' }}>
+          <Typography variant="body2" component="div" sx={{ mb: 1, wordBreak: 'break-word' }}>
+            <strong>Giao đến:</strong> {details.DeliveryAddress || 'N/A'}
+          </Typography>
+          <Typography variant="body2" component="div">
+            <strong>Số lượng:</strong> {details.Quantity || 'N/A'} tờ
+          </Typography>
+        </Box>
+      );
+    }
+
+    // Nếu không có dữ liệu, hiển thị mục đích cũ
+    return (
+        <Typography variant="body2" component="div">
+            <strong>Mục đích:</strong> {request.reason || 'N/A'}
+        </Typography>
+    );
+  })()}
+</TableCell>                                <TableCell align="center">{getStatusChip(request.status)}</TableCell>
                                 <TableCell align="center">{request.status === 'Pending' && (<Tooltip title="Hủy yêu cầu"><span><IconButton color="error" size="small" onClick={() => handleCancelRequest(request.requestId)} disabled={loadingHistory}><Cancel /></IconButton></span></Tooltip>)}</TableCell>
                               </TableRow>)))}
                           </TableBody>

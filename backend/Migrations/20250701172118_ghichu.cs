@@ -6,11 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace backend.Migrations
 {
     /// <inheritdoc />
-<<<<<<<< HEAD:backend/Migrations/20250701080209_ghichu.cs
     public partial class ghichu : Migration
-========
-    public partial class UpdateRequestDetailToMax : Migration
->>>>>>>> ef2f982a671e6ac6eb8a1fc67554d0339c62dccb:backend/Migrations/20250701162448_UpdateRequestDetailToMax.cs
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

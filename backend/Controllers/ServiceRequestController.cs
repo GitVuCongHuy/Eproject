@@ -85,7 +85,7 @@ public class ServiceRequestController : ControllerBase
                 request.RequestId,
                 request.RequestType,
                 request.RequestDate,
-                request.Status
+                request.Status,
             }
         });
     }
@@ -111,7 +111,8 @@ public class ServiceRequestController : ControllerBase
                 r.RequestType,
                 r.RequestDate,
                 r.Status,
-                r.Reason
+                r.Reason,
+                RequestDetail = r.RequestDetail
             })
         });
     }
