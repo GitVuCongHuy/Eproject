@@ -35,10 +35,4 @@ public class Customer
 
     [MaxLength(12)]
     public string citizen_identification_card { get; set; }
-<<<<<<< HEAD
-    // public string adress { get; set; }
-
 }
-=======
-}
->>>>>>> 85603ca19b5c9fc00735921e8b1e9231e6d2d402
