@@ -4,6 +4,7 @@ using System.Text;
 using backend.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.VisualBasic;
 
@@ -52,6 +53,27 @@ public class CustomerController : Controller
                 });
             }
 
+
+            if (!Regex.IsMatch(model.Email, @"^[a-zA-Z0-9._%+-]+@gmail\.com(\.vn)?$"))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Invalid_Email_Format",
+                    Message = "Email phải đúng định dạng Gmail (ví dụ: abc@gmail.com hoặc abc@gmail.com.vn)"
+                });
+            }
+
+            if (!Regex.IsMatch(model.Mobile, @"^0\d{9}$"))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Invalid_Mobile_Format",
+                    Message = "Số điện thoại không hợp lệ. Phải bắt đầu bằng số 0 và có đúng 10 chữ số."
+                });
+            }
+
             if (model.CitizenIdentificationCard.Length != 12)
             {
                 return BadRequest(new ApiError
@@ -59,6 +81,40 @@ public class CustomerController : Controller
                     Status = 400,
                     Error = "Invalid_Citizen_Identification_Card",
                     Message = "Căn cước công dân phải có 12 ký tự."
+                });
+            }
+
+            if (!Regex.IsMatch(model.Password, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$"))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "WeakPassword",
+                    Message = "Mật khẩu phải có ít nhất 6 ký tự, chứa chữ hoa, chữ thường, số và ký tự đặc biệt."
+                });
+            }
+
+            // Check email
+            var existEmail = await _context.Customers.FirstOrDefaultAsync(x => x.email == model.Email);
+            if (existEmail != null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Email_Exists",
+                    Message = "Email này đã được sử dụng."
+                });
+            }
+
+            // Check số điện thoại
+            var existMobile = await _context.Customers.FirstOrDefaultAsync(x => x.mobile == model.Mobile);
+            if (existMobile != null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "Mobile_Exists",
+                    Message = "Số điện thoại này đã được sử dụng."
                 });
             }
 

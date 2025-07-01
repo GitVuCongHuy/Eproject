@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using BCrypt.Net;
 using backend.ViewModel;
 using backend.Enums;
@@ -82,6 +83,16 @@ namespace YourNamespace.Controllers
 
             if (string.IsNullOrWhiteSpace(model.NewPassword) || model.NewPassword.Length < 6)
                 return BadRequest(new ApiError { Status = 400, Error = "WeakPassword", Message = "Mật khẩu mới phải có ít nhất 6 ký tự." });
+           
+            if (!Regex.IsMatch(model.NewPassword, @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$"))
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "WeakPassword",
+                    Message = "Mật khẩu mới phải có ít nhất 6 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt."
+                });
+            }
 
             customer.password = BCrypt.Net.BCrypt.HashPassword(model.NewPassword);
             await _context.SaveChangesAsync();
@@ -89,7 +100,7 @@ namespace YourNamespace.Controllers
             await _emailHelper.SendEmailAsync(customer.email, "Đổi mật khẩu thành công",
                 $"Xin chào {customer.full_name},\n\nMật khẩu đăng nhập của bạn đã được thay đổi thành công vào lúc {DateTime.Now:dd/MM/yyyy HH:mm}.",
                 false);
-
+            
             return Ok(new ApiResponse<string>
             {
                 Status = 200,

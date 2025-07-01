@@ -121,35 +121,67 @@ public class ServiceRequestController : ControllerBase
     public async Task<IActionResult> CancelChequeRequest(int requestId)
     {
         var customerId = GetCustomerIdFromToken();
+
         var request = await _context.Service_requests
-            .FirstOrDefaultAsync(r => r.RequestId == requestId && r.CustomerId == customerId && r.RequestType == "IssueChequeBook");
+            .FirstOrDefaultAsync(r => r.RequestId == requestId &&
+                                    r.CustomerId == customerId &&
+                                    r.RequestType == "IssueChequeBook");
 
-        if (request == null || request.Status != "Pending")
-            return BadRequest(new ApiError { Status = 400, Error = "InvalidRequest", Message = "Không thể huỷ yêu cầu này." });
-
-        var accountId = JsonSerializer.Deserialize<ChequeBookRequestModel>(request.RequestDetail)?.AccountId ?? 0;
-        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
-        
-        if (account == null)
+        if (request == null)
         {
-            return NotFound(new ApiError { Status = 404, Error = "AccountNotFound", Message = "Không tìm thấy tài khoản." });
+            return NotFound(new ApiError
+            {
+                Status = 404,
+                Error = "RequestNotFound",
+                Message = "Không tìm thấy yêu cầu sổ séc."
+            });
         }
 
-        if (account.CardType == "Credit")
+        if (request.Status == "Cancelled by user" || request.Status == "Rejected")
         {
             return BadRequest(new ApiError
             {
                 Status = 400,
-                Error = "InvalidAccount",
-                Message = "Không thể huỷ yêu cầu sổ séc cho thẻ tín dụng."
+                Error = "AlreadyCancelled",
+                Message = "Yêu cầu đã bị huỷ hoặc từ chối trước đó."
+            });
+        }
+
+        var detail = JsonSerializer.Deserialize<ChequeBookRequestModel>(request.RequestDetail);
+        var account = await _context.Accounts.FirstOrDefaultAsync(a =>
+            a.account_id == detail.AccountId && a.customer_id == customerId);
+
+        if (account == null)
+        {
+            return NotFound(new ApiError
+            {
+                Status = 404,
+                Error = "AccountNotFound",
+                Message = "Không tìm thấy tài khoản."
             });
         }
 
         decimal cancelFee = 5000m;
-        if (account.Balance < cancelFee)
-            return BadRequest(new ApiError { Status = 400, Error = "InsufficientFunds", Message = "Không đủ số dư để huỷ yêu cầu." });
+        decimal refund = 0;
 
-        account.Balance -= cancelFee;
+        // Xác định hoàn tiền sổ séc nếu đã phát hành
+        if (request.Status == "Approved" || request.Status == "Issued")
+        {
+            refund = detail.Quantity == 25 ? 25000m : 40000m;
+        }
+
+        // Kiểm tra số dư có đủ để trừ phí huỷ không
+        if (account.Balance + refund < cancelFee)
+        {
+            return BadRequest(new ApiError
+            {
+                Status = 400,
+                Error = "InsufficientFunds",
+                Message = "Không đủ số dư để huỷ yêu cầu."
+            });
+        }
+
+        account.Balance += refund - cancelFee;
         request.Status = "Cancelled by user";
 
         await _context.SaveChangesAsync();
@@ -157,7 +189,7 @@ public class ServiceRequestController : ControllerBase
         return Ok(new ApiResponse<object>
         {
             Status = 200,
-            Message = "Đã huỷ yêu cầu thành công (phí đã được trừ).",
+            Message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ {(refund > 0 ? $"và hoàn {refund:n0}đ phí sổ séc." : ".")}",
             Data = new { request.RequestId }
         });
     }
