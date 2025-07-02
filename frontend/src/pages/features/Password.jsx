@@ -28,6 +28,7 @@ import {
   Sparkles
 } from 'lucide-react';
 import { useAuth } from '../../context/Context';
+
 const PasswordField = ({ label, field, placeholder, required = true, showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }) => (
   <Box sx={{ mb: 2 }}>
     <TextField
@@ -141,19 +142,19 @@ const TransactionPasswordSettings = () => {
     const newErrors = {};
     
     if (mode === 'change' && !formData.currentPassword) {
-      newErrors.currentPassword = 'Vui lòng nhập mật khẩu giao dịch hiện tại';
+      newErrors.currentPassword = 'Please enter your current transaction password';
     }
     
     if (!formData.newPassword) {
-      newErrors.newPassword = 'Vui lòng nhập mật khẩu giao dịch mới';
+      newErrors.newPassword = 'Please enter a new transaction password';
     } else if (formData.newPassword.length < 6) {
-      newErrors.newPassword = 'Mật khẩu phải có đúng 6 chữ số';
+      newErrors.newPassword = 'Password must be exactly 6 digits';
     }
     
     if (!formData.confirmPassword) {
-      newErrors.confirmPassword = 'Vui lòng xác nhận mật khẩu';
+      newErrors.confirmPassword = 'Please confirm your password';
     } else if (formData.newPassword !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Mật khẩu xác nhận không khớp';
+      newErrors.confirmPassword = 'Confirmation password does not match';
     }
     
     setErrors(newErrors);
@@ -183,7 +184,7 @@ const TransactionPasswordSettings = () => {
       const createResult = await createOrUpdateTransactionPassword(newPasswordNum);
 
       if (createResult.success) {
-        setSuccess(createResult.message || 'Thao tác thành công!');
+        setSuccess(createResult.message || 'Operation successful!');
         setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' });
       } else {
         throw createResult;
@@ -191,11 +192,11 @@ const TransactionPasswordSettings = () => {
       
     } catch (error) {
       if (error.errorType === 'Invalid_Transaction_Password') {
-        setErrors({ currentPassword: error.message || 'Mật khẩu giao dịch hiện tại không chính xác' });
+        setErrors({ currentPassword: error.message || 'Current transaction password is incorrect' });
       } else if (error.errorType === 'Transaction_Password_Not_Set') {
-        setErrors({ general: 'Bạn chưa có mật khẩu. Vui lòng sử dụng chức năng "Tạo mật khẩu".' });
+        setErrors({ general: 'You do not have a password yet. Please use the "Create Password" function.' });
       } else {
-        setErrors({ general: error.message || 'Có lỗi xảy ra, vui lòng thử lại.' });
+        setErrors({ general: error.message || 'An error occurred, please try again.' });
       }
       console.error("API Error:", error);
     } finally {
@@ -271,13 +272,13 @@ const TransactionPasswordSettings = () => {
                     mb: 1,
                     textShadow: '0 2px 4px rgba(0,0,0,0.3)'
                   }}>
-                    {mode === 'change' ? 'Đổi Mật Khẩu' : 'Tạo Mật Khẩu'}
+                    {mode === 'change' ? 'Change Password' : 'Create Password'}
                   </Typography>
                   <Typography variant="body1" sx={{ 
                     color: 'rgba(255,255,255,0.9)',
                     fontSize: '1.1rem'
                   }}>
-                    {mode === 'change' ? 'Cập nhật mật khẩu giao dịch của bạn' : 'Bảo vệ các giao dịch quan trọng'}
+                    {mode === 'change' ? 'Update your transaction password' : 'Protect your important transactions'}
                   </Typography>
                 </Box>
 
@@ -285,7 +286,7 @@ const TransactionPasswordSettings = () => {
                 <Box sx={{ display: 'flex', gap: 1.5, mb: 3, justifyContent: 'center' }}>
                   <Chip
                     icon={<Key size={16} />}
-                    label="Tạo mật khẩu"
+                    label="Create Password"
                     onClick={() => { 
                       setMode('create'); 
                       setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' }); 
@@ -305,7 +306,7 @@ const TransactionPasswordSettings = () => {
                   />
                   <Chip
                     icon={<Lock size={16} />}
-                    label="Đổi mật khẩu"
+                    label="Change Password"
                     onClick={() => { 
                       setMode('change'); 
                       setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' }); 
@@ -340,11 +341,11 @@ const TransactionPasswordSettings = () => {
                   <AlertTitle sx={{ color: 'white', fontWeight: 600 }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                       <Sparkles size={16} />
-                      Lưu ý bảo mật
+                      Security Notice
                     </Box>
                   </AlertTitle>
                   <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)' }}>
-                    Mật khẩu giao dịch phải là 6 chữ số và không chia sẻ với ai khác.
+                    The transaction password must be 6 digits and not shared with anyone else.
                   </Typography>
                 </Alert>
 
@@ -389,24 +390,24 @@ const TransactionPasswordSettings = () => {
                 <Box component="form" noValidate onSubmit={handleSubmit}>
                   {mode === 'change' && (
                     <PasswordField
-                      label="Mật khẩu hiện tại"
+                      label="Current Password"
                       field="currentPassword"
-                      placeholder="Nhập mật khẩu hiện tại"
+                      placeholder="Enter current password"
                       {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
                     />
                   )}
                   
                   <PasswordField
-                    label="Mật khẩu mới (6 chữ số)"
+                    label="New Password (6 digits)"
                     field="newPassword"
-                    placeholder="Nhập mật khẩu mới"
+                    placeholder="Enter new password"
                     {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
                   />
                   
                   <PasswordField
-                    label="Xác nhận mật khẩu"
+                    label="Confirm Password"
                     field="confirmPassword"
-                    placeholder="Nhập lại mật khẩu mới"
+                    placeholder="Re-enter new password"
                     {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
                   />
 
@@ -440,7 +441,7 @@ const TransactionPasswordSettings = () => {
                       }
                     }}
                   >
-                    {loading ? 'Đang xử lý...' : (mode === 'change' ? 'Cập nhật mật khẩu' : 'Tạo mật khẩu')}
+                    {loading ? 'Processing...' : (mode === 'change' ? 'Update Password' : 'Create Password')}
                   </Button>
                 </Box>
               </CardContent>

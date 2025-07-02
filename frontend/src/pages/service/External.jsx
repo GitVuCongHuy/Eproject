@@ -30,7 +30,7 @@ const BankTransferPage = () => {
 
   const [formData, setFormData] = useState({
     beneficiaryBank: 'MB',
-    beneficiaryBankName: 'Ngân hàng TMCP Quân Đội',
+    beneficiaryBankName: 'MB Commercial Joint Stock Bank',
     transferType: 'fast',
     accountNumber: cardNumber || '',
     beneficiaryName: beneficiaryName || '',
@@ -46,7 +46,6 @@ const BankTransferPage = () => {
   const [modalError, setModalError] = useState('');
   const [isModalLoading, setIsModalLoading] = useState(false);
 
-  // State mới cho thông báo thành công
   const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
   const [transferResult, setTransferResult] = useState(null);
 
@@ -74,7 +73,7 @@ const BankTransferPage = () => {
           }
         }
       } else {
-        setError(cardsResult.message || 'Lỗi: không thể tải danh sách tài khoản của bạn.');
+        setError(cardsResult.message || 'Error: could not load your account list.');
       }
       setLoadingAccounts(false);
     };
@@ -85,7 +84,7 @@ const BankTransferPage = () => {
     if (senderName) {
       setFormData(prev => ({
         ...prev,
-        transferNote: `${senderName} chuyen tien`
+        transferNote: `${senderName} transfers money`
       }));
     }
   }, [senderName]);
@@ -102,8 +101,8 @@ const BankTransferPage = () => {
   
   const copyToClipboard = (text) => { 
     navigator.clipboard.writeText(text);
-    // Có thể thêm snackbar thông báo copy thành công
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     setAmountError('');
@@ -113,36 +112,29 @@ const BankTransferPage = () => {
     const amount = Number(formData.amount);
     const currentAccountDetails = fromAccounts.find(acc => acc.account_id === selectedAccount);
     
-    // Thêm kiểm tra an toàn nếu không tìm thấy tài khoản
     if (!currentAccountDetails) {
-        setError("Không thể xác định tài khoản nguồn. Vui lòng tải lại trang.");
+        setError("Could not identify the source account. Please reload the page.");
         return;
     }
     
     const currentBalance = currentAccountDetails.balance;
-    
-    // Định nghĩa hạn mức giao dịch tối đa
-    const MAX_TRANSFER_LIMIT = 50000000; // 50 triệu VND
+    const MAX_TRANSFER_LIMIT = 50000000;
 
-    // Kiểm tra 1: Số tiền tối thiểu
     if (!amount || amount < 1000) {
-        setAmountError("Số tiền không hợp lệ. Vui lòng nhập số tiền từ 1,000 VND trở lên.");
+        setAmountError("Invalid amount. Please enter an amount of 1,000 VND or more.");
         return; 
     }
 
-    // Kiểm tra 2: Số tiền có vượt quá hạn mức tối đa không
     if (amount > MAX_TRANSFER_LIMIT) {
-        setAmountError(`Số tiền vượt quá hạn mức cho phép. Tối đa ${MAX_TRANSFER_LIMIT.toLocaleString('vi-VN')} VND mỗi giao dịch.`);
+        setAmountError(`Amount exceeds the allowed limit. Maximum of ${MAX_TRANSFER_LIMIT.toLocaleString('en-US')} VND per transaction.`);
         return;
     }
 
-    // Kiểm tra 3: Số tiền có vượt quá số dư hiện có không
     if (amount > currentBalance) {
-        setAmountError(`Số tiền chuyển vượt quá số dư hiện có (${currentBalance.toLocaleString('vi-VN')} VND).`);
+        setAmountError(`Transfer amount exceeds the available balance (${currentBalance.toLocaleString('en-US')} VND).`);
         return; 
     }
     
-    // Nếu tất cả kiểm tra đều qua, mở modal
     setModalStep(1);
     setIsConfirmModalOpen(true);
   };
@@ -166,7 +158,7 @@ const BankTransferPage = () => {
       await sendOTP(); 
       setModalStep(2); 
     } else { 
-      setModalError(result.message || "Mật khẩu giao dịch không chính xác."); 
+      setModalError(result.message || "Incorrect transaction password."); 
     } 
     setIsModalLoading(false); 
   };
@@ -176,7 +168,7 @@ const BankTransferPage = () => {
     setModalError(''); 
     const otpResult = await verifyOTP(otp); 
     if(!otpResult.success) { 
-      setModalError(otpResult.message || "Mã OTP không hợp lệ."); 
+      setModalError(otpResult.message || "Invalid OTP code."); 
       setIsModalLoading(false); 
       return; 
     } 
@@ -186,13 +178,12 @@ const BankTransferPage = () => {
       senderAccount: senderCard.cardNumber, 
       receiverAccount: formData.accountNumber, 
       amount: Number(formData.amount), 
-      description: formData.transferNote || `${senderName} chuyen tien`, 
+      description: formData.transferNote || `${senderName} transfers money`, 
       transactionPassword: Number(transactionPassword) 
     }; 
     
     const transferResponse = await bankTransfer(transferDetails); 
     if(transferResponse.success) { 
-      // Lưu thông tin giao dịch để hiển thị trong modal thành công
       setTransferResult({
         senderName: senderName,
         senderAccount: senderCard.cardNumber,
@@ -201,13 +192,13 @@ const BankTransferPage = () => {
         amount: Number(formData.amount),
         transferNote: formData.transferNote,
         transactionId: transferResponse.transactionId || `TXN${Date.now()}`,
-        timestamp: new Date().toLocaleString('vi-VN')
+        timestamp: new Date().toLocaleString('en-US')
       });
       
       handleCloseModal(); 
       setIsSuccessModalOpen(true);
     } else { 
-      setError(transferResponse.message || "Giao dịch không thành công. Vui lòng thử lại."); 
+      setError(transferResponse.message || "Transaction failed. Please try again."); 
       handleCloseModal(); 
     } 
     setIsModalLoading(false); 
@@ -231,7 +222,6 @@ const BankTransferPage = () => {
           overflow: 'scroll', 
           backgroundColor: '#f8fafc', 
         },
-        // Custom scrollbar
         '*::-webkit-scrollbar': {
           width: '8px',
         },
@@ -262,10 +252,10 @@ const BankTransferPage = () => {
             </Avatar>
             <Box>
               <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>
-                Chuyển tiền tức thì
+                Instant Money Transfer
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                Chuyển tiền nhanh chóng, an toàn và bảo mật với công nghệ hiện đại
+                Transfer money quickly, safely, and securely with modern technology
               </Typography>
             </Box>
           </Stack>
@@ -312,7 +302,6 @@ const BankTransferPage = () => {
           )}
 
           <form onSubmit={handleSubmit}>
-            {/* Thông tin người nhận */}
             <Card sx={{ mb: 4, borderRadius: 2, border: '1px solid', borderColor: 'primary.light' }}>
               <CardContent sx={{ p: 3 }}>
                 <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
@@ -320,14 +309,14 @@ const BankTransferPage = () => {
                     <Person />
                   </Avatar>
                   <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
-                    Thông tin người nhận
+                    Recipient Information
                   </Typography>
                 </Stack>
                 
                 <Grid container spacing={3}>
                   <Grid item xs={12} md={6}>
                     <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.secondary', fontWeight: 600 }}>
-                      Số tài khoản người nhận
+                      Recipient Account Number
                     </Typography>
                     <TextField 
                       fullWidth 
@@ -359,7 +348,7 @@ const BankTransferPage = () => {
                   
                   <Grid item xs={12} md={6}>
                     <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.secondary', fontWeight: 600 }}>
-                      Tên người nhận
+                      Recipient Name
                     </Typography>
                     <TextField 
                       fullWidth 
@@ -388,7 +377,6 @@ const BankTransferPage = () => {
               </CardContent>
             </Card>
 
-            {/* Tài khoản nguồn */}
             <Card sx={{ mb: 4, borderRadius: 2, border: '1px solid', borderColor: 'success.light' }}>
               <CardContent sx={{ p: 3 }}>
                 <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
@@ -396,14 +384,14 @@ const BankTransferPage = () => {
                     <AccountBalanceWallet />
                   </Avatar>
                   <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'success.main' }}>
-                    Tài khoản nguồn
+                    Source Account
                   </Typography>
                 </Stack>
                 
                 {loadingAccounts ? (
                   <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, p: 3 }}>
                     <CircularProgress size={24} />
-                    <Typography>Đang tải tài khoản...</Typography>
+                    <Typography>Loading accounts...</Typography>
                   </Box>
                 ) : fromAccounts.length > 0 ? (
                   <Card variant="outlined" sx={{ borderRadius: 2, bgcolor: 'success.50' }}>
@@ -411,19 +399,19 @@ const BankTransferPage = () => {
                       <Grid container spacing={3} alignItems="center">
                         <Grid item xs={12} md={8}>
                           <FormControl fullWidth variant="outlined">
-                            <InputLabel id="from-account-select-label">Chọn tài khoản nguồn</InputLabel>
+                            <InputLabel id="from-account-select-label">Select source account</InputLabel>
                             <Select 
                               labelId="from-account-select-label" 
                               value={selectedAccount} 
                               onChange={handleSelectAccount} 
-                              label="Chọn tài khoản nguồn"
+                              label="Select source account"
                               sx={{ borderRadius: 2 }}
                             >
                               {fromAccounts.map((acc) => (
                                 <MenuItem key={acc.account_id} value={acc.account_id}>
                                   <ListItemText 
-                                    primary={`Tài khoản thanh toán - ${acc.cardNumber}`} 
-                                    secondary={`Số dư: ${acc.balance.toLocaleString('vi-VN')} VND`} 
+                                    primary={`Payment Account - ${acc.cardNumber}`} 
+                                    secondary={`Balance: ${acc.balance.toLocaleString('en-US')} VND`} 
                                   />
                                 </MenuItem>
                               ))}
@@ -442,10 +430,10 @@ const BankTransferPage = () => {
                               }}
                             >
                               <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                                Số dư khả dụng
+                                Available Balance
                               </Typography>
                               <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
-                                {currentAccountDetails.balance.toLocaleString('vi-VN')} VND
+                                {currentAccountDetails.balance.toLocaleString('en-US')} VND
                               </Typography>
                             </Paper>
                           )}
@@ -457,7 +445,6 @@ const BankTransferPage = () => {
               </CardContent>
             </Card>
 
-            {/* Thông tin giao dịch */}
             <Card sx={{ mb: 4, borderRadius: 2, border: '1px solid', borderColor: 'warning.light' }}>
               <CardContent sx={{ p: 3 }}>
                 <Stack direction="row" alignItems="center" spacing={2} sx={{ mb: 3 }}>
@@ -465,14 +452,14 @@ const BankTransferPage = () => {
                     <AttachMoney />
                   </Avatar>
                   <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'warning.main' }}>
-                    Chi tiết giao dịch
+                    Transaction Details
                   </Typography>
                 </Stack>
                 
                 <Grid container spacing={3}>
                   <Grid item xs={12} md={6}>
                     <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.secondary', fontWeight: 600 }}>
-                      Số tiền chuyển
+                      Transfer Amount
                     </Typography>
                     <TextField 
                       fullWidth 
@@ -501,7 +488,7 @@ const BankTransferPage = () => {
                   
                   <Grid item xs={12} md={6}>
                     <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.secondary', fontWeight: 600 }}>
-                      Phí giao dịch
+                      Transaction Fee
                     </Typography>
                     <Box sx={{ 
                       p: 2, 
@@ -515,42 +502,41 @@ const BankTransferPage = () => {
                     }}>
                       <CheckCircle color="success" fontSize="small" />
                       <Typography variant="body1" sx={{ fontWeight: 600, color: 'success.main' }}>
-                        MIỄN PHÍ
+                        FREE
                       </Typography>
                     </Box>
                   </Grid>
                   
                   <Grid item xs={12}>
                     <Typography variant="subtitle2" sx={{ mb: 1, color: 'text.secondary', fontWeight: 600 }}>
-                      Lời nhắn
+                      Message
                     </Typography>
-<TextField
-  multiline
-  rows={1}
-  value={formData.transferNote}
-  onChange={handleInputChange('transferNote')}
-  variant="outlined"
-  placeholder="Nhập lời nhắn cho người nhận (tùy chọn)"
-  InputProps={{
-    startAdornment: (
-      <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 1 }}>
-        <Message color="info" />
-      </InputAdornment>
-    ),
-  }}
-  sx={{
-    width: '300px', // 👈 tuỳ chỉnh width theo ý bạn (có thể là 300, 400, 'auto', '60%'...)
-    '& .MuiOutlinedInput-root': {
-      borderRadius: 2,
-      overflow: 'hidden', // 👈 quan trọng để tránh scroll
-      paddingRight: 1,
-    },
-    '& .MuiInputBase-inputMultiline': {
-      overflow: 'hidden', // 👈 không cho hiện scroll
-    },
-  }}
-/>
-
+                    <TextField
+                      multiline
+                      rows={1}
+                      value={formData.transferNote}
+                      onChange={handleInputChange('transferNote')}
+                      variant="outlined"
+                      placeholder="Enter a message for the recipient (optional)"
+                      InputProps={{
+                        startAdornment: (
+                          <InputAdornment position="start" sx={{ alignSelf: 'flex-start', mt: 1 }}>
+                            <Message color="info" />
+                          </InputAdornment>
+                        ),
+                      }}
+                      sx={{
+                        width: '300px',
+                        '& .MuiOutlinedInput-root': {
+                          borderRadius: 2,
+                          overflow: 'hidden',
+                          paddingRight: 1,
+                        },
+                        '& .MuiInputBase-inputMultiline': {
+                          overflow: 'hidden',
+                        },
+                      }}
+                    />
                   </Grid>
                 </Grid>
               </CardContent>
@@ -580,14 +566,13 @@ const BankTransferPage = () => {
                   transition: 'all 0.3s ease-in-out'
                 }}
               >
-                Xác nhận chuyển tiền
+                Confirm Transfer
               </Button>
             </Box>
           </form>
         </Paper>
       </Container>
 
-      {/* Modal xác nhận giao dịch */}
       <Dialog 
         open={isConfirmModalOpen} 
         onClose={handleCloseModal} 
@@ -615,17 +600,17 @@ const BankTransferPage = () => {
               gap: 2
             }}>
               <Security />
-              Xác thực bảo mật
+              Security Authentication
             </DialogTitle>
             <DialogContent sx={{ p: 3 }}>
               <DialogContentText sx={{ textAlign: 'center', mb: 3, fontSize: '1.1rem' }}>
-                Để đảm bảo an toàn giao dịch, vui lòng nhập mật khẩu giao dịch của bạn.
+                To ensure transaction security, please enter your transaction password.
               </DialogContentText>
               <TextField 
                 autoFocus 
                 margin="dense" 
                 id="transactionPassword" 
-                label="Mật khẩu giao dịch" 
+                label="Transaction Password" 
                 type="password" 
                 fullWidth 
                 variant="outlined" 
@@ -648,7 +633,7 @@ const BankTransferPage = () => {
                 variant="outlined"
                 sx={{ borderRadius: 2, minWidth: 100 }}
               >
-                Hủy
+                Cancel
               </Button>
               <Button 
                 onClick={handlePasswordSubmit} 
@@ -656,7 +641,7 @@ const BankTransferPage = () => {
                 disabled={isModalLoading || !transactionPassword}
                 sx={{ borderRadius: 2, minWidth: 100 }}
               >
-                {isModalLoading ? <CircularProgress size={24} /> : "Xác nhận"}
+                {isModalLoading ? <CircularProgress size={24} /> : "Confirm"}
               </Button>
             </DialogActions>
           </>
@@ -673,26 +658,26 @@ const BankTransferPage = () => {
               gap: 2
             }}>
               <Sms />
-              Xác thực OTP
+              OTP Verification
             </DialogTitle>
             <DialogContent sx={{ p: 3 }}>
               <DialogContentText sx={{ textAlign: 'center', mb: 3, fontSize: '1.1rem' }}>
-                Mã OTP đã được gửi đến email của bạn. Vui lòng kiểm tra và nhập mã để hoàn tất giao dịch.
+                An OTP code has been sent to your email. Please check and enter the code to complete the transaction.
               </DialogContentText>
               
               <Paper sx={{ p: 3, mb: 3, borderRadius: 2, bgcolor: 'primary.50', border: '1px solid', borderColor: 'primary.light' }}>
                 <Typography variant="subtitle2" color="primary" sx={{ mb: 1 }}>
-                  Chi tiết giao dịch:
+                  Transaction Details:
                 </Typography>
                 <Stack spacing={1}>
                   <Typography variant="body2">
-                    <strong>Người nhận:</strong> {formData.beneficiaryName}
+                    <strong>Recipient:</strong> {formData.beneficiaryName}
                   </Typography>
                   <Typography variant="body2">
-                    <strong>Số tài khoản:</strong> {formData.accountNumber}
+                    <strong>Account Number:</strong> {formData.accountNumber}
                   </Typography>
                   <Typography variant="h6" color="primary" sx={{ fontWeight: 'bold' }}>
-                    <strong>Số tiền:</strong> {Number(formData.amount).toLocaleString('vi-VN')} VND
+                    <strong>Amount:</strong> {Number(formData.amount).toLocaleString('en-US')} VND
                   </Typography>
                 </Stack>
               </Paper>
@@ -701,7 +686,7 @@ const BankTransferPage = () => {
                 autoFocus 
                 margin="dense" 
                 id="otp" 
-                label="Mã OTP" 
+                label="OTP Code" 
                 type="text" 
                 fullWidth 
                 variant="outlined" 
@@ -724,7 +709,7 @@ const BankTransferPage = () => {
                 variant="outlined"
                 sx={{ borderRadius: 2, minWidth: 100 }}
               >
-                Hủy
+                Cancel
               </Button>
               <Button 
                 onClick={handleFinalSubmit} 
@@ -732,14 +717,13 @@ const BankTransferPage = () => {
                 disabled={isModalLoading || !otp}
                 sx={{ borderRadius: 2, minWidth: 150 }}
               >
-                {isModalLoading ? <CircularProgress size={24} /> : "Hoàn tất giao dịch"}
+                {isModalLoading ? <CircularProgress size={24} /> : "Complete Transaction"}
               </Button>
             </DialogActions>
           </>
         )}
       </Dialog>
 
-      {/* Modal thành công */}
       <Dialog 
         open={isSuccessModalOpen} 
         onClose={handleCloseSuccessModal}
@@ -763,13 +747,12 @@ const BankTransferPage = () => {
         }}>
           <CelebrationOutlined sx={{ fontSize: 80, mb: 2, opacity: 0.9 }} />
           <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 1 }}>
-            🎉 Chúc mừng!
+            🎉 Congratulations!
           </Typography>
           <Typography variant="h6" sx={{ opacity: 0.9 }}>
-            Giao dịch đã được thực hiện thành công
+            The transaction has been completed successfully
           </Typography>
           
-          {/* Decorative elements */}
           <Box sx={{
             position: 'absolute',
             top: 10,
@@ -795,7 +778,6 @@ const BankTransferPage = () => {
         <DialogContent sx={{ p: 4 }}>
           {transferResult && (
             <Box>
-              {/* Thông tin giao dịch */}
               <Paper sx={{ 
                 p: 3, 
                 mb: 3, 
@@ -813,14 +795,14 @@ const BankTransferPage = () => {
                   gap: 1
                 }}>
                   <CheckCircle />
-                  Chi tiết giao dịch
+                  Transaction Details
                 </Typography>
                 
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <Card sx={{ p: 2, height: '100%', borderRadius: 2, bgcolor: 'white' }}>
                       <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-                        Người gửi
+                        Sender
                       </Typography>
                       <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'primary.main' }}>
                         {transferResult.senderName}
@@ -834,7 +816,7 @@ const BankTransferPage = () => {
                   <Grid item xs={12} sm={6}>
                     <Card sx={{ p: 2, height: '100%', borderRadius: 2, bgcolor: 'white' }}>
                       <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-                        Người nhận
+                        Recipient
                       </Typography>
                       <Typography variant="h6" sx={{ fontWeight: 'bold', color: 'secondary.main' }}>
                         {transferResult.beneficiaryName}
@@ -848,14 +830,14 @@ const BankTransferPage = () => {
                   <Grid item xs={12}>
                     <Card sx={{ p: 3, borderRadius: 2, bgcolor: 'success.50', textAlign: 'center' }}>
                       <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-                        Số tiền đã chuyển
+                        Amount Transferred
                       </Typography>
                       <Typography variant="h4" sx={{ 
                         fontWeight: 'bold', 
                         color: 'success.main',
                         textShadow: '0 2px 4px rgba(0,0,0,0.1)'
                       }}>
-                        {transferResult.amount.toLocaleString('vi-VN')} VND
+                        {transferResult.amount.toLocaleString('en-US')} VND
                       </Typography>
                     </Card>
                   </Grid>
@@ -864,7 +846,7 @@ const BankTransferPage = () => {
                     <Grid item xs={12}>
                       <Card sx={{ p: 2, borderRadius: 2, bgcolor: 'grey.50' }}>
                         <Typography variant="subtitle2" color="text.secondary" sx={{ mb: 1 }}>
-                          Lời nhắn
+                          Message
                         </Typography>
                         <Typography variant="body1" sx={{ fontStyle: 'italic' }}>
                           "{transferResult.transferNote}"
@@ -875,7 +857,6 @@ const BankTransferPage = () => {
                 </Grid>
               </Paper>
 
-              {/* Thông tin bổ sung */}
               <Paper sx={{ 
                 p: 3, 
                 borderRadius: 3,
@@ -885,11 +866,11 @@ const BankTransferPage = () => {
               }}>
                 <Stack direction="row" alignItems="center" justifyContent="space-between" sx={{ mb: 2 }}>
                   <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                    Thông tin bổ sung
+                    Additional Information
                   </Typography>
                   <Chip 
                     icon={<Info />} 
-                    label="Hoàn thành" 
+                    label="Completed" 
                     color="success" 
                     size="small"
                     sx={{ borderRadius: 2 }}
@@ -899,7 +880,7 @@ const BankTransferPage = () => {
                 <Grid container spacing={2}>
                   <Grid item xs={12} sm={6}>
                     <Typography variant="body2" color="text.secondary">
-                      Mã giao dịch
+                      Transaction ID
                     </Typography>
                     <Typography variant="body1" sx={{ fontWeight: 'bold', fontFamily: 'monospace' }}>
                       {transferResult.transactionId}
@@ -908,7 +889,7 @@ const BankTransferPage = () => {
                   
                   <Grid item xs={12} sm={6}>
                     <Typography variant="body2" color="text.secondary">
-                      Thời gian thực hiện
+                      Transaction Time
                     </Typography>
                     <Typography variant="body1" sx={{ fontWeight: 'bold' }}>
                       {transferResult.timestamp}
@@ -917,25 +898,24 @@ const BankTransferPage = () => {
                   
                   <Grid item xs={12} sm={6}>
                     <Typography variant="body2" color="text.secondary">
-                      Phí giao dịch
+                      Transaction Fee
                     </Typography>
                     <Typography variant="body1" sx={{ fontWeight: 'bold', color: 'success.main' }}>
-                      MIỄN PHÍ
+                      FREE
                     </Typography>
                   </Grid>
                   
                   <Grid item xs={12} sm={6}>
                     <Typography variant="body2" color="text.secondary">
-                      Trạng thái
+                      Status
                     </Typography>
                     <Typography variant="body1" sx={{ fontWeight: 'bold', color: 'success.main' }}>
-                      Thành công
+                      Successful
                     </Typography>
                   </Grid>
                 </Grid>
               </Paper>
 
-              {/* Lời cảm ơn */}
               <Box sx={{ 
                 textAlign: 'center', 
                 mt: 3, 
@@ -954,13 +934,13 @@ const BankTransferPage = () => {
                   WebkitTextFillColor: 'transparent',
                   fontSize: '1.3rem'
                 }}>
-                  ✨ Cảm ơn bạn đã sử dụng dịch vụ! ✨
+                  ✨ Thank you for using our service! ✨
                 </Typography>
                 <Typography variant="body1" color="text.secondary">
-                  Giao dịch đã được xử lý thành công. Tiền sẽ được chuyển đến tài khoản người nhận trong vài phút.
+                  The transaction has been processed successfully. The money will be transferred to the recipient's account in a few minutes.
                 </Typography>
                 <Typography variant="body2" sx={{ mt: 2, fontStyle: 'italic', color: 'primary.main' }}>
-                  💝 Chúc bạn có một ngày tuyệt vời! 💝
+                  💝 Have a great day! 💝
                 </Typography>
               </Box>
             </Box>
@@ -990,11 +970,10 @@ const BankTransferPage = () => {
               transition: 'all 0.3s ease-in-out'
             }}
           >
-            Hoàn tất
+            Done
           </Button>
         </DialogActions>
 
-        {/* Custom styles for animations */}
         <style jsx>{`
           @keyframes pulse {
             0% {

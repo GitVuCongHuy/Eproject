@@ -33,48 +33,46 @@ const colors = {
 const menuItems = [
   {
     id: 'home', 
-    name: 'Trang chủ', 
+    name: 'Home', 
     path: '/', 
     icon: <Home />,
     badge: null
   },
   {
     id: 'account', 
-    name: 'Tài khoản', 
+    name: 'Accounts', 
     path: '/account', 
     icon: <CreditCard />,
     badge: null
   },
   {
     id: 'transfer', 
-    name: 'Dịch vụ khác', 
+    name: 'Other Services', 
     path: '/transfer', 
     icon: <Send />,
     hasSubmenu: true,
-    badge: 'Mới',
+    badge: 'New',
     submenu: [
-      { name: 'Chuyển tiền', path: '/transfer/internal', icon: '💸' },
-      { name: 'Yêu cầu cấp sổ séc', path: '/chequebook', icon: '📒' },
-      // { name: 'Hủy séc', path: '/cancel', icon: '🚫' },
-      { name: 'Sao kê giao dịch', path: '/statement', icon: '📊' },
+      { name: 'Internal Transfer', path: '/transfer/internal', icon: '💸' },
+      { name: 'Cheque Book Request', path: '/chequebook', icon: '📒' },
+      { name: 'Transaction Statement', path: '/statement', icon: '📊' },
     ]
   },
   {
     id: 'features', 
-    name: 'Tính năng khác', 
+    name: 'More Features', 
     path: '/features', 
     icon: <Settings />,
     hasSubmenu: true,
     badge: null,
     submenu: [
-      // { name: 'Cài đặt', path: '/settings', icon: '⚙️' },
-      { name: 'Hướng dẫn', path: '/guide', icon: '❓' },
-      { name: 'Mật khẩu chuyển khoản', path: '/password', icon: '⚙️'},
-      { name: 'Thay đổi mật khẩu', path: '/update-password-login', icon: '📝' },
-
+      { name: 'User Guide', path: '/guide', icon: '❓' },
+      { name: 'Transfer Password', path: '/password', icon: '⚙️' },
+      { name: 'Change Login Password', path: '/update-password-login', icon: '📝' },
     ]
   }
 ];
+
 
 const getInitials = (name = '') => {
   if (!name) return '';
@@ -212,14 +210,15 @@ const Sidebar = () => {
               {user ? user.full_name : 'Đang tải...'}
             </Typography>
             <Typography 
-              fontSize={12} 
-              sx={{ 
-                color: 'rgba(255,255,255,0.8)',
-                textShadow: '0 1px 2px rgba(0,0,0,0.1)'
-              }}
-            >
-              Khách hàng VIP
-            </Typography>
+  fontSize={12} 
+  sx={{ 
+    color: 'rgba(255,255,255,0.8)',
+    textShadow: '0 1px 2px rgba(0,0,0,0.1)'
+  }}
+>
+  VIP Customer
+</Typography>
+
           </Box>
         </Box>
       </Box>
@@ -355,28 +354,29 @@ const Sidebar = () => {
       <Box sx={{ padding: '16px 20px 24px' }}>
         <Divider sx={{ marginBottom: '16px', borderColor: colors.border }} />
         <Button
-          variant="contained"
-          fullWidth
-          startIcon={<LogoutRounded />}
-          onClick={handleLogout} // << GỌI HÀM handleLogout
-          sx={{
-            borderRadius: '12px',
-            padding: '12px 16px',
-            backgroundColor: colors.text.secondary,
-            fontSize: '14px',
-            fontWeight: 600,
-            textTransform: 'none',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
-            transition: 'all 0.3s ease',
-            '&:hover': {
-              backgroundColor: colors.text.primary,
-              transform: 'translateY(-2px)',
-              boxShadow: '0 6px 20px rgba(0,0,0,0.2)'
-            }
-          }}
-        >
-          Đăng xuất
-        </Button>
+  variant="contained"
+  fullWidth
+  startIcon={<LogoutRounded />}
+  onClick={handleLogout}
+  sx={{
+    borderRadius: '12px',
+    padding: '12px 16px',
+    backgroundColor: colors.text.secondary,
+    fontSize: '14px',
+    fontWeight: 600,
+    textTransform: 'none',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+    transition: 'all 0.3s ease',
+    '&:hover': {
+      backgroundColor: colors.text.primary,
+      transform: 'translateY(-2px)',
+      boxShadow: '0 6px 20px rgba(0,0,0,0.2)'
+    }
+  }}
+>
+  Log out
+</Button>
+
       </Box>
     </Drawer>
   );

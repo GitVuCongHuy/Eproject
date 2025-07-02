@@ -33,18 +33,18 @@ export default function BankTransferPage() {
 
   return (
      <>
-                  {/* Override class bên ngoài */}
-                  <GlobalStyles styles={{
-                    '._mainContent_b1piq_13': {
-                      marginLeft: '30px !important',
-                      marginTop: '30px!important',
-                    },
-                    'html, body': {
-                        overflow: 'y',            
-                        backgroundColor: '#fff',
-                
-                      },
-                  }} />
+        {/* Override external class */}
+        <GlobalStyles styles={{
+          '._mainContent_b1piq_13': {
+            marginLeft: '30px !important',
+            marginTop: '30px!important',
+          },
+          'html, body': {
+              overflow: 'y',            
+              backgroundColor: '#fff',
+      
+            },
+        }} />
     <Box sx={{ 
       minHeight: '100vh',
       background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
@@ -103,7 +103,7 @@ export default function BankTransferPage() {
             <ArrowBack />
           </IconButton>
           <Typography variant="h6" sx={{ color: '#333', fontWeight: 500 }}>
-            Chuyển tiền tới ngân hàng khác
+            Transfer to another bank
           </Typography>
           <Box sx={{ ml: 'auto' }}>
             <IconButton sx={{ color: '#666' }}>
@@ -166,7 +166,7 @@ export default function BankTransferPage() {
                 color: '#333',
                 mb: 1
               }}>
-                Chuyển thành công VND 20,000
+                Successfully transferred VND 20,000
               </Typography>
             </Box>
 
@@ -177,7 +177,7 @@ export default function BankTransferPage() {
               {/* Recipient Info */}
               <Box sx={{ mb: 2 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                  Thông tin tài khoản
+                  Account Information
                 </Typography>
                 <Typography variant="body1" sx={{ fontWeight: 500, color: '#333' }}>
                   VU THIEN HUU
@@ -190,20 +190,20 @@ export default function BankTransferPage() {
               {/* Bank Info */}
               <Box sx={{ mb: 2 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                  Ngân hàng thụ hưởng
+                  Beneficiary Bank
                 </Typography>
                 <Typography variant="body1" sx={{ fontWeight: 500, color: '#333' }}>
-                  MB Ngân hàng TMCP Quân Đội
+                  MB Commercial Joint Stock Bank
                 </Typography>
               </Box>
 
               {/* Transfer Type */}
               <Box sx={{ mb: 2 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                  Loại hình
+                  Type
                 </Typography>
                 <Chip 
-                  label="Chuyển tiền" 
+                  label="Money Transfer" 
                   size="small"
                   sx={{ 
                     bgcolor: '#fff3cd', 
@@ -216,17 +216,17 @@ export default function BankTransferPage() {
               {/* Transaction Time */}
               <Box sx={{ mb: 2 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                  Thời gian thực hiện
+                  Transaction Time
                 </Typography>
                 <Typography variant="body1" sx={{ fontWeight: 500, color: '#333' }}>
-                  15:39 13 Tháng 6, 2025
+                  15:39 June 13, 2025
                 </Typography>
               </Box>
 
               {/* Transaction ID */}
               <Box sx={{ mb: 3 }}>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 0.5 }}>
-                  Mã giao dịch
+                  Transaction ID
                 </Typography>
                 <Typography variant="body1" sx={{ 
                   fontWeight: 500, 
@@ -260,7 +260,7 @@ export default function BankTransferPage() {
               fontWeight: 500
             }}
           >
-            Thực hiện giao dịch khác
+            Make another transaction
           </Button>
           <Button
             variant="contained"
@@ -277,7 +277,7 @@ export default function BankTransferPage() {
               }
             }}
           >
-            Hoàn thành
+            Done
           </Button>
         </Box>
       </Container>
