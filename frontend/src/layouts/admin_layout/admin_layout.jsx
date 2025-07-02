@@ -175,19 +175,19 @@ const AdminLayout = ({ children }) => {
 
     const menuItems = [
         {
-        label: 'Tổng Quan',
+        label: 'Overview',
         icon: <DashboardIcon />,
         key: 'dashboard',
         path: '/admin_new/admin_main',
         },
         {
-        label: 'Khách Hàng',
+        label: 'Client',
         icon: <PeopleIcon />,
         key: 'users',
         path: '/admin_new/admin_account',
         },
         {
-        label: 'Yêu cầu',
+        label: 'Request',
         icon: <PeopleIcon />,
         key: '  ',
         path: '/admin_new/admin_request',
@@ -263,16 +263,16 @@ const AdminLayout = ({ children }) => {
       >
         <MenuItem onClick={handleProfileMenuClose}>
           <AccountCircleIcon sx={{ mr: 2 }} />
-          Hồ sơ cá nhân
+          Personal profile
         </MenuItem>
         <MenuItem onClick={handleProfileMenuClose}>
           <SettingsIcon sx={{ mr: 2 }} />
-          Cài đặt tài khoản
+          Account settings
         </MenuItem>
         <Divider />
         <MenuItem onClick={handleProfileMenuClose} sx={{ color: 'error.main' }}>
           <LogoutIcon sx={{ mr: 2 }} />
-          Đăng xuất
+          Sign out
         </MenuItem>
       </Menu>
 
@@ -305,7 +305,7 @@ const AdminLayout = ({ children }) => {
                 opacity: 0.8
               }}
             >
-              Quản trị viên hệ thống
+              System administrator
             </Typography>
             <Box
               sx={{
@@ -318,7 +318,7 @@ const AdminLayout = ({ children }) => {
               }}
             >
               <Typography variant="caption" sx={{ color: '#1565c0', fontWeight: 600 }}>
-                🟢 Trực tuyến
+                🟢 Online
               </Typography>
             </Box>
           </ProfileSection>

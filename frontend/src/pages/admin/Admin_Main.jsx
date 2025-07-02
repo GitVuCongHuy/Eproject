@@ -238,10 +238,10 @@ const BankStats = () => {
             </Avatar>
             <Box>
               <Typography variant="h4" fontWeight="bold">
-                Hệ thống ngân hàng
+                Banking system
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.8 }}>
-                Tổng quan thông tin ngân hàng
+                Bank information overview
               </Typography>
             </Box>
           </Box>
@@ -286,7 +286,7 @@ const BankStats = () => {
                   {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(bankData.totalBalance)}
                 </Typography>
                 <Typography variant="body2" sx={{ opacity: 0.8 }}>
-                  Tổng số dư hệ thống
+                  Total system balance
                 </Typography>
               </Box>
             </Grid>
@@ -348,17 +348,17 @@ const CustomerStats = () => {
     <Grid container spacing={3}>
       <Grid item xs={12} md={4}>
         <StatCard
-          title="Tổng khách hàng"
+          title="Total customers"
           value={stats?.totalAccounts || 0}
           icon={<People fontSize="large" />}
           color="primary"
-          subtitle="Tất cả tài khoản trong hệ thống"
+          subtitle="All accounts in the system"
           loading={loading}
         />
       </Grid>
       <Grid item xs={12} md={4}>
         <StatCard
-          title="Đang hoạt động"
+          title="Active"
           value={stats?.unlockedAccounts || 0}
           icon={<LockOpen fontSize="large" />}
           color="success"
@@ -369,7 +369,7 @@ const CustomerStats = () => {
       </Grid>
       <Grid item xs={12} md={4}>
         <StatCard
-          title="Bị tạm khóa"
+          title="Temporarily locked"
           value={stats?.lockedAccounts || 0}
           icon={<Security fontSize="large" />}
           color="error"
@@ -414,17 +414,17 @@ const CardStats = () => {
         <Grid container spacing={2}  > 
           <Grid item xs={12} md={3} >
             <StatCard
-              title="Tổng số thẻ"
+              title="Total number of cards"
               value={stats?.totalAccounts || 0}
               icon={<CreditCard fontSize="large" />}
               color="primary"
-              subtitle="Tất cả loại thẻ"
+              subtitle="All card types"
               loading={loading}
             />
           </Grid>
           <Grid item xs={12} md={3}>
             <StatCard
-              title="Thẻ ghi nợ"
+              title="Debit card"
               value={stats?.normalCardCount || 0}
               icon={<AccountBalanceWallet fontSize="large" />}
               color="success"
@@ -434,7 +434,7 @@ const CardStats = () => {
           </Grid>
           <Grid item xs={12} md={3}>
             <StatCard
-              title="Thẻ tín dụng"
+              title="Credit card"
               value={stats?.creditCardCount || 0}
               icon={<CreditScore fontSize="large" />}
               color="warning"
@@ -444,11 +444,11 @@ const CardStats = () => {
           </Grid>
           <Grid item xs={12} md={3}>
             <StatCard
-              title="Thẻ bị khóa"
+              title="Card is locked"
               value={stats?.lockedAccounts || 0}
               icon={<Lock fontSize="large" />}
               color="error"
-              subtitle="Cần xem xét"
+              subtitle="Need to consider"
               loading={loading}
             />
           </Grid>
@@ -467,10 +467,10 @@ const CardStats = () => {
                   </Avatar>
                   <Box>
                     <Typography variant="h6" fontWeight="bold">
-                      Top 10 tài khoản VIP
+                      Top 10 VIP accounts
                     </Typography>
                     <Typography variant="body2" color="textSecondary">
-                      Khách hàng có số dư cao nhất
+                      Customer with highest balance
                     </Typography>
                   </Box>
                 </Box>
@@ -568,7 +568,7 @@ const TransactionStats = () => {
         <Grid container spacing={2}>
           <Grid item xs={12} md={4}>
             <StatCard
-              title="Tổng giao dịch"
+              title="Total transaction"
               value={stats?.totalTransactions || 0}
               icon={<SwapHoriz fontSize="large" />}
               color="primary"
@@ -578,22 +578,22 @@ const TransactionStats = () => {
           </Grid>
           <Grid item xs={12} md={4}>
             <StatCard
-              title="Giao dịch hôm nay"
+              title="Trade today"
               value={stats?.transactionsToday || 0}
               icon={<CalendarToday fontSize="large" />}
               color="success"
-              subtitle="Cập nhật realtime"
+              subtitle="Update realtime"
               trend={8.5}
               loading={loading}
             />
           </Grid>
           <Grid item xs={12} md={4}>
             <StatCard
-              title="Tỷ lệ thành công"
+              title="Success rate"
               value={`${stats?.totalTransactions > 0 ? Math.round(((stats?.totalTransactions - (stats?.failedTransactions || 0)) / stats?.totalTransactions) * 100) : 0}%`}
               icon={<Assessment fontSize="large" />}
               color="info"
-              subtitle="Hiệu suất hệ thống"
+              subtitle="System performance"
               trend={2.3}
               loading={loading}
             />
@@ -611,10 +611,10 @@ const TransactionStats = () => {
               </Avatar>
               <Box>
                 <Typography variant="h6" fontWeight="bold" color="success.main">
-                  Top người gửi
+                  Top senders
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Khách hàng giao dịch nhiều nhất
+                  Most Trading Customers
                 </Typography>
               </Box>
             </Box>
@@ -666,10 +666,10 @@ const TransactionStats = () => {
               </Avatar>
               <Box>
                 <Typography variant="h6" fontWeight="bold" color="secondary.main">
-                  Top người nhận
+                  Top recipients
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Khách hàng nhận tiền nhiều nhất
+                  The customer who gets the most money
                 </Typography>
               </Box>
             </Box>
@@ -752,10 +752,10 @@ const TransactionChart = () => {
             </Avatar>
             <Box>
               <Typography variant="h6" fontWeight="bold">
-                Biểu đồ giao dịch theo thời gian
+                Trading chart over time
               </Typography>
               <Typography variant="body2" color="textSecondary">
-                Phân tích xu hướng giao dịch
+                Trading Trend Analysis
               </Typography>
             </Box>
           </Box>
@@ -765,7 +765,7 @@ const TransactionChart = () => {
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} md={3}>
               <TextField
-                label="Ngày bắt đầu"
+                label="Start date"
                 type="date"
                 value={startDate}
                 onChange={(e) => setStartDate(e.target.value)}
@@ -776,7 +776,7 @@ const TransactionChart = () => {
             </Grid>
             <Grid item xs={12} md={3}>
               <TextField
-                label="Ngày kết thúc"
+                label="End date"
                 type="date"
                 value={endDate}
                 onChange={(e) => setEndDate(e.target.value)}
@@ -794,7 +794,7 @@ const TransactionChart = () => {
                 fullWidth
                 sx={{ height: 40 }}
               >
-                {loading ? 'Đang tải...' : 'Phân tích'}
+                {loading ? 'Loading...' : 'Analysis'}
               </Button>
             </Grid>
             <Grid item xs={12} md={3}>
@@ -807,7 +807,7 @@ const TransactionChart = () => {
                 fullWidth
                 sx={{ height: 40 }}
               >
-                Đặt lại
+                Reset
               </Button>
             </Grid>
           </Grid>
@@ -852,16 +852,16 @@ const TransactionChart = () => {
                   }}
                   formatter={(value, name) => [
                     value, 
-                    name === 'totalTransactions' ? 'Tổng giao dịch' : 
-                    name === 'successTransactions' ? 'Thành công' : 'Thất bại'
+                    name === 'totalTransactions' ? 'Total transaction' : 
+                    name === 'successTransactions' ? 'Success' : 'Failure'
                   ]}
                   labelFormatter={(date) => `📅 ${date}`}
                 />
                 <Legend 
                   wrapperStyle={{ paddingTop: '20px' }}
                   formatter={(value) => 
-                    value === 'totalTransactions' ? '📊 Tổng giao dịch' : 
-                    value === 'successTransactions' ? '✅ Thành công' : '❌ Thất bại'
+                    value === 'totalTransactions' ? '📊 Total transaction' : 
+                    value === 'successTransactions' ? '✅ Success' : '❌ Failure'
                   }
                 />
                 <Area 
@@ -897,17 +897,17 @@ const TransactionChart = () => {
               <Box textAlign="center">
                 <CircularProgress size={60} thickness={4} />
                 <Typography color="textSecondary" sx={{ mt: 2 }}>
-                  Đang phân tích dữ liệu...
+                  Analyzing data...
                 </Typography>
               </Box>
             ) : (
               <Box textAlign="center">
                 <Assessment sx={{ fontSize: 80, color: 'text.disabled', mb: 2 }} />
                 <Typography variant="h6" color="textSecondary">
-                  Không có dữ liệu để hiển thị
+                  No data to display
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  Vui lòng chọn khoảng thời gian khác
+                  Please select another time period
                 </Typography>
               </Box>
             )}
@@ -980,10 +980,10 @@ const Admin_Main = () => {
                   </Avatar>
                   <Box>
                     <Typography variant="h5" fontWeight="bold" color="primary.main">
-                      Thống kê khách hàng
+                      Customer statistics
                     </Typography>
                     <Typography variant="body1" color="textSecondary">
-                      Tổng quan tài khoản khách hàng trong hệ thống
+                      Overview of customer accounts in the system
                     </Typography>
                   </Box>
                 </Box>
@@ -1012,10 +1012,10 @@ const Admin_Main = () => {
                   </Avatar>
                   <Box>
                     <Typography variant="h5" fontWeight="bold" color="warning.main">
-                      Quản lý thẻ ngân hàng
+                      Bank card management
                     </Typography>
                     <Typography variant="body1" color="textSecondary">
-                      Thống kê chi tiết các loại thẻ và tài khoản VIP
+                      Detailed statistics of VIP cards and accounts
                     </Typography>
                   </Box>
                 </Box>
@@ -1043,10 +1043,10 @@ const Admin_Main = () => {
                   </Avatar>
                   <Box>
                     <Typography variant="h5" fontWeight="bold" color="success.main">
-                      Phân tích giao dịch
+                      Transaction analysis
                     </Typography>
                     <Typography variant="body1" color="textSecondary">
-                      Tổng quan hoạt động giao dịch và top khách hàng
+                      Overview of trading activities and top customers
                     </Typography>
                   </Box>
                 </Box>

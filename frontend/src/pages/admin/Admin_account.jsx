@@ -96,23 +96,23 @@ const CustomerCardsDialog = ({ open, onClose, customer }) => {
     const data = response.data;
 
     if (response.status === 200 && data.status === 200) {
-      setSnackbar({ open: true, message: 'Xóa thẻ thành công!', severity: 'success' });
+      setSnackbar({ open: true, message: 'Card deleted successfully!', severity: 'success' });
       fetchCustomerCards();
     } else {
-      let errorMessage = 'Lỗi khi xóa thẻ';
+      let errorMessage = 'Error while deleting card';
 
       switch (data.error) {
         case 'NotFound':
-          errorMessage = 'Không tìm thấy thẻ';
+          errorMessage = 'Card not found';
           break;
         case 'NonZeroBalance':
-          errorMessage = 'Thẻ thường chỉ được xóa khi số dư bằng 0';
+          errorMessage = 'Cards are usually only cleared when the balance is 0.';
           break;
         case 'InvalidCreditBalance':
-          errorMessage = 'Thẻ ghi nợ chỉ được xóa khi số dư là 10.000.000 (vốn gốc)';
+          errorMessage = 'Debit card will only be cleared when the balance is 10,000,000 (principal)';
           break;
         case 'UnknownCardType':
-          errorMessage = 'Loại thẻ không xác định';
+          errorMessage = 'Unknown card type';
           break;
         default:
           errorMessage = data.message || errorMessage;
@@ -177,7 +177,7 @@ const CustomerCardsDialog = ({ open, onClose, customer }) => {
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
               <CreditCard />
-              Danh sách thẻ của khách hàng: {customer?.full_name}
+              Customer card list: {customer?.full_name}
             </Box>
             <Button
               variant="contained"
@@ -185,7 +185,7 @@ const CustomerCardsDialog = ({ open, onClose, customer }) => {
               onClick={() => setCreateCardOpen(true)}
               size="small"
             >
-              Tạo thẻ mới
+              Create a new card
             </Button>
           </Box>
         </DialogTitle>
@@ -210,13 +210,13 @@ const CustomerCardsDialog = ({ open, onClose, customer }) => {
               <Table size="small">
                 <TableHead>
                   <TableRow>
-                    <TableCell><strong>ID Tài khoản</strong></TableCell>
-                    <TableCell><strong>Số thẻ</strong></TableCell>
-                    <TableCell><strong>Loại thẻ</strong></TableCell>
-                    <TableCell><strong>Trạng thái</strong></TableCell>
+                    <TableCell><strong>Account ID</strong></TableCell>
+                    <TableCell><strong>Card number</strong></TableCell>
+                    <TableCell><strong>Card type</strong></TableCell>
+                    <TableCell><strong>Status</strong></TableCell>
                     {/* <TableCell><strong>Số dư</strong></TableCell> */}
-                    <TableCell><strong>Ngày phát hành</strong></TableCell>
-                    <TableCell><strong>Thao tác</strong></TableCell>
+                    <TableCell><strong>Release date</strong></TableCell>
+                    <TableCell><strong>Operation</strong></TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -271,19 +271,19 @@ const CustomerCardsDialog = ({ open, onClose, customer }) => {
           {cards.length > 0 && (
             <Box sx={{ mt: 2, p: 2, bgcolor: 'background.default', borderRadius: 1 }}>
               <Typography variant="body2" color="text.secondary">
-                <strong>Tổng số thẻ:</strong> {cards.length}/3 thẻ
+                <strong>Total number of cards:</strong> {cards.length}/3 card
               </Typography>
             </Box>
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={onClose}>Đóng</Button>
+          <Button onClick={onClose}>Close</Button>
           <Button 
             onClick={fetchCustomerCards} 
             startIcon={<Refresh />}
             disabled={loading}
           >
-            Làm mới
+            Refresh
           </Button>
         </DialogActions>
       </Dialog>
@@ -295,7 +295,7 @@ const CustomerCardsDialog = ({ open, onClose, customer }) => {
         customer={customer}
         onSuccess={() => {
           fetchCustomerCards();
-          setSnackbar({ open: true, message: 'Tạo thẻ thành công!', severity: 'success' });
+          setSnackbar({ open: true, message: 'Card created successfully!', severity: 'success' });
         }}
         onError={(message) => setSnackbar({ open: true, message, severity: 'error' })}
       />
@@ -305,25 +305,25 @@ const CustomerCardsDialog = ({ open, onClose, customer }) => {
         open={deleteCardId !== null}
         onClose={() => setDeleteCardId(null)}
       >
-        <DialogTitle>Xác nhận xóa thẻ</DialogTitle>
+        <DialogTitle>Confirm card deletion</DialogTitle>
         <DialogContent>
           <Typography>
-            Bạn có chắc chắn muốn xóa thẻ này không? Thao tác này không thể hoàn tác.
+           Are you sure you want to delete this card? This action cannot be undone.
           </Typography>
           <Alert severity="warning" sx={{ mt: 2 }}>
-            <strong>Lưu ý:</strong>
-            <br />• Thẻ thường chỉ được xóa khi số dư bằng 0
-            <br />• Thẻ ghi nợ chỉ được xóa khi số dư là 10.000.000 VND (vốn gốc)
+            <strong>Note:</strong>
+            <br />• Cards are usually only deleted when the balance is 0.
+            <br />• Debit card will only be deleted when the balance is 10,000,000 VND (principal)
           </Alert>
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setDeleteCardId(null)}>Hủy</Button>
+          <Button onClick={() => setDeleteCardId(null)}>Cancel</Button>
           <Button
             onClick={() => handleDeleteCard(deleteCardId)}
             color="error"
             variant="contained"
           >
-            Xóa
+           Delete
           </Button>
         </DialogActions>
       </Dialog>
@@ -354,12 +354,12 @@ const CreateCardDialog = ({ open, onClose, customer, onSuccess, onError }) => {
 
   const handleSubmit = async () => {
     if (!cardType) {
-      onError('Vui lòng chọn loại thẻ');
+      onError('Please select card type');
       return;
     }
 
     if (cardType === 'Normal' && (!initialBalance || parseFloat(initialBalance) < 0)) {
-      onError('Vui lòng nhập số dư ban đầu hợp lệ cho thẻ thường');
+      onError('Please enter a valid starting balance for the regular card.');
       return;
     }
 
@@ -386,24 +386,24 @@ const CreateCardDialog = ({ open, onClose, customer, onSuccess, onError }) => {
         onSuccess();
         handleClose();
       } else {
-        let errorMessage = 'Lỗi khi tạo thẻ';
+        let errorMessage = 'Error creating card';
         
         // Xử lý các loại lỗi cụ thể
         switch (data.error) {
           case 'NotFound':
-            errorMessage = 'Không tìm thấy khách hàng';
+            errorMessage = 'No customers found';
             break;
           case 'AccountLocked':
-            errorMessage = 'Tài khoản đã bị khóa';
+            errorMessage = 'Account has been locked';
             break;
           case 'InvalidCardType':
-            errorMessage = 'Loại thẻ không hợp lệ (Normal hoặc Credit)';
+            errorMessage = 'Invalid card type (Normal or Credit)';
             break;
           case 'CardLimitReached':
-            errorMessage = 'Tổng số thẻ không được vượt quá 3';
+            errorMessage = 'Total number of cards cannot exceed 3';
             break;
           case 'CreditCardLimit':
-            errorMessage = 'Chỉ được tạo 1 thẻ ghi nợ';
+            errorMessage = 'Only 1 debit card can be created';
             break;
           default:
             errorMessage = data.message || errorMessage;
@@ -412,7 +412,7 @@ const CreateCardDialog = ({ open, onClose, customer, onSuccess, onError }) => {
         onError(errorMessage);
       }
     } catch (error) {
-      onError('Lỗi kết nối: ' + error.message);
+      onError('Connection error:' + error.message);
     } finally {
       setLoading(false);
     }
@@ -430,53 +430,53 @@ const CreateCardDialog = ({ open, onClose, customer, onSuccess, onError }) => {
       <DialogTitle>
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           <Add />
-          Tạo thẻ mới cho: {customer?.full_name}
+          Create new tag for: {customer?.full_name}
         </Box>
       </DialogTitle>
       <DialogContent>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, pt: 2 }}>
           <FormControl fullWidth>
-            <InputLabel>Loại thẻ</InputLabel>
+            <InputLabel>Card type</InputLabel>
             <Select
               value={cardType}
-              label="Loại thẻ"
+              label="Card type"
               onChange={(e) => setCardType(e.target.value)}
             >
-              <MenuItem value="Normal">Thẻ thường</MenuItem>
-              <MenuItem value="Credit">Thẻ ghi nợ</MenuItem>
+              <MenuItem value="Normal">Regular card</MenuItem>
+              <MenuItem value="Credit">Debit card</MenuItem>
             </Select>
           </FormControl>
 
           {cardType === 'Normal' && (
             <TextField
               fullWidth
-              label="Số dư ban đầu"
+              label="Initial balance"
               type="number"
               value={initialBalance}
               onChange={(e) => setInitialBalance(e.target.value)}
               InputProps={{
                 inputProps: { min: 0 }
               }}
-              helperText="Nhập số dư ban đầu cho thẻ thường"
+              helperText="Enter the starting balance for the regular card"
             />
           )}
 
           {cardType === 'Credit' && (
             <Alert severity="info">
-              Thẻ ghi nợ sẽ được tạo với số dư mặc định là 10.000.000 VND
+              The debit card will be created with a default balance of 10,000,000 VND
             </Alert>
           )}
 
           <Alert severity="warning">
-            <strong>Lưu ý:</strong>
-            <br />• Mỗi khách hàng tối đa 3 thẻ
-            <br />• Chỉ được tạo 1 thẻ ghi nợ duy nhất
+            <strong>Note:</strong>
+            <br />• Maximum 3 cards per customer
+            <br />• Only 1 debit card can be created
           </Alert>
         </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} disabled={loading}>
-          Hủy
+          Cancel
         </Button>
         <Button
           onClick={handleSubmit}
@@ -484,7 +484,7 @@ const CreateCardDialog = ({ open, onClose, customer, onSuccess, onError }) => {
           disabled={loading || !cardType}
           startIcon={loading ? <CircularProgress size={20} /> : <Add />}
         >
-          {loading ? 'Đang tạo...' : 'Tạo thẻ'}
+          {loading ? 'Creating...' : 'Create tags'}
         </Button>
       </DialogActions>
     </Dialog>
@@ -497,7 +497,7 @@ const CustomerDetailDialog = ({ open, onClose, customer }) => {
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>Chi tiết khách hàng</DialogTitle>
+      <DialogTitle>Customer details</DialogTitle>
       <DialogContent>
         <Grid container spacing={2} sx={{ mt: 1 }}>
           <Grid item xs={12} sm={6}>
@@ -510,7 +510,7 @@ const CustomerDetailDialog = ({ open, onClose, customer }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Tên đăng nhập"
+              label="Login name"
               value={customer.username || ''}
               fullWidth
               disabled
@@ -518,7 +518,7 @@ const CustomerDetailDialog = ({ open, onClose, customer }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Họ và tên"
+              label="Full name"
               value={customer.full_name || ''}
               fullWidth
               disabled
@@ -534,7 +534,7 @@ const CustomerDetailDialog = ({ open, onClose, customer }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Số điện thoại"
+              label="Phone number"
               value={customer.mobile || ''}
               fullWidth
               disabled
@@ -548,23 +548,23 @@ const CustomerDetailDialog = ({ open, onClose, customer }) => {
               disabled
             />
           </Grid>
-          <Grid item xs={12} sm={6}>
+          {/* <Grid item xs={12} sm={6}>
             <TextField
               label="Số lần đăng nhập"
               value={customer.number_login || 0}
               fullWidth
               disabled
             />
-          </Grid>
+          </Grid> */}
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Trạng thái"
-              value={customer.locked ? 'Đã khóa' : 'Hoạt động'}
+              label="Status"
+              value={customer.locked ? 'Locked' : 'Work'}
               fullWidth
               disabled
             />
           </Grid>
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <TextField
               label="Device ID"
               value={customer.device || ''}
@@ -572,7 +572,7 @@ const CustomerDetailDialog = ({ open, onClose, customer }) => {
               disabled
               multiline
             />
-          </Grid>
+          </Grid> */}
         </Grid>
       </DialogContent>
       <DialogActions>
@@ -595,16 +595,16 @@ const UpdateCccdDialog = ({ open, onClose, customer, onUpdate }) => {
 
   const handleUpdate = async () => {
     if (!newCccd.trim()) {
-      alert('Vui lòng nhập số CCCD mới');
+      alert('Please enter new CCCD number');
       return;
     }
-
+a
     setLoading(true);
     try {
       await onUpdate(customer.customer_id, newCccd);
       onClose();
     } catch (error) {
-      console.error('Lỗi cập nhật CCCD:', error);
+      console.error('Error updating CCCD:', error);
     } finally {
       setLoading(false);
     }
@@ -612,31 +612,31 @@ const UpdateCccdDialog = ({ open, onClose, customer, onUpdate }) => {
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Cập nhật CCCD</DialogTitle>
+      <DialogTitle>Update CCCD</DialogTitle>
       <DialogContent>
         <Box sx={{ mt: 2 }}>
           <TextField
-            label="Số CCCD hiện tại"
+            label="Current ID number"
             value={customer?.citizen_identification_card || ''}
             fullWidth
             disabled
             sx={{ mb: 2 }}
           />
           <TextField
-            label="Số CCCD mới"
+            label="New CCCD number"
             value={newCccd}
             onChange={(e) => setNewCccd(e.target.value)}
             fullWidth
-            placeholder="Nhập số CCCD mới"
+            placeholder="Enter new CCCD number"
           />
         </Box>
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} disabled={loading}>
-          Hủy
+          Cancel
         </Button>
         <Button onClick={handleUpdate} variant="contained" disabled={loading}>
-          {loading ? 'Đang cập nhật...' : 'Cập nhật'}
+          {loading ? 'Updating...' : 'Update'}
         </Button>
       </DialogActions>
     </Dialog>
@@ -667,7 +667,7 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
     const required = ['username', 'password', 'fullName', 'email', 'mobile', 'citizenIdentificationCard'];
     for (let field of required) {
       if (!formData[field].trim()) {
-        alert(`Vui lòng nhập ${field}`);
+        alert(`Please enter ${field}`);
         return;
       }
     }
@@ -685,7 +685,7 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
       });
       onClose();
     } catch (error) {
-      console.error('Lỗi đăng ký:', error);
+      console.error('Registration error:', error);
     } finally {
       setLoading(false);
     }
@@ -693,12 +693,12 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
 
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
-      <DialogTitle>Đăng ký tài khoản mới</DialogTitle>
+      <DialogTitle>Register new account</DialogTitle>
       <DialogContent>
         <Grid container spacing={2} sx={{ mt: 1 }}>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Tên đăng nhập"
+              label="Login name"
               value={formData.username}
               onChange={handleChange('username')}
               fullWidth
@@ -707,7 +707,7 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Mật khẩu"
+              label="Password"
               type="password"
               value={formData.password}
               onChange={handleChange('password')}
@@ -717,7 +717,7 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Họ và tên"
+              label="Full name"
               value={formData.fullName}
               onChange={handleChange('fullName')}
               fullWidth
@@ -736,7 +736,7 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
           </Grid>
           <Grid item xs={12} sm={6}>
             <TextField
-              label="Số điện thoại"
+              label="Phone number"
               value={formData.mobile}
               onChange={handleChange('mobile')}
               fullWidth
@@ -745,7 +745,7 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              label="Số CCCD"
+              label="CCCD number"
               value={formData.citizenIdentificationCard}
               onChange={handleChange('citizenIdentificationCard')}
               fullWidth
@@ -756,10 +756,10 @@ const RegisterDialog = ({ open, onClose, onRegister }) => {
       </DialogContent>
       <DialogActions>
         <Button onClick={onClose} disabled={loading}>
-          Hủy
+          Cancel
         </Button>
         <Button onClick={handleSubmit} variant="contained" disabled={loading}>
-          {loading ? 'Đang đăng ký...' : 'Đăng ký'}
+          {loading ? 'Registering...' : 'Register'}
         </Button>
       </DialogActions>
     </Dialog>
@@ -917,7 +917,7 @@ const Admin_account = () => {
   return (
     <Container maxWidth="xl" sx={{ py: 4 }}>
       <Typography variant="h4" gutterBottom>
-        Quản lý tài khoản khách hàng
+        Customer account management
       </Typography>
 
       {/* Filter Section */}
@@ -925,12 +925,12 @@ const Admin_account = () => {
         <CardContent>
           <Typography variant="h6" gutterBottom>
             <FilterList sx={{ mr: 1 }} />
-            Bộ lọc tìm kiếm
+            Search filters
           </Typography>
           <Grid container spacing={2} alignItems="center">
             <Grid item xs={12} sm={6} md={3}>
               <TextField
-                label="Tìm theo tên"
+                label="Search by name"
                 value={filters.fullName}
                 onChange={(e) => setFilters(prev => ({ ...prev, fullName: e.target.value }))}
                 fullWidth
@@ -939,7 +939,7 @@ const Admin_account = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
               <TextField
-                label="Tìm theo email"
+                label="Search by email"
                 value={filters.email}
                 onChange={(e) => setFilters(prev => ({ ...prev, email: e.target.value }))}
                 fullWidth
@@ -948,7 +948,7 @@ const Admin_account = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
               <TextField
-                label="Tìm theo CCCD"
+                label="Search by CCCD"
                 value={filters.citizenId}
                 onChange={(e) => setFilters(prev => ({ ...prev, citizenId: e.target.value }))}
                 fullWidth
@@ -957,31 +957,31 @@ const Admin_account = () => {
             </Grid>
             <Grid item xs={12} sm={6} md={2}>
               <FormControl fullWidth size="small">
-                <InputLabel>Trạng thái</InputLabel>
+                <InputLabel>Status</InputLabel>
                 <Select
                   value={filters.lockedOnly}
                   onChange={(e) => setFilters(prev => ({ ...prev, lockedOnly: e.target.value }))}
-                  label="Trạng thái"
+                  label="Status"
                 >
-                  <MenuItem value="all">Tất cả</MenuItem>
-                  <MenuItem value="false">Hoạt động</MenuItem>
-                  <MenuItem value="true">Đã khóa</MenuItem>
+                  <MenuItem value="all">All</MenuItem>
+                  <MenuItem value="false">Work</MenuItem>
+                  <MenuItem value="true">Locked</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
             <Grid item xs={12} md={2}>
               <Box sx={{ display: 'flex', gap: 1 }}>
-                <Tooltip title="Tìm kiếm">
+                <Tooltip title="Search">
                   <IconButton onClick={handleSearch} color="primary">
                     <Search />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Làm mới">
+                <Tooltip title="Refresh">
                   <IconButton onClick={() => { handleClearFilters(); fetchCustomers(); }}>
                     <Refresh />
                   </IconButton>
                 </Tooltip>
-                <Tooltip title="Đăng ký tài khoản mới">
+                <Tooltip title="Register new account">
                   <IconButton onClick={() => setRegisterDialog(true)} color="success">
                     <PersonAdd />
                   </IconButton>
@@ -999,27 +999,27 @@ const Admin_account = () => {
             <TableHead>
               <TableRow>
                 <TableCell>ID</TableCell>
-                <TableCell>Tên đăng nhập</TableCell>
-                <TableCell>Họ và tên</TableCell>
-                <TableCell>Email</TableCell>
-                <TableCell>Số điện thoại</TableCell>
+                <TableCell>Login name</TableCell>
+                <TableCell>Full name</TableCell>
+                <TableCell>E-mail</TableCell>
+                <TableCell>Phone number</TableCell>
                 <TableCell>CCCD</TableCell>
-                <TableCell>Trạng thái</TableCell>
-                <TableCell>Số lần login</TableCell>
-                <TableCell align="center">Thao tác</TableCell>
+                <TableCell>Status</TableCell>
+                <TableCell>Number of login times</TableCell>
+                <TableCell align="center">Operation</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {loading ? (
                 <TableRow>
                   <TableCell colSpan={9} align="center">
-                    Đang tải...
+                    Loading...
                   </TableCell>
                 </TableRow>
               ) : customers.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={9} align="center">
-                    Không có dữ liệu
+                    No data available
                   </TableCell>
                 </TableRow>
               ) : (
@@ -1033,7 +1033,7 @@ const Admin_account = () => {
                     <TableCell>{customer.citizen_identification_card}</TableCell>
                     <TableCell>
                       <Chip
-                        label={customer.locked ? 'Đã khóa' : 'Hoạt động'}
+                        label={customer.locked ? 'Locked' : 'Work'}
                         color={customer.locked ? 'error' : 'success'}
                         size="small"
                       />
@@ -1041,7 +1041,7 @@ const Admin_account = () => {
                     <TableCell>{customer.number_login}</TableCell>
                     <TableCell align="center">
                       <Box sx={{ display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
-                        <Tooltip title="Xem chi tiết">
+                        <Tooltip title="See details">
                           <IconButton
                             size="small"
                             onClick={() => setDetailDialog({ open: true, customer })}
@@ -1049,7 +1049,7 @@ const Admin_account = () => {
                             <Visibility />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip title="Xem danh sách thẻ">
+                        <Tooltip title="View tag list">
                           <IconButton
                             size="small"
                             color="info"
@@ -1058,7 +1058,7 @@ const Admin_account = () => {
                             <CreditCard />
                           </IconButton>
                         </Tooltip>
-                        <Tooltip title="Cập nhật CCCD">
+                        <Tooltip title="Update CCCD">
                           <IconButton
                             size="small"
                             onClick={() => setUpdateCccdDialog({ open: true, customer })}
@@ -1067,7 +1067,7 @@ const Admin_account = () => {
                           </IconButton>
                         </Tooltip>
                         {customer.locked ? (
-                          <Tooltip title="Mở khóa">
+                          <Tooltip title="Unlock">
                             <IconButton
                               size="small"
                               color="success"
@@ -1077,7 +1077,7 @@ const Admin_account = () => {
                             </IconButton>
                           </Tooltip>
                         ) : (
-                          <Tooltip title="Khóa tài khoản">
+                          <Tooltip title="Lock account">
                             <IconButton
                               size="small"
                               color="error"
@@ -1107,9 +1107,9 @@ const Admin_account = () => {
             setPage(0);
           }}
           rowsPerPageOptions={[5, 10, 25, 50]}
-          labelRowsPerPage="Số dòng mỗi trang:"
+          labelRowsPerPage="Number of lines per page:"
           labelDisplayedRows={({ from, to, count }) => 
-            `${from}-${to} của ${count !== -1 ? count : `hơn ${to}`}`
+            `${from}-${to} belong to ${count !== -1 ? count : `than ${to}`}`
           }
         />
       </Paper>
