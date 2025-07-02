@@ -211,21 +211,21 @@ export default function MoneyTransferPage() {
               color: 'white', borderRadius: 3
             }}>
               <Typography variant="h4" gutterBottom sx={{ fontWeight: 600 }}>
-                Chuyển tiền tới tài khoản khác
+                 Transfer to Another Account
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                Chuyển tiền nhanh, tức thì 24/7
+                Fast and instant 24/7 transfers
               </Typography>
             </Paper>
 
             <Paper elevation={2} sx={{ p: 3, mb: 3, borderRadius: 3 }}>
               <Grid container spacing={2} alignItems="center">
                 <Grid item xs={12} md={8}>
-                  <TextField fullWidth placeholder="Tìm người nhận đã lưu" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} InputProps={{startAdornment: (<InputAdornment position="start"><Search color="action" /></InputAdornment>)}} sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}/>
+                  <TextField fullWidth placeholder="Search saved recipients" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} InputProps={{startAdornment: (<InputAdornment position="start"><Search color="action" /></InputAdornment>)}} sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2 } }}/>
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <Button variant="contained" startIcon={<PersonAdd />} fullWidth sx={{ py: 1.5, borderRadius: 2, textTransform: 'none', fontWeight: 500 }} onClick={handleOpen}>
-                    Người nhận mới
+                    New recipient
                   </Button>
                 </Grid>
               </Grid>
@@ -234,8 +234,8 @@ export default function MoneyTransferPage() {
             <Paper elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 3 }}>
                 <Tabs value={tabValue} onChange={handleTabChange} sx={{ '& .MuiTab-root': { textTransform: 'none', fontWeight: 500, fontSize: '1rem' }}}>
-                  <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Star /> Tất cả người nhận</Box>} />
-                  <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Business /> Ngân hàng khác</Box>} />
+                  <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Star /> All recipients</Box>} />
+                  <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Business /> Other banks</Box>} />
                 </Tabs>
               </Box>
               <Box sx={{ p: 2, height:'500px',overflowY:'scroll'}}>
@@ -245,14 +245,14 @@ export default function MoneyTransferPage() {
                   ) : (
                     <Box sx={{ textAlign: 'center', py: 4 }}>
                       <Person sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-                      <Typography variant="h6" color="text.secondary">Không tìm thấy người nhận</Typography>
+                      <Typography variant="h6" color="text.secondary">  No recipients found</Typography>
                     </Box>
                   )}
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                   <Box sx={{ textAlign: 'center', py: 4 }}>
                     <AccountBalance sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-                    <Typography variant="h6" color="text.secondary">Xin lỗi quý khách, chúng tôi đang cập nhật chức năng này</Typography>
+                    <Typography variant="h6" color="text.secondary"> Sorry, this feature is under development.</Typography>
                   </Box>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
@@ -264,7 +264,7 @@ export default function MoneyTransferPage() {
         </Box>
 
         <Dialog open={open} onClose={handleClose} maxWidth="sm" fullWidth>
-          <DialogTitle fontWeight={600}>Thêm người nhận mới</DialogTitle>
+          <DialogTitle fontWeight={600}>Add New Recipient</DialogTitle>
           <DialogContent sx={{ minHeight: '230px' }}>
             <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
               <ToggleButtonGroup
@@ -272,23 +272,23 @@ export default function MoneyTransferPage() {
                 value={transferType}
                 exclusive
                 onChange={handleTransferTypeChange}
-                aria-label="Loại chuyển khoản"
+                aria-label="Transaction type"
               >
-                <ToggleButton value="internal">Ngân hàng TCB</ToggleButton>
-                <ToggleButton value="interbank">Ngân hàng khác</ToggleButton>
+                <ToggleButton value="internal"> TCB Bank</ToggleButton>
+                <ToggleButton value="interbank">Others Bank</ToggleButton>
               </ToggleButtonGroup>
             </Box>
 
             {transferType === 'internal' ? (
               <>
                 <DialogContentText sx={{ mb: 2 }}>
-                  Vui lòng nhập số thẻ hoặc số tài khoản của người nhận để hệ thống kiểm tra.
+                  Please enter the card number or account number of the recipient for verification.
                 </DialogContentText>
                 <TextField 
                   autoFocus 
                   margin="dense" 
                   id="account-number" 
-                  label="Số thẻ / Số tài khoản" 
+                  label="Card number / Account number" 
                   type="text" 
                   fullWidth 
                   variant="outlined" 
@@ -312,7 +312,7 @@ export default function MoneyTransferPage() {
               </>
             ) : (
               <Alert severity="info" sx={{ mt: 2 }}>
-                Tính năng này đang được phát triển. Vui lòng chọn "Nội ngân hàng" để tiếp tục.
+                This feature is under development. Please choose "Internal bank" to proceed.
               </Alert>
             )}
           </DialogContent>
@@ -323,7 +323,7 @@ export default function MoneyTransferPage() {
               <>
                 {customerName ? (
                   <Button onClick={handleContinue} variant="contained">
-                    Tiếp tục
+                    Continue
                   </Button>
                 ) : (
                   <Button 
@@ -332,7 +332,7 @@ export default function MoneyTransferPage() {
                     disabled={checkingAccount || !newAccountNumber} 
                     startIcon={checkingAccount ? <CircularProgress size={20} color="inherit" /> : null}
                   >
-                    {checkingAccount ? 'Đang kiểm tra...' : 'Kiểm tra'}
+                    {checkingAccount ? 'Checking...' : 'Check'}
                   </Button>
                 )}
               </>
