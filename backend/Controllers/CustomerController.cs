@@ -890,6 +890,39 @@ public class CustomerController : Controller
         }
     }
 
+    /// <summary>
+    /// Lấy trạng thái tại khoản
+    /// </summary>
+    /// 
+    /// <returns>
+    /// trả về tổng số tài khoản , số tài khoản bị khóa , số tài khoản không bị khóa 
+    /// </returns>
+    [HttpGet("stats")]
+    public async Task<IActionResult> GetCustomerStats()
+    {
+        try
+        {
+            var totalAccounts = await _context.Customers.CountAsync();
+            var lockedAccounts = await _context.Customers.CountAsync(c => c.locked == true);
+            var unlockedAccounts = totalAccounts - lockedAccounts;
+
+            return Ok(new ApiResponse<object>
+            {
+                Status = 200,
+                Message = "Lấy thống kê tài khoản thành công",
+                Data = new
+                {
+                    TotalAccounts = totalAccounts,
+                    LockedAccounts = lockedAccounts,
+                    UnlockedAccounts = unlockedAccounts
+                }
+            });
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Lỗi server: {ex.Message}");
+        }
+    }
 
 
 

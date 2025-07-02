@@ -11,8 +11,10 @@ coverage/
 .eslintcache
 
 # .NET Core
-**/bin/
-**/obj/
+backend/obj/
+backend/obj/
+backend/Migrations
+
 .vs/
 *.user
 *.suo
