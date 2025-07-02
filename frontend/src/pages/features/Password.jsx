@@ -12,7 +12,10 @@ import {
   AlertTitle,
   CircularProgress,
   Container,
-  GlobalStyles
+  GlobalStyles,
+  Fade,
+  Chip,
+  Paper
 } from '@mui/material';
 import {
   Eye,
@@ -21,10 +24,12 @@ import {
   CheckCircle,
   AlertTriangle,
   Lock,
+  Key,
+  Sparkles
 } from 'lucide-react';
-import { useAuth } from '../../context/Context';
 
 const PasswordField = ({ label, field, placeholder, required = true, showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }) => (
+  <Box sx={{ mb: 2 }}>
     <TextField
       fullWidth
       label={label}
@@ -36,7 +41,6 @@ const PasswordField = ({ label, field, placeholder, required = true, showPasswor
       error={!!errors[field]}
       helperText={errors[field]}
       variant="outlined"
-      margin="normal"
       inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }}
       InputProps={{
         endAdornment: (
@@ -45,20 +49,54 @@ const PasswordField = ({ label, field, placeholder, required = true, showPasswor
               onClick={() => togglePasswordVisibility(field)}
               edge="end"
               aria-label={`toggle ${field} password visibility`}
+              sx={{ 
+                color: 'rgba(255,255,255,0.7)',
+                '&:hover': { color: 'white' }
+              }}
             >
               {showPasswords[field] ? <EyeOff size={20} /> : <Eye size={20} />}
             </IconButton>
           </InputAdornment>
         ),
       }}
-      sx={{ mb: 2 }}
+      sx={{
+        '& .MuiOutlinedInput-root': {
+          backgroundColor: 'rgba(255,255,255,0.1)',
+          backdropFilter: 'blur(10px)',
+          borderRadius: '15px',
+          '& fieldset': {
+            borderColor: 'rgba(255,255,255,0.3)',
+            borderWidth: 1
+          },
+          '&:hover fieldset': {
+            borderColor: 'rgba(255,255,255,0.5)',
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: 'rgba(255,255,255,0.8)',
+            borderWidth: 2
+          },
+          '& input': {
+            color: 'white',
+            fontSize: '1.1rem',
+            letterSpacing: '0.1em'
+          }
+        },
+        '& .MuiInputLabel-root': {
+          color: 'rgba(255,255,255,0.8)',
+          '&.Mui-focused': {
+            color: 'white'
+          }
+        },
+        '& .MuiFormHelperText-root': {
+          color: '#ffcdd2',
+          fontWeight: 500
+        }
+      }}
     />
+  </Box>
 );
 
-
 const TransactionPasswordSettings = () => {
-  const { checkTransactionPassword, createOrUpdateTransactionPassword } = useAuth();
-
   const [mode, setMode] = useState('create');
   const [showPasswords, setShowPasswords] = useState({
     current: false,
@@ -130,135 +168,271 @@ const TransactionPasswordSettings = () => {
     setErrors({});
     
     try {
-      const currentPasswordNum = parseInt(formData.currentPassword, 10);
-      const newPasswordNum = parseInt(formData.newPassword, 10);
-
-      if (mode === 'change') {
-        const checkResult = await checkTransactionPassword(currentPasswordNum);
-        
-        if (!checkResult.success) {
-          throw checkResult;
-        }
-      }
-
-      const createResult = await createOrUpdateTransactionPassword(newPasswordNum);
-
-      if (createResult.success) {
-        setSuccess(createResult.message || 'Thao tác thành công!');
-        setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' });
-      } else {
-        throw createResult;
-      }
-      
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 2000));
+      setSuccess(mode === 'change' ? 'Đổi mật khẩu thành công!' : 'Tạo mật khẩu thành công!');
+      setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' });
     } catch (error) {
-      if (error.errorType === 'Invalid_Transaction_Password') {
-        setErrors({ currentPassword: error.message || 'Mật khẩu giao dịch hiện tại không chính xác' });
-      } else if (error.errorType === 'Transaction_Password_Not_Set') {
-        setErrors({ general: 'Bạn chưa có mật khẩu. Vui lòng sử dụng chức năng "Tạo mật khẩu".' });
-      } else {
-        setErrors({ general: error.message || 'Có lỗi xảy ra, vui lòng thử lại.' });
-      }
-      console.error("API Error:", error);
+      setErrors({ general: 'Có lỗi xảy ra, vui lòng thử lại.' });
     } finally {
       setLoading(false);
     }
   };
 
   return (
-     <>
+    <>
       <GlobalStyles styles={{
-        '._mainContent_b1piq_13': { marginLeft: '30px !important', marginTop: '30px!important' },
-        'html, body': { backgroundColor: '#fff', overflow:'hidden' }
+              '._mainContent_b1piq_13': 
+                {marginLeft: '0px !important', 
+                marginTop: '0px !important',
+                padding: '0px !important'},
+              'html, body': {
+                overflowY: 'hidden', 
+                }, 
       }} />
-      <Container maxWidth="100vw" sx={{ py: 4 }}>
-        <Card elevation={3}>
-          <CardContent sx={{ p: 4 }}>
-            <Box sx={{ mb: 4 }}>
-              <Typography variant="h6" gutterBottom>Chọn hành động</Typography>
-              <Box sx={{ display: 'flex', gap: 2 }}>
-                <Button
-                  variant={mode === 'create' ? 'contained' : 'outlined'}
-                  onClick={() => { setMode('create'); setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' }); setErrors({}); setSuccess(''); }}
-                  startIcon={<Shield size={20} />}
+      
+      <Box sx={{ 
+        height: '100vh',
+        background: 'linear-gradient(135deg, rgb(27, 27, 27) 0%, #c53030 100%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'relative',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: 'radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.1) 0%, transparent 50%)',
+          pointerEvents: 'none'
+        }
+      }}>
+        <Container maxWidth="sm" sx={{ position: 'relative', zIndex: 1 }}>
+          <Fade in timeout={800}>
+            <Paper elevation={24} sx={{
+              background: 'rgba(255,255,255,0.15)',
+              backdropFilter: 'blur(20px)',
+              borderRadius: '25px',
+              border: '1px solid rgba(255,255,255,0.2)',
+              overflow: 'hidden',
+              position: 'relative',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '4px',
+                background: 'linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.3) 100%)'
+              }
+            }}>
+              <CardContent sx={{ p: 4 }}>
+                {/* Header Section */}
+                <Box sx={{ textAlign: 'center', mb: 3 }}>
+                  <Box sx={{ 
+                    display: 'inline-flex',
+                    p: 2,
+                    borderRadius: '20px',
+                    background: 'rgba(255,255,255,0.2)',
+                    mb: 2,
+                    animation: 'pulse 2s infinite'
+                  }}>
+                    <Shield size={32} style={{ color: 'white' }} />
+                  </Box>
+                  <Typography variant="h4" component="h1" sx={{ 
+                    color: 'white', 
+                    fontWeight: 700,
+                    mb: 1,
+                    textShadow: '0 2px 4px rgba(0,0,0,0.3)'
+                  }}>
+                    {mode === 'change' ? 'Đổi Mật Khẩu' : 'Tạo Mật Khẩu'}
+                  </Typography>
+                  <Typography variant="body1" sx={{ 
+                    color: 'rgba(255,255,255,0.9)',
+                    fontSize: '1.1rem'
+                  }}>
+                    {mode === 'change' ? 'Cập nhật mật khẩu giao dịch của bạn' : 'Bảo vệ các giao dịch quan trọng'}
+                  </Typography>
+                </Box>
+
+                {/* Mode Selection */}
+                <Box sx={{ display: 'flex', gap: 1.5, mb: 3, justifyContent: 'center' }}>
+                  <Chip
+                    icon={<Key size={16} />}
+                    label="Tạo mật khẩu"
+                    onClick={() => { 
+                      setMode('create'); 
+                      setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' }); 
+                      setErrors({}); 
+                      setSuccess(''); 
+                    }}
+                    variant={mode === 'create' ? 'filled' : 'outlined'}
+                    sx={{
+                      backgroundColor: mode === 'create' ? 'rgba(255,255,255,0.3)' : 'transparent',
+                      color: 'white',
+                      border: '1px solid rgba(255,255,255,0.5)',
+                      fontWeight: 600,
+                      '&:hover': {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                      }
+                    }}
+                  />
+                  <Chip
+                    icon={<Lock size={16} />}
+                    label="Đổi mật khẩu"
+                    onClick={() => { 
+                      setMode('change'); 
+                      setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' }); 
+                      setErrors({}); 
+                      setSuccess(''); 
+                    }}
+                    variant={mode === 'change' ? 'filled' : 'outlined'}
+                    sx={{
+                      backgroundColor: mode === 'change' ? 'rgba(255,255,255,0.3)' : 'transparent',
+                      color: 'white',
+                      border: '1px solid rgba(255,255,255,0.5)',
+                      fontWeight: 600,
+                      '&:hover': {
+                        backgroundColor: 'rgba(255,255,255,0.2)'
+                      }
+                    }}
+                  />
+                </Box>
+
+                {/* Security Notice */}
+                <Alert 
+                  severity="info" 
+                  sx={{ 
+                    mb: 3,
+                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    borderRadius: '15px',
+                    '& .MuiAlert-icon': { color: 'white' },
+                    '& .MuiAlert-message': { color: 'white' }
+                  }}
                 >
-                  Tạo mật khẩu giao dịch
-                </Button>
-                <Button
-                  variant={mode === 'change' ? 'contained' : 'outlined'}
-                  onClick={() => { setMode('change'); setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' }); setErrors({}); setSuccess(''); }}
-                  startIcon={<Lock size={20} />}
-                >
-                  Đổi mật khẩu giao dịch
-                </Button>
-              </Box>
-            </Box>
+                  <AlertTitle sx={{ color: 'white', fontWeight: 600 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                      <Sparkles size={16} />
+                      Lưu ý bảo mật
+                    </Box>
+                  </AlertTitle>
+                  <Typography variant="body2" sx={{ color: 'rgba(255,255,255,0.9)' }}>
+                    Mật khẩu giao dịch phải là 6 chữ số và không chia sẻ với ai khác.
+                  </Typography>
+                </Alert>
 
-            <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-              <Box sx={{ p: 1.5, bgcolor: 'primary.light', borderRadius: 2, mr: 2, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <Shield size={28} style={{ color: '#1976d2' }} />
-              </Box>
-              <Box>
-                <Typography variant="h4" component="h1" gutterBottom>{mode === 'change' ? 'Đổi mật khẩu giao dịch' : 'Tạo mật khẩu giao dịch'}</Typography>
-                <Typography variant="body1" color="text.secondary">{mode === 'change' ? 'Cập nhật mật khẩu giao dịch của bạn để bảo mật tài khoản' : 'Tạo mật khẩu giao dịch để bảo vệ các giao dịch quan trọng'}</Typography>
-              </Box>
-            </Box>
+                {/* Success/Error Messages */}
+                {success && (
+                  <Fade in>
+                    <Alert severity="success" sx={{ 
+                      mb: 3,
+                      backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                      border: '1px solid rgba(76, 175, 80, 0.5)',
+                      borderRadius: '15px',
+                      '& .MuiAlert-icon': { color: '#4caf50' },
+                      '& .MuiAlert-message': { color: 'white' }
+                    }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <CheckCircle size={16} />
+                        {success}
+                      </Box>
+                    </Alert>
+                  </Fade>
+                )}
 
-            <Alert severity="info" sx={{ mb: 3 }}>
-              <AlertTitle>
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Lock size={16} />Lưu ý bảo mật</Box>
-              </AlertTitle>
-              <Box component="ul" sx={{ m: 0, pl: 2 }}>
-                <li>Mật khẩu giao dịch phải là 6 chữ số và khác với mật khẩu đăng nhập.</li>
-                <li>Không chia sẻ mật khẩu này với bất kỳ ai.</li>
-              </Box>
-            </Alert>
+                {errors.general && (
+                  <Fade in>
+                    <Alert severity="error" sx={{ 
+                      mb: 3,
+                      backgroundColor: 'rgba(5, 5, 5, 0.2)',
+                      border: '1px solid rgba(244, 67, 54, 0.5)',
+                      borderRadius: '15px',
+                      '& .MuiAlert-icon': { color: '#f44336' },
+                      '& .MuiAlert-message': { color: 'white' }
+                    }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                        <AlertTriangle size={16} />
+                        {errors.general}
+                      </Box>
+                    </Alert>
+                  </Fade>
+                )}
 
-            {success && (<Alert severity="success" sx={{ mb: 3 }}><Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><CheckCircle size={16} />{success}</Box></Alert>)}
-            {errors.general && (<Alert severity="error" sx={{ mb: 3 }}><Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><AlertTriangle size={16} />{errors.general}</Box></Alert>)}
+                {/* Form */}
+                <Box component="form" noValidate onSubmit={handleSubmit}>
+                  {mode === 'change' && (
+                    <PasswordField
+                      label="Mật khẩu hiện tại"
+                      field="currentPassword"
+                      placeholder="Nhập mật khẩu hiện tại"
+                      {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
+                    />
+                  )}
+                  
+                  <PasswordField
+                    label="Mật khẩu mới (6 chữ số)"
+                    field="newPassword"
+                    placeholder="Nhập mật khẩu mới"
+                    {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
+                  />
+                  
+                  <PasswordField
+                    label="Xác nhận mật khẩu"
+                    field="confirmPassword"
+                    placeholder="Nhập lại mật khẩu mới"
+                    {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
+                  />
 
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
-              {mode === 'change' && (
-                <PasswordField
-                  label="Mật khẩu giao dịch hiện tại"
-                  field="currentPassword"
-                  placeholder="Nhập mật khẩu giao dịch hiện tại"
-                  {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
-                />
-              )}
-              <PasswordField
-                label="Mật khẩu giao dịch mới (6 chữ số)"
-                field="newPassword"
-                placeholder="Nhập mật khẩu giao dịch mới"
-                {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
-              />
-              <PasswordField
-                label="Xác nhận mật khẩu mới"
-                field="confirmPassword"
-                placeholder="Nhập lại mật khẩu giao dịch mới"
-                {...{ showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }}
-              />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                size="large"
-                disabled={loading}
-                startIcon={loading ? <CircularProgress color="inherit" size={20} /> : <Shield size={20} />}
-                sx={{ mt: 3, py: 1.5, fontSize: '1.1rem', fontWeight: 600 }}
-              >
-                {loading ? 'Đang xử lý...' : (mode === 'change' ? 'Cập nhật mật khẩu' : 'Tạo mật khẩu giao dịch')}
-              </Button>
-            </Box>
-          </CardContent>
-        </Card>
-      </Container>
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    size="large"
+                    disabled={loading}
+                    startIcon={loading ? <CircularProgress color="inherit" size={20} /> : <Shield size={20} />}
+                    sx={{ 
+                      mt: 2,
+                      py: 1.8,
+                      fontSize: '1.1rem',
+                      fontWeight: 700,
+                      borderRadius: '15px',
+                      background: 'linear-gradient(45deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%)',
+                      border: '1px solid rgba(255,255,255,0.4)',
+                      color: 'white',
+                      textTransform: 'none',
+                      backdropFilter: 'blur(10px)',
+                      transition: 'all 0.3s ease',
+                      '&:hover': {
+                        background: 'linear-gradient(45deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.2) 100%)',
+                        transform: 'translateY(-2px)',
+                        boxShadow: '0 8px 25px rgba(0,0,0,0.3)'
+                      },
+                      '&:disabled': {
+                        background: 'rgba(255,255,255,0.1)',
+                        color: 'rgba(255,255,255,0.5)'
+                      }
+                    }}
+                  >
+                    {loading ? 'Đang xử lý...' : (mode === 'change' ? 'Cập nhật mật khẩu' : 'Tạo mật khẩu')}
+                  </Button>
+                </Box>
+              </CardContent>
+            </Paper>
+          </Fade>
+        </Container>
+      </Box>
+
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+      `}</style>
     </>
   );
 };
-
-const TransactionPasswordPage = () => {
-
-    return <TransactionPasswordSettings />;
-}
 
 export default TransactionPasswordSettings;

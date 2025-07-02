@@ -70,7 +70,7 @@ const menuItems = [
       // { name: 'Cài đặt', path: '/settings', icon: '⚙️' },
       { name: 'Hướng dẫn', path: '/guide', icon: '❓' },
       { name: 'Mật khẩu chuyển khoản', path: '/password', icon: '⚙️'},
-      { name: 'Yêu cầu thay đổi thông tin', path: '/update-info', icon: '📝' },
+      { name: 'Thay đổi mật khẩu', path: '/update-password-login', icon: '📝' },
 
     ]
   }

@@ -213,7 +213,28 @@ const cancelChequeRequest = async (requestId) => {
       return { success: false, message: "Lỗi khi lấy thông tin người dùng." };
     }
   };
-
+const changePassword = async (currentPassword, newPassword) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/UserInfo/change-password`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify({
+        CurrentPassword: currentPassword, // Sửa lại cho khớp với Model C#
+        NewPassword: newPassword,       // Sửa lại cho khớp với Model C#
+      }),
+    });
+    const data = await response.json();
+    
+    if (data.status === 200) {
+      return { success: true, message: data.message };
+    } else {
+      return { success: false, message: data.message || "Đổi mật khẩu thất bại", errorType: data.error };
+    }
+  } catch (error) {
+    console.error("Lỗi khi gọi API đổi mật khẩu:", error);
+    return { success: false, message: "Lỗi kết nối máy chủ. Vui lòng thử lại." };
+  }
+};
   const getCards = async () => {
     try {
       const response = await fetch(`${API_BASE_URL}/accounts_manager/cards`, {
@@ -482,6 +503,7 @@ const cancelChequeRequest = async (requestId) => {
   getMyChequeRequests,
   cancelChequeRequest,
   requestUpdateInfo,
+  changePassword
 
   };
 
