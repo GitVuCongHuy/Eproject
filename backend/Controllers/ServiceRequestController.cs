@@ -118,49 +118,57 @@ public class ServiceRequestController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("cancel-cheque-request/{requestId}")]
-    public async Task<IActionResult> CancelChequeRequest(int requestId)
+[HttpPost("cancel-cheque-request/{requestId}")]
+public async Task<IActionResult> CancelChequeRequest(int requestId)
+{
+    var customerId = GetCustomerIdFromToken();
+    var request = await _context.Service_requests
+        .FirstOrDefaultAsync(r => r.RequestId == requestId && r.CustomerId == customerId && r.RequestType == "IssueChequeBook");
+
+    if (request == null || request.Status != "Pending")
+        return BadRequest(new ApiError { Status = 400, Error = "InvalidRequest", Message = "Không thể huỷ yêu cầu này." });
+
+    // --- Bắt đầu phần code được sửa đổi ---
+
+    // Deserialize để lấy lại thông tin chi tiết của yêu cầu ban đầu
+    var requestDetail = JsonSerializer.Deserialize<ChequeBookRequestModel>(request.RequestDetail);
+    if (requestDetail == null)
     {
-        var customerId = GetCustomerIdFromToken();
-        var request = await _context.Service_requests
-            .FirstOrDefaultAsync(r => r.RequestId == requestId && r.CustomerId == customerId && r.RequestType == "IssueChequeBook");
-
-        if (request == null || request.Status != "Pending")
-            return BadRequest(new ApiError { Status = 400, Error = "InvalidRequest", Message = "Không thể huỷ yêu cầu này." });
-
-        var accountId = JsonSerializer.Deserialize<ChequeBookRequestModel>(request.RequestDetail)?.AccountId ?? 0;
-        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == accountId && a.customer_id == customerId);
-        
-        if (account == null)
-        {
-            return NotFound(new ApiError { Status = 404, Error = "AccountNotFound", Message = "Không tìm thấy tài khoản." });
-        }
-
-        if (account.CardType == "Credit")
-        {
-            return BadRequest(new ApiError
-            {
-                Status = 400,
-                Error = "InvalidAccount",
-                Message = "Không thể huỷ yêu cầu sổ séc cho thẻ tín dụng."
-            });
-        }
-
-        decimal cancelFee = 5000m;
-        if (account.Balance < cancelFee)
-            return BadRequest(new ApiError { Status = 400, Error = "InsufficientFunds", Message = "Không đủ số dư để huỷ yêu cầu." });
-
-        account.Balance -= cancelFee;
-        request.Status = "Cancelled by user";
-
-        await _context.SaveChangesAsync();
-
-        return Ok(new ApiResponse<object>
-        {
-            Status = 200,
-            Message = "Đã huỷ yêu cầu thành công (phí đã được trừ).",
-            Data = new { request.RequestId }
-        });
+        // Xử lý lỗi nếu không thể đọc được chi tiết yêu cầu
+        return StatusCode(500, new ApiError { Status = 500, Error = "InternalError", Message = "Lỗi xử lý chi tiết yêu cầu." });
     }
 
+    var account = await _context.Accounts.FirstOrDefaultAsync(a => a.account_id == requestDetail.AccountId && a.customer_id == customerId);
+    if (account == null)
+    {
+        return NotFound(new ApiError { Status = 404, Error = "AccountNotFound", Message = "Không tìm thấy tài khoản." });
+    }
+    
+    // Tính lại phí yêu cầu ban đầu
+    decimal initialFee = requestDetail.Quantity == 25 ? 25000m : 40000m;
+    decimal cancelFee = 5000m;
+
+    // Kiểm tra xem tài khoản có đủ tiền cho phí hủy không
+    if (account.Balance < cancelFee)
+        return BadRequest(new ApiError { Status = 400, Error = "InsufficientFunds", Message = "Không đủ số dư để trả phí huỷ yêu cầu." });
+
+    // HOÀN LẠI phí yêu cầu ban đầu
+    account.Balance += initialFee;
+
+    // TRỪ đi phí hủy
+    account.Balance -= cancelFee;
+
+    request.Status = "Cancelled by user";
+    await _context.SaveChangesAsync();
+
+    // --- Kết thúc phần code được sửa đổi ---
+
+    return Ok(new ApiResponse<object>
+    {
+        Status = 200,
+        // Cập nhật lại message cho rõ ràng
+        Message = $"Đã huỷ yêu cầu thành công. Phí yêu cầu ({initialFee:N0}đ) đã được hoàn lại. Phí huỷ ({cancelFee:N0}đ) đã được trừ.",
+        Data = new { request.RequestId }
+    });
+}
 }

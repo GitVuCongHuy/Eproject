@@ -11,13 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace backend.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:backend/Migrations/20250701172118_ghichu.Designer.cs
-    [Migration("20250701172118_ghichu")]
+    [Migration("20250702014022_ghichu")]
     partial class ghichu
-========
-    [Migration("20250701181932_bangmois")]
-    partial class bangmois
->>>>>>>> 4c814207eafbbb5d15fbd47691a68c1d59c5ff5f:backend/Migrations/20250701181932_bangmois.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
