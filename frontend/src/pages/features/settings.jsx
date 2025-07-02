@@ -22,7 +22,7 @@ import {
   AlertTriangle,
   Lock
 } from 'lucide-react';
-import { useAuth } from '../../context/context'; // chỉnh path nếu khác
+import { useAuth } from 'src/context/context'; // chỉnh path nếu khác
 
 const PasswordField = React.memo(({
   label,

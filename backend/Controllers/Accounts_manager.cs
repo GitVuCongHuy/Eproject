@@ -119,7 +119,7 @@ public class Accounts_manager : Controller
         var customerId = GetCustomerIdFromToken();
         var query = _context.bank_Transaction.AsQueryable();
 
-        
+
         if (accountId.HasValue)
         {
             var accountCardNumber = await _context.Accounts
@@ -149,7 +149,7 @@ public class Accounts_manager : Controller
             query = query.Where(t => accountCardNumbers.Contains(t.SenderAccount) || accountCardNumbers.Contains(t.ReceiverAccount));
         }
 
-    
+
         if (day.HasValue && month.HasValue && year.HasValue)
         {
             query = query.Where(t =>
@@ -179,80 +179,80 @@ public class Accounts_manager : Controller
     }
 
     [HttpPost("transactions/export/send-mail")]
-public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year, [FromQuery] int? accountId)
-{
-    var customerId = GetCustomerIdFromToken();
-    var customer = await _context.Customers.FindAsync(customerId);
-
-    if (customer == null)
+    public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int month, [FromQuery] int year, [FromQuery] int? accountId)
     {
-        return NotFound(new ApiError
+        var customerId = GetCustomerIdFromToken();
+        var customer = await _context.Customers.FindAsync(customerId);
+
+        if (customer == null)
         {
-            Status = 404,
-            Error = "NotFound",
-            Message = "Không tìm thấy khách hàng."
-        });
-    }
-
-    List<string> accountCardNumbers;
-
-    if (accountId.HasValue)
-    {
-        var accountCardNumber = await _context.Accounts
-            .Where(a => a.customer_id == customerId && a.account_id == accountId.Value)
-            .Select(a => a.CardNumber)
-            .FirstOrDefaultAsync();
-
-        if (accountCardNumber == null)
-        {
-            return BadRequest(new ApiError
+            return NotFound(new ApiError
             {
-                Status = 400,
-                Error = "InvalidAccount",
-                Message = "Tài khoản không thuộc quyền sở hữu."
+                Status = 404,
+                Error = "NotFound",
+                Message = "Không tìm thấy khách hàng."
             });
         }
 
-        accountCardNumbers = new List<string> { accountCardNumber };
-    }
-    else
-    {
-        accountCardNumbers = await _context.Accounts
-            .Where(a => a.customer_id == customerId)
-            .Select(a => a.CardNumber)
-            .ToListAsync();
-    }
+        List<string> accountCardNumbers;
 
-    var transactions = await _context.bank_Transaction
-        .Where(t =>
-            (accountCardNumbers.Contains(t.SenderAccount) || accountCardNumbers.Contains(t.ReceiverAccount)) &&
-            t.transactionDate.Month == month &&
-            t.transactionDate.Year == year)
-        .ToListAsync();
-
-    if (!transactions.Any())
-    {
-        return NotFound(new ApiError
+        if (accountId.HasValue)
         {
-            Status = 404,
-            Error = "NoTransactions",
-            Message = "Không có giao dịch trong thời gian này."
+            var accountCardNumber = await _context.Accounts
+                .Where(a => a.customer_id == customerId && a.account_id == accountId.Value)
+                .Select(a => a.CardNumber)
+                .FirstOrDefaultAsync();
+
+            if (accountCardNumber == null)
+            {
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InvalidAccount",
+                    Message = "Tài khoản không thuộc quyền sở hữu."
+                });
+            }
+
+            accountCardNumbers = new List<string> { accountCardNumber };
+        }
+        else
+        {
+            accountCardNumbers = await _context.Accounts
+                .Where(a => a.customer_id == customerId)
+                .Select(a => a.CardNumber)
+                .ToListAsync();
+        }
+
+        var transactions = await _context.bank_Transaction
+            .Where(t =>
+                (accountCardNumbers.Contains(t.SenderAccount) || accountCardNumbers.Contains(t.ReceiverAccount)) &&
+                t.transactionDate.Month == month &&
+                t.transactionDate.Year == year)
+            .ToListAsync();
+
+        if (!transactions.Any())
+        {
+            return NotFound(new ApiError
+            {
+                Status = 404,
+                Error = "NoTransactions",
+                Message = "Không có giao dịch trong thời gian này."
+            });
+        }
+
+        var pdfBytes = GenerateTransactionPdf(transactions);
+        string subject = $"Sao kê giao dịch tháng {month}/{year}";
+        string body = "Vui lòng xem file đính kèm để xem chi tiết sao kê giao dịch.";
+
+        await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"statement_{month}_{year}.pdf");
+
+        return Ok(new ApiResponse<string>
+        {
+            Status = 200,
+            Message = "Đã gửi file PDF qua email",
+            Data = "Gửi thành công"
         });
     }
-
-    var pdfBytes = GenerateTransactionPdf(transactions); 
-    string subject = $"Sao kê giao dịch tháng {month}/{year}";
-    string body = "Vui lòng xem file đính kèm để xem chi tiết sao kê giao dịch.";
-
-    await _emailHelper.SendEmailWithAttachmentAsync(customer.email, subject, body, pdfBytes, $"statement_{month}_{year}.pdf");
-
-    return Ok(new ApiResponse<string>
-    {
-        Status = 200,
-        Message = "Đã gửi file PDF qua email",
-        Data = "Gửi thành công"
-    });
-}
 
 
     private byte[] GenerateTransactionPdf(List<Bank_Transaction> transactions)
@@ -329,4 +329,185 @@ public async Task<IActionResult> ExportTransactionsAndSendMail([FromQuery] int m
             Data = overdueAccounts.Count
         });
     }
+
+
+
+    /// <summary>
+    /// lấy tài khoản dựa theo custommer id 
+    /// </summary>
+    /// <param name="customerId"></param>
+    /// <returns></returns>
+    [HttpGet("get-accounts-by-customer")]
+    public async Task<IActionResult> GetAccountsByCustomerId([FromQuery] int customerId)
+    {
+        // Kiểm tra xem customer có tồn tại không
+        var customerExists = await _context.Customers.AnyAsync(c => c.customer_id == customerId);
+        if (!customerExists)
+        {
+            return NotFound(new ApiError
+            {
+                Status = 404,
+                Error = "NotFound",
+                Message = "Không tìm thấy khách hàng."
+            });
+        }
+
+        // Lấy tất cả tài khoản theo customerId
+        var accounts = await _context.Accounts
+            .Where(a => a.customer_id == customerId)
+            .Select(a => new
+            {
+                a.account_id,
+                a.CardNumber,
+                a.CardType,
+                // a.Balance,
+                a.Status,
+                a.CreditIssuedDate
+            })
+            .ToListAsync();
+
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Lấy danh sách tài khoản thành công",
+            Data = accounts
+        });
+    }
+
+
+    [HttpPost("admin_create-card")]
+    public async Task<IActionResult> Admin_CreateCard([FromBody] Admin_CreateCardRequest model)
+    {
+
+
+        var customer = await _context.Customers.FindAsync(model.customer_id);
+        if (customer == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy khách hàng." });
+
+        if (customer.locked == true)
+            return BadRequest(new ApiError { Status = 400, Error = "AccountLocked", Message = "Tài khoản đã bị khóa." });
+
+        if (string.IsNullOrWhiteSpace(model.CardType) || (model.CardType != "Normal" && model.CardType != "Credit"))
+            return BadRequest(new ApiError { Status = 400, Error = "InvalidCardType", Message = "Loại thẻ không hợp lệ (Normal hoặc Credit)." });
+
+        var existingAccounts = await _context.Accounts.Where(a => a.customer_id == model.customer_id).ToListAsync();
+        if (existingAccounts.Count >= 3)
+            return BadRequest(new ApiError { Status = 400, Error = "CardLimitReached", Message = "Tổng số thẻ không được vượt quá 3." });
+
+        if (model.CardType == "Credit" && existingAccounts.Any(a => a.CardType == "Credit"))
+            return BadRequest(new ApiError { Status = 400, Error = "CreditCardLimit", Message = "Chỉ được tạo 1 thẻ ghi nợ." });
+
+        var cardNumber = await GenerateUniqueCardNumberAsync();
+
+        var newAccount = new Accounts
+        {
+            customer_id = model.customer_id,
+            CardNumber = cardNumber,
+            CardType = model.CardType,
+            Status = "Active",
+            Balance = model.CardType == "Credit" ? 10_000_000 : model.InitialBalance,
+            CreditIssuedDate = model.CardType == "Credit" ? DateTime.UtcNow : null
+        };
+
+        _context.Accounts.Add(newAccount);
+        await _context.SaveChangesAsync();
+
+        return Ok(new ApiResponse<object> { Status = 200, Message = "Tạo thẻ thành công" });
+    }
+
+
+    [HttpDelete("admin_delete-card/{cardId}")]
+    public async Task<IActionResult> Admin_DeleteCard(int cardId)
+    {
+        var account = await _context.Accounts.FindAsync(cardId);
+
+        if (account == null)
+            return NotFound(new ApiError { Status = 404, Error = "NotFound", Message = "Không tìm thấy thẻ." });
+
+        if (account.CardType == "Normal")
+        {
+            if (account.Balance != 0)
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "NonZeroBalance",
+                    Message = "Thẻ thường chỉ được xóa khi số dư bằng 0."
+                });
+        }
+        else if (account.CardType == "Credit")
+        {
+            if (account.Balance != 10_000_000)
+                return BadRequest(new ApiError
+                {
+                    Status = 400,
+                    Error = "InvalidCreditBalance",
+                    Message = "Thẻ ghi nợ chỉ được xóa khi số dư là 10.000.000 (vốn gốc)."
+                });
+        }
+        else
+        {
+            return BadRequest(new ApiError
+            {
+                Status = 400,
+                Error = "UnknownCardType",
+                Message = "Loại thẻ không xác định."
+            });
+        }
+
+        _context.Accounts.Remove(account);
+        await _context.SaveChangesAsync();
+
+        return Ok(new ApiResponse<object> { Status = 200, Message = "Xóa thẻ thành công." });
+    }
+    
+
+    [HttpGet("admin-statistics")]
+    public async Task<IActionResult> GetAccountStatistics()
+    {
+        var totalAccounts = await _context.Accounts.CountAsync();
+
+        var activeAccounts = await _context.Accounts.CountAsync(a => a.Status == "Active");
+        var lockedAccounts = await _context.Accounts.CountAsync(a => a.Status != "Active");
+
+        var normalCardCount = await _context.Accounts.CountAsync(a => a.CardType == "Normal");
+        var creditCardCount = await _context.Accounts.CountAsync(a => a.CardType == "Credit");
+
+        var totalNormalBalance = await _context.Accounts
+            .Where(a => a.CardType == "Normal")
+            .SumAsync(a => (decimal?)a.Balance) ?? 0;
+
+        var totalCreditDebt = await _context.Accounts
+            .Where(a => a.CardType == "Credit")
+            .SumAsync(a => (decimal?)(10_000_000 - a.Balance)) ?? 0;
+
+        var top10Balances = await _context.Accounts
+            .Where(a => a.CardType == "Normal")
+            .OrderByDescending(a => a.Balance)
+            .Take(10)
+            .Select(a => new {
+                a.account_id,
+                a.CardNumber,
+                a.Balance,
+                a.customer.full_name
+            })
+            .ToListAsync();
+
+        return Ok(new ApiResponse<object>
+        {
+            Status = 200,
+            Message = "Thống kê tài khoản thành công",
+            Data = new
+            {
+                totalAccounts,
+                activeAccounts,
+                lockedAccounts,
+                normalCardCount,
+                creditCardCount,
+                totalNormalBalance,
+                totalCreditDebt,
+                top10Balances
+            }
+        });
+    }
+    
 }

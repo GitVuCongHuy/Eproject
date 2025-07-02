@@ -9,7 +9,7 @@ import {
   Receipt, History, Send, ArrowBack, CheckCircle
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/context';
+import { useAuth } from '../../context/Context';
 
 const CheckRequest = () => {
   const theme = useTheme();

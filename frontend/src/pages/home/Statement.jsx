@@ -21,7 +21,7 @@ import {
   ArrowBack
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/context';
+import { useAuth } from '../../context/Context';
 
 const primaryBlack = '#1a1a1a';
 const mediumGray = '#6b7280';

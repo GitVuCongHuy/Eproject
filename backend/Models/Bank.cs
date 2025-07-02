@@ -14,6 +14,12 @@ public class Bank
 
     public string address { get; set; }
 
+    [MaxLength(50)]
+    public string BankType { get; set; }
+
     [MaxLength(20)]
     public string ContactNumber { get; set; }
+
+    [Column(TypeName = "decimal(18,2)")]
+    public decimal TotalBalance { get; set; } = 0;
 }

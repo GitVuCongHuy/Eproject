@@ -1,7 +1,7 @@
 // src/pages/Login/Login.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // << 1. Import useNavigate
-import { useAuth } from "../../context/context";
+import { useAuth } from "../../context/Context";
 import "./Login.css";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
@@ -51,7 +51,7 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (userCaptchaInput !== randomCaptcha) {
+    if (userCaptchaInput.toLowerCase() !== randomCaptcha.toLowerCase()) {
       setCaptchaError("Mã kiểm tra không đúng.");
       setError("");
       return;
@@ -89,9 +89,8 @@ export default function Login() {
 
   // ... (giữ nguyên phần return JSX)
   const isLoginButtonDisabled =
-(showVerification && (!tempUsername || !verificationCode || !userCaptchaInput || userCaptchaInput !== randomCaptcha)) ||
-(!showVerification && (!username || !password || !userCaptchaInput || userCaptchaInput !== randomCaptcha));
-
+  (showVerification && (!tempUsername || !verificationCode || !userCaptchaInput || userCaptchaInput.toLowerCase() !== randomCaptcha.toLowerCase())) ||
+  (!showVerification && (!username || !password || !userCaptchaInput || userCaptchaInput.toLowerCase() !== randomCaptcha.toLowerCase()));
 
 return (
   <div className="login-wrapper">
