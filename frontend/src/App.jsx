@@ -43,7 +43,6 @@ function App() {
             <Route path="/password" element={<Settings />} />
           </Route>
 
-
           {/* Admin */}
           {/* <Route path="admin_login" element={<Admin_login/>} /> */}
           <Route path="/admin_new" element={<AdminLayout />}>
