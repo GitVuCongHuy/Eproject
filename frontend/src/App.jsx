@@ -20,7 +20,7 @@ import Admin_Main from "./pages/admin/Admin_Main";
 import Admin_request from "./pages/admin/Admin_request";
 import Admin_account from "./pages/admin/Admin_account";
 // import Admin_login from "./pages/admin/Admin_login";
-// import AdminProvider from "./context/admin_context";
+
 //KienDev
 
 function App() {
