@@ -27,10 +27,6 @@ const theme = createTheme({
 
 const recipients = [
   { id: 1, name: 'shoppe', fullName: 'PHUONG TRUNG HUNG', account: '9344413017', bank: 'Ngân hàng TMCP Ngoại thương Việt Nam', avatar: 'S', color: '#4caf50', favorite: false },
-  { id: 2, name: 'shipper', fullName: 'NGUYEN TRONG DAT', account: '10487470841S', bank: 'Ngân hàng TMCP Công thương Việt Nam', avatar: 'S', color: '#2196f3', favorite: false },
-  { id: 3, name: 'NGUYEN DUC TRUNG', fullName: 'NGUYEN DUC TRUNG', account: '0603086200888', bank: 'Ngân hàng TMCP Quân Đội', avatar: 'N', color: '#f44336', favorite: true },
-  { id: 4, name: 'trung', fullName: 'NGUYEN DUC TRUNG', account: '0862070705', bank: 'Ngân hàng TMCP Quân Đội', avatar: 'T', color: '#ff9800', favorite: true },
-  { id: 5, name: 'viettelpost', fullName: 'LAM QUOC ANH', account: '0971660368', bank: 'Ngân hàng TMCP Quân Đội', avatar: 'V', color: '#9c27b0', favorite: true }
 ];
 
 function TabPanel({ children, value, index }) {
