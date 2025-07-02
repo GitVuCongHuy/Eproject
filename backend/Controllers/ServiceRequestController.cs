@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 using System.Text.Json;
-using backend.Enums;
+using backend.enums;
 
 
 [ApiController]
@@ -130,129 +130,149 @@ public class ServiceRequestController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("cancel-cheque-request/{requestId}")]
-    public async Task<IActionResult> CancelChequeRequest(int requestId)
+[HttpPost("cancel-cheque-request/{requestId}")]
+public async Task<IActionResult> CancelChequeRequest(int requestId)
+{
+    var customerId = GetCustomerIdFromToken();
+
+    var request = await _context.Service_requests
+        .FirstOrDefaultAsync(r => r.RequestId == requestId &&
+                                r.CustomerId == customerId &&
+                                r.RequestType == "IssueChequeBook");
+
+    if (request == null)
     {
-        var customerId = GetCustomerIdFromToken();
-
-        var request = await _context.Service_requests
-            .FirstOrDefaultAsync(r => r.RequestId == requestId &&
-                                    r.CustomerId == customerId &&
-                                    r.RequestType == "IssueChequeBook");
-
-        if (request == null)
+        return NotFound(new ApiError
         {
-            return NotFound(new ApiError
-            {
-                Status = 404,
-                Error = "RequestNotFound",
-                Message = "Không tìm thấy yêu cầu sổ séc."
-            });
-        }
+            Status = 404,
+            Error = "RequestNotFound",
+            Message = "Không tìm thấy yêu cầu sổ séc."
+        });
+    }
 
-        if (request.Status == "Cancelled by user" || request.Status == "Rejected")
+    if (request.Status == "Cancelled by user" || request.Status == "Rejected")
+    {
+        return BadRequest(new ApiError
+        {
+            Status = 400,
+            Error = "AlreadyCancelled",
+            Message = "Yêu cầu đã bị huỷ hoặc từ chối trước đó."
+        });
+    }
+
+    var detail = JsonSerializer.Deserialize<ChequeBookRequestModel>(request.RequestDetail);
+    var account = await _context.Accounts.FirstOrDefaultAsync(a =>
+        a.account_id == detail.AccountId && a.customer_id == customerId);
+
+    if (account == null)
+    {
+        return NotFound(new ApiError
+        {
+            Status = 404,
+            Error = "AccountNotFound",
+            Message = "Không tìm thấy tài khoản."
+        });
+    }
+
+    decimal cancelFee = 5000m;
+    decimal refund = 0m;
+    string message;
+
+    if (request.Status == "Pending")
+    {
+        refund = detail.Quantity == 25 ? 25000m : 40000m;
+
+        if (account.Balance + refund < cancelFee)
         {
             return BadRequest(new ApiError
             {
                 Status = 400,
-                Error = "AlreadyCancelled",
-                Message = "Yêu cầu đã bị huỷ hoặc từ chối trước đó."
+                Error = "InsufficientFunds",
+                Message = "Không đủ số dư để huỷ yêu cầu (sau khi hoàn tiền)."
             });
         }
 
-        var detail = JsonSerializer.Deserialize<ChequeBookRequestModel>(request.RequestDetail);
-        var account = await _context.Accounts.FirstOrDefaultAsync(a =>
-            a.account_id == detail.AccountId && a.customer_id == customerId);
+        account.Balance += refund - cancelFee;
 
-        if (account == null)
-        {
-            return NotFound(new ApiError
-            {
-                Status = 404,
-                Error = "AccountNotFound",
-                Message = "Không tìm thấy tài khoản."
-            });
-        }
-
-        decimal cancelFee = 5000m;
-        decimal refund = 0m;
-        string message;
-
-        // Nếu đang chờ duyệt, thì hoàn lại phí cấp sổ séc
-        if (request.Status == "Pending")
-        {
-            refund = detail.Quantity == 25 ? 25000m : 40000m;
-
-            if (account.Balance + refund < cancelFee)
-            {
-                return BadRequest(new ApiError
-                {
-                    Status = 400,
-                    Error = "InsufficientFunds",
-                    Message = "Không đủ số dư để huỷ yêu cầu (sau khi hoàn tiền)."
-                });
-            }
-
-            account.Balance += refund - cancelFee;
-
-            // Ghi dòng hoàn tiền
-            _context.statements.Add(new Statements
-            {
-                account_id = account.account_id,
-                PeriodType = "refund",
-                StartDate = DateTime.Now.Date,
-                EndDate = DateTime.Now.Date,
-                GeneratedOn = DateTime.Now,
-                FileUrl = ""
-            });
-
-            message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ và hoàn {refund:n0}đ phí sổ séc.";
-        }
-        else
-        {
-            // Đã được duyệt => không hoàn
-            if (account.Balance < cancelFee)
-            {
-                return BadRequest(new ApiError
-                {
-                    Status = 400,
-                    Error = "InsufficientFunds",
-                    Message = "Không đủ số dư để huỷ yêu cầu."
-                });
-            }
-
-            account.Balance -= cancelFee;
-            message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ.";
-        }
-
-        // Ghi dòng phí huỷ
+        // Ghi dòng hoàn tiền
         _context.statements.Add(new Statements
         {
             account_id = account.account_id,
-            PeriodType = "cancel_fee",
+            PeriodType = "refund",
             StartDate = DateTime.Now.Date,
             EndDate = DateTime.Now.Date,
             GeneratedOn = DateTime.Now,
             FileUrl = ""
         });
 
-        request.Status = "Cancelled by user";
-
-        await _context.SaveChangesAsync();
-
-        return Ok(new ApiResponse<object>
+        message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ và hoàn {refund:n0}đ phí sổ séc.";
+    }
+    else if (request.Status == "Approved")
+    {
+        if (account.Balance < cancelFee)
         {
-            Status = 200,
-            Message = message,
-            Data = new
+            return BadRequest(new ApiError
             {
-                request.RequestId,
-                accountId = account.account_id,
-                amountChanged = refund - cancelFee,
-                transactionType = (refund - cancelFee) >= 0 ? "Credit" : "Debit"
-            }
+                Status = 400,
+                Error = "InsufficientFunds",
+                Message = "Không đủ số dư để huỷ yêu cầu."
+            });
+        }
+
+        account.Balance -= cancelFee;
+
+        // Đánh dấu các séc đã cấp là Cancelled
+        var cheques = await _context.Cheques
+            .Where(c => c.AccountId == account.account_id && c.IssuedDate >= request.RequestDate)
+            .ToListAsync();
+
+        foreach (var cheque in cheques)
+        {
+            if (cheque.Status == ChequeStatusEnum.Pending)
+                cheque.Status = ChequeStatusEnum.Cancelled;
+        }
+
+        message = $"Đã huỷ yêu cầu sổ séc thành công. Phí huỷ {cancelFee:n0}đ.";
+    }
+    else
+    {
+        return BadRequest(new ApiError
+        {
+            Status = 400,
+            Error = "InvalidStatus",
+            Message = "Trạng thái yêu cầu không hợp lệ để huỷ."
         });
     }
 
+    // Ghi dòng phí huỷ
+    _context.statements.Add(new Statements
+    {
+        account_id = account.account_id,
+        PeriodType = "cancel_fee",
+        StartDate = DateTime.Now.Date,
+        EndDate = DateTime.Now.Date,
+        GeneratedOn = DateTime.Now,
+        FileUrl = ""
+    });
+
+    request.Status = "Cancelled by user";
+
+    await _context.SaveChangesAsync();
+
+    return Ok(new ApiResponse<object>
+    {
+        Status = 200,
+        Message = message,
+        Data = new
+        {
+            request.RequestId,
+            accountId = account.account_id,
+            amountChanged = refund - cancelFee,
+            transactionType = (refund - cancelFee) >= 0 ? "Credit" : "Debit"
+        }
+    });
+}
+
+    
 
 }
