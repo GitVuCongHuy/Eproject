@@ -186,6 +186,12 @@ const AdminLayout = ({ children }) => {
         key: 'users',
         path: '/admin_new/admin_account',
         },
+        {
+        label: 'Yêu cầu',
+        icon: <PeopleIcon />,
+        key: 'users',
+        path: '/admin_new/admin_request',
+        },
         
        
     ];
