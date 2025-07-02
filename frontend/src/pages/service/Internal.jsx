@@ -208,17 +208,10 @@ export default function MoneyTransferPage() {
               color: 'white', borderRadius: 3
             }}>
               <Typography variant="h4" gutterBottom sx={{ fontWeight: 600 }}>
-<<<<<<< HEAD
-                Transfer to Another Account
-              </Typography>
-              <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                Fast, instant 24/7 money transfers
-=======
                  Transfer to Another Account
               </Typography>
               <Typography variant="body1" sx={{ opacity: 0.9 }}>
                 Fast and instant 24/7 transfers
->>>>>>> ef566ba55ded4c9298d7ea9d343a9fd572df2764
               </Typography>
             </Paper>
 
@@ -229,11 +222,7 @@ export default function MoneyTransferPage() {
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <Button variant="contained" startIcon={<PersonAdd />} fullWidth sx={{ py: 1.5, borderRadius: 2, textTransform: 'none', fontWeight: 500 }} onClick={handleOpen}>
-<<<<<<< HEAD
-                    New Recipient
-=======
                     New recipient
->>>>>>> ef566ba55ded4c9298d7ea9d343a9fd572df2764
                   </Button>
                 </Grid>
               </Grid>
@@ -242,13 +231,8 @@ export default function MoneyTransferPage() {
             <Paper elevation={2} sx={{ borderRadius: 3, overflow: 'hidden' }}>
               <Box sx={{ borderBottom: 1, borderColor: 'divider', px: 3 }}>
                 <Tabs value={tabValue} onChange={handleTabChange} sx={{ '& .MuiTab-root': { textTransform: 'none', fontWeight: 500, fontSize: '1rem' }}}>
-<<<<<<< HEAD
-                  <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Star /> All Recipients</Box>} />
-                  <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Business /> Other Banks</Box>} />
-=======
                   <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Star /> All recipients</Box>} />
                   <Tab label={<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}><Business /> Other banks</Box>} />
->>>>>>> ef566ba55ded4c9298d7ea9d343a9fd572df2764
                 </Tabs>
               </Box>
               <Box sx={{ p: 2, height:'500px',overflowY:'scroll'}}>
@@ -258,22 +242,14 @@ export default function MoneyTransferPage() {
                   ) : (
                     <Box sx={{ textAlign: 'center', py: 4 }}>
                       <Person sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-<<<<<<< HEAD
-                      <Typography variant="h6" color="text.secondary">No recipients found</Typography>
-=======
                       <Typography variant="h6" color="text.secondary">  No recipients found</Typography>
->>>>>>> ef566ba55ded4c9298d7ea9d343a9fd572df2764
                     </Box>
                   )}
                 </TabPanel>
                 <TabPanel value={tabValue} index={1}>
                   <Box sx={{ textAlign: 'center', py: 4 }}>
                     <AccountBalance sx={{ fontSize: 48, color: 'text.secondary', mb: 2 }} />
-<<<<<<< HEAD
-                    <Typography variant="h6" color="text.secondary">Sorry, we are currently updating this feature</Typography>
-=======
                     <Typography variant="h6" color="text.secondary"> Sorry, this feature is under development.</Typography>
->>>>>>> ef566ba55ded4c9298d7ea9d343a9fd572df2764
                   </Box>
                 </TabPanel>
                 <TabPanel value={tabValue} index={2}>
@@ -293,17 +269,10 @@ export default function MoneyTransferPage() {
                 value={transferType}
                 exclusive
                 onChange={handleTransferTypeChange}
-<<<<<<< HEAD
-                aria-label="Transfer type"
-              >
-                <ToggleButton value="internal">TCB Bank</ToggleButton>
-                <ToggleButton value="interbank">Other Bank</ToggleButton>
-=======
                 aria-label="Transaction type"
               >
                 <ToggleButton value="internal"> TCB Bank</ToggleButton>
                 <ToggleButton value="interbank">Others Bank</ToggleButton>
->>>>>>> ef566ba55ded4c9298d7ea9d343a9fd572df2764
               </ToggleButtonGroup>
             </Box>
 
@@ -340,11 +309,7 @@ export default function MoneyTransferPage() {
               </>
             ) : (
               <Alert severity="info" sx={{ mt: 2 }}>
-<<<<<<< HEAD
-                This feature is under development. Please select "TCB Bank" to continue.
-=======
                 This feature is under development. Please choose "Internal bank" to proceed.
->>>>>>> ef566ba55ded4c9298d7ea9d343a9fd572df2764
               </Alert>
             )}
           </DialogContent>
