@@ -106,6 +106,22 @@ const requestChequeBook = async (requestData) => {
     return { success: false, message: "Lỗi khi gửi yêu cầu cấp sổ séc." };
   }
 };
+const approveChequeRequest = async (requestId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/AdminCheque/approve/${requestId}`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+    });
+
+    const data = await response.json();
+    return data.status === 200
+      ? { success: true, message: data.message }
+      : { success: false, message: data.message, errorType: data.error };
+  } catch (error) {
+    return { success: false, message: "Lỗi khi chấp nhận yêu cầu séc." };
+  }
+};
+
 // Đề xuất đổi tên hàm cho rõ nghĩa
 const getMyChequeRequests = async () => {
   try {
@@ -451,6 +467,37 @@ const cancelChequeRequest = async (requestId) => {
       return { success: false, message: "Lỗi khi tạo mật khẩu giao dịch." };
     }
   };
+  const rejectChequeRequest = async (requestId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/admincheque/reject/${requestId}`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+    });
+
+    const data = await response.json();
+    return data.status === 200
+      ? { success: true, message: data.message }
+      : { success: false, message: data.message, errorType: data.error };
+  } catch (error) {
+    return { success: false, message: "Lỗi khi từ chối yêu cầu séc." };
+  }
+};
+const getAllChequeRequests = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/admincheque/all-requests`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    const data = await response.json();
+    return data.status === 200
+      ? { success: true, data: data.data }
+      : { success: false, message: data.message };
+  } catch (error) {
+    return { success: false, message: "Lỗi khi lấy danh sách yêu cầu séc cho admin." };
+  }
+};
+
   
   // ===================================================================
   // KẾT THÚC PHẦN TÍCH HỢP
@@ -482,7 +529,9 @@ const cancelChequeRequest = async (requestId) => {
   getMyChequeRequests,
   cancelChequeRequest,
   requestUpdateInfo,
-
+    approveChequeRequest,
+    rejectChequeRequest,
+    getAllChequeRequests,
   };
 
   return (
