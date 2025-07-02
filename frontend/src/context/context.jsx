@@ -550,10 +550,10 @@ const getAllChequeRequests = async () => {
   getMyChequeRequests,
   cancelChequeRequest,
   requestUpdateInfo,
-    approveChequeRequest,
-    rejectChequeRequest,
-    getAllChequeRequests,
-    changePassword
+  approveChequeRequest,
+  rejectChequeRequest,
+  getAllChequeRequests,
+  changePassword
 
   };
 

@@ -1,0 +1,1646 @@
+{
+  "Version": 1,
+<<<<<<< HEAD
+  "Hash": "xQPjXJw5jLLAnH8YgEWLnzwVP7C7HuX2HON+Mo+CPMs=",
+=======
+  "Hash": "3G1GcoZFkwfPFGEaZujv71j2o3A7SmjtAoxU+V5vf2w=",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+  "Source": "backend",
+  "BasePath": "_content/backend",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "backend\\wwwroot",
+      "Source": "backend",
+<<<<<<< HEAD
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css",
+      "SourceId": "backend",
+      "SourceType": "Computed",
+      "ContentRoot": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css",
+      "SourceId": "backend",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "backend.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
+      "OriginalItemSpec": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css"
+    },
+    {
+      "Identity": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css",
+      "SourceId": "backend",
+      "SourceType": "Computed",
+      "ContentRoot": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+=======
+      "OriginalItemSpec": "D:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css"
+    },
+    {
+      "Identity": "D:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css",
+      "SourceId": "backend",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "backend.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+<<<<<<< HEAD
+      "OriginalItemSpec": "E:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css"
+    },
+    {
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\css\\site.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "OriginalItemSpec": "D:\\Eproject\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\css\\site.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\favicon.ico",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\favicon.ico",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\js\\site.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\js\\site.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "js/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/LICENSE",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/LICENSE.md",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/dist/jquery.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/dist/jquery.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/dist/jquery.min.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+<<<<<<< HEAD
+      "Identity": "E:\\Eproject\\backend\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "E:\\Eproject\\backend\\wwwroot\\",
+=======
+      "Identity": "D:\\Eproject\\backend\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Eproject\\backend\\wwwroot\\",
+>>>>>>> 492f5848f46fa131a14e4e01e9cd0d8cf94b840f
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/LICENSE.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    }
+  ]
+}
