@@ -6,7 +6,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'; // Thêm import
 
 import { Container, Dialog, DialogTitle, DialogContent, DialogActions, Typography, Button, Tabs, Tab, Card, CardContent, Grid, Box, Divider, Stack, IconButton, Tooltip, Paper, GlobalStyles, CircularProgress, Avatar, Chip, Fade, Alert, useTheme } from '@mui/material';
 import { useAuth } from '../../context/Context';
-
+import { Info } from 'lucide-react';
 // Bảng màu hiện đại
 const colors = {
   primary: '#e53e3e',
@@ -421,6 +421,7 @@ export default function TechcombankAccountsPage() {
                   fullWidth
                   variant="outlined"
                   startIcon={<TrendingUp />}
+                  onClick={() => setOpenDialog(true)}
                   sx={{
                     borderRadius: 3,
                     py: 2,
@@ -441,6 +442,7 @@ export default function TechcombankAccountsPage() {
                   fullWidth
                   variant="outlined"
                   startIcon={<PiggyBank />}
+                  onClick={() => setOpenDialog(true)}
                   sx={{
                     borderRadius: 3,
                     py: 2,
@@ -461,6 +463,7 @@ export default function TechcombankAccountsPage() {
                   fullWidth
                   variant="outlined"
                   startIcon={<SecurityIcon />}
+                  onClick={() => setOpenDialog(true)}
                   sx={{
                     borderRadius: 3,
                     py: 2,
@@ -660,116 +663,40 @@ export default function TechcombankAccountsPage() {
             }
           }}
         >
-          <DialogTitle sx={{ pb: 2 }}>
-            <Typography variant="h5" fontWeight={600}>
-              Mở tài khoản mới
-            </Typography>
-            <Typography color={colors.textSecondary}>
-              Chọn loại tài khoản phù hợp với nhu cầu của bạn
-            </Typography>
-          </DialogTitle>
-          <DialogContent>
-            <Grid container spacing={3} sx={{ mt: 1 }}>
-              <Grid item xs={12} md={6}>
-                <Paper
-                  elevation={0}
-                  sx={{
-                    p: 3,
-                    borderRadius: 3,
-                    border: `2px solid ${colors.border}`,
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      borderColor: colors.primary,
-                      transform: 'translateY(-2px)',
-                      boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
-                    }
-                  }}
-                >
-                  <Avatar
-                    sx={{
-                      width: 60,
-                      height: 60,
-                      background: colors.gradientPrimary,
-                      mb: 2
-                    }}
-                  >
-                    <CreditCard size={30} />
-                  </Avatar>
-                  <Typography variant="h6" fontWeight={600} sx={{ mb: 1 }}>
-                    Tài khoản thanh toán
-                  </Typography>
-                  <Typography color={colors.textSecondary} sx={{ mb: 2 }}>
-                    Tài khoản cơ bản cho các giao dịch hàng ngày
-                  </Typography>
-                  <Stack direction="row" spacing={1}>
-                    <Chip label="Miễn phí" size="small" color="success" />
-                    <Chip label="Phổ biến" size="small" sx={{ background: colors.primary, color: 'white' }} />
-                  </Stack>
-                </Paper>
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <Paper
-                  elevation={0}
-                  sx={{
-                    p: 3,
-                    borderRadius: 3,
-                    border: `2px solid ${colors.border}`,
-                    cursor: 'pointer',
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      borderColor: colors.warning,
-                      transform: 'translateY(-2px)',
-                      boxShadow: '0 8px 25px rgba(0,0,0,0.1)'
-                    }
-                  }}
-                >
-                  <Avatar
-                    sx={{
-                      width: 60,
-                      height: 60,
-                      background: 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)',
-                      mb: 2
-                    }}
-                  >
-                    <PiggyBank size={30} />
-                  </Avatar>
-                  <Typography variant="h6" fontWeight={600} sx={{ mb: 1 }}>
-                    Tài khoản tiết kiệm
-                  </Typography>
-                  <Typography color={colors.textSecondary} sx={{ mb: 2 }}>
-                    Tài khoản có lãi suất cao cho việc tiết kiệm
-                  </Typography>
-                  <Stack direction="row" spacing={1}>
-                    <Chip label="Lãi suất cao" size="small" sx={{ background: colors.warning, color: 'white' }} />
-                    <Chip label="Linh hoạt" size="small" variant="outlined" />
-                  </Stack>
-                </Paper>
-              </Grid>
-            </Grid>
-          </DialogContent>
-          <DialogActions sx={{ p: 3, pt: 2 }}>
-            <Button
-              onClick={() => setOpenDialog(false)}
-              sx={{
-                textTransform: 'none',
-                color: colors.textSecondary
-              }}
-            >
-              Hủy
-            </Button>
-            <Button
-              variant="contained"
-              sx={{
-                background: colors.gradientPrimary,
-                textTransform: 'none',
-                fontWeight: 600,
-                px: 4
-              }}
-            >
-              Tiếp tục
-            </Button>
-          </DialogActions>
+<DialogTitle
+  sx={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: 1,
+    py: 4,
+    textAlign: 'center',
+    borderRadius: 2,
+    bgcolor: '#f9fafb',
+  }}
+>
+  <Box
+    sx={{
+      bgcolor: '#e0f2fe',
+      borderRadius: '50%',
+      p: 1.5,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}
+  >
+    <Info size={32} color="#0288d1" />
+  </Box>
+
+  <Typography variant="h6" fontWeight={600} mt={1}>
+    Chúng tôi đang cập nhật chức năng này
+  </Typography>
+
+  <Typography variant="body2" color="text.secondary" maxWidth={300}>
+    Vui lòng quay lại sau khi hệ thống hoàn tất nâng cấp. Cảm ơn bạn đã quan tâm!
+  </Typography>
+</DialogTitle>
+        
         </Dialog>
       </Container>
     </>
