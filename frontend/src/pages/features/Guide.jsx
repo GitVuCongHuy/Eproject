@@ -38,54 +38,54 @@ const Guide = () => {
   const guideSteps = [
     {
       icon: AccountBalanceWallet,
-      title: "Kiểm tra số dư tài khoản",
+      title: "Check Account Balance",
       color: exceptionGreen,
       steps: [
         {
-          title: "Truy cập trang chủ",
-          description: "Mở ứng dụng Internet Banking và đăng nhập để vào trang chính."
+          title: "Access the Homepage",
+          description: "Open the Internet Banking application and log in to access the main page."
         },
         {
-          title: "Xem số dư",
-          description: "Tại mục 'Tài khoản & Thẻ', số dư tài khoản thanh toán của bạn sẽ được hiển thị."
+          title: "View Balance",
+          description: "Under the 'Accounts & Cards' section, your payment account balance will be displayed."
         }
       ]
     },
     {
       icon: Receipt,
-      title: "Xem sao kê giao dịch",
+      title: "View Transaction Statement",
       color: accentBlue,
       steps: [
         {
-          title: "Chọn mục Sao kê",
-          description: "Từ menu chính, nhấp vào 'Sao kê' để xem lịch sử giao dịch."
+          title: "Select Statement Section",
+          description: "From the main menu, click on 'Statement' to view your transaction history."
         },
         {
-          title: "Xem chi tiết",
-          description: "Danh sách giao dịch hiển thị ngày, mô tả, số tiền và loại giao dịch (tiền vào/ra)."
+          title: "View Details",
+          description: "The transaction list shows the date, description, amount, and transaction type (credit/debit)."
         },
         {
-          title: "Tải xuống sao kê",
-          description: "Nhấn nút 'Tải xuống' để lưu sao kê dưới dạng tệp."
+          title: "Download Statement",
+          description: "Press the 'Download' button to save the statement as a file."
         }
       ]
     },
     {
       icon: RequestPage,
-      title: "Yêu cầu sổ séc",
+      title: "Request a Cheque Book",
       color: '#8b5cf6',
       steps: [
         {
-          title: "Truy cập mục Yêu cầu sổ séc",
-          description: "Từ menu, chọn 'Yêu cầu sổ séc' để mở biểu mẫu."
+          title: "Access Cheque Book Request Section",
+          description: "From the menu, select 'Request Cheque Book' to open the form."
         },
         {
-          title: "Điền thông tin",
-          description: "Chọn tài khoản thanh toán, số lượng tờ séc, và nhập địa chỉ giao hàng."
+          title: "Fill in Information",
+          description: "Select the payment account, the number of cheques, and enter the delivery address."
         },
         {
-          title: "Xác nhận và gửi",
-          description: "Kiểm tra phí phát hành, đồng ý điều khoản, và nhấn 'Gửi yêu cầu'."
+          title: "Confirm and Submit",
+          description: "Check the issuance fee, agree to the terms, and press 'Submit Request'."
         }
       ]
     }
@@ -159,10 +159,10 @@ const Guide = () => {
                       WebkitTextFillColor: 'transparent',
                     }}
                   >
-                    Hướng dẫn sử dụng
+                    User Guide
                   </Typography>
                   <Typography variant="body1" color={mediumGray} mt={0.5}>
-                    Internet Banking - Dễ dàng và an toàn
+                    Internet Banking - Easy and Secure
                   </Typography>
                 </Box>
               </Box>
@@ -312,7 +312,7 @@ const Guide = () => {
               }}
             >
               <Typography variant="body2" color={mediumGray}>
-                💡 <strong>Mẹo:</strong> Luôn đăng xuất sau khi sử dụng để bảo mật tài khoản của bạn
+                💡 <strong>Tip:</strong> Always log out after use to secure your account.
               </Typography>
             </Paper>
           </Fade>

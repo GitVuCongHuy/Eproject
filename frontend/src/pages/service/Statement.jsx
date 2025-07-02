@@ -47,19 +47,13 @@ const Statement = () => {
 
   const years = Array.from({ length: 10 }, (_, i) => new Date().getFullYear() - i);
 
-  // Calculate summary statistics
   const totalCredit = transactions
-
     .filter(t => t.type === 'credit')
-
     .reduce((sum, t) => sum + t.rawAmount, 0); 
   
-
   const totalDebit = transactions
-
     .filter(t => t.type === 'debit')
-
-    .reduce((sum, t) => sum + t.rawAmount, 0); // Sử dụng rawAmount
+    .reduce((sum, t) => sum + t.rawAmount, 0);
 
   const formatCurrency = (amount) => new Intl.NumberFormat('vi-VN', {
     style: 'currency',
@@ -76,10 +70,10 @@ const Statement = () => {
           setCards(res.data);
           setSelectedCard(res.data[0]);
         } else {
-          setError('Không tìm thấy thẻ nào.');
+          setError('No cards found.');
         }
       } catch {
-        setError('Lỗi khi lấy danh sách thẻ.');
+        setError('Error fetching card list.');
       } finally {
         setLoading(false);
       }
@@ -99,7 +93,7 @@ const Statement = () => {
           const formatted = res.data.map((t) => {
             const isDebit = t.senderAccount?.replace(/\s/g, '') === cardNumber;
             return {
-              date: new Date(t.transactionDate).toLocaleDateString('vi-VN'),
+              date: new Date(t.transactionDate).toLocaleDateString('en-GB'),
               description: t.description || '-',
               amount: new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
@@ -114,7 +108,7 @@ const Statement = () => {
           setTransactions([]);
         }
       } catch {
-        setError('Lỗi khi lấy lịch sử giao dịch.');
+        setError('Error fetching transaction history.');
         setTransactions([]);
       } finally {
         setLoading(false);
@@ -124,17 +118,17 @@ const Statement = () => {
   }, [selectedCard, month, year, getTransactions]);
 
   const handleExport = async () => {
-    if (!selectedCard) return setError('Vui lòng chọn một thẻ.');
+    if (!selectedCard) return setError('Please select a card.');
     setExporting(true);
     try {
       const res = await exportTransactions(month, year);
       if (res.success) {
-        setError('Sao kê đã được gửi qua email thành công!');
+        setError('Statement has been sent to your email successfully!');
       } else {
-        setError(res.message || 'Lỗi khi xuất sao kê.');
+        setError(res.message || 'Error exporting statement.');
       }
     } catch {
-      setError('Lỗi khi xuất sao kê.');
+      setError('Error exporting statement.');
     } finally {
       setExporting(false);
     }
@@ -151,7 +145,7 @@ const Statement = () => {
             const formatted = res.data.map((t) => {
               const isDebit = t.senderAccount?.replace(/\s/g, '') === cardNumber;
               return {
-                date: new Date(t.transactionDate).toLocaleDateString('vi-VN'),
+                date: new Date(t.transactionDate).toLocaleDateString('en-GB'),
                 description: t.description || '-',
                 amount: new Intl.NumberFormat('vi-VN', {
                   style: 'currency',
@@ -164,7 +158,7 @@ const Statement = () => {
             setTransactions(formatted);
           }
         } catch {
-          setError('Lỗi khi làm mới dữ liệu.');
+          setError('Error refreshing data.');
         } finally {
           setLoading(false);
         }
@@ -185,7 +179,7 @@ const Statement = () => {
       >
         <CircularProgress size={60} sx={{ color: accentBlue }} />
         <Typography variant="body1" color={mediumGray}>
-          Đang tải sao kê giao dịch...
+          Loading transaction statement...
         </Typography>
       </Box>
     );
@@ -199,11 +193,10 @@ const Statement = () => {
           marginTop: '30px !important',
         },
         'html, body': {
-          overflowY: 'scroll', // Thay đổi thành overflowY: 'scroll'
+          overflowY: 'scroll',
           backgroundColor: '#fff',
         },
       }} />
-
       
       <Box 
         sx={{ 
@@ -213,7 +206,6 @@ const Statement = () => {
           background: 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)'
         }}
       >
-        {/* Header */}
         <Fade in timeout={800}>
           <Paper 
             elevation={0} 
@@ -228,14 +220,14 @@ const Statement = () => {
             <Box display="flex" justifyContent="space-between" alignItems="center">
               <Box>
                 <Typography variant="h4" fontWeight={700} mb={1}>
-                  Sao Kê Giao Dịch
+                  Transaction Statement
                 </Typography>
                 <Typography variant="body1" sx={{ opacity: 0.9 }}>
-                  Xem lịch sử giao dịch chi tiết và xuất báo cáo
+                  View detailed transaction history and export reports
                 </Typography>
               </Box>
               <Box display="flex" gap={1}>
-                <Tooltip title="Làm mới dữ liệu">
+                <Tooltip title="Refresh data">
                   <IconButton 
                     onClick={handleRefresh}
                     disabled={loading}
@@ -264,11 +256,10 @@ const Statement = () => {
           </Paper>
         </Fade>
 
-        {/* Alert Messages */}
         {error && (
           <Fade in>
             <Alert 
-              severity={error.includes('thành công') ? 'success' : 'error'} 
+              severity={error.toLowerCase().includes('success') ? 'success' : 'error'} 
               sx={{ 
                 mb: 3, 
                 borderRadius: 3,
@@ -281,7 +272,6 @@ const Statement = () => {
           </Fade>
         )}
 
-        {/* Summary Cards */}
         <Zoom in timeout={1000}>
           <Grid container spacing={3} mb={4}>
             <Grid item xs={12} md={4}>
@@ -295,7 +285,7 @@ const Statement = () => {
                   <Box display="flex" alignItems="center" justifyContent="space-between">
                     <Box>
                       <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                        Tổng tiền vào
+                        Total Credit
                       </Typography>
                       <Typography variant="h5" fontWeight={700}>
                         {formatCurrency(totalCredit)}
@@ -318,7 +308,7 @@ const Statement = () => {
                   <Box display="flex" alignItems="center" justifyContent="space-between">
                     <Box>
                       <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                        Tổng tiền ra
+                        Total Debit
                       </Typography>
                       <Typography variant="h5" fontWeight={700}>
                         {formatCurrency(totalDebit)}
@@ -341,7 +331,7 @@ const Statement = () => {
                   <Box display="flex" alignItems="center" justifyContent="space-between">
                     <Box>
                       <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                        Số giao dịch
+                        Transactions
                       </Typography>
                       <Typography variant="h5" fontWeight={700}>
                         {transactions.length}
@@ -355,7 +345,6 @@ const Statement = () => {
           </Grid>
         </Zoom>
 
-        {/* Filter Section */}
         <Zoom in timeout={1200}>
           <Card sx={{ 
             mb: 4, 
@@ -378,10 +367,10 @@ const Statement = () => {
                 </Box>
                 <Box>
                   <Typography variant="h6" fontWeight={700} color={primaryBlack}>
-                    Bộ lọc tìm kiếm
+                    Search Filters
                   </Typography>
                   <Typography variant="body2" color={mediumGray}>
-                    Chọn thẻ, tháng và năm để xem giao dịch
+                    Select card, month, and year to view transactions
                   </Typography>
                 </Box>
               </Box>
@@ -390,7 +379,7 @@ const Statement = () => {
 
               <Grid container spacing={3}>
                 <Grid item xs={12} md={4}>
-                  <InputLabel>Thẻ thanh toán</InputLabel>
+                  <InputLabel>Payment Card</InputLabel>
                   <FormControl fullWidth>
                     <Select
                       value={selectedCard?.account_id || ''}
@@ -414,9 +403,6 @@ const Statement = () => {
                               <Typography variant="body1" fontWeight={500}>
                                 {card.CardNumber || card.cardNumber}
                               </Typography>
-                              {/* <Typography variant="caption" color={mediumGray}>
-                                ID: {card.account_id}
-                              </Typography> */}
                             </Box>
                           </Box>
                         </MenuItem>
@@ -426,7 +412,7 @@ const Statement = () => {
                 </Grid>
 
                 <Grid item xs={12} md={4}>
-                  <InputLabel>Tháng</InputLabel>
+                  <InputLabel>Month</InputLabel>
                   <FormControl fullWidth>
                     <Select 
                       value={month} 
@@ -443,7 +429,7 @@ const Statement = () => {
                         <MenuItem key={m} value={m}>
                           <Box display="flex" alignItems="center" gap={1}>
                             <CalendarMonth sx={{ color: mediumGray, fontSize: 20 }} />
-                            Tháng {m}
+                            Month {m}
                           </Box>
                         </MenuItem>
                       ))}
@@ -452,7 +438,7 @@ const Statement = () => {
                 </Grid>
 
                 <Grid item xs={12} md={4}>
-                  <InputLabel>Năm</InputLabel>
+                  <InputLabel>Year</InputLabel>
                   <FormControl fullWidth>
                     <Select 
                       value={year} 
@@ -481,7 +467,6 @@ const Statement = () => {
           </Card>
         </Zoom>
 
-        {/* Transaction History */}
         <Zoom in timeout={1400}>
           <Card sx={{ 
             mb: 4, 
@@ -495,10 +480,10 @@ const Statement = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                   <Box>
                     <Typography variant="h6" fontWeight={700} color={primaryBlack}>
-                      Lịch sử giao dịch
+                      Transaction History
                     </Typography>
                     <Typography variant="body2" color={mediumGray}>
-                      {transactions.length} giao dịch trong tháng {month}/{year}
+                      {transactions.length} transactions in {month}/{year}
                     </Typography>
                   </Box>
                   <Button
@@ -519,7 +504,7 @@ const Statement = () => {
                       transition: 'all 0.3s ease'
                     }}
                   >
-                    {exporting ? 'Đang xuất...' : 'Tải xuống'}
+                    {exporting ? 'Exporting...' : 'Download'}
                   </Button>
                 </Box>
               </Box>
@@ -529,16 +514,16 @@ const Statement = () => {
                   <TableHead>
                     <TableRow>
                       <TableCell sx={{ backgroundColor: lightGray, fontWeight: 700, borderBottom: '2px solid #e5e7eb' }}>
-                        Ngày giao dịch
+                        Transaction Date
                       </TableCell>
                       <TableCell sx={{ backgroundColor: lightGray, fontWeight: 700, borderBottom: '2px solid #e5e7eb' }}>
-                        Mô tả
+                        Description
                       </TableCell>
                       <TableCell align="right" sx={{ backgroundColor: lightGray, fontWeight: 700, borderBottom: '2px solid #e5e7eb' }}>
-                        Số tiền
+                        Amount
                       </TableCell>
                       <TableCell align="center" sx={{ backgroundColor: lightGray, fontWeight: 700, borderBottom: '2px solid #e5e7eb' }}>
-                        Loại giao dịch
+                        Transaction Type
                       </TableCell>
                     </TableRow>
                   </TableHead>
@@ -548,7 +533,7 @@ const Statement = () => {
                         <TableCell colSpan={4} align="center" sx={{ py: 6 }}>
                           <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
                             <CircularProgress size={40} sx={{ color: accentBlue }} />
-                            <Typography color={mediumGray}>Đang tải dữ liệu...</Typography>
+                            <Typography color={mediumGray}>Loading data...</Typography>
                           </Box>
                         </TableCell>
                       </TableRow>
@@ -558,10 +543,10 @@ const Statement = () => {
                           <Box display="flex" flexDirection="column" alignItems="center" gap={2}>
                             <Receipt sx={{ fontSize: 60, color: mediumGray, opacity: 0.5 }} />
                             <Typography variant="h6" color={mediumGray}>
-                              Không có giao dịch
+                              No Transactions
                             </Typography>
                             <Typography variant="body2" color={mediumGray}>
-                              Không tìm thấy giao dịch nào trong khoảng thời gian này
+                              No transactions found for this period
                             </Typography>
                           </Box>
                         </TableCell>
@@ -622,7 +607,7 @@ const Statement = () => {
                           </TableCell>
                           <TableCell align="center" sx={{ borderBottom: '1px solid #f1f5f9' }}>
                             <Chip
-                              label={t.type === 'credit' ? 'Tiền vào' : 'Tiền ra'}
+                              label={t.type === 'credit' ? 'Credit' : 'Debit'}
                               variant="outlined"
                               size="small"
                               sx={{
@@ -642,7 +627,6 @@ const Statement = () => {
           </Card>
         </Zoom>
 
-        {/* Back Button */}
         <Fade in timeout={1600}>
           <Box display="flex" justifyContent="center" mt={4}>
             <Button
@@ -664,7 +648,7 @@ const Statement = () => {
                 transition: 'all 0.3s ease'
               }}
             >
-              Quay lại
+              Go Back
             </Button>
           </Box>
         </Fade>

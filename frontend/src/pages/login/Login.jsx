@@ -1,15 +1,15 @@
 // src/pages/Login/Login.jsx
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // << 1. Import useNavigate
+import { useNavigate } from "react-router-dom"; // 1. Import useNavigate
 import { useAuth } from "../../context/Context";
 import "./Login.css";
 import FingerprintJS from '@fingerprintjs/fingerprintjs';
 
 export default function Login() {
   const { login, verifyLogin } = useAuth();
-  const navigate = useNavigate(); // << 2. Khởi tạo navigate
+  const navigate = useNavigate(); // 2. Initialize navigate
   const [username, setUsername] = useState("");
-  // ... (giữ nguyên các state khác)
+  // ... (keep other states)
   const [password, setPassword] = useState("");
   const [userCaptchaInput, setUserCaptchaInput] = useState("");
   const [randomCaptcha, setRandomCaptcha] = useState("");
@@ -20,8 +20,7 @@ export default function Login() {
   const [verificationCode, setVerificationCode] = useState("");
   const [tempUsername, setTempUsername] = useState("");
 
-
-  // ... (giữ nguyên useEffect và generateCaptcha)
+  // ... (keep useEffect and generateCaptcha)
   const generateCaptcha = () => {
     const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     let result = "";
@@ -52,7 +51,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userCaptchaInput !== randomCaptcha) {
-      setCaptchaError("Mã kiểm tra không đúng.");
+      setCaptchaError("Captcha is incorrect.");
       setError("");
       return;
     }
@@ -62,7 +61,7 @@ export default function Login() {
     if (showVerification) {
       const result = await verifyLogin(tempUsername, verificationCode, deviceId);
       if (result.success) {
-        // << 3. Thay thế alert bằng navigate
+        // 3. Replace alert with navigate
         navigate('/'); 
       } else {
         setError(result.message);
@@ -70,7 +69,7 @@ export default function Login() {
     } else {
       const result = await login(username, password, deviceId);
       if (result.success) {
-         // << 4. Thay thế alert bằng navigate
+         // 4. Replace alert with navigate
         navigate('/');
       } else {
         if (result.errorType === "New equipment") {
@@ -87,7 +86,7 @@ export default function Login() {
     }
   };
 
-  // ... (giữ nguyên phần return JSX)
+  // ... (keep the JSX part)
   const isLoginButtonDisabled =
 (showVerification && (!tempUsername || !verificationCode || !userCaptchaInput || userCaptchaInput !== randomCaptcha)) ||
 (!showVerification && (!username || !password || !userCaptchaInput || userCaptchaInput !== randomCaptcha));
@@ -102,23 +101,23 @@ return (
       <div className="login-form-wrapper">
         <div className="login-form">
           <img src="https://img7.thuthuatphanmem.vn/uploads/2023/07/06/mau-logo-techcombank-dep_045648494.png" alt="TCB Logo" className="logo" />
-          <h3>Chào mừng bạn đến với</h3>
+          <h3>Welcome to</h3>
           <h2><strong>TCB Internet Banking</strong></h2>
           {error && <p className="error">{error}</p>}
           {captchaError && <p className="error">{captchaError}</p>}
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="TÊN ĐĂNG NHẬP"
+              placeholder="USERNAME"
               value={username}
-              onChange={(e ) => setUsername(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
               required
               disabled={showVerification}
             />
             {!showVerification && (
               <input
                 type="password"
-                placeholder="Nhập mật khẩu"
+                placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -127,7 +126,7 @@ return (
             {showVerification && (
               <input
                 type="text"
-                placeholder="Mã xác minh từ Email"
+                placeholder="Verification Code from Email"
                 value={verificationCode}
                 onChange={(e) => setVerificationCode(e.target.value)}
                 required
@@ -137,7 +136,7 @@ return (
               <div className="captcha-display">{randomCaptcha}</div>
               <input
                 type="text"
-                placeholder="NHẬP MÃ KIỂM TRA"
+                placeholder="ENTER CAPTCHA"
                 value={userCaptchaInput}
                 onChange={(e) => setUserCaptchaInput(e.target.value)}
                 required
@@ -147,16 +146,16 @@ return (
               </button>
             </div>
             <button type="submit" className="submit-btn" disabled={isLoginButtonDisabled}>
-              {showVerification ? "Xác minh & Đăng nhập" : "Đăng nhập"}
+              {showVerification ? "Verify & Log In" : "Log In"}
             </button>
           </form>
         </div>
       </div>
       <div className="footer-links-wrapper">
         <div className="footer-links">
-          <a href="#">Kết nối với chúng tôi</a> |
-          <a href="#"> Điều khoản và điều kiện</a> |
-          <a href="#"> An toàn bảo mật</a>
+          <a href="#">Connect with us</a> |
+          <a href="#">Terms and Conditions</a> |
+          <a href="#">Security & Privacy</a>
         </div>
       </div>
     </div>
