@@ -542,7 +542,7 @@ const getAllChequeRequests = async () => {
     sendOTP,
     verifyOTP,
     checkTransactionPassword,
-    createOrUpdateTransactionPassword,
+    createOrUpdateTransactionPassword,  
     // requestIssueCheque,
   // getMyRequests: getMyServiceRequests,
   // requestCancelCheque,
