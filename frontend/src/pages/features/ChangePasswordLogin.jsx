@@ -11,7 +11,7 @@ import {
   Shield, VpnKey
 } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/Context'; 
+import { useAuth } from '../../context/Context';
 
 const ChangePasswordPage = () => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const ChangePasswordPage = () => {
     }));
   };
 
-  // Hàm đánh giá độ mạnh mật khẩu
+  // Function to evaluate password strength
   const getPasswordStrength = (password) => {
     if (!password) return { score: 0, label: '', color: '' };
     
@@ -55,10 +55,10 @@ const ChangePasswordPage = () => {
     
     Object.values(checks).forEach(check => check && score++);
     
-    if (score < 3) return { score: score * 20, label: 'Yếu', color: 'error' };
-    if (score < 4) return { score: score * 20, label: 'Trung bình', color: 'warning' };
-    if (score < 5) return { score: score * 20, label: 'Mạnh', color: 'info' };
-    return { score: 100, label: 'Rất mạnh', color: 'success' };
+    if (score < 3) return { score: score * 20, label: 'Weak', color: 'error' };
+    if (score < 4) return { score: score * 20, label: 'Medium', color: 'warning' };
+    if (score < 5) return { score: score * 20, label: 'Strong', color: 'info' };
+    return { score: 100, label: 'Very Strong', color: 'success' };
   };
 
   const validatePassword = (password) => {
@@ -72,17 +72,17 @@ const ChangePasswordPage = () => {
     setSnackbarOpen(false);
 
     if (!formData.currentPassword || !formData.newPassword || !formData.confirmNewPassword) {
-      setError('Vui lòng điền đầy đủ tất cả các trường.');
+      setError('Please fill in all fields.');
       return;
     }
 
     if (formData.newPassword !== formData.confirmNewPassword) {
-      setError('Mật khẩu mới và mật khẩu xác nhận không khớp.');
+      setError('New password and confirmation password do not match.');
       return;
     }
 
     if (!validatePassword(formData.newPassword)) {
-      setError('Mật khẩu mới không đủ mạnh. Vui lòng tuân thủ yêu cầu.');
+      setError('New password is not strong enough. Please adhere to the requirements.');
       return;
     }
 
@@ -91,20 +91,20 @@ const ChangePasswordPage = () => {
       const res = await changePassword(formData.currentPassword, formData.newPassword);
 
       if (res.success) {
-        setSnackbarMessage(res.message || 'Đổi mật khẩu thành công! Bạn sẽ được đăng xuất.');
+        setSnackbarMessage(res.message || 'Password changed successfully! You will be logged out.');
         setSnackbarOpen(true);
 
         setTimeout(() => {
           logout();
           navigate('/login', { replace: true });
-        }, 2000); 
+        }, 2000);
 
       } else {
-        setError(res.message || 'Đổi mật khẩu thất bại. Vui lòng kiểm tra lại mật khẩu hiện tại.');
+        setError(res.message || 'Failed to change password. Please check your current password.');
       }
     } catch (err) {
       console.error("Change Password Error:", err);
-      setError('Lỗi kết nối hoặc không xác định. Vui lòng thử lại.');
+      setError('Connection or unknown error. Please try again.');
     } finally {
       if (!e.defaultPrevented) {
         setLoading(false);
@@ -116,24 +116,23 @@ const ChangePasswordPage = () => {
 
   return (
     <>
-          <GlobalStyles 
-            styles={{
-              '._mainContent_b1piq_13': 
-                {marginLeft: '0px !important', 
-                marginTop: '0px !important',
-                padding: '0px !important'},
-              'html, body': {
-                overflowY: 'hidden', 
-                }, 
-              }} />
-    
-      {/* Background với gradient đỏ */}
-      <Box 
-        sx={{ 
-          minHeight: '100vh', 
-          width: '100%',
-              background: 'url("https://i.pinimg.com/originals/08/6c/9a/086c9a9c9e90cb1cbdc51e8a394a304f.gif")',
+      <GlobalStyles
+        styles={{
+          '._mainContent_b1piq_13':
+            { marginLeft: '0px !important',
+              marginTop: '0px !important',
+              padding: '0px !important' },
+          'html, body': {
+            overflowY: 'hidden',
+          },
+        }} />
 
+      {/* Background with gradient */}
+      <Box
+        sx={{
+          minHeight: '100vh',
+          width: '100%',
+          background: 'url("https://i.pinimg.com/originals/08/6c/9a/086c9a9c9e90cb1cbdc51e8a394a304f.gif")',
           position: 'relative',
           display: 'flex',
           alignItems: 'center',
@@ -152,9 +151,9 @@ const ChangePasswordPage = () => {
       >
         <Container maxWidth="sm" sx={{ position: 'relative', zIndex: 1 }}>
           <Fade in timeout={800}>
-            <Card 
+            <Card
               elevation={0}
-              sx={{ 
+              sx={{
                 background: 'rgba(255,255,255,0.95)',
                 backdropFilter: 'blur(20px)',
                 borderRadius: 3,
@@ -164,8 +163,8 @@ const ChangePasswordPage = () => {
               }}
             >
               {/* Header */}
-              <Box 
-                sx={{ 
+              <Box
+                sx={{
                   background: 'linear-gradient(135deg,rgb(159, 144, 199) 0%, #c53030 100%)',
                   p: 3,
                   textAlign: 'center',
@@ -173,10 +172,10 @@ const ChangePasswordPage = () => {
                   position: 'relative'
                 }}
               >
-                <IconButton 
+                <IconButton
                   onClick={() => navigate(-1)}
                   disabled={loading}
-                  sx={{ 
+                  sx={{
                     position: 'absolute',
                     left: 16,
                     top: '50%',
@@ -191,11 +190,11 @@ const ChangePasswordPage = () => {
                   <ArrowBack />
                 </IconButton>
 
-                <Avatar 
-                  sx={{ 
+                <Avatar
+                  sx={{
                     bgcolor: 'rgba(255,255,255,0.2)',
-                    width: 60, 
-                    height: 60, 
+                    width: 60,
+                    height: 60,
                     mx: 'auto',
                     mb: 2
                   }}
@@ -203,10 +202,10 @@ const ChangePasswordPage = () => {
                   <Shield sx={{ fontSize: 32, color: 'white' }} />
                 </Avatar>
                 <Typography variant="h5" fontWeight={700} sx={{ mb: 1 }}>
-                  Đổi Mật Khẩu
+                  Change Password
                 </Typography>
                 <Typography variant="body2" sx={{ opacity: 0.9 }}>
-                  Bảo vệ tài khoản với mật khẩu mạnh
+                  Protect your account with a strong password
                 </Typography>
               </Box>
 
@@ -219,7 +218,7 @@ const ChangePasswordPage = () => {
                       fullWidth
                       required
                       name="currentPassword"
-                      label="Mật khẩu hiện tại"
+                      label="Current Password"
                       type={showCurrentPassword ? 'text' : 'password'}
                       value={formData.currentPassword}
                       onChange={handleChange}
@@ -244,8 +243,8 @@ const ChangePasswordPage = () => {
                         ),
                         endAdornment: (
                           <InputAdornment position="end">
-                            <IconButton 
-                              onClick={() => setShowCurrentPassword(!showCurrentPassword)} 
+                            <IconButton
+                              onClick={() => setShowCurrentPassword(!showCurrentPassword)}
                               edge="end"
                               sx={{ color: '#e53e3e' }}
                             >
@@ -262,7 +261,7 @@ const ChangePasswordPage = () => {
                         fullWidth
                         required
                         name="newPassword"
-                        label="Mật khẩu mới"
+                        label="New Password"
                         type={showNewPassword ? 'text' : 'password'}
                         value={formData.newPassword}
                         onChange={handleChange}
@@ -287,8 +286,8 @@ const ChangePasswordPage = () => {
                           ),
                           endAdornment: (
                             <InputAdornment position="end">
-                              <IconButton 
-                                onClick={() => setShowNewPassword(!showNewPassword)} 
+                              <IconButton
+                                onClick={() => setShowNewPassword(!showNewPassword)}
                                 edge="end"
                                 sx={{ color: '#e53e3e' }}
                               >
@@ -304,22 +303,22 @@ const ChangePasswordPage = () => {
                         <Box sx={{ mt: 1.5 }}>
                           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 0.5 }}>
                             <Typography variant="caption" color="text.secondary">
-                              Độ mạnh
+                              Strength
                             </Typography>
-                            <Chip 
-                              label={passwordStrength.label} 
+                            <Chip
+                              label={passwordStrength.label}
                               size="small"
                               color={passwordStrength.color}
                               variant="outlined"
                               sx={{ height: 20, fontSize: '0.7rem' }}
                             />
                           </Box>
-                          <LinearProgress 
-                            variant="determinate" 
-                            value={passwordStrength.score} 
+                          <LinearProgress
+                            variant="determinate"
+                            value={passwordStrength.score}
                             color={passwordStrength.color}
-                            sx={{ 
-                              height: 4, 
+                            sx={{
+                              height: 4,
                               borderRadius: 2,
                               backgroundColor: 'rgba(0,0,0,0.1)'
                             }}
@@ -333,7 +332,7 @@ const ChangePasswordPage = () => {
                       fullWidth
                       required
                       name="confirmNewPassword"
-                      label="Xác nhận mật khẩu"
+                      label="Confirm Password"
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={formData.confirmNewPassword}
                       onChange={handleChange}
@@ -341,8 +340,8 @@ const ChangePasswordPage = () => {
                       error={formData.newPassword !== formData.confirmNewPassword && formData.confirmNewPassword !== ''}
                       helperText={
                         formData.newPassword !== formData.confirmNewPassword && formData.confirmNewPassword !== ''
-                        ? 'Mật khẩu không khớp'
-                        : '8-16 ký tự, gồm hoa, thường, số, ký tự đặc biệt'
+                        ? 'Passwords do not match'
+                        : '8-16 chars, incl. uppercase, lowercase, number, & special character'
                       }
                       sx={{
                         '& .MuiOutlinedInput-root': {
@@ -364,8 +363,8 @@ const ChangePasswordPage = () => {
                         ),
                         endAdornment: (
                           <InputAdornment position="end">
-                            <IconButton 
-                              onClick={() => setShowConfirmPassword(!showConfirmPassword)} 
+                            <IconButton
+                              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                               edge="end"
                               sx={{ color: '#e53e3e' }}
                             >
@@ -379,9 +378,9 @@ const ChangePasswordPage = () => {
                     {/* Error Alert - Compact */}
                     {error && (
                       <Fade in={!!error}>
-                        <Alert 
-                          severity="error" 
-                          sx={{ 
+                        <Alert
+                          severity="error"
+                          sx={{
                             borderRadius: 2,
                             backgroundColor: 'rgba(244, 67, 54, 0.1)',
                             border: '1px solid rgba(244, 67, 54, 0.2)',
@@ -401,15 +400,15 @@ const ChangePasswordPage = () => {
                       size="large"
                       startIcon={loading ? <CircularProgress size={20} color="inherit" /> : <CheckCircle />}
                       disabled={loading}
-                      sx={{ 
-                        textTransform: 'none', 
+                      sx={{
+                        textTransform: 'none',
                         borderRadius: 2,
                         py: 1.5,
                         fontWeight: 600,
                         fontSize: '1rem',
                         background: 'linear-gradient(135deg,rgb(63, 68, 134) 0%, #c53030 100%)',
                         boxShadow: '0 6px 20px rgba(229, 62, 62, 0.3)',
-                        '&:hover': { 
+                        '&:hover': {
                           boxShadow: '0 8px 25px rgba(229, 62, 62, 0.4)',
                           transform: 'translateY(-1px)'
                         },
@@ -420,7 +419,7 @@ const ChangePasswordPage = () => {
                         mt: 1
                       }}
                     >
-                      {loading ? 'Đang xử lý...' : 'Cập nhật mật khẩu'}
+                      {loading ? 'Processing...' : 'Update Password'}
                     </Button>
                   </Stack>
                 </form>
@@ -436,11 +435,11 @@ const ChangePasswordPage = () => {
         onClose={() => setSnackbarOpen(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
       >
-        <Alert 
-          onClose={() => setSnackbarOpen(false)} 
-          severity="success" 
-          sx={{ 
-            width: '100%', 
+        <Alert
+          onClose={() => setSnackbarOpen(false)}
+          severity="success"
+          sx={{
+            width: '100%',
             borderRadius: 2,
             backgroundColor: 'rgba(76, 175, 80, 0.9)',
             backdropFilter: 'blur(10px)'
