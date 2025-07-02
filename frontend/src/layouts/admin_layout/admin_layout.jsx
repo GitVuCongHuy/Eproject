@@ -189,7 +189,7 @@ const AdminLayout = ({ children }) => {
         {
         label: 'Yêu cầu',
         icon: <PeopleIcon />,
-        key: 'users',
+        key: '  ',
         path: '/admin_new/admin_request',
         },
         
@@ -218,15 +218,15 @@ const AdminLayout = ({ children }) => {
                 textShadow: '0 2px 4px rgba(0,0,0,0.1)',
               }}
             >
-              VIETCOMBANK ADMIN
+              TECHCOMBANK ADMIN
             </Typography>
           </Box>
           
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <IconButton color="inherit" size="large">
-              <Badge badgeContent={4} color="error">
+              {/* <Badge badgeContent={4} color="error">
                 <NotificationsIcon />
-              </Badge>
+              </Badge> */}
             </IconButton>
             <IconButton
               color="inherit"
