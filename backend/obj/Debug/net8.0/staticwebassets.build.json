@@ -1,19 +1,1333 @@
 {
   "Version": 1,
+  "Hash": "S3BMoVwL7oswjDgm3VvdZLdwUuudmH3NhqqkNMBEKao=",
+  "Source": "backend",
+  "BasePath": "_content/backend",
+  "Mode": "Default",
   "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "backend\\wwwroot",
+      "Source": "backend",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css",
+      "SourceId": "backend",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "backend#[.{fingerprint}]?.styles.css",
+      "AssetKind": "All",
+      "AssetMode": "CurrentProject",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ApplicationBundle",
+      "Fingerprint": "qif5up2w7g",
+      "Integrity": "LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css",
+      "SourceId": "backend",
+      "SourceType": "Computed",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "backend#[.{fingerprint}]!.bundle.scp.css",
+      "AssetKind": "All",
+      "AssetMode": "Reference",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "ScopedCss",
+      "AssetTraitValue": "ProjectBundle",
+      "Fingerprint": "qif5up2w7g",
+      "Integrity": "LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\css\\site.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "css/site#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "c2tiyv64ts",
+      "Integrity": "pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\favicon.ico",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "favicon#[.{fingerprint}]?.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "61n19gt1b8",
+      "Integrity": "Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\js\\site.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "js/site#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xtxxf3hu2r",
+      "Integrity": "hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "nakmwdwsxp",
+      "Integrity": "P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "st1cbwfwo5",
+      "Integrity": "QO8cMbVkLiktUX1cHeXSUSe5nXMXUgyL9cjwnMyxPqc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "5p029spbuu",
+      "Integrity": "96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "5vj65cig9w",
+      "Integrity": "72C/qDCGu+OwWeVA03bf9Ke0T8oIozCub0lfJkhzhvE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "e6q6xbwqzk",
+      "Integrity": "+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2q4vfeazbq",
+      "Integrity": "qvA39OMlEs53jaewqVFmE8DQQrio47bZtlTs+Wu6U8g=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "dy6jgresuo",
+      "Integrity": "9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "o371a8zbv2",
+      "Integrity": "NDSZjIiMPRIoO7/w7+jHef8retP4riQa8PMj4BVRGok=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "mk8rdyw69w",
+      "Integrity": "Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jeal3x0ldm",
+      "Integrity": "FZG0KxbNqITUi4QY7QvPFRS/TccntMfFWfSTdHN/pws=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "z7kmom2977",
+      "Integrity": "359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "okkk44j0xs",
+      "Integrity": "2BbRsE/+czX1ufmDPGpnEieC9u6I3m5BKNDSX1ob3lg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "97yrjpyf9r",
+      "Integrity": "G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "cwzlr5n8x4",
+      "Integrity": "/EdWHN6t5XYPplC88vixGfrBvfEii19kAssb+0YBVU8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "y53cy5s2zj",
+      "Integrity": "BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "wmug9u23qg",
+      "Integrity": "GMDk5pA5dFkOimkBAWeEjYZ+7lgHPS0jYln6p/WJVYs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "z9shlbduue",
+      "Integrity": "mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "j75batdsum",
+      "Integrity": "4WIqPof/vrXYO/jeJ4fDOQKUYWIwe64V3d+9/qNju20=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2yn17lgxub",
+      "Integrity": "ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "vy0bq9ydhf",
+      "Integrity": "p1dop4slefZhL4zG2pa6+2HUrOY1UUArGJXmet8Md9c=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ophe14yye5",
+      "Integrity": "1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ab1c3rmv7g",
+      "Integrity": "puDgKwvlFAord9R8G8of9P2CVYIJUFSoIbjDLEsKEH0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ik6i2hrs65",
+      "Integrity": "wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "56d2bn4wt9",
+      "Integrity": "02ka4ymoE5yEecLUncLG3/SouTQMnTJOktX+96Pt/88=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ozu22stjof",
+      "Integrity": "ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "73kdqttayv",
+      "Integrity": "DRvWr0gangj5/5Q3DRn6ttzpcWDzl3OpHoAwAzNDR5Q=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6gzpyzhau4",
+      "Integrity": "SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "8inm30yfxf",
+      "Integrity": "gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "gjcw7pocpk",
+      "Integrity": "hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4gxs3k148c",
+      "Integrity": "VFvmi/ZSwQFmjS6Pry9B8zXeZ/GA168TXLyykDhNMZE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6l4ir0ityv",
+      "Integrity": "ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/css/bootstrap.rtl.min.css#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "fctod5rc9n",
+      "Integrity": "j7uqK5VoTT4rUHMr911QEU5Sa94lR3uh9E28XBMlzrM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "f6zq8v6eb3",
+      "Integrity": "l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "kbynt5jhd9",
+      "Integrity": "gO4uhxfGuK0ONjRlHuwfghGfEXT5azm1oHWnTEFGTfk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "89qbw8ngem",
+      "Integrity": "rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.bundle.min.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "c2nslu3uf3",
+      "Integrity": "xIBBxDPvWhk8/JdaFEZoejadfaKFUfZFwRS1D4Jkuro=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "n5w6o92d9r",
+      "Integrity": "SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "2lgwfvgpvi",
+      "Integrity": "CllC/sbLvyLE9cQljmFRlITfqdZRnBv2ysX5LJtl/dg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jqwzsa9uv6",
+      "Integrity": "hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.esm.min.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "wsezl0heh6",
+      "Integrity": "sPqzWcSS9aRa2gpWTVNQzemajn8hrFjgXPj3j9QItQo=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "1piudyfv7h",
+      "Integrity": "JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6ukhryfubh",
+      "Integrity": "Qkl5mZUZ64aYBaORRMP9jfD1kz8J6FwiV2M86JDJkdQ=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "4908xmbfjr",
+      "Integrity": "uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/dist/js/bootstrap.min.js#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "u33ctipx7g",
+      "Integrity": "ui/FQI+y0IUsY8Pbi80b8s3GeEL+PsvdaLTONobpn88=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/bootstrap/LICENSE#[.{fingerprint}]?",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "81b7ukuj9c",
+      "Integrity": "ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "03hjc8e09r",
+      "Integrity": "xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "48y08845bh",
+      "Integrity": "RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation-unobtrusive/LICENSE#[.{fingerprint}]?.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "356vix0kms",
+      "Integrity": "16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ay5nd8zt9x",
+      "Integrity": "4jrcLBsi0Ugm8iLKdqDsAyaCDjkscYZdoGuNH/zqs4E=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/additional-methods.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "9oaff4kq20",
+      "Integrity": "N11IyJpHTgDcSCb3AfX4VrBnpGQeem1NoNzzgcXVyCc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "6d0lkjaslc",
+      "Integrity": "5qqb5VxQ2t2a6Zx/neW5uppLLvaGn4nn0NdYp6g8Lyg=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/dist/jquery.validate.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "l1zq2mitth",
+      "Integrity": "6e0N+WJiVKBeTitK1GKSwPi3rbdPpLtuqaiitZjeD2w=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery-validation/LICENSE#[.{fingerprint}]?.md",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "x0q3zqp4vz",
+      "Integrity": "geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/dist/jquery#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "7s2n0ol71w",
+      "Integrity": "KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "ehgnz7f14e",
+      "Integrity": "zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/dist/jquery.min#[.{fingerprint}]?.map",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "5pze98is44",
+      "Integrity": "OZVI+w57FGwS9boYCZpH1ZSpcP7pYhLu4KtIUvPlZ4I=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Identity": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\hoctap\\DoAN\\backend\\wwwroot\\",
+      "BasePath": "_content/backend",
+      "RelativePath": "lib/jquery/LICENSE#[.{fingerprint}]?.txt",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "mlv21k5csn",
+      "Integrity": "hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    }
+  ],
   "Endpoints": [
     {
-      "Route": "backend.qif5up2w7g.styles.css",
-      "AssetFile": "backend.styles.css",
+      "Route": "backend.bundle.scp.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -30,6 +1344,47 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 02 Jul 2025 09:22:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY="
+        }
+      ]
+    },
+    {
+      "Route": "backend.qif5up2w7g.bundle.scp.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\backend.bundle.scp.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1125"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Jul 2025 09:22:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -38,27 +1393,23 @@
           "Value": "qif5up2w7g"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY="
+          "Name": "label",
+          "Value": "backend.bundle.scp.css"
         },
         {
-          "Name": "label",
-          "Value": "backend.styles.css"
+          "Name": "integrity",
+          "Value": "sha256-LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY="
         }
       ]
     },
     {
-      "Route": "backend.styles.css",
-      "AssetFile": "backend.styles.css",
+      "Route": "backend.qif5up2w7g.styles.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -75,6 +1426,55 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 02 Jul 2025 09:22:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "qif5up2w7g"
+        },
+        {
+          "Name": "label",
+          "Value": "backend.styles.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY="
+        }
+      ]
+    },
+    {
+      "Route": "backend.styles.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\obj\\Debug\\net8.0\\scopedcss\\bundle\\backend.styles.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1125"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"LiC0fyyOZkfLjlVgN5CjwlH0xcepS9hfiJs2v7GPMIY=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 02 Jul 2025 09:22:14 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -86,16 +1486,12 @@
     },
     {
       "Route": "css/site.c2tiyv64ts.css",
-      "AssetFile": "css/site.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -112,6 +1508,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -120,27 +1520,23 @@
           "Value": "c2tiyv64ts"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
-        },
-        {
           "Name": "label",
           "Value": "css/site.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-pAGv4ietcJNk/EwsQZ5BN9+K4MuNYS2a9wl4Jw+q9D0="
         }
       ]
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "css/site.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -157,6 +1553,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -168,16 +1568,12 @@
     },
     {
       "Route": "favicon.61n19gt1b8.ico",
-      "AssetFile": "favicon.ico",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -194,6 +1590,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -202,27 +1602,23 @@
           "Value": "61n19gt1b8"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
-        },
-        {
           "Name": "label",
           "Value": "favicon.ico"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtxf9L+5ITKRc1gIRl4VbUpGkRNfOBXjYTdhJD4facM="
         }
       ]
     },
     {
       "Route": "favicon.ico",
-      "AssetFile": "favicon.ico",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\favicon.ico",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
         },
         {
           "Name": "Content-Length",
@@ -239,6 +1635,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
         }
       ],
       "EndpointProperties": [
@@ -250,16 +1650,12 @@
     },
     {
       "Route": "js/site.js",
-      "AssetFile": "js/site.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -276,6 +1672,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -287,16 +1687,12 @@
     },
     {
       "Route": "js/site.xtxxf3hu2r.js",
-      "AssetFile": "js/site.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\js\\site.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -313,6 +1709,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -321,109 +1721,23 @@
           "Value": "xtxxf3hu2r"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
-        },
-        {
           "Name": "label",
           "Value": "js/site.js"
-        }
-      ]
-    },
-    {
-      "Route": "lib/bootstrap/LICENSE",
-      "AssetFile": "lib/bootstrap/LICENSE",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1153"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk="
-        }
-      ]
-    },
-    {
-      "Route": "lib/bootstrap/LICENSE.81b7ukuj9c",
-      "AssetFile": "lib/bootstrap/LICENSE",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1153"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "application/octet-stream"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "81b7ukuj9c"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk="
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/LICENSE"
+          "Value": "sha256-hRQyftXiu1lLX2P9Ly9xa4gHJgLeR1uGN5qegUobtGo="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -440,6 +1754,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -451,16 +1769,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -477,6 +1791,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -488,16 +1806,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.css.st1cbwfwo5.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -514,6 +1828,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -522,27 +1840,23 @@
           "Value": "st1cbwfwo5"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-QO8cMbVkLiktUX1cHeXSUSe5nXMXUgyL9cjwnMyxPqc="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-QO8cMbVkLiktUX1cHeXSUSe5nXMXUgyL9cjwnMyxPqc="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.5p029spbuu.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -559,6 +1873,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -567,27 +1885,23 @@
           "Value": "5p029spbuu"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-96ayIUEnpKr7n5BIsFK5vJ3qXMXFgvRl9/CBcHs6/Ts="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -604,6 +1918,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -615,16 +1933,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.5vj65cig9w.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -641,6 +1955,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -649,27 +1967,23 @@
           "Value": "5vj65cig9w"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-72C/qDCGu+OwWeVA03bf9Ke0T8oIozCub0lfJkhzhvE="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-72C/qDCGu+OwWeVA03bf9Ke0T8oIozCub0lfJkhzhvE="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -686,6 +2000,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -697,16 +2015,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.nakmwdwsxp.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -723,6 +2037,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -731,27 +2049,23 @@
           "Value": "nakmwdwsxp"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-P4Ski6RrsG4nxKfPqaVoyRMoesl9UzArmfT+4fLqKHY="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -768,6 +2082,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -779,16 +2097,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.2q4vfeazbq.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -805,6 +2119,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -813,27 +2131,23 @@
           "Value": "2q4vfeazbq"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-qvA39OMlEs53jaewqVFmE8DQQrio47bZtlTs+Wu6U8g="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-qvA39OMlEs53jaewqVFmE8DQQrio47bZtlTs+Wu6U8g="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -850,6 +2164,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -861,16 +2179,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.e6q6xbwqzk.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -887,6 +2201,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -895,27 +2213,23 @@
           "Value": "e6q6xbwqzk"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-+ugQREUkP4Wnp1VX2L2lvw0Q2mgKYvYAZr1c2or+ysM="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -932,6 +2246,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -943,16 +2261,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -969,6 +2283,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -980,16 +2298,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.o371a8zbv2.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1006,6 +2320,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1014,27 +2332,23 @@
           "Value": "o371a8zbv2"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-NDSZjIiMPRIoO7/w7+jHef8retP4riQa8PMj4BVRGok="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-NDSZjIiMPRIoO7/w7+jHef8retP4riQa8PMj4BVRGok="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.dy6jgresuo.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1051,6 +2365,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1059,27 +2377,23 @@
           "Value": "dy6jgresuo"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9eX2dpELXvYs+6il2MHwf5OOPVOZjxVK1b1GWgL0B0k="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1096,6 +2410,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1107,16 +2425,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.jeal3x0ldm.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1133,6 +2447,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1141,27 +2459,23 @@
           "Value": "jeal3x0ldm"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-FZG0KxbNqITUi4QY7QvPFRS/TccntMfFWfSTdHN/pws="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-FZG0KxbNqITUi4QY7QvPFRS/TccntMfFWfSTdHN/pws="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1178,6 +2492,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1189,16 +2507,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1215,6 +2529,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1226,16 +2544,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1252,6 +2566,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1263,16 +2581,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.okkk44j0xs.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1289,6 +2603,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1297,27 +2615,23 @@
           "Value": "okkk44j0xs"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-2BbRsE/+czX1ufmDPGpnEieC9u6I3m5BKNDSX1ob3lg="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-2BbRsE/+czX1ufmDPGpnEieC9u6I3m5BKNDSX1ob3lg="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.min.z7kmom2977.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1334,6 +2648,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1342,27 +2660,23 @@
           "Value": "z7kmom2977"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-359CMPAICGkV+zve4A4HJMha3bwqTFTjl+QC1KJK5DQ="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.mk8rdyw69w.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1379,6 +2693,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1387,27 +2705,23 @@
           "Value": "mk8rdyw69w"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Jtl65EICD4ds6dQZbx1ongvMXj8D127HCg5XRBXXYGw="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.97yrjpyf9r.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1424,6 +2738,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1432,27 +2750,23 @@
           "Value": "97yrjpyf9r"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-G0PQCDL7ETO6rITRlBIHDKvvSuJFn5p6h+WmbPX5xr4="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1469,6 +2783,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1480,16 +2798,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.cwzlr5n8x4.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1506,6 +2820,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1514,27 +2832,23 @@
           "Value": "cwzlr5n8x4"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-/EdWHN6t5XYPplC88vixGfrBvfEii19kAssb+0YBVU8="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-/EdWHN6t5XYPplC88vixGfrBvfEii19kAssb+0YBVU8="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1551,6 +2865,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1562,16 +2880,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1588,6 +2902,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1599,16 +2917,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1625,6 +2939,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1636,16 +2954,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.wmug9u23qg.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1662,6 +2976,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1670,27 +2988,23 @@
           "Value": "wmug9u23qg"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-GMDk5pA5dFkOimkBAWeEjYZ+7lgHPS0jYln6p/WJVYs="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-GMDk5pA5dFkOimkBAWeEjYZ+7lgHPS0jYln6p/WJVYs="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.y53cy5s2zj.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1707,6 +3021,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1715,27 +3033,23 @@
           "Value": "y53cy5s2zj"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-BnHmEJpgor1n0UuwNdXG2VhHdV1r9MibuqBVHsgp9a8="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1752,6 +3066,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1763,16 +3081,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.j75batdsum.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1789,6 +3103,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1797,27 +3115,23 @@
           "Value": "j75batdsum"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-4WIqPof/vrXYO/jeJ4fDOQKUYWIwe64V3d+9/qNju20="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4WIqPof/vrXYO/jeJ4fDOQKUYWIwe64V3d+9/qNju20="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1834,6 +3148,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1845,16 +3163,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.2yn17lgxub.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1871,6 +3185,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1879,27 +3197,23 @@
           "Value": "2yn17lgxub"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ekoF4YNq4OUU4BoZ6FG2LTKD68LJvW49arNgykHOZfM="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1916,6 +3230,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1927,16 +3245,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -1953,6 +3267,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -1964,16 +3282,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.vy0bq9ydhf.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -1990,6 +3304,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -1998,27 +3316,23 @@
           "Value": "vy0bq9ydhf"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-p1dop4slefZhL4zG2pa6+2HUrOY1UUArGJXmet8Md9c="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-p1dop4slefZhL4zG2pa6+2HUrOY1UUArGJXmet8Md9c="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2035,6 +3349,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2046,16 +3364,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.ab1c3rmv7g.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2072,6 +3386,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2080,27 +3398,23 @@
           "Value": "ab1c3rmv7g"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-puDgKwvlFAord9R8G8of9P2CVYIJUFSoIbjDLEsKEH0="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-puDgKwvlFAord9R8G8of9P2CVYIJUFSoIbjDLEsKEH0="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2117,6 +3431,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2128,16 +3446,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2154,6 +3468,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2165,16 +3483,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.56d2bn4wt9.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2191,6 +3505,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2199,27 +3517,23 @@
           "Value": "56d2bn4wt9"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-02ka4ymoE5yEecLUncLG3/SouTQMnTJOktX+96Pt/88="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-02ka4ymoE5yEecLUncLG3/SouTQMnTJOktX+96Pt/88="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2236,6 +3550,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2247,16 +3565,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.ik6i2hrs65.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2273,6 +3587,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2281,27 +3599,23 @@
           "Value": "ik6i2hrs65"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-wseUsl7uipUzPYc/DBMMTMFA7hBTcxpw29RKOxLzXSc="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.ophe14yye5.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2318,6 +3632,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2326,27 +3644,23 @@
           "Value": "ophe14yye5"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-1N1aPW6sTYexHfJCcDS4iElpPdWahP2Fr+Um56w0PjI="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap-utilities.z9shlbduue.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2363,6 +3677,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2371,27 +3689,23 @@
           "Value": "z9shlbduue"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap-utilities.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-mcVOHRq7FsWaycSfboGsTpzuQZ3cIOR/GDHYxL6q2Yg="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2408,6 +3722,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2419,16 +3737,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.73kdqttayv.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2445,6 +3759,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2453,27 +3771,23 @@
           "Value": "73kdqttayv"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-DRvWr0gangj5/5Q3DRn6ttzpcWDzl3OpHoAwAzNDR5Q="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-DRvWr0gangj5/5Q3DRn6ttzpcWDzl3OpHoAwAzNDR5Q="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2490,6 +3804,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2501,16 +3819,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.6gzpyzhau4.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2527,6 +3841,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2535,27 +3853,23 @@
           "Value": "6gzpyzhau4"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SiIVMGgRhdXjKSTIddX7mh9IbOXVcwQWc7/p4nS6D/0="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2572,6 +3886,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2583,16 +3901,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.8inm30yfxf.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2609,6 +3923,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2617,27 +3935,23 @@
           "Value": "8inm30yfxf"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gBwg2tmA0Ci2u54gMF1jNCVku6vznarkLS6D76htNNQ="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2654,6 +3968,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2665,16 +3983,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.ozu22stjof.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2691,6 +4005,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2699,27 +4017,23 @@
           "Value": "ozu22stjof"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ZMvmWDSU4zY1Z29EQGm5Mubfz/YxF4hiReGqx84o4tA="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2736,6 +4050,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2747,16 +4065,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.4gxs3k148c.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2773,6 +4087,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2781,27 +4099,23 @@
           "Value": "4gxs3k148c"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-VFvmi/ZSwQFmjS6Pry9B8zXeZ/GA168TXLyykDhNMZE="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-VFvmi/ZSwQFmjS6Pry9B8zXeZ/GA168TXLyykDhNMZE="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2818,6 +4132,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2829,16 +4147,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.gjcw7pocpk.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2855,6 +4169,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2863,27 +4181,23 @@
           "Value": "gjcw7pocpk"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.rtl.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hA1uBYAPgKq7OVoXF7sqU9NtylyP0K7AJn0a4zQcTbg="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.6l4ir0ityv.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2900,6 +4214,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2908,27 +4226,23 @@
           "Value": "6l4ir0ityv"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ukKL5IDSyNoXFyp0wkgXeBpBITyM7JsCE6Dp96H1vI8="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -2945,6 +4259,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2956,16 +4274,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.fctod5rc9n.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -2982,6 +4296,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2990,27 +4308,23 @@
           "Value": "fctod5rc9n"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-j7uqK5VoTT4rUHMr911QEU5Sa94lR3uh9E28XBMlzrM="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-j7uqK5VoTT4rUHMr911QEU5Sa94lR3uh9E28XBMlzrM="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
-      "AssetFile": "lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3027,6 +4341,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3038,16 +4356,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.1piudyfv7h.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3064,6 +4378,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3072,27 +4390,23 @@
           "Value": "1piudyfv7h"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.f6zq8v6eb3.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3109,6 +4423,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3117,27 +4435,23 @@
           "Value": "f6zq8v6eb3"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.bundle.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3154,6 +4468,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3165,16 +4483,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.kbynt5jhd9.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3191,6 +4505,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3199,27 +4517,23 @@
           "Value": "kbynt5jhd9"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-gO4uhxfGuK0ONjRlHuwfghGfEXT5azm1oHWnTEFGTfk="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gO4uhxfGuK0ONjRlHuwfghGfEXT5azm1oHWnTEFGTfk="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3236,6 +4550,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3247,16 +4565,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.89qbw8ngem.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3273,6 +4587,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3281,27 +4599,23 @@
           "Value": "89qbw8ngem"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3318,6 +4632,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3329,16 +4647,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.c2nslu3uf3.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3355,6 +4669,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3363,27 +4681,23 @@
           "Value": "c2nslu3uf3"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-xIBBxDPvWhk8/JdaFEZoejadfaKFUfZFwRS1D4Jkuro="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xIBBxDPvWhk8/JdaFEZoejadfaKFUfZFwRS1D4Jkuro="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3400,6 +4714,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3411,16 +4729,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3437,6 +4751,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3448,16 +4766,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.2lgwfvgpvi.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3474,6 +4788,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3482,27 +4800,23 @@
           "Value": "2lgwfvgpvi"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-CllC/sbLvyLE9cQljmFRlITfqdZRnBv2ysX5LJtl/dg="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.esm.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-CllC/sbLvyLE9cQljmFRlITfqdZRnBv2ysX5LJtl/dg="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3519,6 +4833,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3530,16 +4848,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.jqwzsa9uv6.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3556,6 +4870,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3564,27 +4882,23 @@
           "Value": "jqwzsa9uv6"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.esm.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3601,6 +4915,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3612,16 +4930,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3638,6 +4952,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3649,16 +4967,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.min.js.wsezl0heh6.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3675,6 +4989,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3683,27 +5001,23 @@
           "Value": "wsezl0heh6"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-sPqzWcSS9aRa2gpWTVNQzemajn8hrFjgXPj3j9QItQo="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-sPqzWcSS9aRa2gpWTVNQzemajn8hrFjgXPj3j9QItQo="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.esm.n5w6o92d9r.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.esm.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3720,6 +5034,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3728,27 +5046,23 @@
           "Value": "n5w6o92d9r"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.esm.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3765,6 +5079,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3776,16 +5094,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.6ukhryfubh.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3802,6 +5116,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3810,27 +5128,23 @@
           "Value": "6ukhryfubh"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-Qkl5mZUZ64aYBaORRMP9jfD1kz8J6FwiV2M86JDJkdQ="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Qkl5mZUZ64aYBaORRMP9jfD1kz8J6FwiV2M86JDJkdQ="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.js.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3847,6 +5161,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3858,16 +5176,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.4908xmbfjr.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -3884,6 +5198,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -3892,27 +5210,23 @@
           "Value": "4908xmbfjr"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU="
         }
       ]
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3929,6 +5243,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3940,16 +5258,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -3966,6 +5280,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3977,16 +5295,12 @@
     },
     {
       "Route": "lib/bootstrap/dist/js/bootstrap.min.js.u33ctipx7g.map",
-      "AssetFile": "lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4003,6 +5317,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4011,18 +5329,18 @@
           "Value": "u33ctipx7g"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-ui/FQI+y0IUsY8Pbi80b8s3GeEL+PsvdaLTONobpn88="
-        },
-        {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.min.js.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ui/FQI+y0IUsY8Pbi80b8s3GeEL+PsvdaLTONobpn88="
         }
       ]
     },
     {
-      "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
-      "AssetFile": "lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "Route": "lib/bootstrap/LICENSE",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\LICENSE",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4030,90 +5348,86 @@
           "Value": "bytes"
         },
         {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        },
-        {
           "Name": "Content-Length",
-          "Value": "1139"
+          "Value": "1153"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/plain"
+          "Value": "application/octet-stream"
         },
         {
           "Name": "ETag",
-          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+          "Value": "\"ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=\""
         },
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/bootstrap/LICENSE.81b7ukuj9c",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1153"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "application/octet-stream"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "356vix0kms"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+          "Value": "81b7ukuj9c"
         },
         {
           "Name": "label",
-          "Value": "lib/jquery-validation-unobtrusive/LICENSE.txt"
-        }
-      ]
-    },
-    {
-      "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt",
-      "AssetFile": "lib/jquery-validation-unobtrusive/LICENSE.txt",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
+          "Value": "lib/bootstrap/LICENSE"
         },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1139"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/plain"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
-        }
-      ],
-      "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+          "Value": "sha256-ZH6pA6BSx6fuHZvdaKph1DwUJ+VSYilIiEQu8ilnvqk="
         }
       ]
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.03hjc8e09r.js",
-      "AssetFile": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4130,6 +5444,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4138,27 +5456,23 @@
           "Value": "03hjc8e09r"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-xJbBMLGhYbXlPrrrddrSVmduyF6KEtbxEsYxw7hYZV4="
         }
       ]
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
-      "AssetFile": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4175,6 +5489,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4186,16 +5504,12 @@
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.48y08845bh.js",
-      "AssetFile": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4212,6 +5526,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4220,27 +5538,23 @@
           "Value": "48y08845bh"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-RFWFWIIPsjB4DucR4jqwxTWw13ZmtI+s6tVR2LJmZXk="
         }
       ]
     },
     {
       "Route": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
-      "AssetFile": "lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4257,6 +5571,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4267,8 +5585,8 @@
       ]
     },
     {
-      "Route": "lib/jquery-validation/LICENSE.md",
-      "AssetFile": "lib/jquery-validation/LICENSE.md",
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.356vix0kms.txt",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4276,81 +5594,44 @@
           "Value": "bytes"
         },
         {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
           "Name": "Content-Length",
-          "Value": "1117"
+          "Value": "1139"
         },
         {
           "Name": "Content-Type",
-          "Value": "text/markdown"
+          "Value": "text/plain"
         },
         {
           "Name": "ETag",
-          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
         },
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
-        }
-      ]
-    },
-    {
-      "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
-      "AssetFile": "lib/jquery-validation/LICENSE.md",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
         },
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1117"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/markdown"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "x0q3zqp4vz"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+          "Value": "356vix0kms"
         },
         {
           "Name": "label",
-          "Value": "lib/jquery-validation/LICENSE.md"
+          "Value": "lib/jquery-validation-unobtrusive/LICENSE.txt"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
         }
       ]
     },
     {
-      "Route": "lib/jquery-validation/dist/additional-methods.ay5nd8zt9x.js",
-      "AssetFile": "lib/jquery-validation/dist/additional-methods.js",
+      "Route": "lib/jquery-validation-unobtrusive/LICENSE.txt",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4358,8 +5639,41 @@
           "Value": "bytes"
         },
         {
+          "Name": "Content-Length",
+          "Value": "1139"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-16aFlqtpsG9RyieKZUUUjkJpqTgcJtWXwT312I4Iz1s="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/dist/additional-methods.ay5nd8zt9x.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
         },
         {
           "Name": "Content-Length",
@@ -4376,6 +5690,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4384,27 +5702,23 @@
           "Value": "ay5nd8zt9x"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-4jrcLBsi0Ugm8iLKdqDsAyaCDjkscYZdoGuNH/zqs4E="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery-validation/dist/additional-methods.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-4jrcLBsi0Ugm8iLKdqDsAyaCDjkscYZdoGuNH/zqs4E="
         }
       ]
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.js",
-      "AssetFile": "lib/jquery-validation/dist/additional-methods.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4421,6 +5735,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4432,16 +5750,12 @@
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.9oaff4kq20.js",
-      "AssetFile": "lib/jquery-validation/dist/additional-methods.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4458,6 +5772,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4466,27 +5784,23 @@
           "Value": "9oaff4kq20"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-N11IyJpHTgDcSCb3AfX4VrBnpGQeem1NoNzzgcXVyCc="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery-validation/dist/additional-methods.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-N11IyJpHTgDcSCb3AfX4VrBnpGQeem1NoNzzgcXVyCc="
         }
       ]
     },
     {
       "Route": "lib/jquery-validation/dist/additional-methods.min.js",
-      "AssetFile": "lib/jquery-validation/dist/additional-methods.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4503,6 +5817,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4514,16 +5832,12 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.6d0lkjaslc.js",
-      "AssetFile": "lib/jquery-validation/dist/jquery.validate.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4540,6 +5854,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4548,27 +5866,23 @@
           "Value": "6d0lkjaslc"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-5qqb5VxQ2t2a6Zx/neW5uppLLvaGn4nn0NdYp6g8Lyg="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery-validation/dist/jquery.validate.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-5qqb5VxQ2t2a6Zx/neW5uppLLvaGn4nn0NdYp6g8Lyg="
         }
       ]
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.js",
-      "AssetFile": "lib/jquery-validation/dist/jquery.validate.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4585,6 +5899,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4596,16 +5914,12 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.js",
-      "AssetFile": "lib/jquery-validation/dist/jquery.validate.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4622,6 +5936,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4633,16 +5951,12 @@
     },
     {
       "Route": "lib/jquery-validation/dist/jquery.validate.min.l1zq2mitth.js",
-      "AssetFile": "lib/jquery-validation/dist/jquery.validate.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4659,6 +5973,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4667,18 +5985,18 @@
           "Value": "l1zq2mitth"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-6e0N+WJiVKBeTitK1GKSwPi3rbdPpLtuqaiitZjeD2w="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery-validation/dist/jquery.validate.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-6e0N+WJiVKBeTitK1GKSwPi3rbdPpLtuqaiitZjeD2w="
         }
       ]
     },
     {
-      "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
-      "AssetFile": "lib/jquery/LICENSE.txt",
+      "Route": "lib/jquery-validation/LICENSE.md",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4686,8 +6004,41 @@
           "Value": "bytes"
         },
         {
+          "Name": "Content-Length",
+          "Value": "1117"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/markdown"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery-validation/LICENSE.x0q3zqp4vz.md",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
         },
         {
           "Name": "Content-Length",
@@ -4695,81 +6046,44 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/plain"
+          "Value": "text/markdown"
         },
         {
           "Name": "ETag",
-          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+          "Value": "\"geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw=\""
         },
         {
           "Name": "Last-Modified",
           "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "mlv21k5csn"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+          "Value": "x0q3zqp4vz"
         },
         {
           "Name": "label",
-          "Value": "lib/jquery/LICENSE.txt"
-        }
-      ]
-    },
-    {
-      "Route": "lib/jquery/LICENSE.txt",
-      "AssetFile": "lib/jquery/LICENSE.txt",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
+          "Value": "lib/jquery-validation/LICENSE.md"
         },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "1117"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/plain"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
-        }
-      ],
-      "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+          "Value": "sha256-geHEkw/WGPdaHQMRq5HuNY9snliNzU/y2OW8ycnhGXw="
         }
       ]
     },
     {
       "Route": "lib/jquery/dist/jquery.7s2n0ol71w.js",
-      "AssetFile": "lib/jquery/dist/jquery.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4786,6 +6100,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4794,27 +6112,23 @@
           "Value": "7s2n0ol71w"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery/dist/jquery.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-KSI/3xxCrCexCupdzQJRP1B6Iqg+2NA+X2u38cQdqq8="
         }
       ]
     },
     {
       "Route": "lib/jquery/dist/jquery.js",
-      "AssetFile": "lib/jquery/dist/jquery.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4831,6 +6145,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4842,16 +6160,12 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.5pze98is44.map",
-      "AssetFile": "lib/jquery/dist/jquery.min.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4868,6 +6182,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4876,27 +6194,23 @@
           "Value": "5pze98is44"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-OZVI+w57FGwS9boYCZpH1ZSpcP7pYhLu4KtIUvPlZ4I="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery/dist/jquery.min.map"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OZVI+w57FGwS9boYCZpH1ZSpcP7pYhLu4KtIUvPlZ4I="
         }
       ]
     },
     {
       "Route": "lib/jquery/dist/jquery.min.ehgnz7f14e.js",
-      "AssetFile": "lib/jquery/dist/jquery.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
         },
         {
           "Name": "Content-Length",
@@ -4913,6 +6227,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -4921,27 +6239,23 @@
           "Value": "ehgnz7f14e"
         },
         {
-          "Name": "integrity",
-          "Value": "sha256-zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs="
-        },
-        {
           "Name": "label",
           "Value": "lib/jquery/dist/jquery.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-zp0HUArZHsK1JMJwdk7EyaM+eDINjTdOxADt5Ij2JRs="
         }
       ]
     },
     {
       "Route": "lib/jquery/dist/jquery.min.js",
-      "AssetFile": "lib/jquery/dist/jquery.min.js",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4958,6 +6272,10 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -4969,16 +6287,12 @@
     },
     {
       "Route": "lib/jquery/dist/jquery.min.map",
-      "AssetFile": "lib/jquery/dist/jquery.min.map",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "Selectors": [],
       "ResponseHeaders": [
         {
           "Name": "Accept-Ranges",
           "Value": "bytes"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "no-cache"
         },
         {
           "Name": "Content-Length",
@@ -4995,12 +6309,98 @@
         {
           "Name": "Last-Modified",
           "Value": "Fri, 20 Jun 2025 11:35:08 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
           "Value": "sha256-OZVI+w57FGwS9boYCZpH1ZSpcP7pYhLu4KtIUvPlZ4I="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.mlv21k5csn.txt",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1117"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "mlv21k5csn"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery/LICENSE.txt"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
+        }
+      ]
+    },
+    {
+      "Route": "lib/jquery/LICENSE.txt",
+      "AssetFile": "D:\\hoctap\\DoAN\\backend\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1117"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/plain"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 04 Jun 2025 12:34:32 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-hjIBkvmgxQXbNXK3B9YQ3t06RwLuQSQzC/dpvuB/lMk="
         }
       ]
     }
