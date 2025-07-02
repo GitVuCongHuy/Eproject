@@ -10,7 +10,6 @@ import Bill from "./pages/login/Bills";
 import CheckRequest from "./pages/service/Chequebook";
 import Guide from "./pages/features/Guide";
 import Admin from "./pages/account/Admin";
-import CancelCheckPayment from "./pages/service/ChequebookDelete";
 import Statement from "./pages/service/Statement";
 import ChangePasswordPage from "./pages/features/ChangePasswordLogin";
 import  Settings from "./pages/features/Password";
@@ -40,7 +39,6 @@ function App() {
             <Route path="chequebook" element={<CheckRequest />} />
             <Route path="guide" element={<Guide />} />
             <Route path="admin" element={<Admin />} />
-            <Route path="cancel" element={<CancelCheckPayment />} />
             <Route path="update-password-login" element={<ChangePasswordPage />} />
             <Route path="/password" element={<Settings />} />
           </Route>
