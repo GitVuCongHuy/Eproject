@@ -59,7 +59,7 @@ export default function TechcombankAccountsPage() {
     switch (cardType) {
       case 'Credit':
         return {
-          label: 'Thẻ tín dụng',
+          label: 'Thẻ ghi nợ',
           color: colors.warning,
           bgColor: 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)'
         };
@@ -380,7 +380,7 @@ export default function TechcombankAccountsPage() {
         </Stack>
 
         {/* Các tính năng nhanh */}
-        <Fade in={true} timeout={1200}>
+        {/* <Fade in={true} timeout={1200}>
           <Paper
             elevation={0}
             sx={{
@@ -478,7 +478,7 @@ export default function TechcombankAccountsPage() {
               </Grid>
             </Grid>
           </Paper>
-        </Fade>
+        </Fade> */}
       </>
     );
   };

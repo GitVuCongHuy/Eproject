@@ -55,7 +55,7 @@ const menuItems = [
     submenu: [
       { name: 'Chuyển tiền', path: '/transfer/internal', icon: '💸' },
       { name: 'Yêu cầu cấp sổ séc', path: '/chequebook', icon: '📒' },
-      { name: 'Hủy séc', path: '/cancel', icon: '🚫' },
+      // { name: 'Hủy séc', path: '/cancel', icon: '🚫' },
       { name: 'Sao kê giao dịch', path: '/statement', icon: '📊' },
     ]
   },
