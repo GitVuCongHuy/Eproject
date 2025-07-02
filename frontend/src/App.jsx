@@ -16,14 +16,23 @@ import ChangePasswordPage from "./features/ChangePasswordLogin"; // Sửa từ "
 import Settings from "./features/Password"; // Sửa từ "./pages/features/Password"
 //KienDev
 import AdminLayout from "./layouts/admin_layout/admin_layout";
+<<<<<<< HEAD
 import Admin_Main from "./admin/Admin_Main"; // Sửa từ "./pages/admin/Admin_Main"
 import Admin_request from "./admin/Admin_request"; // Sửa từ "./pages/admin/Admin_request"
 import Admin_account from "./admin/Admin_account"; // Sửa từ "./pages/admin/Admin_account"
+=======
+import Admin_Main from "./pages/admin/Admin_Main";
+import Admin_request from "./pages/admin/Admin_request";
+import Admin_account from "./pages/admin/Admin_account";
+// import Admin_login from "./pages/admin/Admin_login";
+// import AdminProvider from "./context/admin_context";
+>>>>>>> d4239c0c9131a836106613bb36093668d3735c14
 //KienDev
 
 function App() {
   return (
     <AuthProvider>
+      {/* <AdminProvider> */}
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -42,6 +51,9 @@ function App() {
             <Route path="/password" element={<Settings />} />
           </Route>
 
+
+          {/* Admin */}
+          {/* <Route path="admin_login" element={<Admin_login/>} /> */}
           <Route path="/admin_new" element={<AdminLayout />}>
               <Route path="admin_main" element={<Admin_Main/>} />
               <Route path="admin_request" element={<Admin_request/>} />
@@ -50,6 +62,7 @@ function App() {
         
         </Routes>
       </Router>
+      {/* </AdminProvider> */}
     </AuthProvider>
   );
 }

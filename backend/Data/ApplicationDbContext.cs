@@ -18,6 +18,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Bank_Transaction> bank_Transaction { get; set; }
     public DbSet<Cheque> Cheques { get; set; }
     public DbSet<ChequeFee> ChequeFees { get; set; }
+    public DbSet<Admin_Customer> Admin_Customers { get; set; }
 
 
 }
