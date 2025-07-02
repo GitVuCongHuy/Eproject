@@ -27,7 +27,7 @@ import {
   Key,
   Sparkles
 } from 'lucide-react';
-
+import { useAuth } from '../../context/Context';
 const PasswordField = ({ label, field, placeholder, required = true, showPasswords, formData, errors, handleInputChange, togglePasswordVisibility }) => (
   <Box sx={{ mb: 2 }}>
     <TextField
@@ -97,6 +97,7 @@ const PasswordField = ({ label, field, placeholder, required = true, showPasswor
 );
 
 const TransactionPasswordSettings = () => {
+  const { checkTransactionPassword, createOrUpdateTransactionPassword } = useAuth();
   const [mode, setMode] = useState('create');
   const [showPasswords, setShowPasswords] = useState({
     current: false,
@@ -168,12 +169,35 @@ const TransactionPasswordSettings = () => {
     setErrors({});
     
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setSuccess(mode === 'change' ? 'Đổi mật khẩu thành công!' : 'Tạo mật khẩu thành công!');
-      setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      const currentPasswordNum = parseInt(formData.currentPassword, 10);
+      const newPasswordNum = parseInt(formData.newPassword, 10);
+
+      if (mode === 'change') {
+        const checkResult = await checkTransactionPassword(currentPasswordNum);
+        
+        if (!checkResult.success) {
+          throw checkResult;
+        }
+      }
+
+      const createResult = await createOrUpdateTransactionPassword(newPasswordNum);
+
+      if (createResult.success) {
+        setSuccess(createResult.message || 'Thao tác thành công!');
+        setFormData({ currentPassword: '', newPassword: '', confirmPassword: '' });
+      } else {
+        throw createResult;
+      }
+      
     } catch (error) {
-      setErrors({ general: 'Có lỗi xảy ra, vui lòng thử lại.' });
+      if (error.errorType === 'Invalid_Transaction_Password') {
+        setErrors({ currentPassword: error.message || 'Mật khẩu giao dịch hiện tại không chính xác' });
+      } else if (error.errorType === 'Transaction_Password_Not_Set') {
+        setErrors({ general: 'Bạn chưa có mật khẩu. Vui lòng sử dụng chức năng "Tạo mật khẩu".' });
+      } else {
+        setErrors({ general: error.message || 'Có lỗi xảy ra, vui lòng thử lại.' });
+      }
+      console.error("API Error:", error);
     } finally {
       setLoading(false);
     }
