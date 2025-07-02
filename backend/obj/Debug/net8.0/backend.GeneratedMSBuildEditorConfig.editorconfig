@@ -1,0 +1,116 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = backend
+build_property.RootNamespace = backend
+<<<<<<< HEAD
+build_property.ProjectDir = D:\hoctap\DoAN\backend\
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+build_property.ProjectDir = E:\FPT\Aocho\backend\
+=======
+build_property.ProjectDir = D:\hoctap\DoAN\backend\
+>>>>>>> 56e350fd503ed96118785baa9acb741a50089373
+=======
+build_property.ProjectDir = E:\Eproject\backend\
+>>>>>>> 5572c92d79a37f6e8cf2c9f517cac66b724c9fa6
+>>>>>>> 872710a92f80c87edab0ed9fdf1c70d1fd5509c2
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+<<<<<<< HEAD
+build_property.MSBuildProjectDirectory = D:\hoctap\DoAN\backend
+=======
+<<<<<<< HEAD
+<<<<<<< HEAD
+build_property.MSBuildProjectDirectory = E:\FPT\Aocho\backend
+build_property._RazorSourceGeneratorDebug = 
+
+[E:/FPT/Aocho/backend/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/FPT/Aocho/backend/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/FPT/Aocho/backend/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/FPT/Aocho/backend/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/FPT/Aocho/backend/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/FPT/Aocho/backend/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[E:/FPT/Aocho/backend/Views/Shared/_Layout.cshtml]
+=======
+build_property.MSBuildProjectDirectory = D:\hoctap\DoAN\backend
+=======
+build_property.MSBuildProjectDirectory = E:\Eproject\backend
+>>>>>>> 5572c92d79a37f6e8cf2c9f517cac66b724c9fa6
+>>>>>>> 872710a92f80c87edab0ed9fdf1c70d1fd5509c2
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[D:/hoctap/DoAN/backend/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/hoctap/DoAN/backend/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/hoctap/DoAN/backend/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/hoctap/DoAN/backend/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/hoctap/DoAN/backend/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/hoctap/DoAN/backend/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+<<<<<<< HEAD
+[D:/hoctap/DoAN/backend/Views/Shared/_Layout.cshtml]
+=======
+<<<<<<< HEAD
+[D:/hoctap/DoAN/backend/Views/Shared/_Layout.cshtml]
+>>>>>>> 56e350fd503ed96118785baa9acb741a50089373
+=======
+[E:/Eproject/backend/Views/Shared/_Layout.cshtml]
+>>>>>>> 5572c92d79a37f6e8cf2c9f517cac66b724c9fa6
+>>>>>>> 872710a92f80c87edab0ed9fdf1c70d1fd5509c2
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-guihv28zom
