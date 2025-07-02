@@ -224,9 +224,9 @@ const AdminLayout = ({ children }) => {
           
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
             <IconButton color="inherit" size="large">
-              <Badge badgeContent={4} color="error">
+              {/* <Badge badgeContent={4} color="error">
                 <NotificationsIcon />
-              </Badge>
+              </Badge> */}
             </IconButton>
             <IconButton
               color="inherit"
