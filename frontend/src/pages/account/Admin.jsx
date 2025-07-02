@@ -80,11 +80,11 @@ const Admin = () => {
   const renderStatusChip = (status) => {
     const normalized = status?.toLowerCase();
     const label = normalized === 'pending'
-      ? 'Đang chờ'
+      ? 'Waiting'
       : normalized === 'approved'
-      ? 'Đã phê duyệt'
+      ? 'Approved'
       : normalized === 'rejected'
-      ? 'Đã từ chối'
+      ? 'Refused'
       : status;
     const color = normalized === 'pending'
       ? mediumGray
@@ -114,7 +114,7 @@ const Admin = () => {
       <Box sx={{ p: 3, backgroundColor: '#ffffff', minHeight: '100vh' }}>
         <Box display="flex" justifyContent="space-between" alignItems="center" mb={4}>
           <Typography variant="h5" fontWeight={700} color={primaryBlack}>
-            Bảng điều khiển quản trị
+            Admin Panel
           </Typography>
           <Avatar sx={{ bgcolor: primaryBlack, width: 42, height: 42 }}>
             <AdminPanelSettings />
@@ -131,24 +131,24 @@ const Admin = () => {
             '& .MuiTabs-indicator': { backgroundColor: exceptionGreen },
           }}
         >
-          <Tab label="Yêu cầu sổ séc" />
-          <Tab label="Yêu cầu hủy séc" />
+          <Tab label="Request a checkbook" />
+          <Tab label="Request to cancel a check" />
         </Tabs>
 
         {tabValue === 0 && (
           <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
             <CardContent>
               <Typography variant="h6" fontWeight={600} color={primaryBlack} mb={2}>
-                Danh sách yêu cầu sổ séc
+                Checkbook Request List
               </Typography>
               <TableContainer component={Paper} sx={{ boxShadow: theme.shadows[1] }}>
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Tài khoản</Typography></TableCell>
-                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Chi tiết</Typography></TableCell>
-                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Trạng thái</Typography></TableCell>
-                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Hành động</Typography></TableCell>
+                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Account</Typography></TableCell>
+                      <TableCell><Typography variant="body2" fontWeight={600} color={primaryBlack}>Detail</Typography></TableCell>
+                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Status</Typography></TableCell>
+                      <TableCell align="center"><Typography variant="body2" fontWeight={600} color={primaryBlack}>Action</Typography></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -161,10 +161,10 @@ const Admin = () => {
                           {request.status?.toLowerCase() === 'pending' && (
                             <Box display="flex" gap={1} justifyContent="center">
                               <Button variant="contained" size="small" onClick={() => handleApproveCheck(request.id)} sx={{ backgroundColor: exceptionGreen, '&:hover': { backgroundColor: '#1b5e20' }, textTransform: 'none' }}>
-                                <CheckCircle fontSize="small" sx={{ mr: 1 }} /> Phê duyệt
+                                <CheckCircle fontSize="small" sx={{ mr: 1 }} /> Approve
                               </Button>
                               <Button variant="outlined" size="small" onClick={() => handleRejectCheck(request.id)} sx={{ borderColor: '#d32f2f', color: '#d32f2f', textTransform: 'none' }}>
-                                <Cancel fontSize="small" sx={{ mr: 1 }} /> Từ chối
+                                <Cancel fontSize="small" sx={{ mr: 1 }} /> Refuse
                               </Button>
                             </Box>
                           )}
@@ -182,7 +182,7 @@ const Admin = () => {
           <Card sx={{ mb: 4, borderRadius: 2, backgroundColor: lightGray, boxShadow: theme.shadows[1], borderLeft: `4px solid ${primaryBlack}` }}>
             <CardContent>
               <Typography variant="h6" fontWeight={600} color={primaryBlack} mb={2}>
-                Danh sách yêu cầu hủy séc
+                Check Cancellation Request List
               </Typography>
               <TableContainer component={Paper} sx={{ boxShadow: theme.shadows[1] }}>
                 <Table>
@@ -204,10 +204,10 @@ const Admin = () => {
                           {request.status?.toLowerCase() === 'pending' && (
                             <Box display="flex" gap={1} justifyContent="center">
                               <Button variant="contained" size="small" onClick={() => handleApproveCancel(request.id)} sx={{ backgroundColor: exceptionGreen, '&:hover': { backgroundColor: '#1b5e20' }, textTransform: 'none' }}>
-                                <CheckCircle fontSize="small" sx={{ mr: 1 }} /> Phê duyệt
+                                <CheckCircle fontSize="small" sx={{ mr: 1 }} /> Approve
                               </Button>
                               <Button variant="outlined" size="small" onClick={() => handleRejectCancel(request.id)} sx={{ borderColor: '#d32f2f', color: '#d32f2f', textTransform: 'none' }}>
-                                <Cancel fontSize="small" sx={{ mr: 1 }} /> Từ chối
+                                <Cancel fontSize="small" sx={{ mr: 1 }} /> Refuse
                               </Button>
                             </Box>
                           )}

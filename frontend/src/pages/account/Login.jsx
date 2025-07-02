@@ -52,7 +52,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (userCaptchaInput.toLowerCase() !== randomCaptcha.toLowerCase()) {
-      setCaptchaError("Mã kiểm tra không đúng.");
+      setCaptchaError("Incorrect verification code.");
       setError("");
       return;
     }
@@ -101,14 +101,14 @@ return (
       <div className="login-form-wrapper">
         <div className="login-form">
           <img src="https://img7.thuthuatphanmem.vn/uploads/2023/07/06/mau-logo-techcombank-dep_045648494.png" alt="TCB Logo" className="logo" />
-          <h3>Chào mừng bạn đến với</h3>
+          <h3>Welcome to</h3>
           <h2><strong>TCB Internet Banking</strong></h2>
           {error && <p className="error">{error}</p>}
           {captchaError && <p className="error">{captchaError}</p>}
           <form onSubmit={handleSubmit}>
             <input
               type="text"
-              placeholder="TÊN ĐĂNG NHẬP"
+              placeholder="LOGIN NAME"
               value={username}
               onChange={(e ) => setUsername(e.target.value)}
               required
@@ -117,7 +117,7 @@ return (
             {!showVerification && (
               <input
                 type="password"
-                placeholder="Nhập mật khẩu"
+                placeholder="Enter password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -126,7 +126,7 @@ return (
             {showVerification && (
               <input
                 type="text"
-                placeholder="Mã xác minh từ Email"
+                placeholder="Verification code from Email"
                 value={verificationCode}
                 onChange={(e) => setVerificationCode(e.target.value)}
                 required
@@ -136,7 +136,7 @@ return (
               <div className="captcha-display">{randomCaptcha}</div>
               <input
                 type="text"
-                placeholder="NHẬP MÃ KIỂM TRA"
+                placeholder="ENTER VERIFICATION CODE"
                 value={userCaptchaInput}
                 onChange={(e) => setUserCaptchaInput(e.target.value)}
                 required
@@ -146,16 +146,16 @@ return (
               </button>
             </div>
             <button type="submit" className="submit-btn" disabled={isLoginButtonDisabled}>
-              {showVerification ? "Xác minh & Đăng nhập" : "Đăng nhập"}
+              {showVerification ? "Verify & Login" : "Login"}
             </button>
           </form>
         </div>
       </div>
       <div className="footer-links-wrapper">
         <div className="footer-links">
-          <a href="#">Kết nối với chúng tôi</a> |
-          <a href="#"> Điều khoản và điều kiện</a> |
-          <a href="#"> An toàn bảo mật</a>
+          <a href="#">Connect with us</a> |
+          <a href="#">Terms and Conditions</a> |
+          <a href="#">Security</a>
         </div>
       </div>
     </div>

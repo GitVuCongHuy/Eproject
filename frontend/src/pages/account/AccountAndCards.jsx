@@ -59,19 +59,19 @@ export default function TechcombankAccountsPage() {
     switch (cardType) {
       case 'Credit':
         return {
-          label: 'Thẻ ghi nợ',
+          label: 'Debit card',
           color: colors.warning,
           bgColor: 'linear-gradient(135deg, #ed8936 0%, #dd6b20 100%)'
         };
       case 'Normal':
         return {
-          label: 'Thẻ thường',
+          label: 'Regular card',
           color: colors.accent,
           bgColor: 'linear-gradient(135deg, #3182ce 0%, #2c5aa0 100%)'
         };
       default:
         return {
-          label: cardType || 'Không xác định',
+          label: cardType || 'Unknown',
           color: colors.textSecondary,
           bgColor: 'linear-gradient(135deg, #718096 0%, #4a5568 100%)'
         };
@@ -94,10 +94,10 @@ export default function TechcombankAccountsPage() {
           }, {});
           setAccountBalanceVisibility(initialVisibility);
         } else {
-          throw new Error(cardsResponse.message || 'Không thể lấy danh sách tài khoản.');
+          throw new Error(cardsResponse.message || 'Unable to get account list.');
         }
       } catch (err) {
-        console.error("Lỗi khi tải dữ liệu tài khoản:", err);
+        console.error("Error loading account data:", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -107,7 +107,7 @@ export default function TechcombankAccountsPage() {
     fetchAccountData();
   }, [getCards]);
 
-  const tabs = ['Tài khoản'];
+  const tabs = ['Account'];
   // Tổng số dư không cần ẩn, chỉ số dư từng tài khoản mới cần
   const totalBalance = accounts.reduce((sum, acc) => sum + (acc.balance || 0), 0);
 
@@ -118,7 +118,7 @@ export default function TechcombankAccountsPage() {
           <Box display="flex" flexDirection="column" justifyContent="center" alignItems="center" py={10}>
             <CircularProgress size={60} sx={{ color: colors.primary, mb: 3 }} />
             <Typography variant="h6" color={colors.textSecondary}>
-              Đang tải dữ liệu tài khoản...
+              Loading account data...
             </Typography>
           </Box>
         </Fade>
@@ -170,10 +170,10 @@ export default function TechcombankAccountsPage() {
             <CreditCard size={40} />
           </Avatar>
           <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>
-            Bạn chưa có tài khoản nào
+            You do not have an account yet
           </Typography>
           <Typography color={colors.textSecondary} sx={{ mb: 4 }}>
-            Hãy mở tài khoản đầu tiên để bắt đầu sử dụng dịch vụ
+            Open your first account to start using the service.
           </Typography>
           <Button
             variant="contained"
@@ -188,7 +188,7 @@ export default function TechcombankAccountsPage() {
               py: 1.5
             }}
           >
-            Mở tài khoản mới
+            Open new account
           </Button>
         </Paper>
       );
@@ -224,7 +224,7 @@ export default function TechcombankAccountsPage() {
               <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Box>
                   <Typography variant="body1" sx={{ opacity: 0.9, mb: 1 }}>
-                    Tổng tài sản
+                    Total assets
                   </Typography>
                   <Stack direction="row" alignItems="center" spacing={1}> {/* Thêm Stack cho tổng tài sản */}
                     <Typography variant="h3" fontWeight={700}>
@@ -245,7 +245,7 @@ export default function TechcombankAccountsPage() {
                     </Tooltip>
                   </Stack>
                   <Typography variant="body2" sx={{ opacity: 0.8, mt: 1 }}>
-                    {accounts.length} tài khoản
+                    {accounts.length} account
                   </Typography>
                 </Box>
                 <Avatar
@@ -304,7 +304,7 @@ export default function TechcombankAccountsPage() {
                           </Avatar>
                           <Box>
                             <Typography variant="h6" fontWeight={600} color={colors.textPrimary}>
-                              Tài khoản thanh toán
+                              Payment account
                             </Typography>
                             {account.cardNumber && (
                               <Typography
@@ -349,7 +349,7 @@ export default function TechcombankAccountsPage() {
                       </Grid>
                       <Grid item xs={12} md={4} sx={{ textAlign: { xs: 'left', md: 'right' }, mt: { xs: 2, md: 0 } }}>
                         <Typography variant="body2" color={colors.textSecondary} sx={{ mb: 0.5 }}>
-                          Số dư khả dụng
+                          Available balance
                         </Typography>
                         {/* Stack để chứa số dư và nút mắt */}
                         <Stack direction="row" alignItems="center" justifyContent={{ xs: 'flex-start', md: 'flex-end' }} spacing={1}>
@@ -392,7 +392,7 @@ export default function TechcombankAccountsPage() {
             }}
           >
             <Typography variant="h6" fontWeight={600} sx={{ mb: 3 }}>
-              Tính năng nhanh
+              Quick Features
             </Typography>
             <Grid container spacing={2}>
               <Grid item xs={6} md={3}>
@@ -413,7 +413,7 @@ export default function TechcombankAccountsPage() {
                     }
                   }}
                 >
-                  Mở tài khoản
+                  Open an account
                 </Button>
               </Grid>
               <Grid item xs={6} md={3}>
@@ -434,7 +434,7 @@ export default function TechcombankAccountsPage() {
                     }
                   }}
                 >
-                  Đầu tư
+                 Invest
                 </Button>
               </Grid>
               <Grid item xs={6} md={3}>
@@ -455,7 +455,7 @@ export default function TechcombankAccountsPage() {
                     }
                   }}
                 >
-                  Tiết kiệm
+                  Save
                 </Button>
               </Grid>
               <Grid item xs={6} md={3}>
@@ -476,7 +476,7 @@ export default function TechcombankAccountsPage() {
                     }
                   }}
                 >
-                  Bảo hiểm
+                  Insurance
                 </Button>
               </Grid>
             </Grid>
@@ -507,14 +507,14 @@ export default function TechcombankAccountsPage() {
               color={colors.textPrimary}
               sx={{ mb: 1 }}
             >
-              Tài khoản của tôi
+              My account
             </Typography>
             <Typography
               variant="h6"
               color={colors.textSecondary}
               sx={{ mb: 4 }}
             >
-              Quản lý tài khoản và theo dõi số dư một cách dễ dàng
+              Manage your accounts and track your balances easily
             </Typography>
           </Box>
         </Fade>
@@ -574,7 +574,7 @@ export default function TechcombankAccountsPage() {
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
                 <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                  Hỗ trợ khách hàng
+                  Customer Support
                 </Typography>
                 <Stack spacing={2}>
                   <Stack direction="row" spacing={2} alignItems="center">
@@ -587,13 +587,13 @@ export default function TechcombankAccountsPage() {
                   </Stack>
                   <Stack direction="row" spacing={2} alignItems="center">
                     <MapPin size={20} color={colors.primary} />
-                    <Typography>191 Bà Triệu, Hai Bà Trưng, Hà Nội</Typography>
+                    <Typography>191 Ba Trieu, Hai Ba Trung, Hanoi</Typography>
                   </Stack>
                 </Stack>
               </Grid>
               <Grid item xs={12} md={6}>
                 <Typography variant="h6" fontWeight={600} sx={{ mb: 2 }}>
-                  Kết nối với chúng tôi
+                  Connect with us
                 </Typography>
                 <Stack direction="row" spacing={2}>
                   <IconButton
@@ -625,7 +625,7 @@ export default function TechcombankAccountsPage() {
                   </IconButton>
                 </Stack>
                 <Typography variant="body2" color={colors.textSecondary} sx={{ mt: 2 }}>
-                  Tải ứng dụng Techcombank Mobile để trải nghiệm dịch vụ tốt nhất
+                  Download Techcombank Mobile app to experience the best service
                 </Typography>
                 <Button
                   variant="outlined"
@@ -643,7 +643,7 @@ export default function TechcombankAccountsPage() {
                     }
                   }}
                 >
-                  Tải ứng dụng
+                  Download the app
                 </Button>
               </Grid>
             </Grid>
@@ -689,11 +689,11 @@ export default function TechcombankAccountsPage() {
   </Box>
 
   <Typography variant="h6" fontWeight={600} mt={1}>
-    Chúng tôi đang cập nhật chức năng này
+    We are updating this function.
   </Typography>
 
   <Typography variant="body2" color="text.secondary" maxWidth={300}>
-    Vui lòng quay lại sau khi hệ thống hoàn tất nâng cấp. Cảm ơn bạn đã quan tâm!
+    Please come back after the system upgrade is complete. Thank you for your interest!
   </Typography>
 </DialogTitle>
         
