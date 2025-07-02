@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import {
   Box, CssBaseline, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText,
-  Toolbar, AppBar, Typography, Divider, Avatar, IconButton, Badge, Menu, MenuItem
+  Toolbar, AppBar, Typography, Divider, Avatar, IconButton, Menu, MenuItem
 } from '@mui/material';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AccountBalanceIcon from '@mui/icons-material/AccountBalance';
-import AssessmentIcon from '@mui/icons-material/Assessment';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import LogoutIcon from '@mui/icons-material/Logout';
-import SecurityIcon from '@mui/icons-material/Security';
 import { styled } from '@mui/material/styles';
-
-import { useNavigate } from 'react-router-dom';
 
 const drawerWidth = 280;
 
@@ -153,7 +148,7 @@ const ContentCard = styled(Box)(({ theme }) => ({
 const AdminLayout = ({ children }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedItem, setSelectedItem] = useState('dashboard');
-   const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -163,13 +158,12 @@ const AdminLayout = ({ children }) => {
     setAnchorEl(null);
   };
 
-//   const menuItems = [
-//     { label: 'Tổng Quan', icon: <DashboardIcon />, key: 'dashboard' },
-//     { label: 'Khách Hàng', icon: <PeopleIcon />, key: 'users' },
-//     { label: 'Báo Cáo', icon: <AssessmentIcon />, key: 'reports' },
-//     { label: 'Bảo Mật', icon: <SecurityIcon />, key: 'security' },
-//     { label: 'Cài Đặt', icon: <SettingsIcon />, key: 'settings' },
-//   ];
+  const handleLogout = () => {
+    localStorage.removeItem('isAdminLoggedIn');
+    localStorage.removeItem('adminUsername');
+    handleProfileMenuClose();
+    navigate('/admin_login');
+  };
 
 
 
@@ -200,17 +194,16 @@ const AdminLayout = ({ children }) => {
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
 
-      {/* Top App Bar */}
       <StyledAppBar position="fixed" sx={{ zIndex: 1300 }}>
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Box sx={{ display: 'flex', alignItems: 'center' }}>
             <AccountBalanceIcon sx={{ mr: 2, fontSize: 32, color: '#ffffff' }} />
-            <Typography 
-              variant="h5" 
-              noWrap 
-              component="div" 
-              sx={{ 
-                fontWeight: 700, 
+            <Typography
+              variant="h5"
+              noWrap
+              component="div"
+              sx={{
+                fontWeight: 700,
                 letterSpacing: 1.2,
                 background: 'linear-gradient(45deg, #ffffff, #e3f2fd)',
                 WebkitBackgroundClip: 'text',
@@ -221,17 +214,12 @@ const AdminLayout = ({ children }) => {
               TECHCOMBANK ADMIN
             </Typography>
           </Box>
-          
+
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <IconButton color="inherit" size="large">
-              {/* <Badge badgeContent={4} color="error">
-                <NotificationsIcon />
-              </Badge> */}
-            </IconButton>
             <IconButton
               color="inherit"
               onClick={handleProfileMenuOpen}
-              sx={{ 
+              sx={{
                 p: 0.5,
                 '&:hover': {
                   backgroundColor: 'rgba(255, 255, 255, 0.1)',
@@ -247,7 +235,6 @@ const AdminLayout = ({ children }) => {
         </Toolbar>
       </StyledAppBar>
 
-      {/* Profile Menu */}
       <Menu
         anchorEl={anchorEl}
         open={Boolean(anchorEl)}
@@ -270,26 +257,24 @@ const AdminLayout = ({ children }) => {
           Account settings
         </MenuItem>
         <Divider />
-        <MenuItem onClick={handleProfileMenuClose} sx={{ color: 'error.main' }}>
+        <MenuItem onClick={handleLogout} sx={{ color: 'error.main' }}>
           <LogoutIcon sx={{ mr: 2 }} />
           Sign out
         </MenuItem>
       </Menu>
 
-      {/* Sidebar */}
       <StyledDrawer variant="permanent">
         <Toolbar />
         <Box sx={{ overflow: 'auto' }}>
-          {/* Admin Profile Section */}
           <ProfileSection>
             <StyledAvatar
               src="https://randomuser.me/api/portraits/men/1.jpg"
               alt="Admin Avatar"
             />
-            <Typography 
-              variant="h6" 
-              sx={{ 
-                fontWeight: 700, 
+            <Typography
+              variant="h6"
+              sx={{
+                fontWeight: 700,
                 color: '#1565c0',
                 mb: 0.5,
                 fontSize: '1.1rem'
@@ -297,9 +282,9 @@ const AdminLayout = ({ children }) => {
             >
               Nguyễn Văn Admin
             </Typography>
-            <Typography 
-              variant="body2" 
-              sx={{ 
+            <Typography
+              variant="body2"
+              sx={{
                 color: '#546e7a',
                 fontWeight: 500,
                 opacity: 0.8
@@ -324,10 +309,10 @@ const AdminLayout = ({ children }) => {
           </ProfileSection>
 
           <Box sx={{ px: 2, mt: 2 }}>
-            <Typography 
-              variant="overline" 
-              sx={{ 
-                color: '#90a4ae', 
+            <Typography
+              variant="overline"
+              sx={{
+                color: '#90a4ae',
                 fontWeight: 700,
                 letterSpacing: 1,
                 px: 2,
@@ -339,16 +324,16 @@ const AdminLayout = ({ children }) => {
             </Typography>
             <List sx={{ pt: 0 }}>
               {menuItems.map((item) => (
-                <StyledListItemButton 
+                <StyledListItemButton
                   key={item.key}
                   selected={selectedItem === item.key}
-                   onClick={() => {
-                        setSelectedItem(item.key);
-                        navigate(item.path);
-                    }}
+                  onClick={() => {
+                    setSelectedItem(item.key);
+                    navigate(item.path);
+                  }}
                 >
-                  <ListItemIcon sx={{ 
-                    color: selectedItem === item.key ? '#ffffff' : '#1565c0', 
+                  <ListItemIcon sx={{
+                    color: selectedItem === item.key ? '#ffffff' : '#1565c0',
                     minWidth: 48,
                     transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   }}>
@@ -356,8 +341,8 @@ const AdminLayout = ({ children }) => {
                   </ListItemIcon>
                   <ListItemText
                     primary={item.label}
-                    primaryTypographyProps={{ 
-                      fontWeight: 600, 
+                    primaryTypographyProps={{
+                      fontWeight: 600,
                       fontSize: '0.95rem',
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
@@ -369,18 +354,17 @@ const AdminLayout = ({ children }) => {
         </Box>
       </StyledDrawer>
 
-      {/* Main Content */}
       <MainContent component="main">
         <Toolbar />
         <ContentCard>
-          {  <Outlet /> || (
+          {<Outlet /> || (
             <Box sx={{ textAlign: 'center', py: 8 }}>
               <AccountBalanceIcon sx={{ fontSize: 80, color: '#1565c0', mb: 2, opacity: 0.7 }} />
               <Typography variant="h4" sx={{ fontWeight: 700, color: '#37474f', mb: 2 }}>
-                Chào mừng đến với VietcomBank Admin
+                Chào mừng đến với Techcombank Admin
               </Typography>
               <Typography variant="body1" sx={{ color: '#546e7a', maxWidth: 600, mx: 'auto' }}>
-                Hệ thống quản trị ngân hàng hiện đại với giao diện thân thiện và tính năng mạnh mẽ. 
+                Hệ thống quản trị ngân hàng hiện đại với giao diện thân thiện và tính năng mạnh mẽ.
                 Bắt đầu quản lý tài khoản và dịch vụ ngân hàng một cách hiệu quả.
               </Typography>
             </Box>
