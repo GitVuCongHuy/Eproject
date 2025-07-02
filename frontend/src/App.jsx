@@ -1,24 +1,24 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/Context";
-import Home from "./pages/home/Home";
-import Login from "./pages/login/login";
-import AccountAndCards from "./pages/account/AccountAndCards";
+import Home from "./home/home"; // Đã sửa ở lần trước, giữ nguyên
+import Login from "./login/Login"; // Sửa từ "./pages/login/login"
+import AccountAndCards from "./account/AccountAndCards"; // Sửa từ "./pages/account/AccountAndCards"
 import DefaultLayout from "./layouts/default_layout/default_layout";
-import Internal from "./pages/service/Internal";
-import External from "./pages/service/External";
-import Bill from "./pages/login/Bills";
-import CheckRequest from "./pages/service/Chequebook";
-import Guide from "./pages/features/Guide";
-import Admin from "./pages/account/Admin";
-import CancelCheckPayment from "./pages/service/ChequebookDelete";
-import Statement from "./pages/service/Statement";
-import ChangePasswordPage from "./pages/features/ChangePasswordLogin";
-import  Settings from "./pages/features/Password";
+import Internal from "./service/Internal"; // Sửa từ "./pages/service/Internal"
+import External from "./service/External"; // Sửa từ "./pages/service/External"
+import Bill from "./login/Bills"; // Sửa từ "./pages/login/Bills" - Cần kiểm tra lại tên file Bills.jsx trong thư mục login
+import CheckRequest from "./service/Chequebook"; // Sửa từ "./pages/service/Chequebook"
+import Guide from "./features/Guide"; // Sửa từ "./pages/features/Guide"
+import Admin from "./admin/Admin_account"; // Sửa từ "./pages/account/Admin" - Dựa vào cấu trúc thư mục, Admin.jsx nằm trong admin/Admin_account.jsx
+import CancelCheckPayment from "./service/ChequebookDelete"; // Sửa từ "./pages/service/ChequebookDelete"
+import Statement from "./service/Statement"; // Sửa từ "./pages/service/Statement"
+import ChangePasswordPage from "./features/ChangePasswordLogin"; // Sửa từ "./pages/features/ChangePasswordLogin"
+import Settings from "./features/Password"; // Sửa từ "./pages/features/Password"
 //KienDev
 import AdminLayout from "./layouts/admin_layout/admin_layout";
-import Admin_Main from "./pages/admin/Admin_Main";
-import Admin_request from "./pages/admin/Admin_request";
-import Admin_account from "./pages/admin/Admin_account";
+import Admin_Main from "./admin/Admin_Main"; // Sửa từ "./pages/admin/Admin_Main"
+import Admin_request from "./admin/Admin_request"; // Sửa từ "./pages/admin/Admin_request"
+import Admin_account from "./admin/Admin_account"; // Sửa từ "./pages/admin/Admin_account"
 //KienDev
 
 function App() {
