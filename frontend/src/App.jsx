@@ -18,10 +18,11 @@ import AdminLayout from "./layouts/admin_layout/admin_layout";
 import Admin_Main from "./pages/admin/Admin_Main";
 import Admin_request from "./pages/admin/Admin_request";
 import Admin_account from "./pages/admin/Admin_account";
+import ProtectedRoute from "./pages/admin/ProtectedRoute";
 // import Admin_login from "./pages/admin/Admin_login";
 // import AdminProvider from "./context/admin_context";
 //KienDev
-
+import Admin_login from "./pages/admin/Admin_login";
 function App() {
   return (
     <AuthProvider>
@@ -43,13 +44,12 @@ function App() {
             <Route path="/password" element={<Settings />} />
           </Route>
 
-
           {/* Admin */}
-          {/* <Route path="admin_login" element={<Admin_login/>} /> */}
+          <Route path="admin_login" element={<Admin_login/>} />
           <Route path="/admin_new" element={<AdminLayout />}>
-              <Route path="admin_main" element={<Admin_Main/>} />
-              <Route path="admin_request" element={<Admin_request/>} />
-               <Route path="admin_account" element={<Admin_account/>} />
+              <Route path="admin_main" element={<ProtectedRoute><Admin_Main/></ProtectedRoute>} />
+              <Route path="admin_request" element={<ProtectedRoute><Admin_request/></ProtectedRoute>} />
+               <Route path="admin_account" element={<ProtectedRoute><Admin_account/></ProtectedRoute>} />
           </Route>
         
         </Routes>
